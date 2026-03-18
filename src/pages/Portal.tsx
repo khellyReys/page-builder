@@ -7,16 +7,20 @@ import { sharedContact } from "../data/contact";
 export default function Portal() {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const getHero = (promo: (typeof promos)[number]) =>
+    promo.hero ?? promo.hotels?.[0]?.hero;
+
   const filteredPromos = promos.filter((promo) => {
     const searchLower = searchTerm.toLowerCase();
+    const hero = getHero(promo);
     return (
       promo.title.toLowerCase().includes(searchLower) ||
       promo.client.toLowerCase().includes(searchLower) ||
-      promo.hero.hotel.toLowerCase().includes(searchLower) ||
-      promo.hero.location
+      (hero?.hotel.toLowerCase().includes(searchLower) ?? false) ||
+      (hero?.location
         .replace(/<[^>]+>/g, "")
         .toLowerCase()
-        .includes(searchLower) ||
+        .includes(searchLower) ?? false) ||
       promo.dates.toLowerCase().includes(searchLower)
     );
   });
@@ -74,20 +78,23 @@ export default function Portal() {
 
         <div className="grid">
           {filteredPromos.length > 0 ? (
-            filteredPromos.map((promo, index) => (
+            filteredPromos.map((promo, index) => {
+              const hero = getHero(promo);
+              return (
               <PromoCard
                 key={promo.id}
                 id={promo.id}
-                hotel={promo.hero.hotel}
-                location={promo.hero.location.replace(/<[^>]+>/g, "")}
+                hotel={hero?.hotel ?? promo.title}
+                location={(hero?.location ?? "").replace(/<[^>]+>/g, "")}
                 client={promo.client}
                 dates={promo.dates}
-                thumbnail={promo.thumbnailUrl ?? promo.hero.imageUrl}
+                thumbnail={promo.thumbnailUrl ?? hero?.imageUrl ?? ""}
                 totalLabel={promo.portalTotalLabel ?? "Estimate"}
                 totalValue={promo.portalTotalValue ?? ""}
                 delay={index * 0.2}
               />
-            ))
+              );
+            })
           ) : (
             <div
               style={{
