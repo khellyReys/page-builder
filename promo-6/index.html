@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laguna Beach, California Luxury Escape | What A Hotel!</title>
+<meta property="og:title" content="Laguna Beach, California Luxury Escape | What A Hotel!">
+<meta property="og:description" content="Montage Laguna Beach — 3-night luxury getaway with exclusive WhataHotel! perks including complimentary breakfast, $100 spa credit, room upgrade & more.">
+<meta property="og:url" content="https://whatahotelpromos.netlify.app/promo-6/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+* { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+:root {
+--burgundy: #B0373E;
+--dkburg: #8C2329;
+--ltburg: #C4444B;
+--black: #1A1A1A;
+--slate: #2D2D2D;
+--gray: #4A4A4A;
+--lgray: #F8F7F6;
+--border: #E5E2DF;
+--cream: #FAF9F7;
+}
+body { background:#EFECEA; margin:0; padding:24px 16px; }
+.wrap { max-width:820px; margin:0 auto; background:#fff; box-shadow:0 8px 32px rgba(0,0,0,.12); }
+.masthead { background: #ffffff; padding:32px 40px 28px; display:flex; align-items:center; gap:24px; border-bottom: 3px solid var(--burgundy); }
+.mast-info { flex:1; }
+.mast-title { font-size:30px; font-weight:800; color:var(--black); letter-spacing:2.5px; text-transform:uppercase; line-height:1.15; margin-bottom:8px; }
+.mast-dates { font-size:13px; color:var(--gray); letter-spacing:.5px; }
+.mast-sep { width:2px; height:90px; background:var(--burgundy); flex-shrink:0; }
+.mast-logo { text-align:center; }
+.mast-logo img { width:160px; }
+.mast-byline { font-size:11px; color:var(--gray); margin-top:6px; letter-spacing:2px; font-weight:600; text-transform:uppercase; }
+.rule { height:4px; background:var(--burgundy); }
+.rule-thin { height:2px; background:var(--burgundy); margin:32px 40px; }
+.hero { position:relative; }
+.hero img { width:100%; height:400px; object-fit:cover; object-position:center 40%; display:block; }
+.hero-badge { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(26,26,26,.88) 0%, transparent 100%); padding:28px 40px 20px; }
+.hero-hotel { font-size:26px; font-weight:800; color:#fff; letter-spacing:.5px; }
+.hero-loc { font-size:13px; color:rgba(255,255,255,.75); margin-top:3px; }
+.offer-banner { margin:0 40px 0; background:var(--cream); border:1.5px solid var(--burgundy); border-top:none; border-radius:0 0 10px 10px; padding:22px 28px; display:flex; align-items:flex-start; gap:18px; }
+.offer-accent { width:4px; min-height:100%; background:var(--burgundy); border-radius:2px; flex-shrink:0; align-self:stretch; }
+.offer-hed { font-size:17px; font-weight:800; color:var(--burgundy); letter-spacing:1px; text-transform:uppercase; }
+.offer-sub { font-size:13px; color:var(--gray); margin-top:6px; line-height:1.7; }
+.offer-sub strong { color:var(--black); }
+.offer-sub em { color:var(--burgundy); font-style:normal; font-weight:600; }
+.offer-pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.pill { background:var(--burgundy); color:#fff; font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; letter-spacing:.4px; }
+.body { padding:0 40px 40px; }
+.room-label { display:flex; align-items:center; gap:12px; margin:36px 0 18px; }
+.room-label-badge { background:var(--black); color:#fff; font-size:11px; font-weight:700; letter-spacing:2px; padding:6px 16px; border-radius:4px; text-transform:uppercase; white-space:nowrap; }
+.room-label-line { flex:1; height:1px; background:var(--border); }
+.room-hd { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+.room-name { font-size:22px; font-weight:800; color:var(--slate); }
+.room-sub { font-size:12px; color:var(--gray); margin-top:3px; line-height:1.6; }
+.price-card { border:2px solid var(--burgundy); border-radius:8px; padding:12px 20px; text-align:right; min-width:180px; flex-shrink:0; }
+.pc-label { font-size:10px; color:var(--gray); text-transform:uppercase; letter-spacing:1px; }
+.pc-rate { font-size:26px; font-weight:800; color:var(--burgundy); line-height:1.1; }
+.pc-night { font-size:12px; font-weight:500; color:var(--gray); }
+.pc-total { font-size:12px; font-weight:700; color:var(--burgundy); background:#FAF0F1; border-radius:4px; padding:3px 8px; display:inline-block; margin-top:5px; }
+.room-imgs { display:flex; gap:12px; margin-bottom:18px; }
+.room-img { flex:1; height:210px; border-radius:8px; overflow:hidden; }
+.room-img img { width:100%; height:100%; object-fit:cover; }
+.feat-grid { display:flex; gap:12px; margin-bottom:20px; }
+.feat-box { flex:1; background:var(--lgray); border-radius:8px; padding:16px 18px; border:1px solid var(--border); }
+.feat-title { font-size:11px; font-weight:700; color:var(--slate); text-transform:uppercase; letter-spacing:1px; margin-bottom:11px; display:flex; align-items:center; gap:7px; }
+.feat-title i { color:var(--burgundy); }
+.feat-ul { list-style:none; padding:0; margin:0; }
+.feat-li { display:flex; align-items:flex-start; gap:7px; font-size:12.5px; color:var(--gray); margin-bottom:6px; line-height:1.4; }
+.feat-li i { color:var(--burgundy); font-size:10px; margin-top:3px; flex-shrink:0; }
+.savings-bar { background:#FAF0F1; border:1px solid #E8D0D3; border-radius:8px; padding:13px 18px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.sb-left { font-size:13px; color:var(--slate); font-weight:600; }
+.sb-left span { color:var(--burgundy); }
+.sb-sub { font-size:11px; color:var(--gray); margin-top:2px; }
+.sb-right { text-align:right; }
+.sb-right-label { font-size:10px; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; }
+.sb-right-val { font-size:22px; font-weight:800; color:var(--black); }
+.btn-book { display:block; width:fit-content; margin:0 auto 6px; background:var(--burgundy); color:#fff; font-size:14px; font-weight:700; letter-spacing:.5px; padding:12px 38px; border-radius:30px; text-decoration:none; text-align:center; transition:background .2s; }
+.btn-book:hover { background:var(--dkburg); }
+.btn-sub { text-align:center; font-size:11px; color:#A0AEC0; margin-bottom:0; }
+.summary-section { margin-top:40px; }
+.summary-title { font-size:18px; font-weight:800; color:var(--slate); text-align:center; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+.summary-title::before, .summary-title::after { content:''; flex:1; height:2px; background:var(--burgundy); }
+.sum-table { width:100%; border-collapse:collapse; font-size:13px; }
+.sum-th { background:var(--black); color:#fff; padding:12px 14px; text-align:center; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.sum-th:first-child { text-align:left; }
+.sum-td { border:1px solid var(--border); padding:13px 14px; text-align:center; vertical-align:middle; }
+.sum-td:first-child { text-align:left; }
+.td-room { font-weight:700; color:var(--slate); font-size:13px; }
+.td-sub { font-size:11px; color:var(--gray); margin-top:2px; }
+.td-price { color:var(--burgundy); font-weight:700; font-size:14px; }
+.row-alt { background:var(--lgray); }
+.row-total { background:var(--black); }
+.row-total td { color:#fff; font-weight:700; border-color:var(--black); padding:14px 14px; }
+.row-total .big { font-size:18px; color:#E8A0A8; }
+.mobile-summary { display:none; }
+.fn-callout { margin-top:16px; background:linear-gradient(135deg, #FAF0F1 0%, #F0D4D8 100%); border:1.5px solid #D4838C; border-radius:8px; padding:14px 20px; font-size:13px; color:#5A1A22; display:flex; align-items:flex-start; gap:10px; }
+.fn-icon { font-size:22px; flex-shrink:0; }
+.fn-text b { color:var(--burgundy); }
+.perks-recap { margin-top:20px; background:var(--lgray); border:1px solid var(--border); border-radius:8px; padding:18px 22px; }
+.perks-recap-title { font-size:11px; font-weight:700; color:var(--slate); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.perks-recap-title i { color:var(--burgundy); }
+.perks-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.perk { display:flex; align-items:flex-start; gap:7px; font-size:12px; color:var(--gray); }
+.perk i { color:var(--burgundy); font-size:11px; margin-top:2px; flex-shrink:0; }
+.tax-note { text-align:center; font-size:11px; color:#A0AEC0; font-style:italic; margin-top:12px; }
+.contact { text-align:center; padding:28px 40px 32px; border-top:1px solid var(--border); margin-top:40px; }
+.contact-hed { font-size:16px; font-weight:700; color:var(--slate); margin-bottom:6px; }
+.contact-mail { font-size:15px; color:var(--burgundy); font-weight:600; }
+.contact-foot { font-size:11px; color:#A0AEC0; margin-top:10px; letter-spacing:.3px; }
+.view-all { display:block; text-align:center; margin-top:10px; font-size:13px; color:var(--burgundy); font-weight:600; text-decoration:underline; }
+.view-all:hover { color:var(--dkburg); }
+@media(max-width:700px){
+body { padding:12px 8px; }
+.masthead { flex-direction:column; padding:24px 20px; text-align:center; }
+.mast-title { font-size:24px; letter-spacing:1.5px; }
+.mast-sep { width:60px; height:2px; }
+.hero img { height:240px; }
+.hero-badge { padding:20px 20px 16px; }
+.hero-hotel { font-size:20px; }
+.hero-loc { font-size:11px; }
+.offer-banner { margin:0 16px 0; padding:16px 16px; flex-direction:column; gap:0; }
+.offer-accent { width:100%; height:3px; min-height:3px; margin-bottom:12px; }
+.offer-hed { font-size:15px; }
+.body { padding:0 16px 30px; }
+.rule-thin { margin:24px 16px; }
+.room-hd { flex-direction:column; }
+.price-card { width:100%; text-align:left; min-width:unset; }
+.feat-grid { flex-direction:column; }
+.room-imgs { flex-direction:column; }
+.room-img { height:180px; }
+.savings-bar { flex-direction:column; text-align:center; }
+.sb-right { text-align:center; }
+.perks-grid { grid-template-columns:1fr; }
+.sum-table { display:none; }
+.mobile-summary { display:block; }
+}
+.mob-card { background:var(--lgray); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:14px; }
+.mob-card-header { font-size:14px; font-weight:800; color:var(--slate); margin-bottom:4px; }
+.mob-card-sub { font-size:12px; color:var(--gray); margin-bottom:12px; }
+.mob-card-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.mob-card-row:last-child { border-bottom:none; }
+.mob-card-label { color:var(--gray); }
+.mob-card-val { font-weight:700; color:var(--slate); }
+.mob-card-val.accent { color:var(--burgundy); }
+.mob-total-card { background:var(--black); color:#fff; border-radius:10px; padding:18px; margin-bottom:14px; }
+.mob-total-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; font-size:13px; }
+.mob-total-label { color:rgba(255,255,255,.7); }
+.mob-total-val { font-weight:800; color:#E8A0A8; font-size:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="masthead">
+<div class="mast-info">
+<div class="mast-title">Laguna Beach,<br>California</div>
+<div class="mast-dates">June 2 &ndash; 5, 2026 &nbsp;|&nbsp; 3 Nights &nbsp;|&nbsp; 3 Room Options</div>
+</div>
+<div class="mast-sep"></div>
+<div class="mast-logo">
+<img src="https://whatahotel.com/content/general/wah_logo.jpg" alt="What A Hotel!">
+<div class="mast-byline">by Lorraine Travel</div>
+</div>
+</div>
+
+<div class="hero">
+<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80&auto=format" alt="Montage Laguna Beach &mdash; Oceanfront Resort">
+<div class="hero-badge">
+<div class="hero-hotel">Montage Laguna Beach</div>
+<div class="hero-loc"><i class="fas fa-map-marker-alt" style="margin-right:5px"></i>30801 South Coast Hwy, Laguna Beach, CA 92651 &nbsp;|&nbsp; Coastal Bluff-Top Luxury Resort &nbsp;|&nbsp; Southern California</div>
+</div>
+</div>
+<div class="offer-banner">
+<div class="offer-accent"></div>
+<div>
+<div class="offer-hed">WhataHotel! Exclusive Perks</div>
+<div class="offer-sub">
+Book through WhataHotel! and enjoy <strong>exclusive complimentary perks</strong> at Montage Laguna Beach, including <em>daily breakfast for two</em>, a <em>$100 spa services credit</em>, room upgrade, and more &mdash; all on top of the best available rate.
+</div>
+<div class="offer-pills">
+<span class="pill">&#10003; Room Upgrade (subject to avail.)</span>
+<span class="pill">&#10003; Breakfast for Two Daily</span>
+<span class="pill">&#10003; $100 Spa Credit</span>
+<span class="pill">&#10003; Free Wi-Fi</span>
+<span class="pill">&#10003; Late Check-Out</span>
+</div>
+</div>
+</div>
+<div class="body">
+<div style="margin-top:28px; border-radius:8px; overflow:hidden; height:230px;">
+<img src="https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=1600&q=80&auto=format" alt="Montage Laguna Beach &mdash; Ocean Views" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+</div>
+
+<div style="background:var(--lgray); border:1px solid var(--border); border-radius:10px; padding:24px 28px; margin-top:20px; margin-bottom:20px;">
+<div style="font-size:18px; font-weight:800; color:var(--slate); margin-bottom:8px;">Montage Laguna Beach</div>
+<div style="font-size:13px; color:var(--gray); line-height:1.7; margin-bottom:16px;">
+Perched on a coastal bluff overlooking the Pacific Ocean in Laguna Beach, Montage Laguna Beach is a premier luxury resort offering Craftsman-style elegance with world-class amenities. Guests enjoy pristine beach access, the acclaimed 20,000 sq ft Spa Montage, fine dining, and breathtaking ocean views from every vantage point. Each room features marble bathrooms, deep soak bathtubs, Bose surround sound, private balconies, and impeccable attention to detail.
+</div>
+<div class="feat-grid" style="margin-bottom:16px;">
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-gift"></i>WhataHotel! Exclusive Perks</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-star"></i>Room Category Upgrade at Check-In (subject to availability)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Breakfast for Two Daily</li>
+<li class="feat-li"><i class="fas fa-star"></i><strong>$100 Spa Services Credit</strong></li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Wi-Fi</li>
+<li class="feat-li"><i class="fas fa-star"></i>Late Check-Out (subject to availability)</li>
+</ul>
+</div>
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-info-circle"></i>Important Notes</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-circle"></i>All rates shown per room per night; taxes &amp; fees additional</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Showing 3 of 67 available room types &mdash; many more options available</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Spa credit cannot be applied against room rate or taxes</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Check-in: June 2, 2026 &nbsp;|&nbsp; Check-out: June 5, 2026</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Room 1: Horizon View King -->
+<div class="room-label">
+<div class="room-label-badge"><i class="fas fa-hotel" style="margin-right:6px"></i>Option 1</div>
+<div class="room-label-line"></div>
+</div>
+<div class="room-hd">
+<div>
+<div class="room-name">Horizon View King</div>
+<div class="room-sub">
+Elegant guest room with King bed &nbsp;&middot;&nbsp; Horizon ocean views<br>
+Marble bathroom &middot; Deep soak bathtub &middot; Separate walk-in shower &middot; Private balcony/patio<br>
+<strong style="color:var(--burgundy)">Best Value &mdash; From $996.67/night</strong>
+</div>
+</div>
+<div class="price-card">
+<div class="pc-label">WhataHotel! Rate</div>
+<div class="pc-rate">$996<span style="font-size:16px;font-weight:600">.67</span><span class="pc-night">/night</span></div>
+<div class="pc-total">3-Night Total: $2,990.01</div>
+</div>
+</div>
+<div class="room-imgs">
+<div class="room-img">
+<img src="https://www.whatahotel.com/img/paceholder.jpg" alt="Horizon View King &mdash; Montage Laguna Beach">
+</div>
+<div class="room-img">
+<img src="https://www.whatahotel.com/img/paceholder.jpg" alt="Horizon View King &mdash; Bathroom">
+</div>
+</div>
+<div class="feat-grid">
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-door-open"></i>Room Features</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-circle"></i>Luxurious King bed with premium linens</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Horizon ocean views from private balcony or patio</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Marble bathroom with deep soak bathtub</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Separate walk-in shower with premium fixtures</li>
+<li class="feat-li"><i class="fas fa-circle"></i>LCD/HD television with Bose surround sound</li>
+<li class="feat-li"><i class="fas fa-circle"></i>High-speed Wi-Fi &middot; In-room safe &middot; Mini bar</li>
+</ul>
+</div>
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-gift"></i>WhataHotel! Exclusive Perks</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-star"></i>Room Category Upgrade at Check-In (if available)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Breakfast for Two Daily</li>
+<li class="feat-li"><i class="fas fa-star"></i><strong>$100 Spa Services Credit</strong></li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Wi-Fi</li>
+<li class="feat-li"><i class="fas fa-star"></i>Late Check-Out (subject to availability)</li>
+</ul>
+</div>
+</div>
+<div class="savings-bar">
+<div>
+<div class="sb-left">3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span></div>
+<div class="sb-sub">Includes all WhataHotel! exclusive perks &mdash; breakfast, spa credit, upgrade &amp; more</div>
+</div>
+<div class="sb-right">
+<div class="sb-right-label">3-Night Total (excl. taxes)</div>
+<div class="sb-right-val">$2,990.01</div>
+</div>
+</div>
+<a href="https://www.whatahotel.com/booking/showRates.cfm?hotelID=1253&checkIn=2026-06-02&checkOut=2026-06-05&guests=2&children=0&rooms=1" target="_blank" class="btn-book">Book Horizon View King</a>
+<p class="btn-sub">Opens the WhataHotel! secure booking page</p>
+
+<!-- Room 2: Horizon View Queen Queen -->
+<div class="room-label" style="margin-top:32px;">
+<div class="room-label-badge"><i class="fas fa-hotel" style="margin-right:6px"></i>Option 2</div>
+<div class="room-label-line"></div>
+</div>
+<div class="room-hd">
+<div>
+<div class="room-name">Horizon View<br>Queen Queen</div>
+<div class="room-sub">
+Spacious guest room with two Queen beds &nbsp;&middot;&nbsp; Horizon ocean views<br>
+Marble bathroom &middot; Deep soak bathtub &middot; Walk-in shower &middot; Private balcony/patio<br>
+<strong style="color:var(--burgundy)">Ideal for Families &mdash; From $1,215.00/night</strong>
+</div>
+</div>
+<div class="price-card">
+<div class="pc-label">WhataHotel! Rate</div>
+<div class="pc-rate">$1,215<span class="pc-night">/night</span></div>
+<div class="pc-total">3-Night Total: $3,645.00</div>
+</div>
+</div>
+<div class="room-imgs">
+<div class="room-img">
+<img src="https://www.whatahotel.com/img/paceholder.jpg" alt="Horizon View Queen Queen &mdash; Montage Laguna Beach">
+</div>
+<div class="room-img">
+<img src="https://www.whatahotel.com/img/paceholder.jpg" alt="Horizon View Queen Queen &mdash; Ocean View">
+</div>
+</div>
+<div class="feat-grid">
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-door-open"></i>Room Features</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-circle"></i>Two Queen beds with premium linens</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Horizon ocean views from private balcony or patio</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Marble bathroom with deep soak bathtub</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Separate walk-in shower with premium fixtures</li>
+<li class="feat-li"><i class="fas fa-circle"></i>LCD/HD television with Bose surround sound</li>
+<li class="feat-li"><i class="fas fa-circle"></i>High-speed Wi-Fi &middot; In-room safe &middot; Mini bar</li>
+</ul>
+</div>
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-gift"></i>WhataHotel! Exclusive Perks</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-star"></i>Room Category Upgrade at Check-In (if available)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Breakfast for Two Daily</li>
+<li class="feat-li"><i class="fas fa-star"></i><strong>$100 Spa Services Credit</strong></li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Wi-Fi</li>
+<li class="feat-li"><i class="fas fa-star"></i>Late Check-Out (subject to availability)</li>
+</ul>
+</div>
+</div>
+<div class="savings-bar">
+<div>
+<div class="sb-left">3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span></div>
+<div class="sb-sub">Includes all WhataHotel! exclusive perks &mdash; breakfast, spa credit, upgrade &amp; more</div>
+</div>
+<div class="sb-right">
+<div class="sb-right-label">3-Night Total (excl. taxes)</div>
+<div class="sb-right-val">$3,645.00</div>
+</div>
+</div>
+<a href="https://www.whatahotel.com/booking/showRates.cfm?hotelID=1253&checkIn=2026-06-02&checkOut=2026-06-05&guests=2&children=0&rooms=1" target="_blank" class="btn-book">Book Horizon View Queen Queen</a>
+<p class="btn-sub">Opens the WhataHotel! secure booking page</p>
+
+<!-- Room 3: Ocean View Queen Queen -->
+<div class="room-label" style="margin-top:32px;">
+<div class="room-label-badge"><i class="fas fa-hotel" style="margin-right:6px"></i>Option 3</div>
+<div class="room-label-line"></div>
+</div>
+<div class="room-hd">
+<div>
+<div class="room-name">Ocean View<br>Queen Queen</div>
+<div class="room-sub">
+Premium guest room with two Queen beds &nbsp;&middot;&nbsp; Direct ocean views<br>
+Marble bathroom &middot; Deep soak bathtub &middot; Walk-in shower &middot; Private balcony/patio<br>
+<strong style="color:var(--burgundy)">Premium Views &mdash; From $1,341.33/night</strong>
+</div>
+</div>
+<div class="price-card">
+<div class="pc-label">WhataHotel! Rate</div>
+<div class="pc-rate">$1,341<span style="font-size:16px;font-weight:600">.33</span><span class="pc-night">/night</span></div>
+<div class="pc-total">3-Night Total: $4,023.99</div>
+</div>
+</div>
+<div class="room-imgs">
+<div class="room-img">
+<img src="https://www.whatahotel.com/img/paceholder.jpg" alt="Ocean View Queen Queen &mdash; Montage Laguna Beach">
+</div>
+<div class="room-img">
+<img src="https://www.whatahotel.com/img/paceholder.jpg" alt="Ocean View Queen Queen &mdash; Ocean View Balcony">
+</div>
+</div>
+<div class="feat-grid">
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-door-open"></i>Room Features</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-circle"></i>Two Queen beds with premium linens</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Direct ocean views from private balcony or patio</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Marble bathroom with deep soak bathtub</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Separate walk-in shower with premium fixtures</li>
+<li class="feat-li"><i class="fas fa-circle"></i>LCD/HD television with Bose surround sound</li>
+<li class="feat-li"><i class="fas fa-circle"></i>High-speed Wi-Fi &middot; In-room safe &middot; Mini bar</li>
+</ul>
+</div>
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-gift"></i>WhataHotel! Exclusive Perks</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-star"></i>Room Category Upgrade at Check-In (if available)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Breakfast for Two Daily</li>
+<li class="feat-li"><i class="fas fa-star"></i><strong>$100 Spa Services Credit</strong></li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Wi-Fi</li>
+<li class="feat-li"><i class="fas fa-star"></i>Late Check-Out (subject to availability)</li>
+</ul>
+</div>
+</div>
+<div class="savings-bar">
+<div>
+<div class="sb-left">3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span></div>
+<div class="sb-sub">Includes all WhataHotel! exclusive perks &mdash; breakfast, spa credit, upgrade &amp; more</div>
+</div>
+<div class="sb-right">
+<div class="sb-right-label">3-Night Total (excl. taxes)</div>
+<div class="sb-right-val">$4,023.99</div>
+</div>
+</div>
+<a href="https://www.whatahotel.com/booking/showRates.cfm?hotelID=1253&checkIn=2026-06-02&checkOut=2026-06-05&guests=2&children=0&rooms=1" target="_blank" class="btn-book">Book Ocean View Queen Queen</a>
+<p class="btn-sub">Opens the WhataHotel! secure booking page</p>
+
+<!-- View All Rooms Link -->
+<a href="https://www.whatahotel.com/booking/showRates.cfm?hotelID=1253&checkIn=2026-06-02&checkOut=2026-06-05&guests=2&children=0&rooms=1" target="_blank" class="view-all">View All 67 Available Room Types &rarr;</a>
+
+<div class="rule-thin" style="margin:32px 0;"></div>
+
+<!-- Price Summary -->
+<div class="summary-section">
+<div class="summary-title">Price Summary</div>
+<table class="sum-table">
+<thead>
+<tr>
+<th class="sum-th" style="width:40%">Room Type</th>
+<th class="sum-th">Beds</th>
+<th class="sum-th">Per Night</th>
+<th class="sum-th">3-Night Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="sum-td"><div class="td-room">Option 1</div><div class="td-sub">Horizon View King</div></td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">1 King</td>
+<td class="sum-td td-price">$996.67</td>
+<td class="sum-td td-price" style="font-size:15px">$2,990.01</td>
+</tr>
+<tr class="row-alt">
+<td class="sum-td"><div class="td-room">Option 2</div><div class="td-sub">Horizon View Queen Queen</div></td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">2 Queens</td>
+<td class="sum-td td-price">$1,215.00</td>
+<td class="sum-td td-price" style="font-size:15px">$3,645.00</td>
+</tr>
+<tr>
+<td class="sum-td"><div class="td-room">Option 3</div><div class="td-sub">Ocean View Queen Queen</div></td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">2 Queens</td>
+<td class="sum-td td-price">$1,341.33</td>
+<td class="sum-td td-price" style="font-size:15px">$4,023.99</td>
+</tr>
+</tbody>
+</table>
+
+<!-- Mobile Summary -->
+<div class="mobile-summary">
+<div class="mob-card">
+<div class="mob-card-header">Option 1</div>
+<div class="mob-card-sub">Horizon View King</div>
+<div class="mob-card-row"><span class="mob-card-label">Beds</span><span class="mob-card-val">1 King</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Per Night</span><span class="mob-card-val accent">$996.67</span></div>
+<div class="mob-card-row"><span class="mob-card-label">3-Night Total</span><span class="mob-card-val accent" style="font-size:16px;">$2,990.01</span></div>
+</div>
+<div class="mob-card">
+<div class="mob-card-header">Option 2</div>
+<div class="mob-card-sub">Horizon View Queen Queen</div>
+<div class="mob-card-row"><span class="mob-card-label">Beds</span><span class="mob-card-val">2 Queens</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Per Night</span><span class="mob-card-val accent">$1,215.00</span></div>
+<div class="mob-card-row"><span class="mob-card-label">3-Night Total</span><span class="mob-card-val accent" style="font-size:16px;">$3,645.00</span></div>
+</div>
+<div class="mob-card">
+<div class="mob-card-header">Option 3</div>
+<div class="mob-card-sub">Ocean View Queen Queen</div>
+<div class="mob-card-row"><span class="mob-card-label">Beds</span><span class="mob-card-val">2 Queens</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Per Night</span><span class="mob-card-val accent">$1,341.33</span></div>
+<div class="mob-card-row"><span class="mob-card-label">3-Night Total</span><span class="mob-card-val accent" style="font-size:16px;">$4,023.99</span></div>
+</div>
+</div>
+
+<div class="fn-callout">
+<div class="fn-icon">&#127775;</div>
+<div class="fn-text">Book through <b>WhataHotel!</b> to unlock exclusive complimentary perks at Montage Laguna Beach: <b>daily breakfast for two</b>, a <b>$100 spa services credit</b>, room upgrade (subject to availability), complimentary Wi-Fi, and late check-out. These perks are included at no additional cost on top of the best available rate. Subject to availability at time of booking.</div>
+</div>
+<div class="perks-recap">
+<div class="perks-recap-title"><i class="fas fa-concierge-bell"></i>WhataHotel! Exclusive Perks &mdash; Included with Every Booking</div>
+<div class="perks-grid">
+<div class="perk"><i class="fas fa-check-circle"></i>Room Category Upgrade at Check-In (if available)</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Complimentary Breakfast for Two Daily</div>
+<div class="perk"><i class="fas fa-check-circle"></i>$100 Spa Services Credit</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Complimentary Wi-Fi</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Late Check-Out (subject to availability)</div>
+<div class="perk"><i class="fas fa-check-circle"></i>VIP Guest Recognition</div>
+</div>
+</div>
+<p class="tax-note">** All prices exclude applicable taxes, resort fees &amp; surcharges. Rates shown are per room per night based on 2 guests, 0 children, 1 room. Subject to availability at time of booking. 67 room types available &mdash; 3 shown above. **</p>
+</div>
+</div>
+<div class="contact">
+<div class="contact-hed">Questions? We&rsquo;re Here to Help.</div>
+<div class="contact-mail">Reservations@WhataHotel.com</div>
+<div class="contact-foot">Proposal prepared by Lorraine Travel &nbsp;&middot;&nbsp; WhataHotel.com</div>
+</div>
+</div>
+
+<script>
+  function initWidget() {
+    try {
+      if (globalThis.vibssWebChat && globalThis.vibssWebChat.setup) {
+        globalThis.vibssWebChat.setup({
+          id: "743b3c49-9ec6-4539-beec-b9e1cbe0c730",
+        });
+      } else {
+        console.error("[Vibss Widget] Widget script loaded but setup function not available");
+      }
+    } catch (error) {
+      console.error("[Vibss Widget] Failed to initialize widget:", error);
+    }
+  }
+  function handleScriptError() {
+    console.error("[Vibss Widget] Failed to load widget script from https://vibss.io/plugin.js");
+    var errorDiv = document.createElement("div");
+    errorDiv.style.cssText = "position:fixed;bottom:20px;right:20px;background:#fee;color:#c33;padding:12px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:14px;max-width:300px;z-index:999999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;";
+    errorDiv.textContent = "Chat widget failed to load. Please refresh the page.";
+    document.body.appendChild(errorDiv);
+    setTimeout(function() { errorDiv.remove(); }, 10000);
+  }
+  var script = document.createElement("script");
+  script.src = "https://vibss.io/plugin.js?v=2026-03-15";
+  script.onload = initWidget;
+  script.onerror = handleScriptError;
+  document.body.appendChild(script);
+</script>
+
+</body>
+</html>
