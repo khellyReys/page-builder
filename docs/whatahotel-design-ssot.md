@@ -36,6 +36,7 @@ src/
     HeroSection.tsx
     OfferBanner.tsx
     RoomCard.tsx
+    AppDownload.tsx   ← App store download section (always rendered)
     ContactFooter.tsx
   pages/
     PromoPage.tsx     ← Renders single or multi-hotel promos
@@ -281,7 +282,48 @@ Always: `contact: sharedContact` — never inline the contact data.
 
 ---
 
-## HTML Entity Reference
+## App Download Section ⚠️ Required on Every Promo Page
+
+Every promo page **must** include the `<AppDownload />` component. It renders after the last room card and before the `<ContactFooter />`.
+
+### Placement in `PromoPage.tsx`
+
+```tsx
+// Single-hotel
+<div className="body">
+  {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
+</div>
+<AppDownload />           {/* ← always here */}
+<ContactFooter ... />
+
+// Multi-hotel — AppDownload goes outside the hotels loop, after all hotels
+{promo.hotels.map((hotel, index) => (
+  <div key={index}>
+    <HeroSection ... />
+    <OfferBanner ... />
+    <div className="body">
+      {hotel.rooms.map((room) => <RoomCard key={room.badgeText} room={room} />)}
+    </div>
+  </div>
+))}
+<AppDownload />           {/* ← after all hotels, before footer */}
+<ContactFooter ... />
+```
+
+### App Store Links (hardcoded in component — never change)
+
+- **iOS:** `https://apps.apple.com/ph/app/whatahotel/id6759237169`
+- **Android:** `https://play.google.com/store/apps/details?id=com.whatahotel.app`
+- **Heading copy:** "Download our app for more promos" — never change this text
+
+### Rules
+
+- `AppDownload` takes no props — links are hardcoded inside the component
+- Never move it above the room cards or below the `ContactFooter`
+- Never omit it from any promo page — single-hotel or multi-hotel
+- Never change the app store URLs
+
+---
 
 Use these in strings rendered via `dangerouslySetInnerHTML` (hero location, offer description, subtitle, leftLabel, leftSub):
 
@@ -365,6 +407,7 @@ Key rules:
 - Multi-hotel promos use hotels[] — never mix with flat hero/offer/rooms
 - bookUrl must use the room-specific hotelID — never reuse the same URL across rooms
 - If a room has multiple rate variants, always use the lowest priced booking URL
+- Always include <AppDownload /> after the last room card, before <ContactFooter />
 - Branch naming: promo-N-YYYYMMDD (e.g. promo-7-20260318)
 - PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — Montage Laguna Beach")
 ```
@@ -382,6 +425,7 @@ Key rules:
 - [ ] Multi-hotel promos use `hotels[]` not flat structure
 - [ ] Each room has its own unique `bookUrl` with room-specific `hotelID`
 - [ ] If multiple rate variants exist per room, lowest price URL was used
+- [ ] `<AppDownload />` is present after last room card, before `<ContactFooter />`
 - [ ] Promo registered in `src/data/promos.ts`
 - [ ] Committed to GitHub and verified live on Netlify
 
