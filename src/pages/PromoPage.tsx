@@ -4,6 +4,7 @@ import { Masthead } from "../components/Masthead";
 import { HeroSection } from "../components/HeroSection";
 import { OfferBanner } from "../components/OfferBanner";
 import { RoomCard } from "../components/RoomCard";
+import { AppDownload } from "../components/AppDownload";
 import { ContactFooter } from "../components/ContactFooter";
 
 export default function PromoPage() {
@@ -22,11 +23,17 @@ export default function PromoPage() {
           </div>
           <div className="mast-sep" />
           <div className="mast-logo">
-            <img
-              src="https://whatahotel.com/content/general/wah_logo.jpg"
-              alt="What A Hotel!"
-            />
-            <div className="mast-byline">by Lorraine Travel</div>
+            <a
+              href="https://www.whatahotel.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                src="https://whatahotel.com/content/general/wah_logo.jpg"
+                alt="What A Hotel!"
+              />
+              <div className="mast-byline">by Lorraine Travel</div>
+            </a>
           </div>
         </div>
         <div className="body">
@@ -46,6 +53,7 @@ export default function PromoPage() {
           title={promo.title}
           client={promo.client}
           dates={promo.dates}
+          logoHref="https://www.whatahotel.com/"
         />
 
         {promo.hotels.map((hotel, index) => (
@@ -76,6 +84,8 @@ export default function PromoPage() {
           </div>
         ))}
 
+        <AppDownload />
+
         <ContactFooter
           email={promo.contact.email}
           footerHtml={promo.contact.footerHtml}
@@ -87,7 +97,12 @@ export default function PromoPage() {
   // ── Single-hotel promo ───────────────────────────────────────────
   return (
     <div className="wrap">
-      <Masthead title={promo.title} client={promo.client} dates={promo.dates} />
+      <Masthead
+        title={promo.title}
+        client={promo.client}
+        dates={promo.dates}
+        logoHref="https://www.whatahotel.com/"
+      />
       <HeroSection
         imageUrl={promo.hero!.imageUrl}
         alt={promo.hero!.alt}
@@ -112,6 +127,8 @@ export default function PromoPage() {
           </p>
         )}
       </div>
+
+      <AppDownload />
 
       <ContactFooter
         email={promo.contact.email}
