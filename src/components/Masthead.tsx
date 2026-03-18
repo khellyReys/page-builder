@@ -2,9 +2,20 @@ type Props = {
   title: string;
   client: string;
   dates: string;
+  logoHref?: string;
 };
 
-export function Masthead({ title, client, dates }: Props) {
+export function Masthead({ title, client, dates, logoHref }: Props) {
+  const logo = (
+    <>
+      <img
+        src="https://whatahotel.com/content/general/wah_logo.jpg"
+        alt="What A Hotel!"
+      />
+      <div className="mast-byline">by Lorraine Travel</div>
+    </>
+  );
+
   return (
     <div className="masthead">
       <div className="mast-info">
@@ -17,11 +28,13 @@ export function Masthead({ title, client, dates }: Props) {
       </div>
       <div className="mast-sep" />
       <div className="mast-logo">
-        <img
-          src="https://whatahotel.com/content/general/wah_logo.jpg"
-          alt="What A Hotel!"
-        />
-        <div className="mast-byline">by Lorraine Travel</div>
+        {logoHref ? (
+          <a href={logoHref} target="_blank" rel="noreferrer">
+            {logo}
+          </a>
+        ) : (
+          logo
+        )}
       </div>
     </div>
   );
