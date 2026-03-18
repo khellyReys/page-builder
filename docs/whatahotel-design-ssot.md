@@ -242,9 +242,38 @@ Use `"(incl. taxes)"` when taxes are included.
 - If no real image URL is available, use: `"https://www.whatahotel.com/img/paceholder.jpg"`
 - Never leave `src` blank
 
-### `bookUrl`
+### `bookUrl` ⚠️ Critical
 
-Copy exactly from the source HTML. Preserve all query parameters. Never reuse the same URL across rooms if rooms have different IDs.
+The booking URL must always use the **room-specific `hotelID`** from the source HTML. Rules:
+
+- Each room gets its own unique `bookUrl` — never reuse the same URL across different rooms
+- The `hotelID` query parameter identifies the specific room — always preserve it exactly
+- If a room has **multiple booking IDs or rate variants**, always use the one with the **lowest price**
+- Never use a generic hotel-level URL when a room-specific ID is available
+
+**Correct — each room has its own unique hotelID:**
+
+```ts
+// Room 1
+bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=6438&checkIn=2026-04-26&checkOut=2026-04-29&guests=2&children=0&rooms=1";
+// Room 2
+bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=6440&checkIn=2026-04-26&checkOut=2026-04-29&guests=2&children=0&rooms=1";
+```
+
+**Wrong — same hotelID reused across multiple rooms:**
+
+```ts
+// Room 1
+bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=3103&..."; // ❌
+// Room 2
+bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=3103&..."; // ❌ same ID
+```
+
+**When multiple rate IDs exist for one room**, compare the nightly rates and use the URL associated with the lowest one. Add a comment above the room object:
+
+```ts
+// AGENT NOTE: Room had 2 rate variants ($1,325 and $1,472) — used lowest ($1,325), hotelID=3103
+```
 
 ### `contact`
 
@@ -334,6 +363,10 @@ Key rules:
 - Placeholder images: https://www.whatahotel.com/img/paceholder.jpg
 - contact is always: sharedContact (never inline)
 - Multi-hotel promos use hotels[] — never mix with flat hero/offer/rooms
+- bookUrl must use the room-specific hotelID — never reuse the same URL across rooms
+- If a room has multiple rate variants, always use the lowest priced booking URL
+- Branch naming: promo-N-YYYYMMDD (e.g. promo-7-20260318)
+- PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — Montage Laguna Beach")
 ```
 
 ---
@@ -347,6 +380,8 @@ Key rules:
 - [ ] `portalTotalValue` matches the lowest total in the data
 - [ ] Placeholder images used where real URLs unavailable
 - [ ] Multi-hotel promos use `hotels[]` not flat structure
+- [ ] Each room has its own unique `bookUrl` with room-specific `hotelID`
+- [ ] If multiple rate variants exist per room, lowest price URL was used
 - [ ] Promo registered in `src/data/promos.ts`
 - [ ] Committed to GitHub and verified live on Netlify
 
