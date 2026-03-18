@@ -1,264 +1,355 @@
-# Migrating WhataHotel! Proposals from Netlify Direct Upload to GitHub
+# WhataHotel! Proposal Site — Single Source of Truth
 
-> One-time setup · ~15 minutes · No coding required  
-> After this, the Netlify AI agent can create and update pages automatically.
-
----
-
-## What You'll Need
-
-- Your current site files (the HTML folder you've been uploading to Netlify)
-- A free GitHub account → https://github.com
-- Your Netlify login
+> **For:** Lorraine Travel / WhataHotel!  
+> **Stack:** React + TypeScript + Vite · Deployed on Netlify via GitHub  
+> **Last updated:** March 2026
 
 ---
 
-## Part 1 — Set Up GitHub (5 min)
+## How the Site Works
 
-### Step 1 — Create a GitHub Account
-If you don't have one yet:
-1. Go to **https://github.com**
-2. Click **"Sign up"**
-3. Use any email, create a username and password
-4. Verify your email
+All proposal pages are powered by a single React app. There are no individual HTML files per proposal. Instead:
 
----
+- Each proposal is a **TypeScript data file** in `src/data/promo-N.ts`
+- All promos are registered in `src/data/promos.ts`
+- The React router renders each promo at `/promo/promo-N`
+- The portal homepage at `/` is built automatically from the same data
 
-### Step 2 — Create a New Repository
-1. Once logged in, click the **"+"** icon (top right) → **"New repository"**
-2. Fill in:
-   - **Repository name:** `whatahotel-proposals`
-   - **Visibility:** `Private` (so proposal contents stay confidential)
-   - ✅ Check **"Add a README file"**
-3. Click **"Create repository"**
-
-You now have an empty private repo.
+**To add a new proposal: create a data file. That's it.**  
+No HTML files. No new folders. No template copying.
 
 ---
 
-### Step 3 — Upload Your Existing Files to GitHub
+## File Structure
 
-1. Inside your new repo, click **"Add file"** → **"Upload files"**
-2. Drag and drop your entire site folder contents:
-   ```
-   index.html                 ← Main portal page
-   sentz-naples/
-     index.html
-   maui-getaway/
-     index.html
-   [any other proposal folders]
-   ```
-3. At the bottom under **"Commit changes"**, type:
-   `Initial upload — existing proposal pages`
-4. Click **"Commit changes"**
-
-All your files are now in GitHub.
-
----
-
-### Step 4 — Add the SSOT File
-
-1. In your repo, click **"Add file"** → **"Create new file"**
-2. In the filename box type: `docs/whatahotel-design-ssot.md`
-   - Typing the `/` automatically creates the `docs/` folder
-3. Paste the full contents of your SSOT document into the editor
-4. Commit with message: `Add WhataHotel design SSOT`
-
-Your repo should now look like:
 ```
-whatahotel-proposals/
-  docs/
-    whatahotel-design-ssot.md
-  index.html
-  sentz-naples/
-    index.html
-  maui-getaway/
-    index.html
-  README.md
+src/
+  data/
+    promo-1.ts        ← Naples, Florida
+    promo-2.ts        ← ...
+    promo-N.ts        ← New proposals go here
+    promos.ts         ← Central registry — import + export all promos here
+    contact.ts        ← Shared contact block (sharedContact)
+  types.ts            ← Promo, HotelBlock, Room, etc. type definitions
+  components/
+    Masthead.tsx
+    HeroSection.tsx
+    OfferBanner.tsx
+    RoomCard.tsx
+    ContactFooter.tsx
+  pages/
+    PromoPage.tsx     ← Renders single or multi-hotel promos
+    PortalPage.tsx    ← Homepage portal list
 ```
 
 ---
 
-## Part 2 — Connect GitHub to Netlify (5 min)
+## The Promo Type
 
-### Step 5 — Add a netlify.toml File (Important)
+Every promo file exports a `Promo` object. There are two modes:
 
-Before connecting, add this config file so Netlify knows how to serve your site correctly.
+### Single-Hotel Promo
 
-1. In your repo, click **"Add file"** → **"Create new file"**
-2. Name it exactly: `netlify.toml`
-3. Paste this content:
-   ```toml
-   [build]
-     publish = "."
+Use when the proposal covers one hotel. Populate `hero`, `offer`, and `rooms` directly.
 
-   [[redirects]]
-     from = "/*"
-     to = "/index.html"
-     status = 200
-     force = false
-   ```
-4. Commit with message: `Add Netlify config`
+### Multi-Hotel Promo
+
+Use when the proposal covers two or more hotels. Populate `hotels[]` instead. Each entry in `hotels[]` has its own `hero`, `offer`, and `rooms[]`.
+
+**Never mix both.** A promo either uses `hero/offer/rooms` OR `hotels[]`, never both.
 
 ---
 
-### Step 6 — Connect Netlify to Your GitHub Repo
+## Full Type Reference
 
-1. Log in to **https://app.netlify.com**
-2. Go to your existing site
-3. Go to **Site configuration** → **Build & deploy** → **Continuous deployment**
-4. Click **"Link repository"** (or **"Connect to Git"**)
-5. Choose **GitHub**
-6. Click **"Authorize Netlify"** when prompted
-7. Search for and select **`whatahotel-proposals`**
-8. In the build settings:
-   - **Branch to deploy:** `main`
-   - **Build command:** *(leave empty)*
-   - **Publish directory:** `.`
-9. Click **"Deploy site"**
+```ts
+interface Promo {
+  id: string; // e.g. "promo-7"
+  title: string; // e.g. "Laguna Beach, California"
+  client: string; // e.g. "The Sentz Family" or ""
+  dates: string; // e.g. "June 2 – 5, 2026 | 3 Nights | 3 Room Options"
+  thumbnailUrl: string; // Portal card image
+  portalTotalLabel: string; // e.g. "Starting From" or "Combined Total"
+  portalTotalValue: string; // e.g. "$2,990.01"
 
-Netlify will deploy from your repo. Your existing site URL stays exactly the same — nothing breaks for your clients.
+  // Single-hotel only
+  hero?: HeroBlock;
+  offer?: OfferBlock;
+  rooms?: Room[];
 
----
+  // Multi-hotel only
+  hotels?: HotelBlock[];
 
-### Step 7 — Update the Netlify Project Context
+  contact: Contact; // Always: sharedContact
+}
 
-Now that your SSOT is in the repo, update the Project Context field to point to it:
+interface HotelBlock {
+  hero: HeroBlock;
+  offer: OfferBlock;
+  rooms: Room[];
+}
 
-1. Go to **Netlify → your site → Project configuration → Agent runs**
-2. In the **Project context** field, paste this (fits within 3,000 characters):
+interface HeroBlock {
+  imageUrl: string;
+  alt: string;
+  hotel: string;
+  location: string; // HTML string with <i> icon tag
+}
 
-```
-You are building and maintaining the WhataHotel! by Lorraine Travel proposal site.
+interface OfferBlock {
+  heading: string;
+  description: string; // HTML allowed
+  pills: string[]; // Each starts with "✔ "
+}
 
-Always read and strictly follow ALL rules in /docs/whatahotel-design-ssot.md before making any changes or creating any new pages. This is the Single Source of Truth — never deviate from it.
-
-Key rules summary:
-- Never change colors, fonts, spacing, or layout
-- Every room gets its own unique booking button and URL — never reuse URLs
-- Show max 3 rooms per hotel; add a "View All" text link if more exist
-- Never leave an img src blank — use https://www.whatahotel.com/img/paceholder.jpg
-- Every page needs the full Open Graph meta tag block in <head>
-- Always include the Vibss chat widget (ID: 743b3c49-9ec6-4539-beec-b9e1cbe0c730)
-- Always include the app download section with both Android and iOS store links
-- New proposal pages go in their own folder: /client-destination/index.html
-```
-
-3. Click **Save**
-
----
-
-## Part 3 — How to Work Going Forward
-
-### Creating a New Proposal Page
-
-Tell the Netlify AI agent:
-
-```
-Create a new proposal page following /docs/whatahotel-design-ssot.md.
-
-Client: [Name]
-Destination: [City, Country]
-Hotel(s): [Hotel name(s)]
-Dates: [Check-in] – [Check-out], [X] nights
-Rooms: [Room name, price/night, total, booking URL — max 3 per hotel]
-Hero image: [URL]
-Page folder: /[client-destination]/
-Deployed URL: https://whatahotelpromo.netlify.app/[client-destination]
-```
-
-**What happens automatically:**
-1. Agent creates the folder and `index.html` in your GitHub repo
-2. GitHub notifies Netlify
-3. Netlify deploys in ~30 seconds
-4. Page is live at your URL
-
----
-
-### Editing an Existing Page
-
-```
-Edit /sentz-naples/index.html — update the total price to $25,500.00
-```
-
-Agent commits → GitHub updates → Netlify auto-deploys. Done.
-
----
-
-### Adding a New Card to the Portal (Index Page)
-
-After a new proposal is created, tell the agent:
-
-```
-Add a new card to /index.html for:
-- Client: [Name]
-- Hotel: [Hotel name]
-- Location: [City, State]
-- Dates: [X nights]
-- Total: $[amount]
-- Link: /[folder-name]
-- Thumb image: [URL]
+interface Room {
+  badgeText: string;
+  name: string; // HTML allowed (<br/>)
+  subtitle: string; // HTML allowed (<br/>, <strong>)
+  priceLabel: string;
+  priceRate: string; // e.g. "$996.67" — no "/night" suffix
+  priceStrike: string; // Crossed-out rate or "" if none
+  priceTotal: string; // e.g. "3-Night Total: $2,990.01"
+  images: { src: string; alt: string }[];
+  features: {
+    title: string;
+    icon: string; // FontAwesome icon name without "fa-"
+    items: string[]; // Plain text only — no HTML inside items
+  }[];
+  savings: {
+    leftLabel: string; // MUST use <span> — see rules below
+    leftSub: string; // HTML allowed (<strong>)
+    rightLabel: string;
+    rightValue: string;
+  };
+  bookUrl: string;
+  bookLabel: string;
+}
 ```
 
 ---
 
-### Editing the SSOT
+## Field Rules — Follow Exactly
 
-1. Go to **github.com → whatahotel-proposals → docs/whatahotel-design-ssot.md**
-2. Click the **pencil icon** (Edit this file)
-3. Make your changes
-4. Click **"Commit changes"**
+### `id`
 
-The agent reads the updated version on its next run. No redeployment needed.
+Format: `"promo-N"` where N is the next number in sequence. Check `promos.ts` for the current highest number.
 
----
+### `title`
 
-## Part 4 — Good to Know
+Destination-first. Examples:
 
-### Your Repo is the Master Copy
-Everything lives in GitHub. Netlify just reads and publishes it. Your files are always safe and portable.
+- `"Laguna Beach, California"`
+- `"New York City — Two Hotel Options"`
+- `"Aman New York — Ultra-Luxury Urban Sanctuary"`
 
-### Every Change Has a Full History
-If the AI agent makes a bad change:
-1. Go to your repo → click **"Commits"**
-2. Find the last good version
-3. Click **"..."** → **"Revert"**
+### `dates`
 
-Site is restored in under a minute.
+Always: `"Month D – D, YYYY | N Nights | N Room Options"`  
+Or for multi-room: `"Month D – D, YYYY | N Nights | Hotel Name"`
 
-### Folder Name = Page URL
+### `portalTotalLabel` / `portalTotalValue`
+
+- Single hotel, one room type → `"Starting From"` + lowest total
+- Multiple room types → `"Starting From"` + lowest total across all rooms
+- Multi-unit (connecting rooms) → `"Combined Total"` + sum of both units
+- `portalTotalValue` is always formatted as `"$X,XXX.XX"`
+
+### `hero.location`
+
+Always format as:
+
+```ts
+"<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>ADDRESS &nbsp;|&nbsp; DESCRIPTOR";
 ```
-/sentz-naples/index.html    →   https://whatahotelpromo.netlify.app/sentz-naples
-/garcia-tokyo/index.html    →   https://whatahotelpromo.netlify.app/garcia-tokyo
+
+### `offer.pills`
+
+Each pill starts with `"✔ "` (checkmark + space). Plain text only inside pills.
+
+### `badgeText`
+
+Use the appropriate emoji + label:
+
+- Standard rooms: `"🏨 Option 1"`, `"🏨 Option 2"`, etc.
+- Residences/suites: `"🏨 Residence 1"`, `"🏨 Residence 2"`, etc.
+- Multi-hotel, single hotel rooms: `"🏨 Hotel Option 1 — Room 1"`, etc.
+- Multi-hotel, suites: `"🏨 Hotel Option 2 — Suite 1"`, etc.
+- Connecting units (family): `"🛏️ Unit 1 — Parents"`, `"🛏️ Unit 2 — Kids"`, etc.
+
+### `name`
+
+Use `<br/>` for line breaks. Example: `"Three-Bedroom Home<br/>Central Park View"`
+
+### `subtitle`
+
+Use `<br/>` for line breaks. Always end with a colored highlight:
+
+```ts
+"<strong style='color: var(--burgundy)'>Best Value — From $X,XXX/night</strong>";
 ```
 
-Always tell the agent the folder name when requesting a new page.
+### `priceRate`
 
-### The `/docs/` Folder is Private to the Agent
-The `whatahotel-design-ssot.md` file lives in your repo but is never served as a public page. Clients visiting your site cannot access it — only the Netlify AI agent reads it.
+- Include `$` sign
+- Include cents if the rate is fractional: `"$996.67"`, `"$1,341.33"`
+- No `/night` suffix — the component adds that
+- No `.00` needed for whole numbers: `"$1,215"` not `"$1,215.00"`
+
+### `priceStrike`
+
+- If there's a strikethrough rate: `"Standard: $1,472.50/night"`
+- If there's no strikethrough: `""` — never omit the field
+
+### `features`
+
+Always exactly **2 feature blocks** per room:
+
+1. Room/Suite/Residence Features — `icon: "door-open"`
+2. WhataHotel! Exclusive Perks — `icon: "gift"`
+
+Feature items are **plain text only** — no HTML tags inside `items[]` strings.
+
+### `savings.leftLabel` ⚠️ Critical
+
+This field is rendered via `dangerouslySetInnerHTML`. It **must always** use a `<span>` wrapper around the rate label:
+
+```ts
+leftLabel: "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>";
+leftLabel: "2 Nights &nbsp;|&nbsp; <span>Special Offer Rate</span>";
+leftLabel: "8 Nights | 6 Paid + 2 FREE Nights"; // span optional if no rate label
+```
+
+Never write: `"3 Nights | WhataHotel! Exclusive Rate"` — the span styling will be missing.
+
+### `savings.leftSub`
+
+HTML is allowed. Use `<strong>` for savings amounts:
+
+```ts
+leftSub: "Standard rate: $1,472.50 × 2 = $3,386.39 — you save <strong>$338.51</strong>";
+leftSub: "Includes all WhataHotel! exclusive perks &mdash; breakfast, spa credit &amp; more";
+```
+
+### `savings.rightLabel`
+
+Use `"(excl. taxes)"` when taxes are not included in the total.  
+Use `"(incl. taxes)"` when taxes are included.
+
+### `images`
+
+- Always provide 2 image objects per room
+- If no real image URL is available, use: `"https://www.whatahotel.com/img/paceholder.jpg"`
+- Never leave `src` blank
+
+### `bookUrl`
+
+Copy exactly from the source HTML. Preserve all query parameters. Never reuse the same URL across rooms if rooms have different IDs.
+
+### `contact`
+
+Always: `contact: sharedContact` — never inline the contact data.
 
 ---
 
-## One-Time Setup Checklist
+## HTML Entity Reference
 
-- [ ] Create GitHub account at github.com
-- [ ] Create `whatahotel-proposals` private repo
-- [ ] Upload all existing HTML files and folders to repo
-- [ ] Create `docs/whatahotel-design-ssot.md` and paste SSOT content
-- [ ] Create `netlify.toml` with the config above
-- [ ] Connect Netlify to GitHub repo via "Link repository"
-- [ ] Verify site still loads correctly at your Netlify URL
-- [ ] Update Netlify Project Context field with the summary above
-- [ ] Test by asking the agent to make a small edit to confirm it works
+Use these in strings rendered via `dangerouslySetInnerHTML` (hero location, offer description, subtitle, leftLabel, leftSub):
 
-## Every New Proposal Page Checklist
+| Entity     | Output             | Use for                    |
+| ---------- | ------------------ | -------------------------- |
+| `&nbsp;`   | non-breaking space | spacing around `\|`        |
+| `&amp;`    | &                  | ampersands in HTML strings |
+| `&mdash;`  | —                  | em dashes                  |
+| `&middot;` | ·                  | bullet separators          |
+| `&times;`  | ×                  | multiplication             |
 
-- [ ] Provide hotel, room, pricing, and image data to agent
-- [ ] Provide the folder name and full deployed URL (needed for og:url)
-- [ ] Confirm page is live after deploy (~30 seconds)
-- [ ] Test OG preview at https://www.opengraph.xyz
-- [ ] Ask agent to add the card to /index.html portal
+Use plain characters (—, ·, ×, &) inside **plain text fields** like `items[]`, `bookLabel`, `title`, `dates`.
 
 ---
 
-*Guide prepared for WhataHotel! / Lorraine Travel · March 2026*
+## Multi-Hotel Detection
+
+Use `hotels[]` (not flat `hero/offer/rooms`) when:
+
+- The proposal contains two or more distinct hotels
+- There are two or more different hotel names
+- There are two or more different `hotelID` values in booking URLs
+
+In multi-hotel mode:
+
+- `thumbnailUrl` → use the first hotel's hero image
+- `portalTotalValue` → lowest room total across ALL hotels
+- Each hotel in `hotels[]` gets its own complete `hero`, `offer`, and `rooms[]`
+
+---
+
+## Registering a New Promo
+
+After creating `src/data/promo-N.ts`, update `src/data/promos.ts`:
+
+```ts
+import { promo1 } from "./promo-1";
+import { promo2 } from "./promo-2";
+// ... existing imports
+import { promoN } from "./promo-N"; // ← add this
+
+export const promos: Promo[] = [
+  promo1,
+  promo2,
+  // ... existing promos
+  promoN, // ← add this at the end
+];
+```
+
+Once committed to GitHub, Netlify auto-deploys in ~30 seconds. The new promo is live at:
+
+```
+https://<your-site>/promo/promo-N
+```
+
+---
+
+## Editing an Existing Promo
+
+Edit the relevant `src/data/promo-N.ts` file directly. Commit to GitHub. Netlify rebuilds automatically.
+
+---
+
+## Netlify Project Context (Agent Prompt)
+
+Paste this into **Netlify → Site configuration → Agent runs → Project context**:
+
+```
+You are maintaining the WhataHotel! by Lorraine Travel proposal site — a React + TypeScript app deployed on Netlify.
+
+Read /docs/whatahotel-design-ssot.md before every task. It is the Single Source of Truth.
+
+Key rules:
+- New proposals = new src/data/promo-N.ts file + register in src/data/promos.ts
+- Never create HTML files or new folders — this is a React SPA
+- Never change component files (RoomCard, HeroSection, etc.) unless explicitly asked
+- savings.leftLabel MUST always wrap the rate label in <span> tags
+- Always use "" not undefined for empty priceStrike
+- Placeholder images: https://www.whatahotel.com/img/paceholder.jpg
+- contact is always: sharedContact (never inline)
+- Multi-hotel promos use hotels[] — never mix with flat hero/offer/rooms
+```
+
+---
+
+## New Promo Checklist
+
+- [ ] Create `src/data/promo-N.ts` with correct `id`, `title`, `client`, `dates`
+- [ ] All rooms have exactly 2 feature blocks (door-open + gift)
+- [ ] All `leftLabel` strings use `<span>` wrapper
+- [ ] `priceStrike` is `""` not omitted when no strikethrough exists
+- [ ] `portalTotalValue` matches the lowest total in the data
+- [ ] Placeholder images used where real URLs unavailable
+- [ ] Multi-hotel promos use `hotels[]` not flat structure
+- [ ] Promo registered in `src/data/promos.ts`
+- [ ] Committed to GitHub and verified live on Netlify
+
+---
+
+_WhataHotel! / Lorraine Travel · Updated March 2026_
