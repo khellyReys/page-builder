@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naples, Florida Beach Vacation — Sentz Family | What A Hotel!</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+* { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+:root {
+--burgundy: #B0373E;
+--dkburg: #8C2329;
+--ltburg: #C4444B;
+--black: #1A1A1A;
+--slate: #2D2D2D;
+--gray: #4A4A4A;
+--lgray: #F8F7F6;
+--border: #E5E2DF;
+--cream: #FAF9F7;
+}
+body { background:#EFECEA; margin:0; padding:24px 16px; }
+.wrap { max-width:820px; margin:0 auto; background:#fff; box-shadow:0 8px 32px rgba(0,0,0,.12); }
+.masthead { background: #ffffff; padding:32px 40px 28px; display:flex; align-items:center; gap:24px; border-bottom: 3px solid var(--burgundy); }
+.mast-info { flex:1; }
+.mast-title { font-size:30px; font-weight:800; color:var(--black); letter-spacing:2.5px; text-transform:uppercase; line-height:1.15; margin-bottom:8px; }
+.mast-client { font-size:17px; font-weight:600; color:var(--burgundy); margin-bottom:4px; }
+.mast-dates { font-size:13px; color:var(--gray); letter-spacing:.5px; }
+.mast-sep { width:2px; height:90px; background:var(--burgundy); flex-shrink:0; }
+.mast-logo { text-align:center; }
+.mast-logo img { width:160px; }
+.mast-byline { font-size:11px; color:var(--gray); margin-top:6px; letter-spacing:2px; font-weight:600; text-transform:uppercase; }
+.rule { height:4px; background:var(--burgundy); }
+.rule-thin { height:2px; background:var(--burgundy); margin:32px 40px; }
+.hero { position:relative; }
+.hero img { width:100%; height:400px; object-fit:cover; object-position:center 40%; display:block; }
+.hero-badge { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(26,26,26,.88) 0%, transparent 100%); padding:28px 40px 20px; }
+.hero-hotel { font-size:26px; font-weight:800; color:#fff; letter-spacing:.5px; }
+.hero-loc { font-size:13px; color:rgba(255,255,255,.75); margin-top:3px; }
+.offer-banner { margin:0 40px 0; background:var(--cream); border:1.5px solid var(--burgundy); border-top:none; border-radius:0 0 10px 10px; padding:22px 28px; display:flex; align-items:flex-start; gap:18px; }
+.offer-accent { width:4px; min-height:100%; background:var(--burgundy); border-radius:2px; flex-shrink:0; align-self:stretch; }
+.offer-hed { font-size:17px; font-weight:800; color:var(--burgundy); letter-spacing:1px; text-transform:uppercase; }
+.offer-sub { font-size:13px; color:var(--gray); margin-top:6px; line-height:1.7; }
+.offer-sub strong { color:var(--black); }
+.offer-sub em { color:var(--burgundy); font-style:normal; font-weight:600; }
+.offer-pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.pill { background:var(--burgundy); color:#fff; font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; letter-spacing:.4px; }
+.body { padding:0 40px 40px; }
+.room-label { display:flex; align-items:center; gap:12px; margin:36px 0 18px; }
+.room-label-badge { background:var(--black); color:#fff; font-size:11px; font-weight:700; letter-spacing:2px; padding:6px 16px; border-radius:4px; text-transform:uppercase; white-space:nowrap; }
+.room-label-line { flex:1; height:1px; background:var(--border); }
+.room-hd { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+.room-name { font-size:22px; font-weight:800; color:var(--slate); }
+.room-sub { font-size:12px; color:var(--gray); margin-top:3px; line-height:1.6; }
+.price-card { border:2px solid var(--burgundy); border-radius:8px; padding:12px 20px; text-align:right; min-width:180px; flex-shrink:0; }
+.pc-label { font-size:10px; color:var(--gray); text-transform:uppercase; letter-spacing:1px; }
+.pc-rate { font-size:26px; font-weight:800; color:var(--burgundy); line-height:1.1; }
+.pc-night { font-size:12px; font-weight:500; color:var(--gray); }
+.pc-strike { font-size:11px; color:#A0AEC0; text-decoration:line-through; margin-top:2px; }
+.pc-total { font-size:12px; font-weight:700; color:var(--burgundy); background:#FAF0F1; border-radius:4px; padding:3px 8px; display:inline-block; margin-top:5px; }
+.room-imgs { display:flex; gap:12px; margin-bottom:18px; }
+.room-img { flex:1; height:210px; border-radius:8px; overflow:hidden; }
+.room-img img { width:100%; height:100%; object-fit:cover; }
+.feat-grid { display:flex; gap:12px; margin-bottom:20px; }
+.feat-box { flex:1; background:var(--lgray); border-radius:8px; padding:16px 18px; border:1px solid var(--border); }
+.feat-title { font-size:11px; font-weight:700; color:var(--slate); text-transform:uppercase; letter-spacing:1px; margin-bottom:11px; display:flex; align-items:center; gap:7px; }
+.feat-title i { color:var(--burgundy); }
+.feat-ul { list-style:none; padding:0; margin:0; }
+.feat-li { display:flex; align-items:flex-start; gap:7px; font-size:12.5px; color:var(--gray); margin-bottom:6px; line-height:1.4; }
+.feat-li i { color:var(--burgundy); font-size:10px; margin-top:3px; flex-shrink:0; }
+.savings-bar { background:#FAF0F1; border:1px solid #E8D0D3; border-radius:8px; padding:13px 18px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.sb-left { font-size:13px; color:var(--slate); font-weight:600; }
+.sb-left span { color:var(--burgundy); }
+.sb-sub { font-size:11px; color:var(--gray); margin-top:2px; }
+.sb-right { text-align:right; }
+.sb-right-label { font-size:10px; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; }
+.sb-right-val { font-size:22px; font-weight:800; color:var(--black); }
+.btn-book { display:block; width:fit-content; margin:0 auto 6px; background:var(--burgundy); color:#fff; font-size:14px; font-weight:700; letter-spacing:.5px; padding:12px 38px; border-radius:30px; text-decoration:none; text-align:center; transition:background .2s; }
+.btn-book:hover { background:var(--dkburg); }
+.btn-sub { text-align:center; font-size:11px; color:#A0AEC0; margin-bottom:0; }
+.connect-note { display:flex; align-items:center; justify-content:center; gap:10px; padding:10px 0; margin:4px 0; }
+.cn-line { flex:1; height:1px; background:var(--border); }
+.cn-badge { background:var(--black); color:#fff; font-size:11px; font-weight:700; padding:5px 14px; border-radius:20px; letter-spacing:.5px; display:flex; align-items:center; gap:6px; }
+.summary-section { margin-top:40px; }
+.summary-title { font-size:18px; font-weight:800; color:var(--slate); text-align:center; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+.summary-title::before, .summary-title::after { content:''; flex:1; height:2px; background:var(--burgundy); }
+.sum-table { width:100%; border-collapse:collapse; font-size:13px; }
+.sum-th { background:var(--black); color:#fff; padding:12px 14px; text-align:center; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.sum-th:first-child { text-align:left; }
+.sum-td { border:1px solid var(--border); padding:13px 14px; text-align:center; vertical-align:middle; }
+.sum-td:first-child { text-align:left; }
+.td-room { font-weight:700; color:var(--slate); font-size:13px; }
+.td-sub { font-size:11px; color:var(--gray); margin-top:2px; }
+.td-price { color:var(--burgundy); font-weight:700; font-size:14px; }
+.td-strike { color:#A0AEC0; font-size:11px; text-decoration:line-through; display:block; margin-top:1px; }
+.row-alt { background:var(--lgray); }
+.row-sub { background:#FAF0F1; }
+.row-total { background:var(--black); }
+.row-total td { color:#fff; font-weight:700; border-color:var(--black); padding:14px 14px; }
+.row-total .big { font-size:18px; color:#E8A0A8; }
+.row-savings { background:#F0FFF4; }
+.row-savings td { color:#276749; font-weight:600; border-color:#C6F6D5; }
+.row-savings .save-val { font-size:15px; font-weight:800; color:#276749; }
+.mobile-summary { display:none; }
+.fn-callout { margin-top:16px; background:linear-gradient(135deg, #FAF0F1 0%, #F0D4D8 100%); border:1.5px solid #D4838C; border-radius:8px; padding:14px 20px; font-size:13px; color:#5A1A22; display:flex; align-items:flex-start; gap:10px; }
+.fn-icon { font-size:22px; flex-shrink:0; }
+.fn-text b { color:var(--burgundy); }
+.perks-recap { margin-top:20px; background:var(--lgray); border:1px solid var(--border); border-radius:8px; padding:18px 22px; }
+.perks-recap-title { font-size:11px; font-weight:700; color:var(--slate); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.perks-recap-title i { color:var(--burgundy); }
+.perks-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.perk { display:flex; align-items:flex-start; gap:7px; font-size:12px; color:var(--gray); }
+.perk i { color:var(--burgundy); font-size:11px; margin-top:2px; flex-shrink:0; }
+.tax-note { text-align:center; font-size:11px; color:#A0AEC0; font-style:italic; margin-top:12px; }
+.contact { text-align:center; padding:28px 40px 32px; border-top:1px solid var(--border); margin-top:40px; }
+.contact-hed { font-size:16px; font-weight:700; color:var(--slate); margin-bottom:6px; }
+.contact-mail { font-size:15px; color:var(--burgundy); font-weight:600; }
+.contact-foot { font-size:11px; color:#A0AEC0; margin-top:10px; letter-spacing:.3px; }
+@media(max-width:700px){
+body { padding:12px 8px; }
+.masthead { flex-direction:column; padding:24px 20px; text-align:center; }
+.mast-title { font-size:24px; letter-spacing:1.5px; }
+.mast-sep { width:60px; height:2px; }
+.hero img { height:240px; }
+.hero-badge { padding:20px 20px 16px; }
+.hero-hotel { font-size:20px; }
+.hero-loc { font-size:11px; }
+.offer-banner { margin:0 16px 0; padding:16px 16px; flex-direction:column; gap:0; }
+.offer-accent { width:100%; height:3px; min-height:3px; margin-bottom:12px; }
+.offer-hed { font-size:15px; }
+.body { padding:0 16px 30px; }
+.rule-thin { margin:24px 16px; }
+.room-hd { flex-direction:column; }
+.price-card { width:100%; text-align:left; min-width:unset; }
+.feat-grid { flex-direction:column; }
+.room-imgs { flex-direction:column; }
+.room-img { height:180px; }
+.savings-bar { flex-direction:column; text-align:center; }
+.sb-right { text-align:center; }
+.perks-grid { grid-template-columns:1fr; }
+.sum-table { display:none; }
+.mobile-summary { display:block; }
+}
+.mob-card { background:var(--lgray); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:14px; }
+.mob-card-header { font-size:14px; font-weight:800; color:var(--slate); margin-bottom:4px; }
+.mob-card-sub { font-size:12px; color:var(--gray); margin-bottom:12px; }
+.mob-card-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.mob-card-row:last-child { border-bottom:none; }
+.mob-card-label { color:var(--gray); }
+.mob-card-val { font-weight:700; color:var(--slate); }
+.mob-card-val.accent { color:var(--burgundy); }
+.mob-card-val.strike { color:#A0AEC0; text-decoration:line-through; font-weight:400; }
+.mob-total-card { background:var(--black); color:#fff; border-radius:10px; padding:18px; margin-bottom:14px; }
+.mob-total-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; font-size:13px; }
+.mob-total-label { color:rgba(255,255,255,.7); }
+.mob-total-val { font-weight:800; color:#E8A0A8; font-size:18px; }
+.mob-savings-card { background:#F0FFF4; border:1px solid #C6F6D5; border-radius:10px; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.mob-savings-label { font-size:12px; color:#276749; font-weight:600; }
+.mob-savings-val { font-size:16px; font-weight:800; color:#276749; }
+.mob-free-badge { background:#FAF0F1; border:1px solid #D4838C; border-radius:10px; padding:12px 18px; text-align:center; font-size:12px; color:#5A1A22; font-weight:600; margin-bottom:14px; }
+.mob-free-badge span { color:var(--burgundy); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="masthead">
+<div class="mast-info">
+<div class="mast-title">Naples, Florida<br>Beach Vacation</div>
+<div class="mast-client">&#10022; The Sentz Family &#10022;</div>
+<div class="mast-dates">October 12 &ndash; 20, 2026 &nbsp;|&nbsp; 8 Nights &nbsp;|&nbsp; 2 Connecting Units</div>
+</div>
+<div class="mast-sep"></div>
+<div class="mast-logo">
+<img src="https://whatahotel.com/content/general/wah_logo.jpg" alt="What A Hotel!">
+<div class="mast-byline">by Lorraine Travel</div>
+</div>
+</div>
+<div class="hero">
+<img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=1600&q=80&auto=format" alt="Four Seasons Naples Beach Club — Beachfront Resort">
+<div class="hero-badge">
+<div class="hero-hotel">Four Seasons Naples Beach Club</div>
+<div class="hero-loc"><i class="fas fa-map-marker-alt" style="margin-right:5px"></i>801 Gulf Shore Blvd N, Naples, FL 34102 &nbsp;|&nbsp; 1,000 ft of Private White-Sand Beach &nbsp;|&nbsp; Gulf Coast, Florida</div>
+</div>
+</div>
+<div class="offer-banner">
+<div class="offer-accent"></div>
+<div>
+<div class="offer-hed">Exclusive: Stay Longer &mdash; 4th Night Free!</div>
+<div class="offer-sub">
+Your October 12&ndash;20 dates <strong>qualify</strong> for the Four Seasons' <em>"Fourth Night Free"</em> promotion (valid May 7 &ndash; Nov 19, 2026).
+On an <strong>8-night stay</strong>, each room earns <strong>TWO (2) completely free nights</strong> &mdash; that's 4 free nights across both connecting units!
+</div>
+<div class="offer-pills">
+<span class="pill">&#10003; Qualifies Oct 12&ndash;20</span>
+<span class="pill">&#10003; 2 Free Nights &times; 2 Rooms</span>
+<span class="pill">&#10003; Combinable with WhataHotel! Perks</span>
+<span class="pill">&#10003; Free Cancel Before Oct 9, 2026</span>
+</div>
+</div>
+</div>
+<div class="body">
+<div style="margin-top:28px; border-radius:8px; overflow:hidden; height:230px;">
+<img src="https://sspark.genspark.ai/cfimages?u1=2bLxiSQwAFDEWYD9W2VL%2F95B7o4HKvZkDfoSmrcT5QZUAjQYSBUw%2Bi2ACydvgDEm2glHCy5PJ8irdntVKubmcIOZ5jqJ8li4pzv40eaSaoX60ZXPsinNzcOErwVQTnsxvCiqSyWLWWFY&u2=2FDTac47Ka9lMAtG&width=2560" alt="Four Seasons Naples Beach Club — Beach &amp; Pool" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+</div>
+<div class="room-label">
+<div class="room-label-badge">&#128701;&nbsp; Unit 1 &mdash; Parents</div>
+<div class="room-label-line"></div>
+</div>
+<div class="room-hd">
+<div>
+<div class="room-name">Partial Ocean View<br>One-Bedroom Suite &mdash; King</div>
+<div class="room-sub">
+1,108 sq ft (103 m&sup2;) &nbsp;&middot;&nbsp; Floors 3&ndash;5, Main Building &nbsp;&middot;&nbsp; Max 3 Adults or 2 Adults + 2 Children<br>
+Separate Bedroom &middot; Expansive Living Room &middot; 2 Bathrooms &middot; Private Furnished Terrace<br>
+<strong style="color:var(--burgundy)">Connects directly to the Kids' Room &rarr;</strong>
+</div>
+</div>
+<div class="price-card">
+<div class="pc-label">4th Night Free Avg Rate</div>
+<div class="pc-rate">$2,100<span class="pc-night">/night</span></div>
+<div class="pc-strike">Reg. $2,800/night</div>
+<div class="pc-total">8-Night Total: $18,648.00</div>
+</div>
+</div>
+<div class="room-imgs">
+<div class="room-img">
+<img src="https://sspark.genspark.ai/cfimages?u1=d2fcnoT6Xr23kbG2hYjtULlIIm6yPwPPnaFS%2Bar%2F180F9HTO%2BMjpv34tc5CScxyWbqdRI%2Fihz9%2BBNV8rT9n1crHAHa6Y2Rw5Lr1614DIOSj1Sl3mUTVRrYgkc35ak9z75BJ4hGfPoOPymZMDe2IdifvLO%2FZMpgDJ0yGXvYXd4YHvA9XfpH2qwpozZLojXWGraGQA1INhg2DOj5uvPis0EYGL84pLB5Q%3D&u2=oIPIiVlzcDZ4xj0w&width=2560" alt="Partial Ocean View 1-Bedroom Suite">
+</div>
+<div class="room-img">
+<img src="https://sspark.genspark.ai/cfimages?u1=a7bfPaI%2B1QoMZDOhATdRWqox7mbu3IhlrUd72LYC6RlsTAFRiVnssfU8fmPO8hYbBbO9eaB3DPilH4KcHV5bVrHIIW4zKO5omCKZ1ahr6zJ%2Ff7D5g8%2Bdgdby5DpGKT07g1na9fzVSTRMFvWKo7gGedXbUvDEssPs1VkFZZ%2FGHHVXbNNEoqmpHZmHXbhp0ETeGTuF8W4y8f%2FIQi1gEGnSINZKcked&u2=Mbbqynnmmfmv%2FY5o&width=2560" alt="Partial Ocean View 1-Bedroom Suite Living Area">
+</div>
+</div>
+<div class="feat-grid">
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-door-open"></i>Suite Features</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-circle"></i>1,108 sq ft &mdash; nearly <em>twice</em> the size of a standard room</li>
+<li class="feat-li"><i class="fas fa-circle"></i>King bed with customizable Four Seasons mattress</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Formal foyer with coat closet</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Separate living room &mdash; dining table for four + sofabed</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Guest powder room with shower (2nd bath)</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Primary marble bath: soaking tub + glass shower</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Expansive furnished terrace &mdash; angled Gulf &amp; shoreline views</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Private bedroom with walk-in closet</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Sonos speaker (suite upgrade) &middot; Dyson hair dryer</li>
+<li class="feat-li"><i class="fas fa-circle"></i>65" 4K TV &middot; In-room tablet &middot; Nespresso machine</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Deluxe Byredo toiletries &middot; Bathrobes &amp; slippers</li>
+</ul>
+</div>
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-gift"></i>WhataHotel! Exclusive Perks</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-star"></i><strong>4th Night FREE</strong> &mdash; 2 free nights on 8-night stay</li>
+<li class="feat-li"><i class="fas fa-star"></i>Room Category Upgrade at Check-In (if available)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Daily Breakfast for Two</li>
+<li class="feat-li"><i class="fas fa-star"></i><strong>$200 Hotel Credit</strong> (1-Bedroom Suite benefit!)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Premium Wi-Fi</li>
+<li class="feat-li"><i class="fas fa-star"></i>Priority Late Check-Out (based on availability)</li>
+<li class="feat-li"><i class="fas fa-star"></i>VIP Guest Recognition by Four Seasons</li>
+<li class="feat-li"><i class="fas fa-star"></i>Twice-daily housekeeping + evening turndown</li>
+<li class="feat-li"><i class="fas fa-star"></i>24-hour In-Room Dining</li>
+<li class="feat-li"><i class="fas fa-star"></i>FREE Cancellation before October 9, 2026</li>
+</ul>
+</div>
+</div>
+<div class="savings-bar">
+<div>
+<div class="sb-left">8 Nights &nbsp;|&nbsp; 6 Paid + <span>2 FREE</span> Nights</div>
+<div class="sb-sub">Regular rate: $2,800 &times; 8 = $22,400 &mdash; you save <strong>$3,752.00</strong> with the 4th Night Free offer</div>
+</div>
+<div class="sb-right">
+<div class="sb-right-label">Grand Total (excl. taxes)</div>
+<div class="sb-right-val">$18,648.00</div>
+</div>
+</div>
+<a href="https://www.whatahotel.com/booking/showRates.cfm?hotelID=6813&checkIn=2026/10/12&checkOut=2026/10/20&guests=2&children=0&rooms=1" target="_blank" class="btn-book">Book Unit 1 &mdash; Parents' Suite</a>
+<p class="btn-sub">Clicking "Book Now" opens the WhataHotel! secure booking page</p>
+<div class="connect-note" style="margin:28px 0 0;">
+<div class="cn-line"></div>
+<div class="cn-badge"><i class="fas fa-link"></i> CONNECTING DOOR &nbsp;|&nbsp; Both Units Join Here</div>
+<div class="cn-line"></div>
+</div>
+<div class="room-label">
+<div class="room-label-badge">&#128701;&nbsp; Unit 2 &mdash; The 4 Kiddos</div>
+<div class="room-label-line"></div>
+</div>
+<div class="room-hd">
+<div>
+<div class="room-name">Partial Ocean View Room<br>Two Queen Beds</div>
+<div class="room-sub">
+532 sq ft (49 m&sup2;) &nbsp;&middot;&nbsp; Floors 1&ndash;7, Main Building &nbsp;&middot;&nbsp; Max 4 Adults or 2 Adults + 2 Children<br>
+2 Queen Beds &middot; Expansive Private Terrace &middot; Angled Gulf Views<br>
+<strong style="color:var(--burgundy)">&larr; Connects directly to Parents' Suite</strong>
+</div>
+</div>
+<div class="price-card">
+<div class="pc-label">4th Night Free Avg Rate</div>
+<div class="pc-rate">$709<span style="font-size:16px;font-weight:600">.38</span><span class="pc-night">/night</span></div>
+<div class="pc-strike">Reg. $945.63/night</div>
+<div class="pc-total">8-Night Total: $6,299.25</div>
+</div>
+</div>
+<div class="room-imgs">
+<div class="room-img">
+<img src="https://sspark.genspark.ai/cfimages?u1=RyHMeJ84V83%2Ficwq4KKtY30buCB1tZSBDybSFupAdO1gReSigCuUdA7ubv2OMCkucrmUw9bNz%2F%2Be6lUJhU62MjE7xCDD1c3e0ekqAemiPzR1hsxMum9%2FqNBqySaxH6Le6qiAoTwnTzX9GeH%2F4XcZb7Ep9UwUXJ2VAt48WnsL7de6SahjrWr3HabUnzRRMOyGrft%2BhX3mO4gJtnpFyemUjL6zRAZLWDY%3D&u2=f%2FBlsDBJI5aOVD8t&width=2560" alt="Partial Ocean View Room — 2 Queen Beds">
+</div>
+<div class="room-img">
+<img src="https://sspark.genspark.ai/cfimages?u1=iwOKvybbtSO0yzoeUBtP%2BNGIpAvoFNbNWulf3RMGFegRqNcpPl%2FqpKI8SmubBk3a7mtRjsk2FtOmSGpVz5JdO91Ovf%2FT7lY7GtJNMM6aPvSTJsy16KYpjwyQs%2BeZOTAd1DPpDDTcYTU6sKH0cl5DpKYJHlaRT7VIXKPfXi2oGvZbeRMQIM1FSu6V9pKjIKTzZWPmEPzY1EdQNnl6FDqm1jPI&u2=VMiwzWPQM4ZcSwve&width=2560" alt="Partial Ocean View Room Terrace">
+</div>
+</div>
+<div class="feat-grid">
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-door-open"></i>Room Features</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-circle"></i>Two Queen beds &mdash; ideal for 4 kids sharing</li>
+<li class="feat-li"><i class="fas fa-circle"></i>532 sq ft with expansive private furnished terrace</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Angled Gulf of Mexico &amp; shoreline views</li>
+<li class="feat-li"><i class="fas fa-circle"></i>White-marble bath: soaking tub + glass shower + double vanity</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Residential-style walk-in closet with custom cabinetry</li>
+<li class="feat-li"><i class="fas fa-circle"></i>65" 4K TV &middot; Bang &amp; Olufsen speaker &middot; In-room tablet</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Nespresso &middot; Private bar (wine, beer, snacks) &middot; Extra fridge</li>
+<li class="feat-li"><i class="fas fa-circle"></i>Yoga mat &middot; Beach tote &middot; Byredo toiletries &middot; Bathrobes</li>
+</ul>
+</div>
+<div class="feat-box">
+<div class="feat-title"><i class="fas fa-gift"></i>WhataHotel! Exclusive Perks</div>
+<ul class="feat-ul">
+<li class="feat-li"><i class="fas fa-star"></i><strong>4th Night FREE</strong> &mdash; 2 free nights on 8-night stay</li>
+<li class="feat-li"><i class="fas fa-star"></i>Room Category Upgrade at Check-In (if available)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Daily Breakfast for Two</li>
+<li class="feat-li"><i class="fas fa-star"></i>$100 Hotel Credit (spa, dining, bar)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Complimentary Premium Wi-Fi</li>
+<li class="feat-li"><i class="fas fa-star"></i>Priority Late Check-Out (based on availability)</li>
+<li class="feat-li"><i class="fas fa-star"></i>Kids under 18 stay FREE in parents' room</li>
+<li class="feat-li"><i class="fas fa-star"></i>Access to FIN's Club (ages 4&ndash;12) &amp; Teen Centre</li>
+<li class="feat-li"><i class="fas fa-star"></i>VIP Guest Recognition by Four Seasons</li>
+<li class="feat-li"><i class="fas fa-star"></i>FREE Cancellation before October 9, 2026</li>
+</ul>
+</div>
+</div>
+<div class="savings-bar">
+<div>
+<div class="sb-left">8 Nights &nbsp;|&nbsp; 6 Paid + <span>2 FREE</span> Nights</div>
+<div class="sb-sub">Regular rate: $945.63 &times; 8 = $7,565.04 &mdash; you save <strong>$2,097.90</strong> with the 4th Night Free offer</div>
+</div>
+<div class="sb-right">
+<div class="sb-right-label">Grand Total (excl. taxes)</div>
+<div class="sb-right-val">$6,299.25</div>
+</div>
+</div>
+<a href="https://www.whatahotel.com/booking/showRates.cfm?hotelID=6813&checkIn=2026/10/12&checkOut=2026/10/20&guests=2&children=0&rooms=1" target="_blank" class="btn-book">Book Unit 2 &mdash; Kids' Connecting Room</a>
+<p class="btn-sub">Clicking "Book Now" opens the WhataHotel! secure booking page</p>
+<div class="rule-thin"></div>
+<div class="summary-section">
+<div class="summary-title">Price Summary</div>
+<table class="sum-table">
+<thead>
+<tr>
+<th class="sum-th" style="width:36%">Unit / Room Type</th>
+<th class="sum-th">Sq Ft</th>
+<th class="sum-th">Beds</th>
+<th class="sum-th">Avg/Night<br><span style="font-weight:400;font-size:9px;letter-spacing:.3px">(4th Night Free Rate)</span></th>
+<th class="sum-th">Regular Rate<br><span style="font-weight:400;font-size:9px">/night</span></th>
+<th class="sum-th">8-Night<br>Grand Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="sum-td"><div class="td-room">Unit 1 &mdash; Parents</div><div class="td-sub">Partial Ocean View<br>1-Bedroom Suite</div></td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">1,108 sq ft</td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">1 King<br>+ Sofabed</td>
+<td class="sum-td td-price">$2,100.00</td>
+<td class="sum-td" style="font-size:12px;color:#A0AEC0;text-decoration:line-through">$2,800.00</td>
+<td class="sum-td td-price" style="font-size:15px">$18,648.00</td>
+</tr>
+<tr class="row-alt">
+<td class="sum-td"><div class="td-room">Unit 2 &mdash; The Kiddos</div><div class="td-sub">Partial Ocean View<br>Room &mdash; 2 Queen Beds</div></td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">532 sq ft</td>
+<td class="sum-td" style="font-size:12px;color:#4A4A4A">2 Queens</td>
+<td class="sum-td td-price">$709.38</td>
+<td class="sum-td" style="font-size:12px;color:#A0AEC0;text-decoration:line-through">$945.63</td>
+<td class="sum-td td-price" style="font-size:15px">$6,299.25</td>
+</tr>
+<tr class="row-sub">
+<td class="sum-td" colspan="3" style="font-size:11px;color:#5A1A22;font-style:italic;font-weight:600;text-align:right;">4th Night Free = 2 free nights per unit &times; 2 units =</td>
+<td class="sum-td" colspan="2" style="font-size:12px;color:var(--burgundy);font-weight:700;text-align:center;">4 TOTAL FREE NIGHTS</td>
+<td class="sum-td" style="font-size:13px;color:var(--burgundy);font-weight:700">Save $5,849.90</td>
+</tr>
+<tr class="row-total">
+<td colspan="3" style="text-align:right;font-size:13px;letter-spacing:.5px;">COMBINED 2-UNIT GRAND TOTAL (excl. taxes &amp; fees)</td>
+<td></td>
+<td></td>
+<td class="big" style="text-align:center;font-size:20px;color:#E8A0A8;">$24,947.25</td>
+</tr>
+<tr class="row-savings">
+<td colspan="5" style="text-align:right;font-size:12px;letter-spacing:.3px;">&#127991; &nbsp;Total savings vs. regular rate across both units:</td>
+<td style="text-align:center;" class="save-val">$5,849.90</td>
+</tr>
+</tbody>
+</table>
+<div class="mobile-summary">
+<div class="mob-card">
+<div class="mob-card-header">Unit 1 &mdash; Parents</div>
+<div class="mob-card-sub">Partial Ocean View &middot; 1-Bedroom Suite</div>
+<div class="mob-card-row"><span class="mob-card-label">Size</span><span class="mob-card-val">1,108 sq ft</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Beds</span><span class="mob-card-val">1 King + Sofabed</span></div>
+<div class="mob-card-row"><span class="mob-card-label">4th Night Free Rate</span><span class="mob-card-val accent">$2,100.00/night</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Regular Rate</span><span class="mob-card-val strike">$2,800.00/night</span></div>
+<div class="mob-card-row"><span class="mob-card-label">8-Night Grand Total</span><span class="mob-card-val accent" style="font-size:16px;">$18,648.00</span></div>
+</div>
+<div class="mob-card">
+<div class="mob-card-header">Unit 2 &mdash; The Kiddos</div>
+<div class="mob-card-sub">Partial Ocean View &middot; Room &mdash; 2 Queen Beds</div>
+<div class="mob-card-row"><span class="mob-card-label">Size</span><span class="mob-card-val">532 sq ft</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Beds</span><span class="mob-card-val">2 Queens</span></div>
+<div class="mob-card-row"><span class="mob-card-label">4th Night Free Rate</span><span class="mob-card-val accent">$709.38/night</span></div>
+<div class="mob-card-row"><span class="mob-card-label">Regular Rate</span><span class="mob-card-val strike">$945.63/night</span></div>
+<div class="mob-card-row"><span class="mob-card-label">8-Night Grand Total</span><span class="mob-card-val accent" style="font-size:16px;">$6,299.25</span></div>
+</div>
+<div class="mob-free-badge">4th Night Free = 2 free nights per unit &times; 2 units = <span>4 TOTAL FREE NIGHTS</span></div>
+<div class="mob-total-card">
+<div class="mob-total-row">
+<span class="mob-total-label">Combined 2-Unit Grand Total</span>
+<span class="mob-total-val">$24,947.25</span>
+</div>
+<div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;">Excl. taxes &amp; fees</div>
+</div>
+<div class="mob-savings-card">
+<span class="mob-savings-label">&#127991; Total savings across both units:</span>
+<span class="mob-savings-val">$5,849.90</span>
+</div>
+</div>
+<div class="fn-callout">
+<div class="fn-icon">&#127775;</div>
+<div class="fn-text">With the <b>4th Night FREE</b> promotion (valid through Nov 19, 2026), the Sentz Family saves <b>$5,849.90</b> across both connecting units &mdash; effectively receiving <b>4 complimentary nights</b> (2 per room) at this stunning Gulf Coast luxury resort. Offer valid at time of booking, subject to availability. <b>FREE cancellation before October 9, 2026.</b></div>
+</div>
+<div class="perks-recap">
+<div class="perks-recap-title"><i class="fas fa-concierge-bell"></i>WhataHotel! Exclusive Perks &mdash; Included with Every Booking</div>
+<div class="perks-grid">
+<div class="perk"><i class="fas fa-check-circle"></i>4th Night FREE (2 complimentary nights per unit)</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Priority Room Category Upgrade at Check-In</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Daily Breakfast for Two (per room)</div>
+<div class="perk"><i class="fas fa-check-circle"></i>$200 Hotel Credit &mdash; Parents' Suite &nbsp;|&nbsp; $100 &mdash; Kids' Room</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Complimentary Premium Wi-Fi</div>
+<div class="perk"><i class="fas fa-check-circle"></i>Priority Late Check-Out (based on availability)</div>
+<div class="perk"><i class="fas fa-check-circle"></i>VIP Four Seasons Guest Recognition</div>
+<div class="perk"><i class="fas fa-check-circle"></i>FREE Cancellation before October 9, 2026</div>
+</div>
+</div>
+<p class="tax-note">** All prices are per-night averages excluding applicable taxes, resort fees &amp; surcharges. 4th Night Free rate is the averaged nightly cost with 2 complimentary nights applied across an 8-night stay. Valid May 7 &ndash; November 19, 2026 (selected dates). Subject to availability at time of booking. **</p>
+</div>
+</div>
+<div class="contact">
+<div class="contact-hed">Questions? We&rsquo;re Here to Help.</div>
+<div class="contact-mail">Reservations@WhataHotel.com</div>
+<div class="contact-foot">Proposal prepared by Lorraine Travel &nbsp;&middot;&nbsp; WhataHotel.com &nbsp;&middot;&nbsp; Four Seasons Preferred Partner Since 1948</div>
+</div>
+</div>
+
+<script>
+  function initWidget() {
+    try {
+      if (globalThis.vibssWebChat && globalThis.vibssWebChat.setup) {
+        globalThis.vibssWebChat.setup({
+          id: "743b3c49-9ec6-4539-beec-b9e1cbe0c730",
+        });
+      } else {
+        console.error("[Vibss Widget] Widget script loaded but setup function not available");
+      }
+    } catch (error) {
+      console.error("[Vibss Widget] Failed to initialize widget:", error);
+    }
+  }
+  function handleScriptError() {
+    console.error("[Vibss Widget] Failed to load widget script from https://vibss.io/plugin.js");
+    var errorDiv = document.createElement("div");
+    errorDiv.style.cssText = "position:fixed;bottom:20px;right:20px;background:#fee;color:#c33;padding:12px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:14px;max-width:300px;z-index:999999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;";
+    errorDiv.textContent = "Chat widget failed to load. Please refresh the page.";
+    document.body.appendChild(errorDiv);
+    setTimeout(function() { errorDiv.remove(); }, 10000);
+  }
+  var script = document.createElement("script");
+  script.src = "https://vibss.io/plugin.js?v=2026-03-15";
+  script.onload = initWidget;
+  script.onerror = handleScriptError;
+  document.body.appendChild(script);
+</script>
+
+</body>
+</html>
