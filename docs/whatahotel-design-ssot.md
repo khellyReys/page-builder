@@ -355,7 +355,72 @@ In multi-hotel mode:
 
 ---
 
-## Registering a New Promo
+## Clarification Protocol — What to Ask Before Creating a Promo
+
+### Step 1 — Always fetch the URL first
+
+If the user provides a WhataHotel! booking URL (`https://www.whatahotel.com/booking/showRates.cfm?hotelID=XXXX&...`), **fetch and read the full page HTML before doing anything else**. The page contains all the data needed:
+
+- **Room names** — in `<h3>` tags inside each `.bookingItem`
+- **Nightly rates** — in `<h4>Starting at: <b>X,XXX.00 USD</b>` per room
+- **3-night totals** — in `Total¹ for 3 Nights: X,XXX.XX USD` inside `.roomMoreInfo`
+- **Room-specific booking URLs** — in `href="/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=HOTELID&..."` — prepend `https://www.whatahotel.com` to make them absolute
+- **Hero image** — in the `<ul id="subSlides">` background-image style, e.g. `/content/hotels/2706/andaz_maui.jpg` — prepend `https://www.whatahotel.com`
+- **Hotel name** — in `<h1>` tag
+- **Perks** — in `.perksList` or `.bookItemDesc ul`
+- **Cancellation policy** — in `.roomMoreInfo` per room
+- **Check-in / check-out dates** — in `PREFILL_CHECKIN` and `PREFILL_CHECKOUT` JS variables or the `<h4>` summary at the top of the booking list
+
+### Step 2 — Build booking URLs correctly
+
+Each room's booking URL must be constructed as:
+
+```
+https://www.whatahotel.com/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=HOTELID&checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&guests=2&children=0&rooms=1
+```
+
+Extract `room`, `rate`, and `hotel` values from the `href` on the "Book Now" link for each room. Every room has a unique `room` code (e.g. `D1DU5V`, `S1TU5V`, `B1KU5V`) — this is what makes each URL unique.
+
+### Step 3 — Extract the hero image
+
+The hotel image is in the slideshow background:
+
+```html
+<li
+  class="headerSlide"
+  style="background-image: url(/content/hotels/2706/andaz_maui.jpg)"
+></li>
+```
+
+Prepend `https://www.whatahotel.com` to get the full URL:
+
+```
+https://www.whatahotel.com/content/hotels/2706/andaz_maui.jpg
+```
+
+Use this for both `thumbnailUrl` and `hero.imageUrl`. Room images are not available on this page — use the placeholder for individual room images.
+
+### Step 4 — Select the 3 rooms to show
+
+The SSOT limit is **max 3 rooms per promo**. When the page has more than 3 rooms:
+
+- Always pick the **3 lowest-priced** standard room options
+- Skip ADA/accessible variants if a standard equivalent exists at the same price
+- Skip villas unless the user specifically requests them
+
+### Step 5 — Ask only if still missing after fetching
+
+Only ask the user for clarification if these cannot be inferred from the page:
+
+1. **Promo ID / number** — always ask, cannot be inferred
+2. **Client name** — ask if not mentioned by user
+3. **Which 3 rooms to feature** — ask only if the user has a preference; otherwise default to 3 lowest-priced standard rooms
+
+### Never hallucinate
+
+Never invent room names, rates, features, or URLs. Everything must come from the fetched page. If the page cannot be fetched, tell the user and ask them to paste the HTML.
+
+---
 
 After creating `src/data/promo-N.ts`, update `src/data/promos.ts`:
 
@@ -405,11 +470,17 @@ Key rules:
 - Placeholder images: https://www.whatahotel.com/img/paceholder.jpg
 - contact is always: sharedContact (never inline)
 - Multi-hotel promos use hotels[] — never mix with flat hero/offer/rooms
-- bookUrl must use the room-specific hotelID — never reuse the same URL across rooms
+- When given a whatahotel.com booking URL, FETCH the page first — all room names, rates, booking URLs, and hero image are in the HTML source
+- Room booking URLs: use href="/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=ID&..." from each "Book Now" link — prepend https://www.whatahotel.com
+- Hero image: found in subSlides background-image style — prepend https://www.whatahotel.com
+- Show the 3 lowest-priced standard rooms; skip ADA/accessible variants and villas unless requested
+- Never reuse the same bookUrl across rooms — each room has a unique room code
 - If a room has multiple rate variants, always use the lowest priced booking URL
 - Always include <AppDownload /> after the last room card, before <ContactFooter />
 - Branch naming: promo-N-YYYYMMDD (e.g. promo-7-20260318)
-- PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — Montage Laguna Beach")
+- PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — Andaz Maui at Wailea")
+- Never hallucinate room data — if page cannot be fetched, tell the user and ask them to paste the HTML
+- If any data is missing, add an // AGENT NOTE: comment listing what needs to be filled in
 ```
 
 ---
@@ -425,6 +496,8 @@ Key rules:
 - [ ] Multi-hotel promos use `hotels[]` not flat structure
 - [ ] Each room has its own unique `bookUrl` with room-specific `hotelID`
 - [ ] If multiple rate variants exist per room, lowest price URL was used
+- [ ] No room data was hallucinated — all rates, names, and URLs came from provided source
+- [ ] If any data is missing, `// AGENT NOTE:` comment is present listing what needs updating
 - [ ] `<AppDownload />` is present after last room card, before `<ContactFooter />`
 - [ ] Promo registered in `src/data/promos.ts`
 - [ ] Committed to GitHub and verified live on Netlify
