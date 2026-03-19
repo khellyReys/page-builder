@@ -1,3 +1,10 @@
+export type ComparisonRow = {
+  label: string;
+  standard: string;
+  whatahotel: string;
+  highlight?: boolean;
+};
+
 export type RoomData = {
   badgeText: string;
   name: string;
@@ -18,6 +25,7 @@ export type RoomData = {
     rightLabel: string;
     rightValue: string;
   };
+  comparison?: ComparisonRow[];
   bookUrl: string;
   bookLabel: string;
 };
