@@ -4,6 +4,7 @@ import { Masthead } from "../components/Masthead";
 import { HeroSection } from "../components/HeroSection";
 import { OfferBanner } from "../components/OfferBanner";
 import { RoomCard } from "../components/RoomCard";
+import { ComparisonOverview } from "../components/ComparisonOverview";
 import { AppDownload } from "../components/AppDownload";
 import { ContactFooter } from "../components/ContactFooter";
 
@@ -81,6 +82,9 @@ export default function PromoPage() {
                 </p>
               )}
             </div>
+            {hotel.rooms.length > 0 && (
+              <ComparisonOverview rooms={hotel.rooms} />
+            )}
           </div>
         ))}
 
@@ -127,6 +131,8 @@ export default function PromoPage() {
           </p>
         )}
       </div>
+
+      {promo.rooms!.length > 0 && <ComparisonOverview rooms={promo.rooms!} />}
 
       <AppDownload />
 
