@@ -36,7 +36,8 @@ src/
     HeroSection.tsx
     OfferBanner.tsx
     RoomCard.tsx
-    AppDownload.tsx   ← App store download section (always rendered)
+    ComparisonOverview.tsx  ← Renders after all room cards, before AppDownload
+    AppDownload.tsx         ← App store download section (always rendered)
     ContactFooter.tsx
   pages/
     PromoPage.tsx     ← Renders single or multi-hotel promos
@@ -123,8 +124,16 @@ interface Room {
     rightLabel: string;
     rightValue: string;
   };
+  comparison: ComparisonRow[]; // See Comparison Overview section below
   bookUrl: string;
   bookLabel: string;
+}
+
+interface ComparisonRow {
+  label: string; // e.g. "Nightly Rate", "3-Night Total", "You Save"
+  standard: string; // e.g. "€1,700/night" — the BAR/standard rate
+  whatahotel: string; // e.g. "€1,530/night" — the WhataHotel exclusive rate
+  highlight?: boolean; // true for the "You Save" row — renders with accent color
 }
 ```
 
@@ -192,8 +201,8 @@ Use `<br/>` for line breaks. Always end with a colored highlight:
 
 ### `priceRate`
 
-- Include `$` sign
-- Include cents if the rate is fractional: `"$996.67"`, `"$1,341.33"`
+- Include `$` sign (or relevant currency symbol)
+- Include cents if the rate is fractional: `"$996.67"`, `"€1,530.00"`
 - No `/night` suffix — the component adds that
 - No `.00` needed for whole numbers: `"$1,215"` not `"$1,215.00"`
 
@@ -211,6 +220,12 @@ Always exactly **2 feature blocks** per room:
 
 Feature items are **plain text only** — no HTML tags inside `items[]` strings.
 
+---
+
+## Savings Block Rules ⚠️
+
+The `savings` object must reflect **all three** of the following — per-night comparison, total for the stay, and savings amount. Never show only the total.
+
 ### `savings.leftLabel` ⚠️ Critical
 
 This field is rendered via `dangerouslySetInnerHTML`. It **must always** use a `<span>` wrapper around the rate label:
@@ -218,73 +233,72 @@ This field is rendered via `dangerouslySetInnerHTML`. It **must always** use a `
 ```ts
 leftLabel: "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>";
 leftLabel: "2 Nights &nbsp;|&nbsp; <span>Special Offer Rate</span>";
-leftLabel: "8 Nights | 6 Paid + 2 FREE Nights"; // span optional if no rate label
 ```
 
 Never write: `"3 Nights | WhataHotel! Exclusive Rate"` — the span styling will be missing.
 
 ### `savings.leftSub`
 
-HTML is allowed. Use `<strong>` for savings amounts:
+Must include **all three** data points — per-night breakdown, total calculation, and savings — using `<strong>` for amounts:
 
 ```ts
-leftSub: "Standard rate: $1,472.50 × 2 = $3,386.39 — you save <strong>$338.51</strong>";
-leftSub: "Includes all WhataHotel! exclusive perks &mdash; breakfast, spa credit &amp; more";
+// Full format:
+leftSub: "Standard rate: €1,700/night &times; 3 = €5,100 &mdash; WhataHotel! rate: €1,530/night &times; 3 = €4,590 &mdash; you save <strong>€510</strong>";
+
+// Shorter format when space is tight:
+leftSub: "€1,700 standard vs €1,530 WhataHotel! rate &times; 3 nights &mdash; you save <strong>€510</strong>";
 ```
+
+Never omit the savings amount. Never show only the total without the per-night context.
 
 ### `savings.rightLabel`
 
 Use `"(excl. taxes)"` when taxes are not included in the total.  
 Use `"(incl. taxes)"` when taxes are included.
 
-### `images`
+### `savings.rightValue`
 
-- Always provide 2 image objects per room
-- If no real image URL is available, use: `"https://www.whatahotel.com/img/paceholder.jpg"`
-- Never leave `src` blank
-
-### `bookUrl` ⚠️ Critical
-
-The booking URL must always use the **room-specific `hotelID`** from the source HTML. Rules:
-
-- Each room gets its own unique `bookUrl` — never reuse the same URL across different rooms
-- The `hotelID` query parameter identifies the specific room — always preserve it exactly
-- If a room has **multiple booking IDs or rate variants**, always use the one with the **lowest price**
-- Never use a generic hotel-level URL when a room-specific ID is available
-
-**Correct — each room has its own unique hotelID:**
-
-```ts
-// Room 1
-bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=6438&checkIn=2026-04-26&checkOut=2026-04-29&guests=2&children=0&rooms=1";
-// Room 2
-bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=6440&checkIn=2026-04-26&checkOut=2026-04-29&guests=2&children=0&rooms=1";
-```
-
-**Wrong — same hotelID reused across multiple rooms:**
-
-```ts
-// Room 1
-bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=3103&..."; // ❌
-// Room 2
-bookUrl: "https://www.whatahotel.com/booking/showRates.cfm?hotelID=3103&..."; // ❌ same ID
-```
-
-**When multiple rate IDs exist for one room**, compare the nightly rates and use the URL associated with the lowest one. Add a comment above the room object:
-
-```ts
-// AGENT NOTE: Room had 2 rate variants ($1,325 and $1,472) — used lowest ($1,325), hotelID=3103
-```
-
-### `contact`
-
-Always: `contact: sharedContact` — never inline the contact data.
+This is the **WhataHotel! total** for the full stay, not the standard rate total.  
+Format: `"€4,590"` or `"$2,990.01"` — match the currency of the booking page.
 
 ---
 
-## App Download Section ⚠️ Required on Every Promo Page
+## Comparison Overview ⚠️ Required on Every Room
 
-Every promo page **must** include the `<AppDownload />` component. It renders after the last room card and before the `<ContactFooter />`.
+Each room must include a `comparison` array. This powers the `<ComparisonOverview />` component, which renders **below all room cards and above `<AppDownload />`**.
+
+The comparison table shows a side-by-side breakdown of Standard Rate vs. WhataHotel! Rate for every room option featured in the promo.
+
+### How to populate `comparison`
+
+Always include exactly **3 rows** per room:
+
+```ts
+comparison: [
+  {
+    label: "Nightly Rate",
+    standard: "€1,700/night",   // BAR rate from the page
+    whatahotel: "€1,530/night", // SEASONAL OFFER / lowest rate
+  },
+  {
+    label: `${N}-Night Total`,  // e.g. "3-Night Total"
+    standard: "€5,100",         // BAR rate × number of nights
+    whatahotel: "€4,590",       // WhataHotel rate × number of nights (= priceTotal amount)
+  },
+  {
+    label: "You Save",
+    standard: "",               // leave blank for "You Save" row
+    whatahotel: "€510",         // difference: standard total − WhataHotel total
+    highlight: true,            // renders row in accent/burgundy color
+  },
+],
+```
+
+### Where to extract rates
+
+- **Standard rate** (`standard`) → the **BAR** rate row on the booking page (labeled `+ WhataHotel! + BAR + ...`)
+- **WhataHotel rate** (`whatahotel`) → the **SEASONAL OFFER** rate row (labeled `+ WhataHotel! + SEASONAL OFFER + ...`)
+- If no BAR rate exists (only one rate variant), set `standard` to `""` and omit the `highlight` row, or note this with `// AGENT NOTE`
 
 ### Placement in `PromoPage.tsx`
 
@@ -293,10 +307,11 @@ Every promo page **must** include the `<AppDownload />` component. It renders af
 <div className="body">
   {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
 </div>
-<AppDownload />           {/* ← always here */}
+<ComparisonOverview rooms={promo.rooms!} nights={N} />  {/* ← after room cards */}
+<AppDownload />
 <ContactFooter ... />
 
-// Multi-hotel — AppDownload goes outside the hotels loop, after all hotels
+// Multi-hotel — one ComparisonOverview per hotel, after its rooms
 {promo.hotels.map((hotel, index) => (
   <div key={index}>
     <HeroSection ... />
@@ -304,11 +319,98 @@ Every promo page **must** include the `<AppDownload />` component. It renders af
     <div className="body">
       {hotel.rooms.map((room) => <RoomCard key={room.badgeText} room={room} />)}
     </div>
+    <ComparisonOverview rooms={hotel.rooms} nights={N} />  {/* ← after each hotel's rooms */}
   </div>
 ))}
-<AppDownload />           {/* ← after all hotels, before footer */}
+<AppDownload />
 <ContactFooter ... />
 ```
+
+---
+
+## Room Images ⚠️ Always Scrape from Page — Never Default to Placeholder
+
+Each `.bookingItem` on the WhataHotel booking page contains `<img>` tags with full CloudFront URLs:
+
+```html
+<img
+  src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
+/>
+<img
+  src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
+/>
+```
+
+### Rules
+
+- Always use the **first 2 image URLs** from the room's image list in the page HTML
+- Some rooms have 2 images, some have 3 — always take the first 2
+- The `alt` text should match the room name (e.g. `"Deluxe Room 1 King Bed"`)
+- The placeholder `https://www.whatahotel.com/img/paceholder.jpg` is **only** a last resort when the page genuinely has no images for a room — this should be rare
+- Image URLs from the booking page are on the `d321ocj5nbe62c.cloudfront.net` CDN — use them as-is, no modification needed
+- The same image URL may be reused across rooms if the hotel uses a shared bathroom/detail shot — this is acceptable
+
+### Example
+
+```ts
+images: [
+  {
+    src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg",
+    alt: "Deluxe Room — The Peninsula Paris",
+  },
+  {
+    src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg",
+    alt: "Deluxe Room Bathroom — The Peninsula Paris",
+  },
+],
+```
+
+---
+
+## Booking URL Rules ⚠️ Critical
+
+### Rate variants on the same room
+
+The booking page often shows **multiple rate rows per room type** — typically a lower SEASONAL OFFER rate and a higher BAR rate:
+
+```
+SEASONAL OFFER — Deluxe Room 1 King    €1,530/night  → room=A1KP77
+BAR            — Deluxe Room 1 King    €1,700/night  → room=A1KP76
+```
+
+**Always use the SEASONAL OFFER (lowest) rate URL as the `bookUrl`.**  
+The BAR rate URL is only used for the `comparison[].standard` value — never as the `bookUrl`.
+
+Add a comment when multiple variants exist:
+
+```ts
+// AGENT NOTE: 2 rate variants — SEASONAL OFFER €1,530 (A1KP77) and BAR €1,700 (A1KP76). Using lowest.
+```
+
+### Construct booking URLs correctly
+
+Each room's booking URL comes from the `href` on its "Book Now" link:
+
+```html
+<a
+  href="/booking/booking_info.cfm?room=A1KP77&rate=PJ8&hotel=2881&checkin=2026-04-02&checkout=2026-04-03&guests=2&children=0&rooms=1"
+  >Book Now</a
+>
+```
+
+Prepend `https://www.whatahotel.com` to make it absolute:
+
+```ts
+bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KP77&rate=PJ8&hotel=2881&checkin=2026-04-02&checkout=2026-04-03&guests=2&children=0&rooms=1";
+```
+
+Each room type has a **unique `room` code** (e.g. `A1KP77`, `A13P77`, `P1KP77`). Never reuse the same `room` code across different room types.
+
+---
+
+## App Download Section ⚠️ Required on Every Promo Page
+
+Every promo page **must** include the `<AppDownload />` component after `<ComparisonOverview />` and before `<ContactFooter />`.
 
 ### App Store Links (hardcoded in component — never change)
 
@@ -319,21 +421,23 @@ Every promo page **must** include the `<AppDownload />` component. It renders af
 ### Rules
 
 - `AppDownload` takes no props — links are hardcoded inside the component
-- Never move it above the room cards or below the `ContactFooter`
-- Never omit it from any promo page — single-hotel or multi-hotel
+- Placement order: RoomCards → ComparisonOverview → AppDownload → ContactFooter
+- Never omit from any promo page — single-hotel or multi-hotel
 - Never change the app store URLs
 
 ---
 
+## HTML Entities Reference
+
 Use these in strings rendered via `dangerouslySetInnerHTML` (hero location, offer description, subtitle, leftLabel, leftSub):
 
-| Entity     | Output             | Use for                    |
-| ---------- | ------------------ | -------------------------- |
-| `&nbsp;`   | non-breaking space | spacing around `\|`        |
-| `&amp;`    | &                  | ampersands in HTML strings |
-| `&mdash;`  | —                  | em dashes                  |
-| `&middot;` | ·                  | bullet separators          |
-| `&times;`  | ×                  | multiplication             |
+| Entity     | Output  | Use for                    |
+| ---------- | ------- | -------------------------- |
+| `&nbsp;`   | (space) | spacing around `\|`        |
+| `&amp;`    | &       | ampersands in HTML strings |
+| `&mdash;`  | —       | em dashes                  |
+| `&middot;` | ·       | bullet separators          |
+| `&times;`  | ×       | multiplication             |
 
 Use plain characters (—, ·, ×, &) inside **plain text fields** like `items[]`, `bookLabel`, `title`, `dates`.
 
@@ -345,7 +449,7 @@ Use `hotels[]` (not flat `hero/offer/rooms`) when:
 
 - The proposal contains two or more distinct hotels
 - There are two or more different hotel names
-- There are two or more different `hotelID` values in booking URLs
+- There are two or more different hotel IDs in booking URLs
 
 In multi-hotel mode:
 
@@ -362,53 +466,61 @@ In multi-hotel mode:
 If the user provides a WhataHotel! booking URL (`https://www.whatahotel.com/booking/showRates.cfm?hotelID=XXXX&...`), **fetch and read the full page HTML before doing anything else**. The page contains all the data needed:
 
 - **Room names** — in `<h3>` tags inside each `.bookingItem`
-- **Nightly rates** — in `<h4>Starting at: <b>X,XXX.00 USD</b>` per room
-- **3-night totals** — in `Total¹ for 3 Nights: X,XXX.XX USD` inside `.roomMoreInfo`
-- **Room-specific booking URLs** — in `href="/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=HOTELID&..."` — prepend `https://www.whatahotel.com` to make them absolute
-- **Hero image** — in the `<ul id="subSlides">` background-image style, e.g. `/content/hotels/2706/andaz_maui.jpg` — prepend `https://www.whatahotel.com`
+- **Rate variants** — each room has multiple rows: look for `SEASONAL OFFER` (lowest) and `BAR` (standard/higher)
+- **Nightly rates** — in `<h4>Starting at: <b>X,XXX.00 EUR/USD</b>` (lowest) and in individual rate rows
+- **N-night totals** — in `Total¹ for N Nights: X,XXX.XX` inside the expanded rate info
+- **Room images** — `<img>` tags inside each room's image list; use the first 2 per room; URLs are on `d321ocj5nbe62c.cloudfront.net`
+- **Room-specific booking URLs** — in `href="/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=HOTELID&..."` on each "Book Now" link; prepend `https://www.whatahotel.com`
+- **Hero image** — in the `<ul id="subSlides">` background-image style — prepend `https://www.whatahotel.com`
 - **Hotel name** — in `<h1>` tag
-- **Perks** — in `.perksList` or `.bookItemDesc ul`
-- **Cancellation policy** — in `.roomMoreInfo` per room
-- **Check-in / check-out dates** — in `PREFILL_CHECKIN` and `PREFILL_CHECKOUT` JS variables or the `<h4>` summary at the top of the booking list
+- **Perks** — in `.perksList` or the "Exclusive Complimentary Perks" section
+- **Cancellation policy** — in the expanded rate info per room
+- **Check-in / check-out dates** — from the URL parameters or the `<h4>` summary at the top
 
-### Step 2 — Build booking URLs correctly
+### Step 2 — Extract rates correctly (SEASONAL OFFER vs BAR)
 
-Each room's booking URL must be constructed as:
+Each room type appears twice in the rate table:
+
+```
+Row 1: SEASONAL OFFER — lower rate  → use for bookUrl, priceRate, whatahotel column
+Row 2: BAR            — higher rate → use for priceStrike, standard column only
+```
+
+If only one rate variant exists (no BAR row), set `priceStrike: ""` and set `comparison[0].standard` to `""`.
+
+### Step 3 — Build booking URLs
 
 ```
 https://www.whatahotel.com/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=HOTELID&checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&guests=2&children=0&rooms=1
 ```
 
-Extract `room`, `rate`, and `hotel` values from the `href` on the "Book Now" link for each room. Every room has a unique `room` code (e.g. `D1DU5V`, `S1TU5V`, `B1KU5V`) — this is what makes each URL unique.
+Extract `room`, `rate`, and `hotel` from the SEASONAL OFFER row's "Book Now" `href` for each room type.
 
-### Step 3 — Extract the hero image
+### Step 4 — Extract room images
 
-The hotel image is in the slideshow background:
+Find the `<img>` tags in the image slider for each `.bookingItem`. Take the first 2. Use the full CloudFront URL as-is.
 
-```html
-<li
-  class="headerSlide"
-  style="background-image: url(/content/hotels/2706/andaz_maui.jpg)"
-></li>
-```
+### Step 5 — Select the rooms to show
 
-Prepend `https://www.whatahotel.com` to get the full URL:
-
-```
-https://www.whatahotel.com/content/hotels/2706/andaz_maui.jpg
-```
-
-Use this for both `thumbnailUrl` and `hero.imageUrl`. Room images are not available on this page — use the placeholder for individual room images.
-
-### Step 4 — Select the 3 rooms to show
-
-The SSOT limit is **max 3 rooms per promo**. When the page has more than 3 rooms:
+The limit is **max 3 rooms per promo**. When the page has more than 3 rooms:
 
 - Always pick the **3 lowest-priced** standard room options
 - Skip ADA/accessible variants if a standard equivalent exists at the same price
 - Skip villas unless the user specifically requests them
 
-### Step 5 — Ask only if still missing after fetching
+### Step 6 — Build the comparison array
+
+For each room, compute:
+
+```
+standard nightly  = BAR rate (e.g. €1,700)
+whatahotel nightly = SEASONAL OFFER rate (e.g. €1,530)
+standard total    = standard nightly × N nights
+whatahotel total  = whatahotel nightly × N nights  (= priceTotal amount)
+savings           = standard total − whatahotel total
+```
+
+### Step 7 — Ask only if still missing after fetching
 
 Only ask the user for clarification if these cannot be inferred from the page:
 
@@ -418,9 +530,11 @@ Only ask the user for clarification if these cannot be inferred from the page:
 
 ### Never hallucinate
 
-Never invent room names, rates, features, or URLs. Everything must come from the fetched page. If the page cannot be fetched, tell the user and ask them to paste the HTML.
+Never invent room names, rates, features, images, or URLs. Everything must come from the fetched page. If the page cannot be fetched, tell the user and ask them to paste the HTML.
 
 ---
+
+## Registering a New Promo
 
 After creating `src/data/promo-N.ts`, update `src/data/promos.ts`:
 
@@ -464,23 +578,43 @@ Read /docs/whatahotel-design-ssot.md before every task. It is the Single Source 
 Key rules:
 - New proposals = new src/data/promo-N.ts file + register in src/data/promos.ts
 - Never create HTML files or new folders — this is a React SPA
-- Never change component files (RoomCard, HeroSection, etc.) unless explicitly asked
+- Never change component files (RoomCard, HeroSection, ComparisonOverview, etc.) unless explicitly asked
 - savings.leftLabel MUST always wrap the rate label in <span> tags
+- savings.leftSub MUST include per-night breakdown, total, AND savings amount — never just the total
 - Always use "" not undefined for empty priceStrike
-- Placeholder images: https://www.whatahotel.com/img/paceholder.jpg
 - contact is always: sharedContact (never inline)
 - Multi-hotel promos use hotels[] — never mix with flat hero/offer/rooms
-- When given a whatahotel.com booking URL, FETCH the page first — all room names, rates, booking URLs, and hero image are in the HTML source
-- Room booking URLs: use href="/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=ID&..." from each "Book Now" link — prepend https://www.whatahotel.com
-- Hero image: found in subSlides background-image style — prepend https://www.whatahotel.com
+
+ROOM IMAGES — CRITICAL:
+- Always scrape the first 2 <img> URLs from each room's image list on the booking page
+- Images are on the d321ocj5nbe62c.cloudfront.net CDN — use them as-is
+- NEVER default to the placeholder (https://www.whatahotel.com/img/paceholder.jpg) unless the page genuinely has no images for that room
+
+BOOKING URLS — CRITICAL:
+- Each room type has two rate rows: SEASONAL OFFER (lowest) and BAR (higher)
+- Use the SEASONAL OFFER "Book Now" href as the bookUrl — prepend https://www.whatahotel.com
+- Use the BAR rate only for priceStrike and comparison[].standard — never as bookUrl
+- Add // AGENT NOTE comment when multiple variants exist
+
+COMPARISON OVERVIEW — REQUIRED:
+- Every room must have a comparison[] array with exactly 3 rows: Nightly Rate, N-Night Total, You Save
+- standard = BAR rate; whatahotel = SEASONAL OFFER rate
+- You Save row: highlight: true, standard: "", whatahotel = standard total minus whatahotel total
+- ComparisonOverview renders after all room cards for that hotel, before AppDownload
+
+HERO IMAGE:
+- Found in subSlides background-image style — prepend https://www.whatahotel.com
+
+ROOM SELECTION:
 - Show the 3 lowest-priced standard rooms; skip ADA/accessible variants and villas unless requested
-- Never reuse the same bookUrl across rooms — each room has a unique room code
-- If a room has multiple rate variants, always use the lowest priced booking URL
-- Always include <AppDownload /> after the last room card, before <ContactFooter />
-- Branch naming: promo-N-YYYYMMDD (e.g. promo-7-20260318)
-- PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — Andaz Maui at Wailea")
+
+LAYOUT ORDER (per hotel section):
+- HeroSection → OfferBanner → RoomCards → ComparisonOverview → [AppDownload → ContactFooter at end]
+
 - Never hallucinate room data — if page cannot be fetched, tell the user and ask them to paste the HTML
 - If any data is missing, add an // AGENT NOTE: comment listing what needs to be filled in
+- Branch naming: promo-N-YYYYMMDD (e.g. promo-7-20260318)
+- PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — The Peninsula Paris")
 ```
 
 ---
@@ -490,15 +624,21 @@ Key rules:
 - [ ] Create `src/data/promo-N.ts` with correct `id`, `title`, `client`, `dates`
 - [ ] All rooms have exactly 2 feature blocks (door-open + gift)
 - [ ] All `leftLabel` strings use `<span>` wrapper
+- [ ] `leftSub` includes per-night breakdown, total calculation, AND savings amount
 - [ ] `priceStrike` is `""` not omitted when no strikethrough exists
-- [ ] `portalTotalValue` matches the lowest total in the data
-- [ ] Placeholder images used where real URLs unavailable
+- [ ] `portalTotalValue` matches the lowest WhataHotel! total in the data
+- [ ] Room images scraped from page (CloudFront CDN URLs) — placeholder only used if page has no images
+- [ ] Each room has a `comparison[]` array with 3 rows: Nightly Rate, N-Night Total, You Save
+- [ ] `comparison[].standard` uses BAR rate; `comparison[].whatahotel` uses SEASONAL OFFER rate
+- [ ] `comparison[2].highlight` is `true` for the You Save row
 - [ ] Multi-hotel promos use `hotels[]` not flat structure
-- [ ] Each room has its own unique `bookUrl` with room-specific `hotelID`
-- [ ] If multiple rate variants exist per room, lowest price URL was used
-- [ ] No room data was hallucinated — all rates, names, and URLs came from provided source
+- [ ] Each room's `bookUrl` uses the SEASONAL OFFER (lowest) rate's unique room code
+- [ ] BAR rate used only for `priceStrike` and `comparison[].standard` — never as `bookUrl`
+- [ ] `// AGENT NOTE` comment added when multiple rate variants exist per room
+- [ ] No room data was hallucinated — all rates, names, images, and URLs came from fetched page
 - [ ] If any data is missing, `// AGENT NOTE:` comment is present listing what needs updating
-- [ ] `<AppDownload />` is present after last room card, before `<ContactFooter />`
+- [ ] `<ComparisonOverview />` is present after last room card(s), before `<AppDownload />`
+- [ ] `<AppDownload />` is present after `<ComparisonOverview />`, before `<ContactFooter />`
 - [ ] Promo registered in `src/data/promos.ts`
 - [ ] Committed to GitHub and verified live on Netlify
 
