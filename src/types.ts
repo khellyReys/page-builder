@@ -31,6 +31,12 @@ export type Room = {
     rightLabel: string;
     rightValue: string;
   };
+  comparison?: Array<{
+    label: string;
+    standard: string;
+    whatahotel: string;
+    highlight?: boolean;
+  }>;
   bookUrl: string;
   bookLabel: string;
 };

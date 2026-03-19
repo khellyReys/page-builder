@@ -8,5 +8,6 @@ import { promo6 } from "./promo-6";
 import { promo7 } from "./promo-7";
 import { promo8 } from "./promo-8";
 import { promo9 } from "./promo-9";
+import { promo10 } from "./promo-10";
 
-export const promos: Promo[] = [promo1, promo2, promo3, promo4, promo5, promo6, promo7, promo8, promo9];
+export const promos: Promo[] = [promo1, promo2, promo3, promo4, promo5, promo6, promo7, promo8, promo9, promo10];
