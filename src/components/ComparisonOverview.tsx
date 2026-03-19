@@ -43,14 +43,14 @@ export function ComparisonOverview({ rooms }: Props) {
             </tr>
           </thead>
           <tbody>
-            {rooms[0].comparison.map((row, rowIndex) => (
+            {rooms[0].comparison!.map((row, rowIndex) => (
               <tr
                 key={row.label}
                 className={`co-tr${row.highlight ? " co-tr-highlight" : ""}`}
               >
                 <td className="co-td co-td-label">{row.label}</td>
                 {rooms.map((room) => {
-                  const cell = room.comparison[rowIndex];
+                  const cell = room.comparison?.[rowIndex];
                   return (
                     <td key={room.badgeText} className="co-td">
                       {/* Standard rate — shown with muted strikethrough */}
