@@ -11,6 +11,13 @@ export type OfferBlock = {
   pills: string[];
 };
 
+export type ComparisonRow = {
+  label: string;
+  standard: string;
+  whatahotel: string;
+  highlight?: boolean;
+};
+
 export type Room = {
   badgeText: string;
   name: string;
@@ -31,6 +38,7 @@ export type Room = {
     rightLabel: string;
     rightValue: string;
   };
+  comparison?: ComparisonRow[];
   bookUrl: string;
   bookLabel: string;
 };
