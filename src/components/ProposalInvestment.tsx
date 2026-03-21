@@ -24,6 +24,19 @@ export function ProposalInvestment({ room }: Props) {
           />
         ) : null}
         <SavingsBreakdown breakdown={room.savingsBreakdown} />
+        <div className="proposal-inv-book-slot proposal-inv-book-slot--breakdown">
+          <a
+            href={room.bookUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-book proposal-inv-book-link"
+          >
+            {room.bookLabel}
+          </a>
+          <p className="btn-sub proposal-inv-book-hint">
+            Secure booking opens on WhataHotel.com in a new tab.
+          </p>
+        </div>
         <p className="proposal-inv-partner">{partnerLine}</p>
       </div>
     );
@@ -55,31 +68,42 @@ export function ProposalInvestment({ room }: Props) {
       ) : null}
 
       <div className="proposal-inv-grid">
-        <div className="proposal-inv-col proposal-inv-col-primary">
-          <div className="proposal-inv-card proposal-inv-adr">
-            <div className="proposal-inv-card-label">Avg. Daily Rate (ADR)</div>
-            <div className="proposal-inv-card-hero">{room.priceRate}</div>
-            <div className="proposal-inv-card-sub">{adrSub}</div>
+        <div className="proposal-inv-card proposal-inv-adr">
+          <div className="proposal-inv-card-label">Avg. Daily Rate (ADR)</div>
+          <div className="proposal-inv-card-hero">{room.priceRate}</div>
+          <div className="proposal-inv-card-sub">{adrSub}</div>
+        </div>
+        <div className="proposal-inv-card proposal-inv-grand">
+          <div className="proposal-inv-card-label">Grand Total</div>
+          <div className="proposal-inv-card-hero proposal-inv-grand-amount">
+            {grandAmount}
           </div>
-          <div className="proposal-inv-card proposal-inv-nights">
-            <div className="proposal-inv-card-label">Nights</div>
-            <div className="proposal-inv-nights-count">
-              {room.nightsLabel ?? "—"}
-            </div>
-            <div className="proposal-inv-nights-range">
-              {room.stayCheckInOut ?? "—"}
-            </div>
+          {grandSub ? (
+            <div className="proposal-inv-card-sub">{grandSub}</div>
+          ) : null}
+        </div>
+        <div className="proposal-inv-card proposal-inv-nights">
+          <div className="proposal-inv-card-label">Nights</div>
+          <div className="proposal-inv-nights-count">
+            {room.nightsLabel ?? "—"}
+          </div>
+          <div className="proposal-inv-nights-range">
+            {room.stayCheckInOut ?? "—"}
           </div>
         </div>
-        <div className="proposal-inv-col proposal-inv-col-total">
-          <div className="proposal-inv-card proposal-inv-grand">
-            <div className="proposal-inv-card-label">Grand Total</div>
-            <div className="proposal-inv-card-hero proposal-inv-grand-amount">
-              {grandAmount}
-            </div>
-            {grandSub ? (
-              <div className="proposal-inv-card-sub">{grandSub}</div>
-            ) : null}
+        <div className="proposal-inv-card proposal-inv-book">
+          <div className="proposal-inv-book-inner">
+            <a
+              href={room.bookUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-book proposal-inv-book-link"
+            >
+              {room.bookLabel}
+            </a>
+            <p className="btn-sub proposal-inv-book-hint">
+              Secure booking opens on WhataHotel.com in a new tab.
+            </p>
           </div>
         </div>
       </div>

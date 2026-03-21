@@ -2158,15 +2158,10 @@ body {
 .proposal-inv-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 14px;
   margin-bottom: 16px;
   align-items: stretch;
-}
-
-.proposal-inv-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .proposal-inv-card {
@@ -2174,6 +2169,57 @@ body {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 14px 16px;
+}
+
+.proposal-inv-book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.proposal-inv-book-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.proposal-inv-book-link {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.proposal-inv-book-hint {
+  margin: 0 !important;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.proposal-inv-book-slot {
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.proposal-inv-book-slot--breakdown {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.proposal-inv-book-slot .proposal-inv-book-link {
+  width: auto;
+  min-width: min(100%, 260px);
 }
 
 .proposal-inv-card-label {
@@ -2529,25 +2575,12 @@ body {
   font-style: italic;
 }
 
-.proposal-book-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-}
-
-.proposal-confirm-btn {
-  text-align: center;
-  justify-content: center;
-}
-
-.proposal-book-hint {
-  margin: 0 !important;
-  text-align: center;
-}
-
 @media (max-width: 700px) {
   .proposal-inv-grid {
     grid-template-columns: 1fr;
+  }
+
+  .proposal-inv-book-inner {
+    max-width: none;
   }
 }

@@ -37,22 +37,6 @@ function ProposalBookingSection({
           />
         </div>
       ) : null}
-      <div className="body proposal-book-actions">
-        {rooms.map((room) => (
-          <a
-            key={room.badgeText}
-            href={room.bookUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-book proposal-confirm-btn"
-          >
-            {room.bookLabel}
-          </a>
-        ))}
-        <p className="btn-sub proposal-book-hint">
-          Secure booking opens on WhataHotel.com in a new tab.
-        </p>
-      </div>
       {rooms.map((room) =>
         room.keyAttributes?.length ? (
           <div key={room.badgeText} className="body">
