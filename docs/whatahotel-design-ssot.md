@@ -78,6 +78,8 @@ interface Promo {
   hero?: HeroBlock;
   offer?: OfferBlock;
   rooms?: Room[];
+  specialOffer?: SpecialOffer;
+  priceSummary?: PriceSummary;
 
   // Multi-hotel only
   hotels?: HotelBlock[];
@@ -104,6 +106,42 @@ interface OfferBlock {
   pills: string[]; // Each starts with "✔ "
 }
 
+interface SpecialOffer {
+  title: string; // e.g. "EXCLUSIVE: STAY LONGER — 4TH NIGHT FREE!"
+  description: string; // e.g. "Your dates qualify for..."
+  highlights: Array<{
+    icon: string; // FontAwesome icon name (e.g. "check", "star", "gift")
+    text: string; // e.g. "Qualifies Oct 12–20"
+  }>;
+  validityText?: string; // e.g. "Valid May 7 – Nov 19, 2026 (selected dates)"
+}
+
+interface PriceSummary {
+  items: Array<{
+    label: string; // e.g. "Unit 1 — Parents' Suite"
+    sqft?: string; // e.g. "1,108 sq ft"
+    bedConfig?: string; // e.g. "1 King + Sofabed"
+    whatahotelRate: string; // e.g. "$2,100.00"
+    regularRate: string; // Struck-through rate, e.g. "$2,800.00"
+    total: string; // e.g. "$18,648.00"
+  }>;
+  totalSavings?: string; // e.g. "$5,849.90"
+  grandTotal?: string; // e.g. "$24,947.25"
+  savingsNote?: string; // HTML allowed, e.g. "All prices exclude taxes..."
+}
+
+interface SavingsBreakdown {
+  nights: string; // e.g. "8 Nights"
+  paidNights: number; // e.g. 6
+  freeNights: number; // e.g. 2
+  standardRate: string; // e.g. "$2,800/night"
+  standardTotal: string; // e.g. "$22,400"
+  whatahotelRate: string; // e.g. "$1,483/night"
+  whatahotelTotal: string; // e.g. "$18,648"
+  savingsAmount: string; // e.g. "$3,752.00"
+  savingsPercentage?: string; // e.g. "16.8%"
+}
+
 interface Room {
   badgeText: string;
   name: string; // HTML allowed (<br/>)
@@ -124,6 +162,7 @@ interface Room {
     rightLabel: string;
     rightValue: string;
   };
+  savingsBreakdown?: SavingsBreakdown; // Detailed breakdown: paid/free nights, standard vs WhataHotel rates
   comparison: ComparisonRow[]; // See Comparison Overview section below
   bookUrl: string;
   bookLabel: string;
@@ -328,27 +367,231 @@ comparison: [
 
 ---
 
-## Room Images ⚠️ Always Scrape from Page — Never Default to Placeholder
+## SavingsBreakdown (Per-Room) ⚠️ Optional but Recommended
 
-Each `.bookingItem` on the WhataHotel booking page contains `<img>` tags with full CloudFront URLs:
+The `<SavingsBreakdown />` component displays a detailed pricing breakdown **within each room card** — showing the impact of free nights, special offers, or rate differences.
 
-```html
-<img
-  src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
-/>
-<img
-  src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
-/>
+### When to use
+
+- Multi-night stays with special promotions (e.g., "4th Night Free")
+- When you want to show standard rate vs WhataHotel! rate comparison at the room level
+- To replace long, cluttered text descriptions in the `savings.leftSub` field
+
+### How to populate `savingsBreakdown`
+
+Add optional `savingsBreakdown` field to each `Room`:
+
+```ts
+savingsBreakdown?: {
+  nights: "8 Nights",
+  paidNights: 6,
+  freeNights: 2,
+  standardRate: "$2,800",
+  standardTotal: "$22,400",
+  whatahotelRate: "$1,483",
+  whatahotelTotal: "$18,648.00",
+  savingsAmount: "$3,752.00",
+  savingsPercentage: "16.8%",
+};
+```
+
+### Placement in RoomCard
+
+The component renders **between the price card and room images**:
+
+```
+Price Card (name, rate, total)
+    ↓
+[SavingsBreakdown] ← NEW (optional)
+    ↓
+Room Images
+    ↓
+Features
+    ↓
+Savings Bar (legacy)
+    ↓
+Book Button
 ```
 
 ### Rules
 
-- Always use the **first 2 image URLs** from the room's image list in the page HTML
-- Some rooms have 2 images, some have 3 — always take the first 2
-- The `alt` text should match the room name (e.g. `"Deluxe Room 1 King Bed"`)
-- The placeholder `https://www.whatahotel.com/img/paceholder.jpg` is **only** a last resort when the page genuinely has no images for a room — this should be rare
-- Image URLs from the booking page are on the `d321ocj5nbe62c.cloudfront.net` CDN — use them as-is, no modification needed
-- The same image URL may be reused across rooms if the hotel uses a shared bathroom/detail shot — this is acceptable
+- All fields are **required strings** except `savingsPercentage` (optional)
+- `nights`: e.g., `"4 Nights"`, `"8 Nights"`
+- `paidNights` / `freeNights`: numbers only (e.g., 6, 2)
+- Rates: include currency (e.g., `"$2,800"`, `"€1,530"`)
+- Totals: formatted price (e.g., `"$22,400"`, `"€4,590.00"`)
+- `savingsAmount`: always show currency and cents if fractional
+- `savingsPercentage`: optional, e.g., `"16.8%"` or omit
+
+---
+
+## SpecialOfferBox (Promo-Level) ⚠️ Optional
+
+The `<SpecialOfferBox />` component highlights key promotions or special terms ** below the OfferBanner and above room cards**.
+
+### When to use
+
+- "4th Night Free" offers
+- Exclusive cancellation policies
+- Limited-time promotions
+- Multi-night discounts
+
+### How to populate `specialOffer`
+
+Add optional `specialOffer` field to the `Promo`:
+
+```ts
+specialOffer?: {
+  title: "EXCLUSIVE: STAY LONGER — 4TH NIGHT FREE!",
+  description: "Your August 12–20 dates qualify for the Four Seasons' 'Fourth Night Free' promotion. On an 8-night stay, each room earns TWO (2) completely free nights.",
+  highlights: [
+    { icon: "check", text: "Qualifies Aug 12–20" },
+    { icon: "check", text: "2 Free Nights × 2 Rooms" },
+    { icon: "star", text: "Combinable with WhataHotel! Perks" },
+  ],
+  validityText: "Valid May 7 – Nov 19, 2026 (selected dates). Subject to availability at booking.",
+};
+```
+
+### Placement in PromoPage
+
+```tsx
+<OfferBanner ... />
+{promo.specialOffer && (
+  <div className="body">
+    <SpecialOfferBox offer={promo.specialOffer} />
+  </div>
+)}
+<div className="body">
+  {promo.rooms!.map((room) => <RoomCard ... />)}
+</div>
+```
+
+### Rules
+
+- `title`: MUST USE `text-transform: uppercase` — typically starts with "EXCLUSIVE:"
+- `description`: Plain text or simple formatting (HTML allowed but keep it minimal)
+- `highlights[]`: Array of icon + text pairs; icons are FontAwesome names (e.g., `"check"`, `"star"`, `"gift"`)
+- `validityText`: Optional, appears in italics at bottom
+
+---
+
+## PriceSummaryTable (Multi-Unit Totals) ⚠️ Optional
+
+The `<PriceSummaryTable />` component shows a **consolidated pricing table** for **all room units combined** — ideal for multi-unit properties or connecting rooms.
+
+### When to use
+
+- Connecting units (parents' room + kids' room)
+- Properties with multiple standard room options
+- When you need to show combined grand total + total savings
+
+### How to populate `priceSummary`
+
+Add optional `priceSummary` field to the `Promo`:
+
+```ts
+priceSummary?: {
+  items: [
+    {
+      label: "Unit 1 — Parents' Suite",
+      sqft: "1,108 sq ft",
+      bedConfig: "1 King + Sofabed",
+      whatahotelRate: "$2,100.00",
+      regularRate: "$2,800.00",
+      total: "$18,648.00",
+    },
+    {
+      label: "Unit 2 — Kids' Connecting Room",
+      sqft: "532 sq ft",
+      bedConfig: "2 Queens",
+      whatahotelRate: "$709.38",
+      regularRate: "$945.63",
+      total: "$6,299.25",
+    },
+  ],
+  totalSavings: "$5,849.90",
+  grandTotal: "$24,947.25",
+  savingsNote: "💰 Total savings vs. regular rate across both units. All prices exclude taxes & resort fees.",
+};
+```
+
+### Placement in PromoPage
+
+```tsx
+{promo.rooms!.map((room) => <RoomCard ... />)}
+<ComparisonOverview rooms={promo.rooms!} />
+{promo.priceSummary && (
+  <div className="body">
+    <PriceSummaryTable
+      items={promo.priceSummary.items}
+      totalSavings={promo.priceSummary.totalSavings}
+      grandTotal={promo.priceSummary.grandTotal}
+      savingsNote={promo.priceSummary.savingsNote}
+    />
+  </div>
+)}
+<AppDownload />
+<ContactFooter ... />
+```
+
+### Rules
+
+- `items`: Array of pricing rows; each row represents one unit/room option
+- `label`: e.g., `"Unit 1 — Parents' Suite"`, `"Room Option 1"`, `"Deluxe Ocean View"`
+- `sqft` / `bedConfig`: Optional; provide if available for clarity
+- `whatahotelRate`: The special/exclusive rate (e.g., `"$2,100.00"`)
+- `regularRate`: Standard BAR rate; will be displayed with strikethrough
+- `total`: Final cost for this unit (e.g., `"$18,648.00"` for 8-night stay)
+- `totalSavings`: Sum of all savings across units (e.g., `"$5,849.90"`)
+- `grandTotal`: Sum of all unit totals (e.g., `"$24,947.25"`)
+- `savingsNote`: Optional; can include HTML (e.g., emoji, <strong>, HTML entities)
+
+---
+
+## Room Images ⚠️ Always Scrape from Page — Never Default to Placeholder
+
+Each `.bookingItem` on the WhataHotel booking page contains an image carousel with `<img>` tags containing full CloudFront URLs.
+
+### HTML Structure
+
+```html
+<div class="bookingItem">
+  <div class="roomHeader">...</div>
+  <div class="carousel">
+    <!-- or .imageSlider or similar image container -->
+    <img
+      src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
+      alt="Deluxe Room"
+    />
+    <img
+      src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
+      alt="Bathroom"
+    />
+    <img src="https://d321ocj5nbe62c.cloudfront.net/..." alt="..." />
+    <!-- 3rd image; we only use first 2 -->
+  </div>
+  <div class="rates">...</div>
+</div>
+```
+
+### CSS Selector Rules
+
+- **Find all room images where they live**: Within each `.bookingItem`, look for `<img>` tags located in an image carousel/slider container
+- **Selector may vary** — the container can be `.imageSlider`, `.carousel`, `.images`, or an unlabeled `<div>` near the room header
+- **Handle both `src` and `data-src`** — some images use lazy-loading with `data-src` attributes. Always check for:
+  - `<img src="https://d321ocj5nbe62c.cloudfront.net/...">` ← Standard
+  - `<img data-src="https://d321ocj5nbe62c.cloudfront.net/...">` ← Lazy-loaded; use `data-src` value if `src` is missing
+- **Size filtering** — Skip images with width or height below 200px (likely icons/logos); only use room photos
+
+### Rules
+
+- Always extract the **first 2 image URLs** from the room's image list
+- ALL images must be from `d321ocj5nbe62c.cloudfront.net` CDN; use URLs as-is (never modify the URL)
+- Extract the `alt` text from the `<img>` tag and use it as-is, or use the room name if `alt` is blank
+- If a room has fewer than 2 images available, use what's there (e.g., just 1 image) — do NOT pad with placeholder
+- The placeholder `https://www.whatahotel.com/img/paceholder.jpg` is **only** used if the page genuinely has zero images for a room type — this is rare
+- The same image URL may be reused across room types if the hotel uses a shared bathroom/detail shot — this is acceptable and expected
 
 ### Example
 
@@ -364,6 +607,17 @@ images: [
   },
 ],
 ```
+
+### Common Image Extraction Mistakes ⚠️
+
+| Mistake                            | Fix                                                                                                                          |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Using nav/header logo images       | Check image width/height: skip those < 200px; be selective about closeness to room header                                    |
+| Missing lazy-loaded images         | Check both `src` AND `data-src` attributes; modern pages use lazy-loading                                                    |
+| Using placeholder URLs             | Never use image URLs from `whatahotel.com/img/` domain; ALL room images must come from `d321ocj5nbe62c.cloudfront.net`       |
+| Only finding 1 image when 2 exist  | Make sure you're extracting from the image carousel, not just the first `<img>` on the page                                  |
+| Using wrong CDN format             | Some pages might have Amazon S3 URLs or other CDNs; verify the full URL starts with `https://d321ocj5nbe62c.cloudfront.net/` |
+| Extracting images from page header | The hero/page banner images are NOT room images; look within each `.bookingItem` row only                                    |
 
 ---
 
@@ -498,7 +752,40 @@ Extract `room`, `rate`, and `hotel` from the SEASONAL OFFER row's "Book Now" `hr
 
 ### Step 4 — Extract room images
 
-Find the `<img>` tags in the image slider for each `.bookingItem`. Take the first 2. Use the full CloudFront URL as-is.
+⚠️ **This is critical — missing images is the most common error.**
+
+For each room row in the table:
+
+1. **Locate the room's image carousel**: Scroll to the room row and find the image slider/carousel container. It will be in or near the room's header area.
+2. **Extract all `<img>` tags** with width/height >= 200px (skip icons/logos)
+3. **Check both `src` and `data-src`** attributes:
+   - If `<img src="https://d321ocj5nbe62c.cloudfront.net/..."` exists, use the `src` URL
+   - If `src` is missing/placeholder but `data-src="https://d321ocj5nbe62c.cloudfront.net/..."` exists, use `data-src`
+   - If both are placeholder/missing, move to the next image
+4. **Take the first 2 valid CloudFront URLs**
+5. **Validate**: All URLs must start with `https://d321ocj5nbe62c.cloudfront.net/` (not whatahotel.com or other CDN)
+6. **Use alt text**: Extract the `alt` attribute from each `<img>` tag; if blank, derive from room name (e.g., "Deluxe Room — Hotel Name")
+
+**Troubleshooting**:
+
+- If you find 0 images after this process, use the placeholder URL `https://www.whatahotel.com/img/paceholder.jpg` (rare)
+- If first image is tiny/pixelated, skip it and use the 2nd image instead
+- If you see only 1 image per room, include only 1 URL
+
+**Example result**:
+
+```ts
+images: [
+  {
+    src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg",
+    alt: "Deluxe Room — The Peninsula Paris",
+  },
+  {
+    src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg",
+    alt: "Bathroom — The Peninsula Paris",
+  },
+];
+```
 
 ### Step 5 — Select the rooms to show
 
@@ -566,55 +853,87 @@ Edit the relevant `src/data/promo-N.ts` file directly. Commit to GitHub. Netlify
 
 ---
 
-## Netlify Project Context (Agent Prompt)
+## Netlify Project Context (Agent Prompt) — Token-Optimized for Efficiency
 
 Paste this into **Netlify → Site configuration → Agent runs → Project context**:
 
 ```
-You are maintaining the WhataHotel! by Lorraine Travel proposal site — a React + TypeScript app deployed on Netlify.
+MISSION: Create WhataHotel! proposal data files following the SSOT only. Single fetch. Direct creation. Zero refetching.
 
-Read /docs/whatahotel-design-ssot.md before every task. It is the Single Source of Truth.
+CONSTRAINTS:
+- React SPA — only create src/data/promo-N.ts files
+- Register every new promo in src/data/promos.ts (import + export)
+- Never modify component files
+- Never create HTML files or folders
 
-Key rules:
-- New proposals = new src/data/promo-N.ts file + register in src/data/promos.ts
-- Never create HTML files or new folders — this is a React SPA
-- Never change component files (RoomCard, HeroSection, ComparisonOverview, etc.) unless explicitly asked
-- savings.leftLabel MUST always wrap the rate label in <span> tags
-- savings.leftSub MUST include per-night breakdown, total, AND savings amount — never just the total
-- Always use "" not undefined for empty priceStrike
-- contact is always: sharedContact (never inline)
-- Multi-hotel promos use hotels[] — never mix with flat hero/offer/rooms
+WORKFLOW (ALWAYS FOLLOW THIS ORDER):
+1. Read /docs/whatahotel-design-ssot.md — this is the only source of truth
+2. Fetch the booking page URL once (only once)
+3. Extract ALL required data in a single parse (see "EXTRACTION RULES" below)
+4. Build the promo object directly using the extracted data
+5. Commit with branch name: promo-N-YYYYMMDD
+6. Done — no refetching, no re-verifying
 
-ROOM IMAGES — CRITICAL:
-- Always scrape the first 2 <img> URLs from each room's image list on the booking page
-- Images are on the d321ocj5nbe62c.cloudfront.net CDN — use them as-is
-- NEVER default to the placeholder (https://www.whatahotel.com/img/paceholder.jpg) unless the page genuinely has no images for that room
+EXTRACTION RULES (COMPLETE IN ONE PASS):
 
-BOOKING URLS — CRITICAL:
-- Each room type has two rate rows: SEASONAL OFFER (lowest) and BAR (higher)
-- Use the SEASONAL OFFER "Book Now" href as the bookUrl — prepend https://www.whatahotel.com
-- Use the BAR rate only for priceStrike and comparison[].standard — never as bookUrl
-- Add // AGENT NOTE comment when multiple variants exist
+From <h1>: Hotel name
+From <h4>: Starting-at rate per night (lowest SEASONAL OFFER)
+From rate table rows:
+  - SEASONAL OFFER: lowest rate → bookUrl source
+  - BAR: higher rate → priceStrike source
+From <h3> inside .bookingItem: Room names
+From .bookingItem images (first 2 only):
+  - Check src attribute for d321ocj5nbe62c.cloudfront.net URL
+  - If src is placeholder, check data-src attribute (lazy-loaded)
+  - Skip images < 200px; validate CDN domain
+From <a href="/booking/booking_info.cfm...">: Extract room code, rate code, hotel ID
+From page totals: N-night cost for each rate variant
+From hero section: Background image URL
 
-COMPARISON OVERVIEW — REQUIRED:
-- Every room must have a comparison[] array with exactly 3 rows: Nightly Rate, N-Night Total, You Save
-- standard = BAR rate; whatahotel = SEASONAL OFFER rate
-- You Save row: highlight: true, standard: "", whatahotel = standard total minus whatahotel total
-- ComparisonOverview renders after all room cards for that hotel, before AppDownload
+REQUIRED DATA STRUCTURE:
 
-HERO IMAGE:
-- Found in subSlides background-image style — prepend https://www.whatahotel.com
+Single-Hotel Promo:
+- id, title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
+- hero: imageUrl, alt, hotel, location
+- offer: heading, description, pills[]
+- rooms[]: badgeText, name, subtitle, priceLabel, priceRate, priceStrike, priceTotal, images[], features[], savings, bookUrl, bookLabel
+- contact: sharedContact
 
-ROOM SELECTION:
-- Show the 3 lowest-priced standard rooms; skip ADA/accessible variants and villas unless requested
+Multi-Hotel Promo:
+- Same as above but wrap each hotel's sections in hotels[]
 
-LAYOUT ORDER (per hotel section):
-- HeroSection → OfferBanner → RoomCards → ComparisonOverview → [AppDownload → ContactFooter at end]
+MANDATORY FIELDS (NEVER OMIT):
+- priceStrike: use "" (empty string) if no BAR rate exists
+- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only
+- comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates
+- savings.leftLabel: must wrap rate name in <span>
+- savings.leftSub: must show "Standard: X/night (total: Y) — WhataHotel!: A/night (total: B) — you save Z"
 
-- Never hallucinate room data — if page cannot be fetched, tell the user and ask them to paste the HTML
-- If any data is missing, add an // AGENT NOTE: comment listing what needs to be filled in
-- Branch naming: promo-N-YYYYMMDD (e.g. promo-7-20260318)
-- PR title must start with: "promo-N — Hotel Name" (e.g. "promo-7 — The Peninsula Paris")
+OPTIONAL COMPONENTS (use if applicable):
+- savingsBreakdown?: For free-night promos or complex pricing breakdowns
+- specialOffer?: For highlighted promotions or cancellation policies
+- priceSummary?: For multi-unit or package pricing tables
+
+DO NOT REFETCH:
+- The page HTML is fetched once at the start
+- All required data is extractable in one pass
+- No "verification" steps, no "double-checking"
+- If data is ambiguous or missing, add // AGENT NOTE: [what's needed] and move on
+
+EXAMPLES IN SSOT:
+- See promo-9.ts for CloudFront image URLs
+- See Clarification Protocol for step-by-step extraction
+- See Comparison Array section for the exact rate calculation
+
+If you are asked to create or update a promo:
+1. Ask: What is the WhataHotel booking page URL?
+2. Fetch once
+3. Follow EXTRACTION RULES
+4. Build promo file
+5. Register in promos.ts
+6. Commit
+
+No questions beyond the booking URL needed. No iterative refetching. Just follow the SSOT.
 ```
 
 ---
@@ -637,8 +956,12 @@ LAYOUT ORDER (per hotel section):
 - [ ] `// AGENT NOTE` comment added when multiple rate variants exist per room
 - [ ] No room data was hallucinated — all rates, names, images, and URLs came from fetched page
 - [ ] If any data is missing, `// AGENT NOTE:` comment is present listing what needs updating
-- [ ] `<ComparisonOverview />` is present after last room card(s), before `<AppDownload />`
-- [ ] `<AppDownload />` is present after `<ComparisonOverview />`, before `<ContactFooter />`
+- [ ] `<ComparisonOverview />` is present after last room card(s), before optional components & `<AppDownload />`
+- [ ] `[OPTIONAL]` `savingsBreakdown` field present in rooms if detailed pricing breakdown is needed (e.g., free nights promo)
+- [ ] `[OPTIONAL]` `specialOffer` field present in promo if special promotion/offer exists to highlight
+- [ ] `[OPTIONAL]` `priceSummary` field present in promo if multi-unit pricing table is needed
+- [ ] If optional components used: data is complete and formatted correctly (see SavingsBreakdown, SpecialOfferBox, PriceSummaryTable sections)
+- [ ] `<AppDownload />` is present after `<ComparisonOverview />` and before `<ContactFooter />`
 - [ ] Promo registered in `src/data/promos.ts`
 - [ ] Committed to GitHub and verified live on Netlify
 

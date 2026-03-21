@@ -1,10 +1,13 @@
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { promos } from "../data/promos";
 import { Masthead } from "../components/Masthead";
 import { HeroSection } from "../components/HeroSection";
 import { OfferBanner } from "../components/OfferBanner";
+import { SpecialOfferBox } from "../components/SpecialOfferBox";
 import { RoomCard } from "../components/RoomCard";
 import { ComparisonOverview } from "../components/ComparisonOverview";
+import { PriceSummaryTable } from "../components/PriceSummaryTable";
 import { AppDownload } from "../components/AppDownload";
 import { ContactFooter } from "../components/ContactFooter";
 
@@ -15,6 +18,18 @@ export default function PromoPage() {
   if (!promo) {
     return (
       <div className="wrap">
+        <Helmet>
+          <title>Proposal Not Found — WhataHotel! Proposals</title>
+          <meta
+            name="description"
+            content="The proposal you're looking for could not be found."
+          />
+          <meta property="og:title" content="Proposal Not Found" />
+          <meta
+            property="og:description"
+            content="The proposal you're looking for could not be found."
+          />
+        </Helmet>
         <div className="masthead">
           <div className="mast-info">
             <div className="mast-title">Proposal Not Found</div>
@@ -48,8 +63,30 @@ export default function PromoPage() {
 
   // ── Multi-hotel promo ────────────────────────────────────────────
   if (promo.hotels && promo.hotels.length > 0) {
+    const heroImage = promo.hotels[0]?.hero?.imageUrl || promo.thumbnailUrl;
+    const description =
+      promo.hotels[0]?.offer?.description?.replace(/<[^>]*>/g, "") ||
+      "Exclusive hotel proposal with premium room options and special perks.";
+    const currentUrl =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/promo/${promo.id}`
+        : "";
+
     return (
       <div className="wrap">
+        <Helmet>
+          <title>{promo.title} — WhataHotel! Proposals</title>
+          <meta name="description" content={description} />
+          <meta property="og:title" content={promo.title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={heroImage} />
+          <meta property="og:url" content={currentUrl} />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={promo.title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={heroImage} />
+        </Helmet>
         <Masthead
           title={promo.title}
           client={promo.client}
@@ -70,6 +107,11 @@ export default function PromoPage() {
               description={hotel.offer.description}
               pills={hotel.offer.pills}
             />
+            {promo.specialOffer && (
+              <div className="body">
+                <SpecialOfferBox offer={promo.specialOffer} />
+              </div>
+            )}
             <div className="body">
               {hotel.rooms.length ? (
                 hotel.rooms.map((room) => (
@@ -88,6 +130,17 @@ export default function PromoPage() {
           </div>
         ))}
 
+        {promo.priceSummary && (
+          <div className="body">
+            <PriceSummaryTable
+              items={promo.priceSummary.items}
+              totalSavings={promo.priceSummary.totalSavings}
+              grandTotal={promo.priceSummary.grandTotal}
+              savingsNote={promo.priceSummary.savingsNote}
+            />
+          </div>
+        )}
+
         <AppDownload />
 
         <ContactFooter
@@ -99,8 +152,30 @@ export default function PromoPage() {
   }
 
   // ── Single-hotel promo ───────────────────────────────────────────
+  const heroImage = promo.hero?.imageUrl || promo.thumbnailUrl;
+  const description =
+    promo.offer?.description?.replace(/<[^>]*>/g, "") ||
+    "Exclusive hotel proposal with premium room options and special perks.";
+  const currentUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/promo/${promo.id}`
+      : "";
+
   return (
     <div className="wrap">
+      <Helmet>
+        <title>{promo.title} — WhataHotel! Proposals</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={promo.title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={heroImage} />
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={promo.title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={heroImage} />
+      </Helmet>
       <Masthead
         title={promo.title}
         client={promo.client}
@@ -119,6 +194,12 @@ export default function PromoPage() {
         pills={promo.offer!.pills}
       />
 
+      {promo.specialOffer && (
+        <div className="body">
+          <SpecialOfferBox offer={promo.specialOffer} />
+        </div>
+      )}
+
       <div className="body">
         {promo.rooms!.length ? (
           promo.rooms!.map((room) => (
@@ -133,6 +214,17 @@ export default function PromoPage() {
       </div>
 
       {promo.rooms!.length > 0 && <ComparisonOverview rooms={promo.rooms!} />}
+
+      {promo.priceSummary && (
+        <div className="body">
+          <PriceSummaryTable
+            items={promo.priceSummary.items}
+            totalSavings={promo.priceSummary.totalSavings}
+            grandTotal={promo.priceSummary.grandTotal}
+            savingsNote={promo.priceSummary.savingsNote}
+          />
+        </div>
+      )}
 
       <AppDownload />
 

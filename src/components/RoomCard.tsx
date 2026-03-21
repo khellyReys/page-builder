@@ -25,6 +25,17 @@ export type RoomData = {
     rightLabel: string;
     rightValue: string;
   };
+  savingsBreakdown?: {
+    nights: string;
+    paidNights: number;
+    freeNights: number;
+    standardRate: string;
+    standardTotal: string;
+    whatahotelRate: string;
+    whatahotelTotal: string;
+    savingsAmount: string;
+    savingsPercentage?: string;
+  };
   comparison?: ComparisonRow[];
   bookUrl: string;
   bookLabel: string;
@@ -33,6 +44,8 @@ export type RoomData = {
 type Props = {
   room: RoomData;
 };
+
+import { SavingsBreakdown } from "./SavingsBreakdown";
 
 export function RoomCard({ room }: Props) {
   return (
@@ -67,6 +80,11 @@ export function RoomCard({ room }: Props) {
           <div className="pc-total">{room.priceTotal}</div>
         </div>
       </div>
+
+      {room.savingsBreakdown && (
+        <SavingsBreakdown breakdown={room.savingsBreakdown} />
+      )}
+
       <div className="room-imgs">
         {room.images.map((img) => (
           <div key={img.src} className="room-img">
