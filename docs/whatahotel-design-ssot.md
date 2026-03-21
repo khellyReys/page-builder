@@ -858,7 +858,10 @@ Edit the relevant `src/data/promo-N.ts` file directly. Commit to GitHub. Netlify
 Paste this into **Netlify → Site configuration → Agent runs → Project context**:
 
 ```
-MISSION: Create WhataHotel! proposal data files following the SSOT only. Single fetch. Direct creation. Zero refetching.
+🚨 TOKEN EFFICIENCY RULES — MANDATORY 🚨
+
+MISSION: Create WhataHotel! proposal data files following the SSOT only.
+SINGLE FETCH. DIRECT CREATION. ZERO REFETCHING. ZERO VERIFICATION FETCHES.
 
 CONSTRAINTS:
 - React SPA — only create src/data/promo-N.ts files
@@ -866,13 +869,25 @@ CONSTRAINTS:
 - Never modify component files
 - Never create HTML files or folders
 
+⛔ CRITICAL: FETCH THE PAGE EXACTLY ONCE AND NEVER AGAIN
+- First action: Fetch https://www.whatahotel.com/booking/showRates.cfm?... URL provided by user
+- Parse the HTML completely in one pass (rooms, rates, images, perks, everything)
+- Store the parsed data in memory
+- Do NOT re-fetch for "verification", "checking", "validating", or any other reason
+- Do NOT fetch existing promo files for "reference" — use the SSOT examples only
+- Do NOT fetch the hero image separately — extract it during the initial HTML parse
+- Each token spent on extra fetches = wasted cost
+
 WORKFLOW (ALWAYS FOLLOW THIS ORDER):
-1. Read /docs/whatahotel-design-ssot.md — this is the only source of truth
-2. Fetch the booking page URL once (only once)
-3. Extract ALL required data in a single parse (see "EXTRACTION RULES" below)
-4. Build the promo object directly using the extracted data
-5. Commit with branch name: promo-N-YYYYMMDD
-6. Done — no refetching, no re-verifying
+1. Ask user for the booking page URL (only question needed)
+2. Fetch the URL ONCE — extract rooms, rates, images, hero, perks, totals (all in one parse)
+3. Read /docs/whatahotel-design-ssot.md for structure only (do not fetch from it)
+4. Build the complete promo object using only:
+   - The parsed HTML data (cached in memory)
+   - The SSOT structure rules
+5. Register in src/data/promos.ts
+6. Commit with branch name: promo-N-YYYYMMDD
+7. Done — finished
 
 EXTRACTION RULES (COMPLETE IN ONE PASS):
 
@@ -914,26 +929,75 @@ OPTIONAL COMPONENTS (use if applicable):
 - specialOffer?: For highlighted promotions or cancellation policies
 - priceSummary?: For multi-unit or package pricing tables
 
-DO NOT REFETCH:
-- The page HTML is fetched once at the start
-- All required data is extractable in one pass
-- No "verification" steps, no "double-checking"
-- If data is ambiguous or missing, add // AGENT NOTE: [what's needed] and move on
+⚠️ FORBIDDEN ACTIONS (THESE WASTE TOKENS):
+- ❌ Do NOT "check" an existing promo file for reference — use the SSOT examples
+- ❌ Do NOT fetch the hero image separately — extract from initial page parse
+- ❌ Do NOT re-read the booking page after initial fetch
+- ❌ Do NOT verify data by fetching again
+- ❌ Do NOT find/read src/data/promo-9.ts for examples — refer to SSOT sections instead
+- ❌ Do NOT run verification commands after building the file
+- ❌ Do NOT browse the project directory — only edit needed files
 
-EXAMPLES IN SSOT:
-- See promo-9.ts for CloudFront image URLs
-- See Clarification Protocol for step-by-step extraction
-- See Comparison Array section for the exact rate calculation
+✅ CORRECT FLOW:
+- Fetch the URL once
+- Parse everything in one pass
+- Build the TypeScript file from cached parsed data + SSOT rules
+- Register in promos.ts
+- Commit
+- Done
 
-If you are asked to create or update a promo:
-1. Ask: What is the WhataHotel booking page URL?
-2. Fetch once
-3. Follow EXTRACTION RULES
-4. Build promo file
-5. Register in promos.ts
-6. Commit
+EXTRACTION COMPLETE IN ONE PASS:
 
-No questions beyond the booking URL needed. No iterative refetching. Just follow the SSOT.
+From <h1>: Hotel name
+From <h4>: Starting-at rate per night (lowest SEASONAL OFFER)
+From rate table rows:
+  - SEASONAL OFFER: lowest rate → bookUrl source
+  - BAR: higher rate → priceStrike source
+From <h3> inside .bookingItem: Room names
+From .bookingItem images (first 2 only):
+  - Check src attribute for d321ocj5nbe62c.cloudfront.net URL
+  - If src is placeholder, check data-src attribute (lazy-loaded)
+  - Skip images < 200px; validate CDN domain
+From <a href="/booking/booking_info.cfm...">: Extract room code, rate code, hotel ID
+From page totals: N-night cost for each rate variant
+From hero section background-image: Extract and prepend https://www.whatahotel.com
+
+REQUIRED DATA STRUCTURE:
+
+Single-Hotel Promo:
+- id, title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
+- hero: imageUrl, alt, hotel, location
+- offer: heading, description, pills[]
+- rooms[]: badgeText, name, subtitle, priceLabel, priceRate, priceStrike, priceTotal, images[], features[], comparison[], savings, bookUrl, bookLabel
+- contact: sharedContact
+
+Multi-Hotel Promo:
+- Same as above but wrap each hotel's sections in hotels[]
+
+MANDATORY FIELDS (NEVER OMIT):
+- priceStrike: use "" (empty string) if no BAR rate exists
+- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only
+- comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates
+- savings.leftLabel: must wrap rate name in <span>
+- savings.leftSub: must show "Standard: X/night (total: Y) — WhataHotel!: A/night (total: B) — you save Z"
+
+CODE EXAMPLES IN SSOT:
+- Clarification Protocol: Step-by-step extraction checklist
+- Comparison Array section: Exact rate calculation examples
+- promo-9.ts: Reference file with proper CloudFront URLs
+
+FINAL WORKFLOW:
+
+1. Ask user: "What is the WhataHotel booking page URL?"
+2. Fetch that URL exactly once — parse complete HTML
+3. Extract: hotel name, rates, rooms, images, perks, totals (all from that one fetch)
+4. Use SSOT structure rules to build the TypeScript object
+5. Create src/data/promo-N.ts
+6. Update src/data/promos.ts with import + export
+7. Commit with branch: promo-N-YYYYMMDD
+8. Push to GitHub
+9. Netlify deploys automatically
+10. Done — no additional fetches, no verification steps
 ```
 
 ---
