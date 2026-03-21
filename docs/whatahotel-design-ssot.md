@@ -2,7 +2,21 @@
 
 > **For:** Lorraine Travel / WhataHotel!  
 > **Stack:** React + TypeScript + Vite · Deployed on Netlify via GitHub  
-> **Last updated:** March 2026
+> **Last updated:** March 2026 — **keep in sync with `src/types.ts` and `src/components/`**
+
+---
+
+## Production readiness (agents & maintainers)
+
+| Area | Status | Notes |
+|------|--------|--------|
+| **Build / types** | OK | `npm run build` should pass before merge. |
+| **Data-only workflow** | OK | New promos are TS data + `promos.ts` registry; no per-promo routes. |
+| **SSOT doc** | **Must stay aligned** | This file previously drifted from the app (file names, room layout, optional fields). Sections below are updated; **re-verify after UI changes.** |
+| **Redundancy** | Mitigated | If `savingsBreakdown` is set, the **investment price card is omitted** (rates live in `SavingsBreakdown`). `ComparisonOverview` is still the cross-room table; `savings` bar remains the narrative + CTA totals. |
+| **Gaps to improve** | Optional | Automated CI (`build` + lint), visual regression or storybook for `promo-11`-style layouts, stricter `comparison[]` validation in dev if you want fail-fast. |
+
+**Ready for production** as a Netlify-hosted SPA **if** agents follow this SSOT and you run a build on PRs. The main risk is **stale agent prompts** (Netlify project context) — update the block at the end of this doc when rules change.
 
 ---
 
@@ -17,6 +31,21 @@ All proposal pages are powered by a single React app. There are no individual HT
 
 **To add a new proposal: create a data file. That's it.**  
 No HTML files. No new folders. No template copying.
+
+**Portal ordering:** The homepage (`/`) sorts proposals by **`createdAt` (newest first)**. Order of imports in `promos.ts` does not control display order.
+
+### Recommended agent workflow (new promos)
+
+Use this order so you know **what to extract** before you touch the booking page:
+
+1. **Read this SSOT** (`docs/whatahotel-design-ssot.md`) — field rules, `comparison[]`, savings HTML, optional fields. Optionally skim **`src/types.ts`** for the exact TypeScript contract.
+2. **Get the WhataHotel booking page URL** from the user (and promo id / client name if needed).
+3. **Fetch that URL exactly once** — parse HTML in one pass (rooms, rates, images, hero, perks, totals). No re-fetch for “verification.”
+4. **Create** `src/data/promo-N.ts` from parsed data + SSOT rules.
+5. **Register** in `src/data/promos.ts` (import + add to `promos` array). Set **`createdAt`** (ISO 8601) for portal ordering.
+6. **Commit / push** — Netlify deploys from GitHub.
+
+Reading the docs first is **not** a network fetch; the **single-fetch rule** applies only to the **booking page** (and any other live URLs you must retrieve).
 
 ---
 
@@ -35,13 +64,18 @@ src/
     Masthead.tsx
     HeroSection.tsx
     OfferBanner.tsx
-    RoomCard.tsx
-    ComparisonOverview.tsx  ← Renders after all room cards, before AppDownload
-    AppDownload.tsx         ← App store download section (always rendered)
+    RoomCard.tsx              ← Room sections + investment block + perks
+    RoomOverviewGrid.tsx      ← Optional key-attribute grid (from room.keyAttributes)
+    SavingsBreakdown.tsx      ← Standard vs WhataHotel! breakdown (optional per room)
+    ComparisonOverview.tsx    ← After all room cards for that hotel; responsive table/cards
+    SpecialOfferBox.tsx
+    PriceSummaryTable.tsx
+    PromoCard.tsx
+    AppDownload.tsx           ← App store section (always rendered on promo pages)
     ContactFooter.tsx
   pages/
     PromoPage.tsx     ← Renders single or multi-hotel promos
-    PortalPage.tsx    ← Homepage portal list
+    Portal.tsx          ← Homepage portal list (not PortalPage.tsx)
 ```
 
 ---
@@ -67,12 +101,14 @@ Use when the proposal covers two or more hotels. Populate `hotels[]` instead. Ea
 ```ts
 interface Promo {
   id: string; // e.g. "promo-7"
+  createdAt: string; // ISO 8601 — required; portal sorts newest first
+  mastheadEyebrow?: string; // e.g. "Travel proposal" — small label above title
   title: string; // e.g. "Laguna Beach, California"
   client: string; // e.g. "The Sentz Family" or ""
   dates: string; // e.g. "June 2 – 5, 2026 | 3 Nights | 3 Room Options"
-  thumbnailUrl: string; // Portal card image
-  portalTotalLabel: string; // e.g. "Starting From" or "Combined Total"
-  portalTotalValue: string; // e.g. "$2,990.01"
+  thumbnailUrl?: string; // Portal card image
+  portalTotalLabel?: string; // e.g. "Starting From" or "Combined Total"
+  portalTotalValue?: string; // e.g. "$2,990.01"
 
   // Single-hotel only
   hero?: HeroBlock;
@@ -84,7 +120,13 @@ interface Promo {
   // Multi-hotel only
   hotels?: HotelBlock[];
 
-  contact: Contact; // Always: sharedContact
+  contact: Contact; // Usually sharedContact; may include advisorName
+}
+
+interface Contact {
+  email: string;
+  footerHtml: string;
+  advisorName?: string; // e.g. "Lorraine Travel" — shown above email when set
 }
 
 interface HotelBlock {
@@ -146,11 +188,14 @@ interface Room {
   badgeText: string;
   name: string; // HTML allowed (<br/>)
   subtitle: string; // HTML allowed (<br/>, <strong>)
-  priceLabel: string;
+  priceLabel?: string; // Optional small caps above rate (omit when using savingsBreakdown-only investment UI)
   priceRate: string; // e.g. "$996.67" — no "/night" suffix
-  priceStrike: string; // Crossed-out rate or "" if none
+  priceStrike?: string; // Crossed-out rate; omit or "" if none
   priceTotal: string; // e.g. "3-Night Total: $2,990.01"
-  images: { src: string; alt: string }[];
+  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // Room overview grid
+  galleryTitle?: string;
+  gallerySubtitle?: string;
+  images: Array<{ src: string; alt: string; caption?: string }>;
   features: {
     title: string;
     icon: string; // FontAwesome icon name without "fa-"
@@ -162,8 +207,8 @@ interface Room {
     rightLabel: string;
     rightValue: string;
   };
-  savingsBreakdown?: SavingsBreakdown; // Detailed breakdown: paid/free nights, standard vs WhataHotel rates
-  comparison: ComparisonRow[]; // See Comparison Overview section below
+  savingsBreakdown?: SavingsBreakdown; // If set, investment block uses this instead of the price card (no duplicate rates)
+  comparison?: ComparisonRow[]; // Strongly recommended — powers ComparisonOverview; omit only if no table needed
   bookUrl: string;
   bookLabel: string;
 }
@@ -302,11 +347,11 @@ Format: `"€4,590"` or `"$2,990.01"` — match the currency of the booking page
 
 ---
 
-## Comparison Overview ⚠️ Required on Every Room
+## Comparison Overview ⚠️ Required for production-quality promos
 
-Each room must include a `comparison` array. This powers the `<ComparisonOverview />` component, which renders **below all room cards and above `<AppDownload />`**.
+Each room **should** include a `comparison` array (typed optional, but the UI hides `<ComparisonOverview />` if missing). It powers the `<ComparisonOverview />` component, which renders **below all room cards for that hotel and above `<AppDownload />`**.
 
-The comparison table shows a side-by-side breakdown of Standard Rate vs. WhataHotel! Rate for every room option featured in the promo.
+The comparison table shows a side-by-side breakdown of Standard Rate vs. WhataHotel! Rate for every room option featured in the promo. On narrow viewports, a **stacked card layout** is used (no horizontal scroll).
 
 ### How to populate `comparison`
 
@@ -346,7 +391,7 @@ comparison: [
 <div className="body">
   {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
 </div>
-<ComparisonOverview rooms={promo.rooms!} nights={N} />  {/* ← after room cards */}
+<ComparisonOverview rooms={promo.rooms!} />  {/* after room cards; no nights prop */}
 <AppDownload />
 <ContactFooter ... />
 
@@ -358,7 +403,7 @@ comparison: [
     <div className="body">
       {hotel.rooms.map((room) => <RoomCard key={room.badgeText} room={room} />)}
     </div>
-    <ComparisonOverview rooms={hotel.rooms} nights={N} />  {/* ← after each hotel's rooms */}
+    <ComparisonOverview rooms={hotel.rooms} />
   </div>
 ))}
 <AppDownload />
@@ -395,27 +440,30 @@ savingsBreakdown?: {
 };
 ```
 
-### Placement in RoomCard
-
-The component renders **between the price card and room images**:
+### Placement in RoomCard (actual render order)
 
 ```
-Price Card (name, rate, total)
+Room intro (name, subtitle)
     ↓
-[SavingsBreakdown] ← NEW (optional)
+[RoomOverviewGrid] ← optional (keyAttributes)
     ↓
-Room Images
+Gallery (optional headings + images, optional captions)
     ↓
-Features
+Investment summary
+  — If savingsBreakdown: partner line → SavingsBreakdown only (no duplicate price card)
+  — Else: partner line → Price card (priceLabel, rate, strike, total)
     ↓
-Savings Bar (legacy)
+Exclusive perks & inclusions (feature columns)
     ↓
-Book Button
+Savings bar (summary strip)
+    ↓
+Book button
 ```
 
 ### Rules
 
 - All fields are **required strings** except `savingsPercentage` (optional)
+- **Do not** duplicate nightly/total pricing: if `savingsBreakdown` is present, the **bordered price card is not shown** in the investment block (data may still include `priceRate` / `priceTotal` for `savings` bar and `comparison`).
 - `nights`: e.g., `"4 Nights"`, `"8 Nights"`
 - `paidNights` / `freeNights`: numbers only (e.g., 6, 2)
 - Rates: include currency (e.g., `"$2,800"`, `"€1,530"`)
@@ -835,9 +883,11 @@ export const promos: Promo[] = [
   promo1,
   promo2,
   // ... existing promos
-  promoN, // ← add this at the end
+  promoN, // ← add; array order does not control portal sort
 ];
 ```
+
+- Set **`createdAt`** to the real creation time (ISO string). The **portal lists newest first** by `createdAt`, not by position in this array.
 
 Once committed to GitHub, Netlify auto-deploys in ~30 seconds. The new promo is live at:
 
@@ -869,23 +919,23 @@ CONSTRAINTS:
 - Never modify component files
 - Never create HTML files or folders
 
-⛔ CRITICAL: FETCH THE PAGE EXACTLY ONCE AND NEVER AGAIN
-- First action: Fetch https://www.whatahotel.com/booking/showRates.cfm?... URL provided by user
-- Parse the HTML completely in one pass (rooms, rates, images, perks, everything)
+⛔ CRITICAL: FETCH THE BOOKING PAGE EXACTLY ONCE — NEVER RE-FETCH
+- After you have read the SSOT (see workflow step 1), fetch https://www.whatahotel.com/booking/showRates.cfm?... (or URL from user) **once**
+- Parse the HTML completely in one pass (rooms, rates, images, hero, perks, everything)
 - Store the parsed data in memory
 - Do NOT re-fetch for "verification", "checking", "validating", or any other reason
-- Do NOT fetch existing promo files for "reference" — use the SSOT examples only
+- Do NOT fetch existing promo files for "reference" — use the SSOT sections only
 - Do NOT fetch the hero image separately — extract it during the initial HTML parse
-- Each token spent on extra fetches = wasted cost
+- Reading this SSOT doc from disk/repo is NOT a network fetch — do that first so you know what fields to fill
 
 WORKFLOW (ALWAYS FOLLOW THIS ORDER):
-1. Ask user for the booking page URL (only question needed)
-2. Fetch the URL ONCE — extract rooms, rates, images, hero, perks, totals (all in one parse)
-3. Read /docs/whatahotel-design-ssot.md for structure only (do not fetch from it)
+1. Read /docs/whatahotel-design-ssot.md for structure and rules (optional: src/types.ts for types). Do not skip — you need comparison[], savings, and field rules before extracting.
+2. Ask user for the booking page URL (and promo id / client if required)
+3. Fetch that URL ONCE — extract rooms, rates, images, hero, perks, totals (all in one parse)
 4. Build the complete promo object using only:
    - The parsed HTML data (cached in memory)
    - The SSOT structure rules
-5. Register in src/data/promos.ts
+5. Create src/data/promo-N.ts and register in src/data/promos.ts (import + array entry). Set createdAt (ISO 8601).
 6. Commit with branch name: promo-N-YYYYMMDD
 7. Done — finished
 
@@ -908,26 +958,30 @@ From hero section: Background image URL
 REQUIRED DATA STRUCTURE:
 
 Single-Hotel Promo:
-- id, title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
+- id, createdAt (ISO), title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
 - hero: imageUrl, alt, hotel, location
 - offer: heading, description, pills[]
-- rooms[]: badgeText, name, subtitle, priceLabel, priceRate, priceStrike, priceTotal, images[], features[], savings, bookUrl, bookLabel
-- contact: sharedContact
+- rooms[]: badgeText, name, subtitle, priceRate, priceTotal, images[], features[], savings, bookUrl, bookLabel
+- priceLabel?: optional; priceStrike: "" if no BAR
+- comparison[]: strongly recommended (3 rows) — ComparisonOverview hidden if omitted
+- contact: sharedContact (optional advisorName on contact)
 
 Multi-Hotel Promo:
 - Same as above but wrap each hotel's sections in hotels[]
 
 MANDATORY FIELDS (NEVER OMIT):
+- createdAt: ISO 8601 string for portal ordering
 - priceStrike: use "" (empty string) if no BAR rate exists
-- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only
-- comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates
+- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only (unless documented exception)
+- comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates — required for production promos
 - savings.leftLabel: must wrap rate name in <span>
 - savings.leftSub: must show "Standard: X/night (total: Y) — WhataHotel!: A/night (total: B) — you save Z"
 
 OPTIONAL COMPONENTS (use if applicable):
-- savingsBreakdown?: For free-night promos or complex pricing breakdowns
+- savingsBreakdown?: If set, UI shows breakdown instead of duplicate price card in investment block
 - specialOffer?: For highlighted promotions or cancellation policies
 - priceSummary?: For multi-unit or package pricing tables
+- mastheadEyebrow?, keyAttributes?, galleryTitle?, image captions — layout polish
 
 ⚠️ FORBIDDEN ACTIONS (THESE WASTE TOKENS):
 - ❌ Do NOT "check" an existing promo file for reference — use the SSOT examples
@@ -939,7 +993,8 @@ OPTIONAL COMPONENTS (use if applicable):
 - ❌ Do NOT browse the project directory — only edit needed files
 
 ✅ CORRECT FLOW:
-- Fetch the URL once
+- Read SSOT (and types) first — know the target schema
+- Fetch the booking URL once
 - Parse everything in one pass
 - Build the TypeScript file from cached parsed data + SSOT rules
 - Register in promos.ts
@@ -965,16 +1020,18 @@ From hero section background-image: Extract and prepend https://www.whatahotel.c
 REQUIRED DATA STRUCTURE:
 
 Single-Hotel Promo:
-- id, title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
+- id, createdAt (ISO), title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
 - hero: imageUrl, alt, hotel, location
 - offer: heading, description, pills[]
-- rooms[]: badgeText, name, subtitle, priceLabel, priceRate, priceStrike, priceTotal, images[], features[], comparison[], savings, bookUrl, bookLabel
+- rooms[]: badgeText, name, subtitle, priceRate, priceStrike, priceTotal, images[], features[], comparison[], savings, bookUrl, bookLabel
+- priceLabel?: optional
 - contact: sharedContact
 
 Multi-Hotel Promo:
 - Same as above but wrap each hotel's sections in hotels[]
 
 MANDATORY FIELDS (NEVER OMIT):
+- createdAt (ISO 8601)
 - priceStrike: use "" (empty string) if no BAR rate exists
 - images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only
 - comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates
@@ -984,27 +1041,29 @@ MANDATORY FIELDS (NEVER OMIT):
 CODE EXAMPLES IN SSOT:
 - Clarification Protocol: Step-by-step extraction checklist
 - Comparison Array section: Exact rate calculation examples
-- promo-9.ts: Reference file with proper CloudFront URLs
+- CloudFront image rules: see "Step 4 — Extract room images" in this doc
 
 FINAL WORKFLOW:
 
-1. Ask user: "What is the WhataHotel booking page URL?"
-2. Fetch that URL exactly once — parse complete HTML
-3. Extract: hotel name, rates, rooms, images, perks, totals (all from that one fetch)
-4. Use SSOT structure rules to build the TypeScript object
-5. Create src/data/promo-N.ts
-6. Update src/data/promos.ts with import + export
-7. Commit with branch: promo-N-YYYYMMDD
-8. Push to GitHub
-9. Netlify deploys automatically
-10. Done — no additional fetches, no verification steps
+1. Read this SSOT (and optionally src/types.ts)
+2. Ask user: "What is the WhataHotel booking page URL?" (and id / client if needed)
+3. Fetch that URL exactly once — parse complete HTML
+4. Extract: hotel name, rates, rooms, images, perks, totals (all from that one fetch)
+5. Use SSOT structure rules to build the TypeScript object
+6. Create src/data/promo-N.ts
+7. Update src/data/promos.ts with import + export; set createdAt
+8. Commit with branch: promo-N-YYYYMMDD
+9. Push to GitHub
+10. Netlify deploys automatically
+11. Done — no additional fetches, no verification steps
 ```
 
 ---
 
 ## New Promo Checklist
 
-- [ ] Create `src/data/promo-N.ts` with correct `id`, `title`, `client`, `dates`
+- [ ] **Read** this SSOT (and `src/types.ts` if needed) before building data — know `comparison[]`, savings rules, and optional fields
+- [ ] Create `src/data/promo-N.ts` with correct `id`, **`createdAt` (ISO 8601)**, `title`, `client`, `dates`
 - [ ] All rooms have exactly 2 feature blocks (door-open + gift)
 - [ ] All `leftLabel` strings use `<span>` wrapper
 - [ ] `leftSub` includes per-night breakdown, total calculation, AND savings amount

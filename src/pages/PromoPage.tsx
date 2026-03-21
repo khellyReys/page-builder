@@ -92,6 +92,7 @@ export default function PromoPage() {
           client={promo.client}
           dates={promo.dates}
           logoHref="https://www.whatahotel.com/"
+          eyebrow={promo.mastheadEyebrow}
         />
 
         {promo.hotels.map((hotel, index) => (
@@ -146,6 +147,7 @@ export default function PromoPage() {
         <ContactFooter
           email={promo.contact.email}
           footerHtml={promo.contact.footerHtml}
+          advisorName={promo.contact.advisorName}
         />
       </div>
     );
@@ -181,6 +183,7 @@ export default function PromoPage() {
         client={promo.client}
         dates={promo.dates}
         logoHref="https://www.whatahotel.com/"
+        eyebrow={promo.mastheadEyebrow}
       />
       <HeroSection
         imageUrl={promo.hero!.imageUrl}
@@ -231,6 +234,7 @@ export default function PromoPage() {
       <ContactFooter
         email={promo.contact.email}
         footerHtml={promo.contact.footerHtml}
+        advisorName={promo.contact.advisorName}
       />
     </div>
   );

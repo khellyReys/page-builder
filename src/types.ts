@@ -23,15 +23,27 @@ export type SavingsBreakdown = {
   savingsPercentage?: string;
 };
 
+export type RoomKeyAttribute = {
+  label: string;
+  value: string;
+  sub?: string;
+};
+
 export type Room = {
   badgeText: string;
   name: string;
   subtitle: string;
-  priceLabel: string;
+  /** Small caps line above the rate (optional) */
+  priceLabel?: string;
   priceRate: string;
   priceStrike?: string;
   priceTotal: string;
-  images: Array<{ src: string; alt: string }>;
+  /** Quick-scan specs (Room Overview grid); optional */
+  keyAttributes?: RoomKeyAttribute[];
+  /** Gallery section heading; optional */
+  galleryTitle?: string;
+  gallerySubtitle?: string;
+  images: Array<{ src: string; alt: string; caption?: string }>;
   features: Array<{
     title: string;
     icon: string;
@@ -81,6 +93,10 @@ export type PriceSummaryItem = {
 
 export type Promo = {
   id: string;
+  /** ISO 8601 — used for portal sort (newest first) */
+  createdAt: string;
+  /** Small label above the title, e.g. “Travel Proposal” */
+  mastheadEyebrow?: string;
   title: string;
   client: string;
   dates: string;
@@ -110,5 +126,6 @@ export type Promo = {
   contact: {
     email: string;
     footerHtml: string;
+    advisorName?: string;
   };
 };

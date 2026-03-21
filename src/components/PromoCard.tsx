@@ -6,6 +6,7 @@ type Props = {
   location: string;
   client: string;
   dates: string;
+  createdLabel: string;
   thumbnail: string;
   totalLabel: string;
   totalValue: string;
@@ -18,6 +19,7 @@ export function PromoCard({
   location,
   client,
   dates,
+  createdLabel,
   thumbnail,
   totalLabel,
   totalValue,
@@ -42,6 +44,10 @@ export function PromoCard({
         </div>
         <div className="card-client">{client}</div>
         <div className="card-dates">{dates}</div>
+        <div className="card-created">
+          <i className="fas fa-calendar-plus" style={{ marginRight: 5 }} />
+          Added {createdLabel}
+        </div>
         <div className="card-footer">
           <div>
             <div className="card-total-label">{totalLabel}</div>

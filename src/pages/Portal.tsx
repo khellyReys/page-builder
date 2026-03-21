@@ -1,29 +1,71 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { promos } from "../data/promos";
 import { PromoCard } from "../components/PromoCard";
 import { ContactFooter } from "../components/ContactFooter";
 import { sharedContact } from "../data/contact";
 
+const PAGE_SIZE = 6;
+
+function formatCreatedLabel(iso: string) {
+  try {
+    return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
+      new Date(iso),
+    );
+  } catch {
+    return iso;
+  }
+}
+
 export default function Portal() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
 
   const getHero = (promo: (typeof promos)[number]) =>
     promo.hero ?? promo.hotels?.[0]?.hero;
 
-  const filteredPromos = promos.filter((promo) => {
+  const filteredSorted = useMemo(() => {
     const searchLower = searchTerm.toLowerCase();
-    const hero = getHero(promo);
-    return (
-      promo.title.toLowerCase().includes(searchLower) ||
-      promo.client.toLowerCase().includes(searchLower) ||
-      (hero?.hotel.toLowerCase().includes(searchLower) ?? false) ||
-      (hero?.location
-        .replace(/<[^>]+>/g, "")
-        .toLowerCase()
-        .includes(searchLower) ?? false) ||
-      promo.dates.toLowerCase().includes(searchLower)
+    const filtered = promos.filter((promo) => {
+      const hero = getHero(promo);
+      return (
+        promo.title.toLowerCase().includes(searchLower) ||
+        promo.client.toLowerCase().includes(searchLower) ||
+        (hero?.hotel.toLowerCase().includes(searchLower) ?? false) ||
+        (hero?.location
+          .replace(/<[^>]+>/g, "")
+          .toLowerCase()
+          .includes(searchLower) ?? false) ||
+        promo.dates.toLowerCase().includes(searchLower)
+      );
+    });
+    return [...filtered].sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
-  });
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [searchTerm]);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredSorted.length / PAGE_SIZE) || 1,
+  );
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
+
+  const pageItems = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return filteredSorted.slice(start, start + PAGE_SIZE);
+  }, [filteredSorted, page]);
+
+  const rangeStart =
+    filteredSorted.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+  const rangeEnd = Math.min(page * PAGE_SIZE, filteredSorted.length);
+
   return (
     <div className="wrap">
       <div className="masthead">
@@ -77,49 +119,85 @@ export default function Portal() {
         </div>
 
         <div className="grid">
-          {filteredPromos.length > 0 ? (
-            filteredPromos.map((promo, index) => {
+          {filteredSorted.length > 0 ? (
+            pageItems.map((promo, index) => {
               const hero = getHero(promo);
               return (
-              <PromoCard
-                key={promo.id}
-                id={promo.id}
-                hotel={hero?.hotel ?? promo.title}
-                location={(hero?.location ?? "").replace(/<[^>]+>/g, "")}
-                client={promo.client}
-                dates={promo.dates}
-                thumbnail={promo.thumbnailUrl ?? hero?.imageUrl ?? ""}
-                totalLabel={promo.portalTotalLabel ?? "Estimate"}
-                totalValue={promo.portalTotalValue ?? ""}
-                delay={index * 0.2}
-              />
+                <PromoCard
+                  key={promo.id}
+                  id={promo.id}
+                  hotel={hero?.hotel ?? promo.title}
+                  location={(hero?.location ?? "").replace(/<[^>]+>/g, "")}
+                  client={promo.client}
+                  dates={promo.dates}
+                  createdLabel={formatCreatedLabel(promo.createdAt)}
+                  thumbnail={promo.thumbnailUrl ?? hero?.imageUrl ?? ""}
+                  totalLabel={promo.portalTotalLabel ?? "Estimate"}
+                  totalValue={promo.portalTotalValue ?? ""}
+                  delay={index * 0.2}
+                />
               );
             })
           ) : (
-            <div
-              style={{
-                textAlign: "center",
-                padding: "48px 24px",
-                color: "var(--text-muted)",
-                fontSize: "18px",
-              }}
-            >
+            <div className="portal-empty">
               <i
-                className="fas fa-search"
-                style={{ fontSize: "48px", marginBottom: "16px", opacity: 0.5 }}
+                className={
+                  promos.length === 0 && !searchTerm
+                    ? "fas fa-folder-open"
+                    : "fas fa-search"
+                }
+                aria-hidden={true}
               />
-              <div>No proposals found matching "{searchTerm}"</div>
-              <div style={{ fontSize: "14px", marginTop: "8px" }}>
-                Try searching by destination, client name, hotel, or dates
+              <div className="portal-empty-title">
+                {promos.length === 0 && !searchTerm
+                  ? "No proposals yet. Add a promo in src/data/ and register it in promos.ts."
+                  : `No proposals found matching "${searchTerm}"`}
               </div>
+              {(promos.length > 0 || searchTerm) && (
+                <div className="portal-empty-hint">
+                  Try searching by destination, client name, hotel, or dates
+                </div>
+              )}
             </div>
           )}
         </div>
+
+        {filteredSorted.length > 0 && (
+          <div className="portal-pagination">
+            <div className="portal-pagination-info">
+              Showing {rangeStart}–{rangeEnd} of {filteredSorted.length}
+            </div>
+            <div className="portal-pagination-controls">
+              <button
+                type="button"
+                className="portal-pagination-btn"
+                disabled={page <= 1}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+              >
+                <i className="fas fa-chevron-left" style={{ marginRight: 6 }} />
+                Previous
+              </button>
+              <span className="portal-pagination-page">
+                Page {page} of {totalPages}
+              </span>
+              <button
+                type="button"
+                className="portal-pagination-btn"
+                disabled={page >= totalPages}
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              >
+                Next
+                <i className="fas fa-chevron-right" style={{ marginLeft: 6 }} />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       <ContactFooter
         email={sharedContact.email}
         footerHtml={sharedContact.footerHtml}
+        advisorName={sharedContact.advisorName}
       />
     </div>
   );

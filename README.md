@@ -1,4 +1,16 @@
-# React + TypeScript + Vite
+# WhataHotel! proposal site
+
+Luxury travel proposals as typed data (`src/data/promo-N.ts`) + one React app. Deploy on Netlify.
+
+### Social / Open Graph previews
+
+Crawlers often **do not run JavaScript**, so they only see the first HTML document. After each `npm run build`, **`scripts/generate-promo-html.ts`** writes `dist/promo/<id>/index.html` per entry in `promos.ts`, with `og:image` / `twitter:image` set to the **hero (or thumbnail)** URL — not the logo in the root `index.html`.
+
+Netlify sets **`URL`** during build; the script uses it for `og:url` / canonical links. Local builds fall back to `http://localhost:8888` with a console warning.
+
+---
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

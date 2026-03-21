@@ -3,9 +3,11 @@ type Props = {
   client: string;
   dates: string;
   logoHref?: string;
+  /** e.g. “Travel Proposal” */
+  eyebrow?: string;
 };
 
-export function Masthead({ title, client, dates, logoHref }: Props) {
+export function Masthead({ title, client, dates, logoHref, eyebrow }: Props) {
   const logo = (
     <>
       <img
@@ -19,6 +21,7 @@ export function Masthead({ title, client, dates, logoHref }: Props) {
   return (
     <div className="masthead">
       <div className="mast-info">
+        {eyebrow ? <div className="mast-eyebrow">{eyebrow}</div> : null}
         <div
           className="mast-title"
           dangerouslySetInnerHTML={{ __html: title }}

@@ -23,7 +23,9 @@ export function SavingsBreakdown({ breakdown }: Props) {
           <div className="sbr-total">{breakdown.standardTotal}</div>
         </div>
 
-        <div className="sb-vs">vs</div>
+        <div className="sb-vs" aria-hidden="true">
+          <span className="sb-vs-text">vs</span>
+        </div>
 
         <div className="sb-rate-box sb-whatahotel">
           <div className="sbr-label">WhataHotel! Rate</div>
