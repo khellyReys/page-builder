@@ -47,13 +47,12 @@ export const promo9: Promo = {
       priceTotal: "4-Night Total: £4,032.00",
       images: [
         {
-          src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249705973.jpg",
+          src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/1423/142/SuperiorRoom_KingBed_FourSeasonsLondon_(c)2024_HD_P.jpg",
           alt: "Superior Room King Bed — Four Seasons London at Park Lane",
         },
-        // AGENT NOTE: Only 1 image found on page for this room type
         {
-          src: "https://www.whatahotel.com/img/paceholder.jpg",
-          alt: "Superior Room King Bed — Bathroom",
+          src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/1423/143/SuperiorRoom_KingBed_Bathroom_FourSeasonsLondon_(c)2024_HD_P.jpg",
+          alt: "Superior Room King Bed Bathroom — Four Seasons London at Park Lane",
         },
       ],
       features: [
@@ -105,12 +104,12 @@ export const promo9: Promo = {
       priceTotal: "4-Night Total: £4,200.00",
       images: [
         {
-          src: "https://d2573qu6qrjt8c.cloudfront.net/76A021760CB541A1B6008D6DDC56B2D0/76A021760CB541A1B6008D6DDC56B2D0.JPEG",
+          src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/1423/241/DeluxeRoom_TwinBeds_FourSeasonsLondon_(c)2024_HD_P.jpg",
           alt: "Deluxe Room 2 Twin Beds — Four Seasons London at Park Lane",
         },
         {
-          src: "https://d2573qu6qrjt8c.cloudfront.net/9CF5955CFC314411A836E5AF8AAA7DAF/E.JPEG",
-          alt: "Deluxe Room 2 Twin Beds — Interior",
+          src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/1423/242/DeluxeRoom_TwinBeds_Bathroom_FourSeasonsLondon_(c)2024_HD_P.jpg",
+          alt: "Deluxe Room 2 Twin Beds Bathroom — Four Seasons London at Park Lane",
         },
       ],
       features: [
@@ -162,13 +161,12 @@ export const promo9: Promo = {
       priceTotal: "4-Night Total: £4,200.00",
       images: [
         {
-          src: "https://www.fourseasons.com/alt/img-opt/~70.1530.0,0000-290,3460-3000,0000-1687,5000/publish/content/dam/fourseasons/images/web/LON/LON_1368_original.jpg",
+          src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/1423/341/DeluxeRoom_KingBed_FourSeasonsLondon_(c)2024_HD_P.jpg",
           alt: "Deluxe Room King Bed — Four Seasons London at Park Lane",
         },
-        // AGENT NOTE: Only 1 image found on page for this room type
         {
-          src: "https://www.whatahotel.com/img/paceholder.jpg",
-          alt: "Deluxe Room King Bed — Bathroom",
+          src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/1423/342/DeluxeRoom_KingBed_Bathroom_FourSeasonsLondon_(c)2024_HD_P.jpg",
+          alt: "Deluxe Room King Bed Bathroom — Four Seasons London at Park Lane",
         },
       ],
       features: [

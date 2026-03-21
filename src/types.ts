@@ -11,6 +11,18 @@ export type OfferBlock = {
   pills: string[];
 };
 
+export type SavingsBreakdown = {
+  nights: string;
+  paidNights: number;
+  freeNights: number;
+  standardRate: string;
+  standardTotal: string;
+  whatahotelRate: string;
+  whatahotelTotal: string;
+  savingsAmount: string;
+  savingsPercentage?: string;
+};
+
 export type Room = {
   badgeText: string;
   name: string;
@@ -31,6 +43,7 @@ export type Room = {
     rightLabel: string;
     rightValue: string;
   };
+  savingsBreakdown?: SavingsBreakdown;
   bookUrl: string;
   bookLabel: string;
 };
@@ -39,6 +52,25 @@ export type HotelBlock = {
   hero: HeroBlock;
   offer: OfferBlock;
   rooms: Room[];
+};
+
+export type SpecialOffer = {
+  title: string;
+  description: string;
+  highlights: Array<{
+    icon: string;
+    text: string;
+  }>;
+  validityText?: string;
+};
+
+export type PriceSummaryItem = {
+  label: string;
+  sqft?: string;
+  bedConfig?: string;
+  whatahotelRate: string;
+  regularRate: string;
+  total: string;
 };
 
 export type Promo = {
@@ -57,6 +89,17 @@ export type Promo = {
 
   // Multi-hotel promo
   hotels?: HotelBlock[];
+
+  // Special offer box (optional)
+  specialOffer?: SpecialOffer;
+
+  // Price summary (optional)
+  priceSummary?: {
+    items: PriceSummaryItem[];
+    totalSavings?: string;
+    grandTotal?: string;
+    savingsNote?: string;
+  };
 
   contact: {
     email: string;
