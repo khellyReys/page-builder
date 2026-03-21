@@ -69,10 +69,10 @@ src/
     HotelIdentity.tsx         ← Stars + hotel name + location below hero
     OfferBanner.tsx
     RoomMetaStrip.tsx         ← Optional quickFacts strip (Room Category, Suite Size, …)
-    ProposalInvestment.tsx   ← ADR / nights / grand total + book CTA in grid (or SavingsBreakdown + CTA below)
-    RoomCard.tsx              ← Room flow: label, intro, meta, gallery, investment, perks, ExperienceMore
+    ProposalInvestment.tsx   ← ADR / Grand total / Nights (3-column grid); no book button inside
+    RoomCard.tsx              ← … investment → Exclusive perks → **Book** CTA → optional ExperienceMore
     ExperienceMore.tsx      ← Optional spending-credit style block
-    RoomOverviewGrid.tsx      ← Key-attribute grid (after table + footnote; book link is in ProposalInvestment)
+    RoomOverviewGrid.tsx      ← Key-attribute grid (after table + footnote; book link is in RoomCard after perks)
     SavingsBreakdown.tsx      ← Standard vs WhataHotel! breakdown (optional per room)
     ComparisonOverview.tsx    ← Booking summary table — requires `hotelName` + `rooms`
     SpecialOfferBox.tsx
@@ -81,7 +81,7 @@ src/
     AppDownload.tsx           ← App store section (always rendered on promo pages)
     ContactFooter.tsx
   pages/
-    PromoPage.tsx     ← Renders single or multi-hotel promos (table → footnote → overview; book in investment block)
+    PromoPage.tsx     ← Renders single or multi-hotel promos (table → footnote → overview; book CTA is in RoomCard)
     Portal.tsx          ← Homepage portal list (not PortalPage.tsx)
 ```
 
@@ -98,7 +98,7 @@ Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatah
 3. `HotelIdentity` — star row, `hero.hotel`, `hero.location` (HTML)
 4. `OfferBanner` — only if `offer` exists and **`!offer.hidden`** and **`!promo.suppressOfferBanner`**
 5. `SpecialOfferBox` — optional, promo-level
-6. `RoomCard` for each room — includes **`ProposalInvestment`**, which renders **`bookUrl` / `bookLabel`** (bottom-right cell of the 2×2 pricing grid, or below `SavingsBreakdown` when that mode is used)
+6. `RoomCard` for each room — **`ProposalInvestment`** (3-column **ADR · Grand total · Nights** grid, no booking button in the grid) + **Exclusive perks** + primary **`bookUrl` / `bookLabel`** CTA (after perks, before optional `ExperienceMore`)
 7. `ComparisonOverview` — **booking summary** table columns: Hotel · Room category · Check-in/out · Nights · ADR · Total (`rooms` + **`hotelName`** from `hero.hotel`)
 8. Optional `promo.pricingFootnote` (HTML) — e.g. taxes disclaimer
 9. `RoomOverviewGrid` per room when `keyAttributes` is set
@@ -262,7 +262,7 @@ interface Room {
   };
   grandTotalInclTaxes?: string;
   grandTotalInclTaxesLabel?: string;
-  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // After table + footnote; book CTA is in ProposalInvestment
+  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // After table + footnote; book CTA is in RoomCard (after perks)
   galleryTitle?: string;
   gallerySubtitle?: string;
   images: Array<{ src: string; alt: string; caption?: string }>; // [] → default room image
@@ -448,6 +448,8 @@ When using the default **ProposalInvestment** layout (no `savingsBreakdown`), se
 
 When `savingsBreakdown` is present, use `standardTotalInclTaxes` / `whatahotelTotalInclTaxes` on the breakdown for column-level incl.-tax amounts.
 
+**UI when `grandTotalInclTaxes` is set:** The app **omits “excl. taxes” wording** on the ADR subline (defaults to **“Per night”** unless `priceLabel` is a non–excl.-tax override) and **strips excl.-tax** phrasing from the Grand total subline (preferring nights + dates). The incl.-tax block remains the clear place for **taxes & fees included** amounts.
+
 ---
 
 ## Booking summary (`ComparisonOverview`) ⚠️ Required for production-quality promos
@@ -486,7 +488,7 @@ The old **Standard vs WhataHotel** row model (`comparison[]`) is **not** consume
 
 ### Placement (implemented in `PromoPage.tsx`)
 
-`PromoPage` renders: all room cards (each card’s **`ProposalInvestment`** includes the **Book** link for that room) → `<ComparisonOverview rooms={...} hotelName={...} />` → optional `pricingFootnote` → `RoomOverviewGrid` when `keyAttributes` is set → optional `PriceSummaryTable` → `AppDownload` → `ContactFooter`.
+`PromoPage` renders: all room cards (each **`RoomCard`** includes the **Book** link for that room **after Exclusive perks**) → `<ComparisonOverview rooms={...} hotelName={...} />` → optional `pricingFootnote` → `RoomOverviewGrid` when `keyAttributes` is set → optional `PriceSummaryTable` → `AppDownload` → `ContactFooter`.
 
 ---
 
@@ -529,10 +531,12 @@ Room label + intro (name, subtitle)
 Gallery (optional headings + images; empty images[] → default room photo)
     ↓
 Investment summary (ProposalInvestment)
-  — If savingsBreakdown: context line → SavingsBreakdown → **Book** (`bookUrl` / `bookLabel`) + hint → partner line
-  — Else: context line → **2×2 grid:** ADR | Grand total / Nights | **Book** (+ hint) → optional value stack, BAR line, incl.-tax block → partner line
+  — If savingsBreakdown: context line → SavingsBreakdown → partner line
+  — Else: context line → **3-column grid:** ADR | Grand total | Nights → optional value stack, BAR line, incl.-tax block (`grandTotalInclTaxes`) → partner line
     ↓
 Exclusive perks & inclusions (feature columns)
+    ↓
+**Book** (`bookUrl` / `bookLabel`) + secure-booking hint
     ↓
 [ExperienceMore] ← optional
     ↓
@@ -669,7 +673,7 @@ priceSummary?: {
 ```tsx
 {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
 <ComparisonOverview rooms={promo.rooms!} hotelName={promo.hero!.hotel} />
-{/* footnote + RoomOverviewGrid — book CTAs are inside ProposalInvestment; see Proposal page layout section */}
+{/* footnote + RoomOverviewGrid — book CTAs are in RoomCard after perks; see Proposal page layout section */}
 {promo.priceSummary && (
   <div className="body">
     <PriceSummaryTable
@@ -813,7 +817,7 @@ Each room type has a **unique `room` code** (e.g. `A1KP77`, `A13P77`, `P1KP77`).
 
 ## App Download Section ⚠️ Required on Every Promo Page
 
-Every promo page **must** include the `<AppDownload />` component after the booking section (table, footnote, room overview grids, optional price summary) and before `<ContactFooter />`. Primary **Book** links live in each room’s **Investment summary** (`ProposalInvestment`), not below the table.
+Every promo page **must** include the `<AppDownload />` component after the booking section (table, footnote, room overview grids, optional price summary) and before `<ContactFooter />`. Primary **Book** links live in each **`RoomCard`** (**after Exclusive perks**, before `ExperienceMore`), not below the booking table.
 
 ### App Store Links (hardcoded in component — never change)
 
@@ -824,7 +828,7 @@ Every promo page **must** include the `<AppDownload />` component after the book
 ### Rules
 
 - `AppDownload` takes no props — links are hardcoded inside the component
-- Placement order: RoomCards (book link inside investment block) → ComparisonOverview (booking table) → footnote → RoomOverviewGrid(s) → optional PriceSummaryTable → AppDownload → ContactFooter
+- Placement order: RoomCards (book CTA after perks inside each card) → ComparisonOverview (booking table) → footnote → RoomOverviewGrid(s) → optional PriceSummaryTable → AppDownload → ContactFooter
 - Never omit from any promo page — single-hotel or multi-hotel
 - Never change the app store URLs
 
@@ -1184,7 +1188,7 @@ FINAL WORKFLOW:
 - [ ] `// AGENT NOTE` comment added when multiple rate variants exist per room
 - [ ] No room data was hallucinated — all rates, names, images, and URLs came from fetched page
 - [ ] If any data is missing, `// AGENT NOTE:` comment is present listing what needs updating
-- [ ] `PromoPage` flow satisfied: room cards (with book CTA in `ProposalInvestment`) → booking table → optional `pricingFootnote` → `RoomOverviewGrid` → optional price summary → `<AppDownload />` → `<ContactFooter />` (handled by app when promo is registered)
+- [ ] `PromoPage` flow satisfied: room cards (book CTA **after Exclusive perks** in `RoomCard`) → booking table → optional `pricingFootnote` → `RoomOverviewGrid` → optional price summary → `<AppDownload />` → `<ContactFooter />` (handled by app when promo is registered)
 - [ ] `[OPTIONAL]` `savingsBreakdown` field present in rooms if detailed pricing breakdown is needed (e.g., free nights promo)
 - [ ] `[OPTIONAL]` `specialOffer` field present in promo if special promotion/offer exists to highlight
 - [ ] `[OPTIONAL]` `priceSummary` field present in promo if multi-unit pricing table is needed

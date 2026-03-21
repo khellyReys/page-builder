@@ -5,8 +5,60 @@ type Props = {
   room: Room;
 };
 
+/** When incl.-tax total is shown, drop excl.-tax phrasing from sublines (data may still carry legacy copy). */
+function stripExclTaxVerbiage(s: string): string {
+  return s
+    .replace(/\s*[·•]\s*excl\.?\s*taxes?(?:\s*(?:&|and)\s*fees?)?[^·•]*/gi, "")
+    .replace(/\bexcl\.?\s*taxes?(?:\s*(?:&|and)\s*fees?)?\b/gi, "")
+    .replace(/¹\s*$/g, "")
+    .replace(/\s*[·•]\s*$/g, "")
+    .replace(/^\s*[·•]\s*/g, "")
+    .trim();
+}
+
+function adrLine(room: Room, hasInclTaxGrand: boolean): string {
+  if (hasInclTaxGrand) {
+    if (room.priceLabel && !/\bexcl\b/i.test(room.priceLabel)) {
+      return room.priceLabel;
+    }
+    return "Per night";
+  }
+  if (room.priceLabel && room.priceLabel.toLowerCase().includes("excl")) {
+    return room.priceLabel;
+  }
+  return "Per night · excl. taxes & fees";
+}
+
+function grandSubline(room: Room, hasInclTaxGrand: boolean): string | null {
+  if (hasInclTaxGrand) {
+    if (room.stayTotalExclSub) {
+      const cleaned = stripExclTaxVerbiage(room.stayTotalExclSub);
+      if (cleaned) return cleaned;
+    }
+    if (room.nightsLabel && room.stayCheckInOut) {
+      const n = Number(room.nightsLabel);
+      const nk = Number.isFinite(n) && n === 1 ? "Night" : "Nights";
+      return `${room.nightsLabel} ${nk} · ${room.stayCheckInOut}`;
+    }
+    if (room.nightsLabel) {
+      const n = Number(room.nightsLabel);
+      const nk = Number.isFinite(n) && n === 1 ? "Night" : "Nights";
+      return `${room.nightsLabel} ${nk}`;
+    }
+    return null;
+  }
+  if (room.stayTotalExclSub) return room.stayTotalExclSub;
+  if (room.nightsLabel) {
+    const n = Number(room.nightsLabel);
+    const nk = Number.isFinite(n) && n === 1 ? "Night" : "Nights";
+    return `${room.nightsLabel} ${nk} · excl. taxes & fees¹`;
+  }
+  return null;
+}
+
 export function ProposalInvestment({ room }: Props) {
   const partnerLine = "What A Hotel! · Preferred Partner";
+  const hasInclTaxGrand = Boolean(room.grandTotalInclTaxes);
 
   if (room.savingsBreakdown) {
     return (
@@ -24,35 +76,14 @@ export function ProposalInvestment({ room }: Props) {
           />
         ) : null}
         <SavingsBreakdown breakdown={room.savingsBreakdown} />
-        <div className="proposal-inv-book-slot proposal-inv-book-slot--breakdown">
-          <a
-            href={room.bookUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-book proposal-inv-book-link"
-          >
-            {room.bookLabel}
-          </a>
-          <p className="btn-sub proposal-inv-book-hint">
-            Secure booking opens on WhataHotel.com in a new tab.
-          </p>
-        </div>
         <p className="proposal-inv-partner">{partnerLine}</p>
       </div>
     );
   }
 
-  const adrSub =
-    room.priceLabel && room.priceLabel.toLowerCase().includes("excl")
-      ? room.priceLabel
-      : "Per night · excl. taxes & fees";
-
+  const adrSub = adrLine(room, hasInclTaxGrand);
   const grandAmount = room.stayTotalExclAmount ?? room.priceTotal;
-  const grandSub =
-    room.stayTotalExclSub ??
-    (room.nightsLabel
-      ? `${room.nightsLabel} ${Number(room.nightsLabel) === 1 ? "Night" : "Nights"} · excl. taxes & fees¹`
-      : null);
+  const grandSub = grandSubline(room, hasInclTaxGrand);
 
   return (
     <div className="investment-block proposal-investment">
@@ -67,7 +98,7 @@ export function ProposalInvestment({ room }: Props) {
         />
       ) : null}
 
-      <div className="proposal-inv-grid">
+      <div className="proposal-inv-grid proposal-inv-grid--three">
         <div className="proposal-inv-card proposal-inv-adr">
           <div className="proposal-inv-card-label">Avg. Daily Rate (ADR)</div>
           <div className="proposal-inv-card-hero">{room.priceRate}</div>
@@ -89,21 +120,6 @@ export function ProposalInvestment({ room }: Props) {
           </div>
           <div className="proposal-inv-nights-range">
             {room.stayCheckInOut ?? "—"}
-          </div>
-        </div>
-        <div className="proposal-inv-card proposal-inv-book">
-          <div className="proposal-inv-book-inner">
-            <a
-              href={room.bookUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-book proposal-inv-book-link"
-            >
-              {room.bookLabel}
-            </a>
-            <p className="btn-sub proposal-inv-book-hint">
-              Secure booking opens on WhataHotel.com in a new tab.
-            </p>
           </div>
         </div>
       </div>
