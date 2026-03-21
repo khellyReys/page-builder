@@ -21,6 +21,12 @@ export function SavingsBreakdown({ breakdown }: Props) {
           <div className="sbr-label">Standard Rate</div>
           <div className="sbr-rate">{breakdown.standardRate}/night</div>
           <div className="sbr-total">{breakdown.standardTotal}</div>
+          {breakdown.standardTotalInclTaxes ? (
+            <div className="sbr-total-incl-wrap">
+              <div className="sbr-total-incl-hint">Incl. taxes &amp; fees</div>
+              <div className="sbr-total-incl">{breakdown.standardTotalInclTaxes}</div>
+            </div>
+          ) : null}
         </div>
 
         <div className="sb-vs" aria-hidden="true">
@@ -31,6 +37,14 @@ export function SavingsBreakdown({ breakdown }: Props) {
           <div className="sbr-label">WhataHotel! Rate</div>
           <div className="sbr-rate">{breakdown.whatahotelRate}/night</div>
           <div className="sbr-total">{breakdown.whatahotelTotal}</div>
+          {breakdown.whatahotelTotalInclTaxes ? (
+            <div className="sbr-total-incl-wrap">
+              <div className="sbr-total-incl-hint">Incl. taxes &amp; fees</div>
+              <div className="sbr-total-incl sbr-total-incl-wh">
+                {breakdown.whatahotelTotalInclTaxes}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
 

@@ -1,142 +1,113 @@
-import type { RoomData } from "./RoomCard";
+import type { Room } from "../types";
+import { stripHtml } from "../lib/html";
 
 type Props = {
-  rooms: RoomData[];
+  rooms: Room[];
+  hotelName: string;
 };
 
-export function ComparisonOverview({ rooms }: Props) {
-  // Don't render if no rooms have comparison data
-  if (!rooms.length || !rooms[0].comparison?.length) return null;
+function bookingRow(room: Room, hotelName: string) {
+  if (room.bookingSummary) {
+    return {
+      hotel: hotelName,
+      roomCategory: stripHtml(room.name),
+      checkInOut: room.bookingSummary.checkInOut,
+      nights: room.bookingSummary.nights,
+      adr: room.bookingSummary.adr,
+      total: room.bookingSummary.total,
+    };
+  }
+  return {
+    hotel: hotelName,
+    roomCategory: stripHtml(room.name),
+    checkInOut: room.stayCheckInOut ?? "—",
+    nights: room.nightsLabel ?? "—",
+    adr: room.priceRate,
+    total: room.savings?.rightValue ?? "—",
+  };
+}
 
-  const rows = rooms[0].comparison!;
+export function ComparisonOverview({ rooms, hotelName }: Props) {
+  if (!rooms.length) return null;
 
   return (
-    <div className="comparison-overview">
-      <div className="co-header">
-        <h2 className="co-title">Rate Comparison Overview</h2>
-        <p className="co-sub">
-          Standard rate vs. your exclusive WhataHotel! rate
-        </p>
+    <div className="comparison-overview booking-summary-overview">
+      <div className="proposal-co-header">
+        <h2 className="proposal-co-heading">Booking summary</h2>
+        <span className="proposal-co-divider" aria-hidden="true">
+          ·
+        </span>
+        <h2 className="proposal-co-heading proposal-co-heading-muted">
+          Comparison overview
+        </h2>
       </div>
 
-      <div className="co-mobile-cards" aria-label="Rate comparison by room">
-        {rooms.map((room) => (
-          <div key={room.badgeText} className="co-m-card">
-            <div
-              className="co-m-card-badge"
-              dangerouslySetInnerHTML={{ __html: room.badgeText }}
-            />
-            <div
-              className="co-m-card-name"
-              dangerouslySetInnerHTML={{ __html: room.name }}
-            />
-            <div className="co-m-rows">
-              {rows.map((row, rowIndex) => {
-                const cell = room.comparison?.[rowIndex];
-                return (
-                  <div
-                    key={row.label}
-                    className={`co-m-row${
-                      row.highlight ? " co-m-row-highlight" : ""
-                    }`}
-                  >
-                    <div className="co-m-row-label">{row.label}</div>
-                    <div className="co-m-row-values">
-                      {cell?.standard ? (
-                        <span className="co-standard">{cell.standard}</span>
-                      ) : null}
-                      <span
-                        className={`co-whatahotel${
-                          row.highlight ? " co-save" : ""
-                        }`}
-                      >
-                        {cell?.whatahotel ?? "—"}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+      <div className="co-mobile-cards" aria-label="Booking summary by room">
+        {rooms.map((room) => {
+          const row = bookingRow(room, hotelName);
+          return (
+            <div key={room.badgeText} className="co-m-card co-booking-card">
+              <div
+                className="co-m-card-badge"
+                dangerouslySetInnerHTML={{ __html: room.badgeText }}
+              />
+              <dl className="co-booking-dl">
+                <div className="co-booking-dl-row">
+                  <dt>Hotel</dt>
+                  <dd>{row.hotel}</dd>
+                </div>
+                <div className="co-booking-dl-row">
+                  <dt>Room category</dt>
+                  <dd>{row.roomCategory}</dd>
+                </div>
+                <div className="co-booking-dl-row">
+                  <dt>Check-in / out</dt>
+                  <dd>{row.checkInOut}</dd>
+                </div>
+                <div className="co-booking-dl-row">
+                  <dt>Nights</dt>
+                  <dd>{row.nights}</dd>
+                </div>
+                <div className="co-booking-dl-row">
+                  <dt>ADR</dt>
+                  <dd className="co-booking-em">{row.adr}</dd>
+                </div>
+                <div className="co-booking-dl-row">
+                  <dt>Total</dt>
+                  <dd className="co-booking-em co-booking-total">{row.total}</dd>
+                </div>
+              </dl>
             </div>
-            <a
-              href={room.bookUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="co-btn-book co-m-book"
-            >
-              {room.bookLabel}
-            </a>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="co-table-wrap co-table-desktop">
-        <table className="co-table">
+        <table className="co-table co-booking-table">
           <thead>
             <tr>
-              <th className="co-th co-th-label" />
-              {rooms.map((room) => (
-                <th
-                  key={room.badgeText}
-                  className="co-th"
-                  dangerouslySetInnerHTML={{ __html: room.badgeText }}
-                />
-              ))}
-            </tr>
-            {/* Room name row */}
-            <tr className="co-name-row">
-              <td className="co-td co-td-label">Room</td>
-              {rooms.map((room) => (
-                <td
-                  key={room.badgeText}
-                  className="co-td co-td-name"
-                  dangerouslySetInnerHTML={{ __html: room.name }}
-                />
-              ))}
+              <th className="co-th">Hotel</th>
+              <th className="co-th">Room category</th>
+              <th className="co-th">Check-in / out</th>
+              <th className="co-th">Nights</th>
+              <th className="co-th">ADR</th>
+              <th className="co-th">Total</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr
-                key={row.label}
-                className={`co-tr${row.highlight ? " co-tr-highlight" : ""}`}
-              >
-                <td className="co-td co-td-label">{row.label}</td>
-                {rooms.map((room) => {
-                  const cell = room.comparison?.[rowIndex];
-                  return (
-                    <td key={room.badgeText} className="co-td">
-                      {/* Standard rate — shown with muted strikethrough */}
-                      {cell?.standard ? (
-                        <span className="co-standard">{cell.standard}</span>
-                      ) : null}
-                      {/* WhataHotel rate — always shown */}
-                      <span
-                        className={`co-whatahotel${row.highlight ? " co-save" : ""}`}
-                      >
-                        {cell?.whatahotel ?? "—"}
-                      </span>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-
-            {/* Book buttons row */}
-            <tr className="co-tr co-tr-book">
-              <td className="co-td co-td-label" />
-              {rooms.map((room) => (
-                <td key={room.badgeText} className="co-td">
-                  <a
-                    href={room.bookUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="co-btn-book"
-                  >
-                    {room.bookLabel}
-                  </a>
-                </td>
-              ))}
-            </tr>
+            {rooms.map((room) => {
+              const row = bookingRow(room, hotelName);
+              return (
+                <tr key={room.badgeText} className="co-tr">
+                  <td className="co-td">{row.hotel}</td>
+                  <td className="co-td">{row.roomCategory}</td>
+                  <td className="co-td">{row.checkInOut}</td>
+                  <td className="co-td">{row.nights}</td>
+                  <td className="co-td co-td-em">{row.adr}</td>
+                  <td className="co-td co-td-em co-td-total">{row.total}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

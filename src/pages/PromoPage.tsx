@@ -1,8 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { promos } from "../data/promos";
+import { DEFAULT_HERO_IMAGE } from "../constants";
 import { Masthead } from "../components/Masthead";
 import { HeroSection } from "../components/HeroSection";
+import { HotelIdentity } from "../components/HotelIdentity";
 import { OfferBanner } from "../components/OfferBanner";
 import { SpecialOfferBox } from "../components/SpecialOfferBox";
 import { RoomCard } from "../components/RoomCard";
@@ -10,6 +12,61 @@ import { ComparisonOverview } from "../components/ComparisonOverview";
 import { PriceSummaryTable } from "../components/PriceSummaryTable";
 import { AppDownload } from "../components/AppDownload";
 import { ContactFooter } from "../components/ContactFooter";
+import { RoomOverviewGrid } from "../components/RoomOverviewGrid";
+import type { Room } from "../types";
+
+function ProposalBookingSection({
+  rooms,
+  hotelName,
+  footnoteHtml,
+}: {
+  rooms: Room[];
+  hotelName: string;
+  footnoteHtml?: string;
+}) {
+  if (!rooms.length) return null;
+
+  return (
+    <>
+      <ComparisonOverview rooms={rooms} hotelName={hotelName} />
+      {footnoteHtml ? (
+        <div className="body">
+          <div
+            className="pricing-footnote"
+            dangerouslySetInnerHTML={{ __html: footnoteHtml }}
+          />
+        </div>
+      ) : null}
+      <div className="body proposal-book-actions">
+        {rooms.map((room) => (
+          <a
+            key={room.badgeText}
+            href={room.bookUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-book proposal-confirm-btn"
+          >
+            {room.bookLabel}
+          </a>
+        ))}
+        <p className="btn-sub proposal-book-hint">
+          Secure booking opens on WhataHotel.com in a new tab.
+        </p>
+      </div>
+      {rooms.map((room) =>
+        room.keyAttributes?.length ? (
+          <div key={room.badgeText} className="body">
+            <RoomOverviewGrid
+              title={room.overviewTitle}
+              subtitle={room.overviewSubtitle}
+              attributes={room.keyAttributes}
+            />
+          </div>
+        ) : null,
+      )}
+    </>
+  );
+}
 
 export default function PromoPage() {
   const { promoId } = useParams<{ promoId: string }>();
@@ -61,9 +118,15 @@ export default function PromoPage() {
     );
   }
 
+  const showOffer = (o: { hidden?: boolean } | undefined) =>
+    Boolean(o && !promo.suppressOfferBanner && !o.hidden);
+
   // ── Multi-hotel promo ────────────────────────────────────────────
   if (promo.hotels && promo.hotels.length > 0) {
-    const heroImage = promo.hotels[0]?.hero?.imageUrl || promo.thumbnailUrl;
+    const heroImage =
+      promo.hotels[0]?.hero?.imageUrl ||
+      promo.thumbnailUrl ||
+      DEFAULT_HERO_IMAGE;
     const description =
       promo.hotels[0]?.offer?.description?.replace(/<[^>]*>/g, "") ||
       "Exclusive hotel proposal with premium room options and special perks.";
@@ -95,24 +158,31 @@ export default function PromoPage() {
           eyebrow={promo.mastheadEyebrow}
         />
 
+        {promo.specialOffer ? (
+          <div className="body">
+            <SpecialOfferBox offer={promo.specialOffer} />
+          </div>
+        ) : null}
+
         {promo.hotels.map((hotel, index) => (
           <div key={index}>
             <HeroSection
-              imageUrl={hotel.hero.imageUrl}
+              imageUrl={hotel.hero.imageUrl || DEFAULT_HERO_IMAGE}
               alt={hotel.hero.alt}
-              hotel={hotel.hero.hotel}
-              locationHtml={hotel.hero.location}
             />
-            <OfferBanner
-              heading={hotel.offer.heading}
-              description={hotel.offer.description}
-              pills={hotel.offer.pills}
-            />
-            {promo.specialOffer && (
-              <div className="body">
-                <SpecialOfferBox offer={promo.specialOffer} />
-              </div>
-            )}
+            <div className="body body-tight-top">
+              <HotelIdentity
+                hotel={hotel.hero.hotel}
+                locationHtml={hotel.hero.location}
+              />
+            </div>
+            {showOffer(hotel.offer) ? (
+              <OfferBanner
+                heading={hotel.offer.heading}
+                description={hotel.offer.description}
+                pills={hotel.offer.pills}
+              />
+            ) : null}
             <div className="body">
               {hotel.rooms.length ? (
                 hotel.rooms.map((room) => (
@@ -125,13 +195,21 @@ export default function PromoPage() {
                 </p>
               )}
             </div>
-            {hotel.rooms.length > 0 && (
-              <ComparisonOverview rooms={hotel.rooms} />
-            )}
+            {hotel.rooms.length > 0 ? (
+              <ProposalBookingSection
+                rooms={hotel.rooms}
+                hotelName={hotel.hero.hotel}
+                footnoteHtml={
+                  index === promo.hotels!.length - 1
+                    ? promo.pricingFootnote
+                    : undefined
+                }
+              />
+            ) : null}
           </div>
         ))}
 
-        {promo.priceSummary && (
+        {promo.priceSummary ? (
           <div className="body">
             <PriceSummaryTable
               items={promo.priceSummary.items}
@@ -140,7 +218,7 @@ export default function PromoPage() {
               savingsNote={promo.priceSummary.savingsNote}
             />
           </div>
-        )}
+        ) : null}
 
         <AppDownload />
 
@@ -154,7 +232,8 @@ export default function PromoPage() {
   }
 
   // ── Single-hotel promo ───────────────────────────────────────────
-  const heroImage = promo.hero?.imageUrl || promo.thumbnailUrl;
+  const heroImage =
+    promo.hero?.imageUrl || promo.thumbnailUrl || DEFAULT_HERO_IMAGE;
   const description =
     promo.offer?.description?.replace(/<[^>]*>/g, "") ||
     "Exclusive hotel proposal with premium room options and special perks.";
@@ -185,23 +264,26 @@ export default function PromoPage() {
         logoHref="https://www.whatahotel.com/"
         eyebrow={promo.mastheadEyebrow}
       />
-      <HeroSection
-        imageUrl={promo.hero!.imageUrl}
-        alt={promo.hero!.alt}
-        hotel={promo.hero!.hotel}
-        locationHtml={promo.hero!.location}
-      />
-      <OfferBanner
-        heading={promo.offer!.heading}
-        description={promo.offer!.description}
-        pills={promo.offer!.pills}
-      />
+      <HeroSection imageUrl={heroImage} alt={promo.hero!.alt} />
+      <div className="body body-tight-top">
+        <HotelIdentity
+          hotel={promo.hero!.hotel}
+          locationHtml={promo.hero!.location}
+        />
+      </div>
+      {showOffer(promo.offer) ? (
+        <OfferBanner
+          heading={promo.offer!.heading}
+          description={promo.offer!.description}
+          pills={promo.offer!.pills}
+        />
+      ) : null}
 
-      {promo.specialOffer && (
+      {promo.specialOffer ? (
         <div className="body">
           <SpecialOfferBox offer={promo.specialOffer} />
         </div>
-      )}
+      ) : null}
 
       <div className="body">
         {promo.rooms!.length ? (
@@ -216,9 +298,15 @@ export default function PromoPage() {
         )}
       </div>
 
-      {promo.rooms!.length > 0 && <ComparisonOverview rooms={promo.rooms!} />}
+      {promo.rooms!.length > 0 ? (
+        <ProposalBookingSection
+          rooms={promo.rooms!}
+          hotelName={promo.hero!.hotel}
+          footnoteHtml={promo.pricingFootnote}
+        />
+      ) : null}
 
-      {promo.priceSummary && (
+      {promo.priceSummary ? (
         <div className="body">
           <PriceSummaryTable
             items={promo.priceSummary.items}
@@ -227,7 +315,7 @@ export default function PromoPage() {
             savingsNote={promo.priceSummary.savingsNote}
           />
         </div>
-      )}
+      ) : null}
 
       <AppDownload />
 

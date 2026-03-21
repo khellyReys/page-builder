@@ -13,8 +13,8 @@
 | **Build / types** | OK | `npm run build` should pass before merge. |
 | **Data-only workflow** | OK | New promos are TS data + `promos.ts` registry; no per-promo routes. |
 | **SSOT doc** | **Must stay aligned** | This file previously drifted from the app (file names, room layout, optional fields). Sections below are updated; **re-verify after UI changes.** |
-| **Redundancy** | Mitigated | If `savingsBreakdown` is set, the **investment price card is omitted** (rates live in `SavingsBreakdown`). `ComparisonOverview` is still the cross-room table; `savings` bar remains the narrative + CTA totals. |
-| **Gaps to improve** | Optional | Automated CI (`build` + lint), visual regression or storybook for `promo-11`-style layouts, stricter `comparison[]` validation in dev if you want fail-fast. |
+| **Redundancy** | Mitigated | If `savingsBreakdown` is set, the default **ADR / nights / grand total** investment layout is replaced by `<SavingsBreakdown />`. There is **no** savings strip under the room card; totals appear in the **booking summary** table and investment block. |
+| **Gaps to improve** | Optional | Automated CI (`build` + lint), visual regression for proposal layouts, optional validation that `bookingSummary` or fallbacks (`stayCheckInOut`, `nightsLabel`, `savings.rightValue`) are populated. |
 
 **Ready for production** as a Netlify-hosted SPA **if** agents follow this SSOT and you run a build on PRs. The main risk is **stale agent prompts** (Netlify project context) — update the block at the end of this doc when rules change.
 
@@ -38,7 +38,7 @@ No HTML files. No new folders. No template copying.
 
 Use this order so you know **what to extract** before you touch the booking page:
 
-1. **Read this SSOT** (`docs/whatahotel-design-ssot.md`) — field rules, `comparison[]`, savings HTML, optional fields. Optionally skim **`src/types.ts`** for the exact TypeScript contract.
+1. **Read this SSOT** (`docs/whatahotel-design-ssot.md`) — field rules, booking-summary row data, investment block fields, `savings` (still required by types), optional `comparison[]` (legacy). Optionally skim **`src/types.ts`** for the exact TypeScript contract.
 2. **Get the WhataHotel booking page URL** from the user (and promo id / client name if needed).
 3. **Fetch that URL exactly once** — parse HTML in one pass (rooms, rates, images, hero, perks, totals). No re-fetch for “verification.”
 4. **Create** `src/data/promo-N.ts` from parsed data + SSOT rules.
@@ -59,24 +59,57 @@ src/
     promo-N.ts        ← New proposals go here
     promos.ts         ← Central registry — import + export all promos here
     contact.ts        ← Shared contact block (sharedContact)
+  constants.ts        ← DEFAULT_HERO_IMAGE, DEFAULT_ROOM_IMAGE (fallbacks)
   types.ts            ← Promo, HotelBlock, Room, etc. type definitions
+  lib/
+    html.ts           ← stripHtml helper (booking table fallbacks)
   components/
     Masthead.tsx
-    HeroSection.tsx
+    HeroSection.tsx           ← Hero image only (no overlay text)
+    HotelIdentity.tsx         ← Stars + hotel name + location below hero
     OfferBanner.tsx
-    RoomCard.tsx              ← Room sections + investment block + perks
-    RoomOverviewGrid.tsx      ← Optional key-attribute grid (from room.keyAttributes)
+    RoomMetaStrip.tsx         ← Optional quickFacts strip (Room Category, Suite Size, …)
+    ProposalInvestment.tsx   ← ADR / nights / grand total (or SavingsBreakdown)
+    RoomCard.tsx              ← Room flow: label, intro, meta, gallery, investment, perks, ExperienceMore
+    ExperienceMore.tsx      ← Optional spending-credit style block
+    RoomOverviewGrid.tsx      ← Key-attribute grid (rendered after booking CTAs)
     SavingsBreakdown.tsx      ← Standard vs WhataHotel! breakdown (optional per room)
-    ComparisonOverview.tsx    ← After all room cards for that hotel; responsive table/cards
+    ComparisonOverview.tsx    ← Booking summary table — requires `hotelName` + `rooms`
     SpecialOfferBox.tsx
     PriceSummaryTable.tsx
     PromoCard.tsx
     AppDownload.tsx           ← App store section (always rendered on promo pages)
     ContactFooter.tsx
   pages/
-    PromoPage.tsx     ← Renders single or multi-hotel promos
+    PromoPage.tsx     ← Renders single or multi-hotel promos (table → footnote → book → overview)
     Portal.tsx          ← Homepage portal list (not PortalPage.tsx)
 ```
+
+---
+
+## Proposal page layout (reference)
+
+Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatahotel.com/best-proposal-sample)** (Travel Proposal pattern).
+
+**Single-hotel render order (`PromoPage.tsx`):**
+
+1. `Masthead` — logo links to `https://www.whatahotel.com/`
+2. `HeroSection` — full-width image (`hero.imageUrl` or `DEFAULT_HERO_IMAGE` from `src/constants.ts`)
+3. `HotelIdentity` — star row, `hero.hotel`, `hero.location` (HTML)
+4. `OfferBanner` — only if `offer` exists and **`!offer.hidden`** and **`!promo.suppressOfferBanner`**
+5. `SpecialOfferBox` — optional, promo-level
+6. `RoomCard` for each room (see room order below)
+7. `ComparisonOverview` — **booking summary** table columns: Hotel · Room category · Check-in/out · Nights · ADR · Total (`rooms` + **`hotelName`** from `hero.hotel`)
+8. Optional `promo.pricingFootnote` (HTML) — e.g. taxes disclaimer
+9. Book CTAs — one button per room (`bookUrl` / `bookLabel`)
+10. `RoomOverviewGrid` per room when `keyAttributes` is set (after CTAs)
+11. Optional `PriceSummaryTable`
+12. `AppDownload` — unchanged
+13. `ContactFooter`
+
+**Multi-hotel:** Repeat steps 2–10 per `hotels[]` entry; `specialOffer` is rendered **once** before the hotel loop. Global `promo.pricingFootnote` is shown after the **last** hotel’s booking section (current behavior).
+
+**Default images:** Empty `images[]` uses `DEFAULT_ROOM_IMAGE`; missing hero URL uses `DEFAULT_HERO_IMAGE`.
 
 ---
 
@@ -120,6 +153,11 @@ interface Promo {
   // Multi-hotel only
   hotels?: HotelBlock[];
 
+  /** HTML footnote after booking summary (e.g. taxes disclaimer). */
+  pricingFootnote?: string;
+  /** When true, `OfferBanner` is not rendered. */
+  suppressOfferBanner?: boolean;
+
   contact: Contact; // Usually sharedContact; may include advisorName
 }
 
@@ -136,16 +174,18 @@ interface HotelBlock {
 }
 
 interface HeroBlock {
-  imageUrl: string;
+  imageUrl: string; // App uses DEFAULT_HERO_IMAGE if missing/empty
   alt: string;
   hotel: string;
-  location: string; // HTML string with <i> icon tag
+  location: string; // HTML string with <i> icon tag — shown in HotelIdentity below hero
 }
 
 interface OfferBlock {
   heading: string;
   description: string; // HTML allowed
   pills: string[]; // Each starts with "✔ "
+  /** When true, banner is hidden (matches slim proposal pages). */
+  hidden?: boolean;
 }
 
 interface SpecialOffer {
@@ -180,6 +220,10 @@ interface SavingsBreakdown {
   standardTotal: string; // e.g. "$22,400"
   whatahotelRate: string; // e.g. "$1,483/night"
   whatahotelTotal: string; // e.g. "$18,648"
+  /** Optional: full stay total incl. taxes & fees (standard side) — from booking page */
+  standardTotalInclTaxes?: string; // e.g. "$24,100.00"
+  /** Optional: full stay total incl. taxes & fees (WhataHotel side) */
+  whatahotelTotalInclTaxes?: string; // e.g. "$20,200.00"
   savingsAmount: string; // e.g. "$3,752.00"
   savingsPercentage?: string; // e.g. "16.8%"
 }
@@ -188,36 +232,82 @@ interface Room {
   badgeText: string;
   name: string; // HTML allowed (<br/>)
   subtitle: string; // HTML allowed (<br/>, <strong>)
-  priceLabel?: string; // Optional small caps above rate (omit when using savingsBreakdown-only investment UI)
-  priceRate: string; // e.g. "$996.67" — no "/night" suffix
-  priceStrike?: string; // Crossed-out rate; omit or "" if none
-  priceTotal: string; // e.g. "3-Night Total: $2,990.01"
-  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // Room overview grid
+  priceLabel?: string; // Optional ADR subline override (e.g. excl. taxes wording)
+  priceRate: string; // e.g. "$996.67" — no "/night" suffix (shown as ADR)
+  priceStrike?: string; // Crossed-out BAR reference; omit or "" if none
+  /** Stay total excluding taxes — fallback copy for Grand Total if stayTotalExclAmount omitted */
+  priceTotal: string;
+  /** Large Grand Total figure (excl. taxes), e.g. "€35,541" */
+  stayTotalExclAmount?: string;
+  /** Subline under Grand Total, e.g. "3 Nights · excl. taxes & fees¹" */
+  stayTotalExclSub?: string;
+  /** Context line under "Rate & pricing breakdown" (HTML) */
+  investmentContextLine?: string;
+  /** Top strip before gallery: Room Category, Suite Size, Floor, Occupancy, … */
+  quickFacts?: Array<{ label: string; value: string }>;
+  stayCheckInOut?: string; // e.g. "Apr 27 → Apr 30" — booking table + investment
+  nightsLabel?: string; // e.g. "3"
+  includedValueLines?: Array<{ label: string; value: string; detail?: string }>;
+  includedValueTotalLabel?: string;
+  includedValueTotal?: string;
+  includedValueTotalDetail?: string;
+  experienceMore?: ExperienceMoreBlock; // Optional spending-credit style section
+  pricingFootnote?: string; // Rare: per-room footnote (prefer promo.pricingFootnote)
+  overviewTitle?: string; // Room overview `<h3>` override
+  overviewSubtitle?: string;
+  bookingSummary?: {
+    checkInOut: string;
+    nights: string;
+    adr: string;
+    total: string;
+  };
+  grandTotalInclTaxes?: string;
+  grandTotalInclTaxesLabel?: string;
+  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // Rendered after book CTAs
   galleryTitle?: string;
   gallerySubtitle?: string;
-  images: Array<{ src: string; alt: string; caption?: string }>;
+  images: Array<{ src: string; alt: string; caption?: string }>; // [] → default room image
   features: {
     title: string;
-    icon: string; // FontAwesome icon name without "fa-"
-    items: string[]; // Plain text only — no HTML inside items
+    icon: string;
+    items: string[];
   }[];
+  /** Still required by TypeScript. `rightValue` is used as booking-table **Total** when `bookingSummary` is omitted. The narrative strip is not rendered. */
   savings: {
-    leftLabel: string; // MUST use <span> — see rules below
-    leftSub: string; // HTML allowed (<strong>)
+    leftLabel: string; // Keep populated for parity / future use; wrap rate in <span>
+    leftSub: string;
     rightLabel: string;
     rightValue: string;
+    rightInclTaxesLabel?: string; // Not shown in current UI
+    rightInclTaxesValue?: string;
   };
-  savingsBreakdown?: SavingsBreakdown; // If set, investment block uses this instead of the price card (no duplicate rates)
-  comparison?: ComparisonRow[]; // Strongly recommended — powers ComparisonOverview; omit only if no table needed
+  savingsBreakdown?: SavingsBreakdown; // Replaces default ADR / nights / grand total layout
+  /** Legacy BAR vs WH rows — not used by the booking summary table; optional to keep for archives */
+  comparison?: ComparisonRow[];
   bookUrl: string;
   bookLabel: string;
 }
 
+interface ExperienceMoreBlock {
+  title: string;
+  subtitle?: string;
+  leadAmount?: string;
+  descriptionHtml?: string;
+  validityLine?: string;
+  stackNoteHtml?: string;
+  alsoIncludesTitle?: string;
+  alsoIncludes?: string[];
+  applicableTitle?: string;
+  applicable?: string[];
+  termsHtml?: string;
+}
+
+/** Legacy — optional. Booking table does not read this. */
 interface ComparisonRow {
-  label: string; // e.g. "Nightly Rate", "3-Night Total", "You Save"
-  standard: string; // e.g. "€1,700/night" — the BAR/standard rate
-  whatahotel: string; // e.g. "€1,530/night" — the WhataHotel exclusive rate
-  highlight?: boolean; // true for the "You Save" row — renders with accent color
+  label: string;
+  standard: string;
+  whatahotel: string;
+  highlight?: boolean;
 }
 ```
 
@@ -261,6 +351,11 @@ Always format as:
 
 Each pill starts with `"✔ "` (checkmark + space). Plain text only inside pills.
 
+### `offer.hidden` / `promo.suppressOfferBanner`
+
+- Set **`offer.hidden: true`** to hide the banner while keeping offer data in the file.
+- Set **`promo.suppressOfferBanner: true`** to hide the banner for the whole promo (e.g. slim Travel Proposal layout).
+
 ### `badgeText`
 
 Use the appropriate emoji + label:
@@ -287,7 +382,7 @@ Use `<br/>` for line breaks. Always end with a colored highlight:
 
 - Include `$` sign (or relevant currency symbol)
 - Include cents if the rate is fractional: `"$996.67"`, `"€1,530.00"`
-- No `/night` suffix — the component adds that
+- No `/night` suffix — the investment block labels this as **ADR**
 - No `.00` needed for whole numbers: `"$1,215"` not `"$1,215.00"`
 
 ### `priceStrike`
@@ -306,13 +401,13 @@ Feature items are **plain text only** — no HTML tags inside `items[]` strings.
 
 ---
 
-## Savings Block Rules ⚠️
+## Savings object (`room.savings`) ⚠️
 
-The `savings` object must reflect **all three** of the following — per-night comparison, total for the stay, and savings amount. Never show only the total.
+The `savings` object is **still required** by TypeScript. **`savings.rightValue`** is used as the booking table **Total** when `bookingSummary` is omitted. The **burgundy narrative strip** (left label / left sub) is **not rendered** in the current proposal UI — keep fields populated anyway for parity, exports, and future layout options.
 
-### `savings.leftLabel` ⚠️ Critical
+### `savings.leftLabel` ⚠️ Critical (data quality)
 
-This field is rendered via `dangerouslySetInnerHTML`. It **must always** use a `<span>` wrapper around the rate label:
+Use `dangerouslySetInnerHTML`-safe HTML. It **must always** use a `<span>` wrapper around the rate label:
 
 ```ts
 leftLabel: "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>";
@@ -342,73 +437,57 @@ Use `"(incl. taxes)"` when taxes are included.
 
 ### `savings.rightValue`
 
-This is the **WhataHotel! total** for the full stay, not the standard rate total.  
-Format: `"€4,590"` or `"$2,990.01"` — match the currency of the booking page.
+**WhataHotel! stay total** (typically excl. taxes), e.g. `"€35,541"` or `"$2,990.01"`. Must align with **`stayTotalExclAmount`** / **`priceTotal`** when possible. Used as the **Total** column in `<ComparisonOverview />` unless `room.bookingSummary.total` is set.
+
+### `savings.rightInclTaxesLabel` / `savings.rightInclTaxesValue` (optional)
+
+Optional fields on the type; **the current UI does not render a savings strip.** Prefer **`grandTotalInclTaxes`** on the room (inside the investment block) or incl.-tax lines on **`savingsBreakdown`** when you need tax-inclusive totals visible.
+
+### `grandTotalInclTaxes` / `grandTotalInclTaxesLabel` (optional)
+
+When using the default **ProposalInvestment** layout (no `savingsBreakdown`), set `grandTotalInclTaxes` to show **grand total incl. taxes & fees** below the excl.-tax totals. Default label: `"Grand total (incl. taxes & fees)"`.
+
+When `savingsBreakdown` is present, use `standardTotalInclTaxes` / `whatahotelTotalInclTaxes` on the breakdown for column-level incl.-tax amounts.
 
 ---
 
-## Comparison Overview ⚠️ Required for production-quality promos
+## Booking summary (`ComparisonOverview`) ⚠️ Required for production-quality promos
 
-Each room **should** include a `comparison` array (typed optional, but the UI hides `<ComparisonOverview />` if missing). It powers the `<ComparisonOverview />` component, which renders **below all room cards for that hotel and above `<AppDownload />`**.
+`<ComparisonOverview />` renders the **Booking summary / Comparison overview** table (columns: **Hotel · Room category · Check-in / out · Nights · ADR · Total**). It is shown **after all `RoomCard`s for that hotel** and **requires**:
 
-The comparison table shows a side-by-side breakdown of Standard Rate vs. WhataHotel! Rate for every room option featured in the promo. On narrow viewports, a **stacked card layout** is used (no horizontal scroll).
+- `rooms={...}`
+- `hotelName={...}` — use `hero.hotel` (plain string; repeats in each row).
 
-### How to populate `comparison`
+### Row data
 
-Always include exactly **3 rows** per room:
+**Preferred:** set `room.bookingSummary` for full control:
 
 ```ts
-comparison: [
-  {
-    label: "Nightly Rate",
-    standard: "€1,700/night",   // BAR rate from the page
-    whatahotel: "€1,530/night", // SEASONAL OFFER / lowest rate
-  },
-  {
-    label: `${N}-Night Total`,  // e.g. "3-Night Total"
-    standard: "€5,100",         // BAR rate × number of nights
-    whatahotel: "€4,590",       // WhataHotel rate × number of nights (= priceTotal amount)
-  },
-  {
-    label: "You Save",
-    standard: "",               // leave blank for "You Save" row
-    whatahotel: "€510",         // difference: standard total − WhataHotel total
-    highlight: true,            // renders row in accent/burgundy color
-  },
-],
+bookingSummary: {
+  checkInOut: "Apr 27 → Apr 30",
+  nights: "3",
+  adr: "€11,847",
+  total: "€35,541",
+},
 ```
 
-### Where to extract rates
+**Fallbacks** (if `bookingSummary` is omitted):
 
-- **Standard rate** (`standard`) → the **BAR** rate row on the booking page (labeled `+ WhataHotel! + BAR + ...`)
-- **WhataHotel rate** (`whatahotel`) → the **SEASONAL OFFER** rate row (labeled `+ WhataHotel! + SEASONAL OFFER + ...`)
-- If no BAR rate exists (only one rate variant), set `standard` to `""` and omit the `highlight` row, or note this with `// AGENT NOTE`
+- **Room category** — plain text from `room.name` (HTML stripped)
+- **Check-in / out** — `stayCheckInOut` or `"—"`
+- **Nights** — `nightsLabel` or `"—"`
+- **ADR** — `priceRate`
+- **Total** — `savings.rightValue`
 
-### Placement in `PromoPage.tsx`
+Populate `stayCheckInOut`, `nightsLabel`, and `savings.rightValue` (or `bookingSummary`) so the table never shows meaningless placeholders.
 
-```tsx
-// Single-hotel
-<div className="body">
-  {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
-</div>
-<ComparisonOverview rooms={promo.rooms!} />  {/* after room cards; no nights prop */}
-<AppDownload />
-<ContactFooter ... />
+### Legacy `comparison[]` (optional)
 
-// Multi-hotel — one ComparisonOverview per hotel, after its rooms
-{promo.hotels.map((hotel, index) => (
-  <div key={index}>
-    <HeroSection ... />
-    <OfferBanner ... />
-    <div className="body">
-      {hotel.rooms.map((room) => <RoomCard key={room.badgeText} room={room} />)}
-    </div>
-    <ComparisonOverview rooms={hotel.rooms} />
-  </div>
-))}
-<AppDownload />
-<ContactFooter ... />
-```
+The old **Standard vs WhataHotel** row model (`comparison[]`) is **not** consumed by this table. You may still store it for documentation or future use. Rate extraction rules (BAR vs SEASONAL OFFER) remain valid for filling **`priceStrike`**, **`priceRate`**, and **`savings.rightValue`**.
+
+### Placement (implemented in `PromoPage.tsx`)
+
+`PromoPage` renders: all room cards → `<ComparisonOverview rooms={...} hotelName={...} />` → optional `pricingFootnote` → book buttons (`bookUrl`) → `RoomOverviewGrid` when `keyAttributes` is set → optional `PriceSummaryTable` → `AppDownload` → `ContactFooter`.
 
 ---
 
@@ -433,6 +512,7 @@ savingsBreakdown?: {
   freeNights: 2,
   standardRate: "$2,800",
   standardTotal: "$22,400",
+  // optional: standardTotalInclTaxes, whatahotelTotalInclTaxes — see “Example with incl.-tax totals” below
   whatahotelRate: "$1,483",
   whatahotelTotal: "$18,648.00",
   savingsAmount: "$3,752.00",
@@ -443,39 +523,58 @@ savingsBreakdown?: {
 ### Placement in RoomCard (actual render order)
 
 ```
-Room intro (name, subtitle)
+Room label + intro (name, subtitle)
     ↓
-[RoomOverviewGrid] ← optional (keyAttributes)
+[RoomMetaStrip] ← optional quickFacts (Room Category, Suite Size, …)
     ↓
-Gallery (optional headings + images, optional captions)
+Gallery (optional headings + images; empty images[] → default room photo)
     ↓
-Investment summary
-  — If savingsBreakdown: partner line → SavingsBreakdown only (no duplicate price card)
-  — Else: partner line → Price card (priceLabel, rate, strike, total)
+Investment summary (ProposalInvestment)
+  — If savingsBreakdown: context line → SavingsBreakdown → partner line
+  — Else: context line → ADR + nights + Grand Total (+ optional value stack, BAR line, incl.-tax block) → partner line
     ↓
 Exclusive perks & inclusions (feature columns)
     ↓
-Savings bar (summary strip)
+[ExperienceMore] ← optional
     ↓
-Book button
+(PromoPage) Booking summary table → footnote → Book CTA(s) → RoomOverviewGrid(keyAttributes)
 ```
 
 ### Rules
 
-- All fields are **required strings** except `savingsPercentage` (optional)
-- **Do not** duplicate nightly/total pricing: if `savingsBreakdown` is present, the **bordered price card is not shown** in the investment block (data may still include `priceRate` / `priceTotal` for `savings` bar and `comparison`).
+- All fields are **required strings** except `savingsPercentage`, `standardTotalInclTaxes`, and `whatahotelTotalInclTaxes` (optional)
+- **Do not** duplicate nightly/total pricing: if `savingsBreakdown` is present, the **default ADR / nights / grand total grid is not shown** (data may still include `priceRate` / `priceTotal` / `savings.rightValue` for the booking table and fallbacks).
 - `nights`: e.g., `"4 Nights"`, `"8 Nights"`
 - `paidNights` / `freeNights`: numbers only (e.g., 6, 2)
 - Rates: include currency (e.g., `"$2,800"`, `"€1,530"`)
 - Totals: formatted price (e.g., `"$22,400"`, `"€4,590.00"`)
 - `savingsAmount`: always show currency and cents if fractional
 - `savingsPercentage`: optional, e.g., `"16.8%"` or omit
+- **Incl. taxes (optional, recommended when the booking page shows them):** set `standardTotalInclTaxes` and `whatahotelTotalInclTaxes` to the formatted grand totals for each column (amount strings only; the UI adds the small caption **Incl. taxes & fees**). Source these from the same booking confirmation / room line the guest would see on whatahotel.com.
+
+### Example with incl.-tax totals
+
+```ts
+savingsBreakdown: {
+  nights: "8 Nights",
+  paidNights: 6,
+  freeNights: 2,
+  standardRate: "$2,800",
+  standardTotal: "$22,400",
+  standardTotalInclTaxes: "$24,100.00",
+  whatahotelRate: "$1,483",
+  whatahotelTotal: "$18,648.00",
+  whatahotelTotalInclTaxes: "$20,200.00",
+  savingsAmount: "$3,752.00",
+  savingsPercentage: "16.8%",
+};
+```
 
 ---
 
 ## SpecialOfferBox (Promo-Level) ⚠️ Optional
 
-The `<SpecialOfferBox />` component highlights key promotions or special terms ** below the OfferBanner and above room cards**.
+The `<SpecialOfferBox />` component highlights key promotions or special terms **below the offer banner (if any) and above room cards**. On **multi-hotel** promos it is rendered **once** before the hotel loop (not repeated per hotel).
 
 ### When to use
 
@@ -566,9 +665,12 @@ priceSummary?: {
 
 ### Placement in PromoPage
 
+`PromoPage` already wires the full flow. Conceptually (single-hotel):
+
 ```tsx
-{promo.rooms!.map((room) => <RoomCard ... />)}
-<ComparisonOverview rooms={promo.rooms!} />
+{promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
+<ComparisonOverview rooms={promo.rooms!} hotelName={promo.hero!.hotel} />
+{/* footnote + book CTAs + RoomOverviewGrid — see Proposal page layout section */}
 {promo.priceSummary && (
   <div className="body">
     <PriceSummaryTable
@@ -681,7 +783,7 @@ BAR            — Deluxe Room 1 King    €1,700/night  → room=A1KP76
 ```
 
 **Always use the SEASONAL OFFER (lowest) rate URL as the `bookUrl`.**  
-The BAR rate URL is only used for the `comparison[].standard` value — never as the `bookUrl`.
+The BAR rate URL is only used for **`priceStrike`** (and optional legacy `comparison[].standard`) — **never** as the `bookUrl`.
 
 Add a comment when multiple variants exist:
 
@@ -712,7 +814,7 @@ Each room type has a **unique `room` code** (e.g. `A1KP77`, `A13P77`, `P1KP77`).
 
 ## App Download Section ⚠️ Required on Every Promo Page
 
-Every promo page **must** include the `<AppDownload />` component after `<ComparisonOverview />` and before `<ContactFooter />`.
+Every promo page **must** include the `<AppDownload />` component after the booking section (table, footnote, book buttons, room overview grids, optional price summary) and before `<ContactFooter />`.
 
 ### App Store Links (hardcoded in component — never change)
 
@@ -723,7 +825,7 @@ Every promo page **must** include the `<AppDownload />` component after `<Compar
 ### Rules
 
 - `AppDownload` takes no props — links are hardcoded inside the component
-- Placement order: RoomCards → ComparisonOverview → AppDownload → ContactFooter
+- Placement order: RoomCards → ComparisonOverview (booking table) → footnote → book CTAs → RoomOverviewGrid(s) → optional PriceSummaryTable → AppDownload → ContactFooter
 - Never omit from any promo page — single-hotel or multi-hotel
 - Never change the app store URLs
 
@@ -788,7 +890,7 @@ Row 1: SEASONAL OFFER — lower rate  → use for bookUrl, priceRate, whatahotel
 Row 2: BAR            — higher rate → use for priceStrike, standard column only
 ```
 
-If only one rate variant exists (no BAR row), set `priceStrike: ""` and set `comparison[0].standard` to `""`.
+If only one rate variant exists (no BAR row), set `priceStrike: ""`. If you still maintain legacy `comparison[]`, set `comparison[0].standard` to `""`.
 
 ### Step 3 — Build booking URLs
 
@@ -929,7 +1031,7 @@ CONSTRAINTS:
 - Reading this SSOT doc from disk/repo is NOT a network fetch — do that first so you know what fields to fill
 
 WORKFLOW (ALWAYS FOLLOW THIS ORDER):
-1. Read /docs/whatahotel-design-ssot.md for structure and rules (optional: src/types.ts for types). Do not skip — you need comparison[], savings, and field rules before extracting.
+1. Read /docs/whatahotel-design-ssot.md for structure and rules (optional: src/types.ts for types). Do not skip — you need booking-summary fields, `savings`, investment block fields, and optional legacy `comparison[]` before extracting.
 2. Ask user for the booking page URL (and promo id / client if required)
 3. Fetch that URL ONCE — extract rooms, rates, images, hero, perks, totals (all in one parse)
 4. Build the complete promo object using only:
@@ -963,7 +1065,9 @@ Single-Hotel Promo:
 - offer: heading, description, pills[]
 - rooms[]: badgeText, name, subtitle, priceRate, priceTotal, images[], features[], savings, bookUrl, bookLabel
 - priceLabel?: optional; priceStrike: "" if no BAR
-- comparison[]: strongly recommended (3 rows) — ComparisonOverview hidden if omitted
+- quickFacts?, stayCheckInOut?, nightsLabel?, stayTotalExclAmount?, stayTotalExclSub?, investmentContextLine?, bookingSummary?, experienceMore? — see Full Type Reference
+- comparison[]: optional legacy (not used by booking table)
+- pricingFootnote? on promo (HTML)
 - contact: sharedContact (optional advisorName on contact)
 
 Multi-Hotel Promo:
@@ -973,12 +1077,12 @@ MANDATORY FIELDS (NEVER OMIT):
 - createdAt: ISO 8601 string for portal ordering
 - priceStrike: use "" (empty string) if no BAR rate exists
 - images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only (unless documented exception)
-- comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates — required for production promos
-- savings.leftLabel: must wrap rate name in <span>
-- savings.leftSub: must show "Standard: X/night (total: Y) — WhataHotel!: A/night (total: B) — you save Z"
+- booking table: set `bookingSummary` **or** `stayCheckInOut` + `nightsLabel` + `savings.rightValue` (and ADR from `priceRate`)
+- savings.leftLabel: must wrap rate name in <span> (data quality)
+- savings.leftSub: must show "Standard: X/night (total: Y) — WhataHotel!: A/night (total: B) — you save Z" (data quality)
 
 OPTIONAL COMPONENTS (use if applicable):
-- savingsBreakdown?: If set, UI shows breakdown instead of duplicate price card in investment block
+- savingsBreakdown?: If set, investment block uses `<SavingsBreakdown />` instead of the ADR / nights / grand total grid
 - specialOffer?: For highlighted promotions or cancellation policies
 - priceSummary?: For multi-unit or package pricing tables
 - mastheadEyebrow?, keyAttributes?, galleryTitle?, image captions — layout polish
@@ -1023,8 +1127,10 @@ Single-Hotel Promo:
 - id, createdAt (ISO), title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
 - hero: imageUrl, alt, hotel, location
 - offer: heading, description, pills[]
-- rooms[]: badgeText, name, subtitle, priceRate, priceStrike, priceTotal, images[], features[], comparison[], savings, bookUrl, bookLabel
+- rooms[]: badgeText, name, subtitle, priceRate, priceStrike, priceTotal, images[], features[], savings, bookUrl, bookLabel
 - priceLabel?: optional
+- quickFacts?, bookingSummary?, stayCheckInOut?, nightsLabel?, investment fields — see Full Type Reference
+- pricingFootnote?, suppressOfferBanner?, offer.hidden? as needed
 - contact: sharedContact
 
 Multi-Hotel Promo:
@@ -1033,14 +1139,14 @@ Multi-Hotel Promo:
 MANDATORY FIELDS (NEVER OMIT):
 - createdAt (ISO 8601)
 - priceStrike: use "" (empty string) if no BAR rate exists
-- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only
-- comparison[]: 3 rows [Nightly Rate, N-Night Total, You Save] with standard/whatahotel rates
+- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only (or empty array → app placeholder)
+- booking table data: `bookingSummary` **or** valid fallbacks (`stayCheckInOut`, `nightsLabel`, `savings.rightValue`, `priceRate`)
 - savings.leftLabel: must wrap rate name in <span>
 - savings.leftSub: must show "Standard: X/night (total: Y) — WhataHotel!: A/night (total: B) — you save Z"
 
 CODE EXAMPLES IN SSOT:
 - Clarification Protocol: Step-by-step extraction checklist
-- Comparison Array section: Exact rate calculation examples
+- Booking summary section: `bookingSummary` + fallbacks
 - CloudFront image rules: see "Step 4 — Extract room images" in this doc
 
 FINAL WORKFLOW:
@@ -1062,29 +1168,29 @@ FINAL WORKFLOW:
 
 ## New Promo Checklist
 
-- [ ] **Read** this SSOT (and `src/types.ts` if needed) before building data — know `comparison[]`, savings rules, and optional fields
+- [ ] **Read** this SSOT (and `src/types.ts` if needed) before building data — know booking table fields, `savings`, investment block, optional legacy `comparison[]`
 - [ ] Create `src/data/promo-N.ts` with correct `id`, **`createdAt` (ISO 8601)**, `title`, `client`, `dates`
 - [ ] All rooms have exactly 2 feature blocks (door-open + gift)
-- [ ] All `leftLabel` strings use `<span>` wrapper
-- [ ] `leftSub` includes per-night breakdown, total calculation, AND savings amount
+- [ ] All `savings.leftLabel` strings use `<span>` wrapper
+- [ ] `savings.leftSub` includes per-night breakdown, total calculation, AND savings amount (data quality)
+- [ ] `savings.rightValue` matches stay total used in the booking table (or set `bookingSummary.total`)
 - [ ] `priceStrike` is `""` not omitted when no strikethrough exists
 - [ ] `portalTotalValue` matches the lowest WhataHotel! total in the data
-- [ ] Room images scraped from page (CloudFront CDN URLs) — placeholder only used if page has no images
-- [ ] Each room has a `comparison[]` array with 3 rows: Nightly Rate, N-Night Total, You Save
-- [ ] `comparison[].standard` uses BAR rate; `comparison[].whatahotel` uses SEASONAL OFFER rate
-- [ ] `comparison[2].highlight` is `true` for the You Save row
+- [ ] Room images scraped from page (CloudFront CDN URLs) — empty `images[]` uses app default photo
+- [ ] Booking table: `bookingSummary` **or** `stayCheckInOut` + `nightsLabel` + `priceRate` + `savings.rightValue` populated
+- [ ] Optional: `quickFacts`, `investmentContextLine`, `stayTotalExclAmount` / `stayTotalExclSub` for sample-style investment block
 - [ ] Multi-hotel promos use `hotels[]` not flat structure
 - [ ] Each room's `bookUrl` uses the SEASONAL OFFER (lowest) rate's unique room code
-- [ ] BAR rate used only for `priceStrike` and `comparison[].standard` — never as `bookUrl`
+- [ ] BAR rate used only for `priceStrike` (and optional legacy `comparison[]`) — never as `bookUrl`
 - [ ] `// AGENT NOTE` comment added when multiple rate variants exist per room
 - [ ] No room data was hallucinated — all rates, names, images, and URLs came from fetched page
 - [ ] If any data is missing, `// AGENT NOTE:` comment is present listing what needs updating
-- [ ] `<ComparisonOverview />` is present after last room card(s), before optional components & `<AppDownload />`
+- [ ] `PromoPage` flow satisfied: room cards → booking table → optional `pricingFootnote` → book CTAs → `RoomOverviewGrid` → optional price summary → `<AppDownload />` → `<ContactFooter />` (handled by app when promo is registered)
 - [ ] `[OPTIONAL]` `savingsBreakdown` field present in rooms if detailed pricing breakdown is needed (e.g., free nights promo)
 - [ ] `[OPTIONAL]` `specialOffer` field present in promo if special promotion/offer exists to highlight
 - [ ] `[OPTIONAL]` `priceSummary` field present in promo if multi-unit pricing table is needed
 - [ ] If optional components used: data is complete and formatted correctly (see SavingsBreakdown, SpecialOfferBox, PriceSummaryTable sections)
-- [ ] `<AppDownload />` is present after `<ComparisonOverview />` and before `<ContactFooter />`
+- [ ] `<AppDownload />` remains on every promo route (component-level; do not remove from `PromoPage`)
 - [ ] Promo registered in `src/data/promos.ts`
 - [ ] Committed to GitHub and verified live on Netlify
 
