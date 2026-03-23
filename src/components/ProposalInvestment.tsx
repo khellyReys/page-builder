@@ -82,7 +82,12 @@ export function ProposalInvestment({ room }: Props) {
   }
 
   const adrSub = adrLine(room, hasInclTaxGrand);
-  const grandAmount = room.stayTotalExclAmount ?? room.priceTotal;
+  // When an incl.-tax total exists it IS the grand total — show it in the card directly.
+  const grandAmount =
+    room.grandTotalInclTaxes ?? room.stayTotalExclAmount ?? room.priceTotal;
+  const grandCardLabel = hasInclTaxGrand
+    ? (room.grandTotalInclTaxesLabel ?? "Grand Total (incl. taxes & fees)")
+    : "Grand Total";
   const grandSub = grandSubline(room, hasInclTaxGrand);
 
   return (
@@ -105,7 +110,7 @@ export function ProposalInvestment({ room }: Props) {
           <div className="proposal-inv-card-sub">{adrSub}</div>
         </div>
         <div className="proposal-inv-card proposal-inv-grand">
-          <div className="proposal-inv-card-label">Grand Total</div>
+          <div className="proposal-inv-card-label">{grandCardLabel}</div>
           <div className="proposal-inv-card-hero proposal-inv-grand-amount">
             {grandAmount}
           </div>
@@ -128,16 +133,6 @@ export function ProposalInvestment({ room }: Props) {
         <div className="proposal-inv-bar">
           <span className="proposal-inv-bar-label">Standard reference</span>
           <span className="proposal-inv-bar-val">{room.priceStrike}</span>
-        </div>
-      ) : null}
-
-      {room.grandTotalInclTaxes ? (
-        <div className="proposal-inv-incl">
-          <div className="proposal-inv-incl-label">
-            {room.grandTotalInclTaxesLabel ??
-              "Grand total (incl. taxes & fees)"}
-          </div>
-          <div className="proposal-inv-incl-val">{room.grandTotalInclTaxes}</div>
         </div>
       ) : null}
 

@@ -7,6 +7,13 @@ type Props = {
 };
 
 function bookingRow(room: Room, hotelName: string) {
+  // Always show the highest (tax-inclusive) total when available.
+  const total =
+    room.grandTotalInclTaxes ??
+    room.bookingSummary?.total ??
+    room.savings?.rightValue ??
+    "—";
+
   if (room.bookingSummary) {
     return {
       hotel: hotelName,
@@ -14,7 +21,7 @@ function bookingRow(room: Room, hotelName: string) {
       checkInOut: room.bookingSummary.checkInOut,
       nights: room.bookingSummary.nights,
       adr: room.bookingSummary.adr,
-      total: room.bookingSummary.total,
+      total,
     };
   }
   return {
@@ -23,7 +30,7 @@ function bookingRow(room: Room, hotelName: string) {
     checkInOut: room.stayCheckInOut ?? "—",
     nights: room.nightsLabel ?? "—",
     adr: room.priceRate,
-    total: room.savings?.rightValue ?? "—",
+    total,
   };
 }
 
@@ -72,8 +79,11 @@ export function ComparisonOverview({ rooms, hotelName }: Props) {
                   <dt>ADR</dt>
                   <dd className="co-booking-em">{row.adr}</dd>
                 </div>
-                <div className="co-booking-dl-row">
-                  <dt>Total</dt>
+                <div className="co-booking-dl-row co-booking-dl-row--total">
+                  <dt>
+                    Grand Total
+                    <span className="co-dt-sub">incl. taxes &amp; fees</span>
+                  </dt>
                   <dd className="co-booking-em co-booking-total">{row.total}</dd>
                 </div>
               </dl>
@@ -91,7 +101,10 @@ export function ComparisonOverview({ rooms, hotelName }: Props) {
               <th className="co-th">Check-in / out</th>
               <th className="co-th">Nights</th>
               <th className="co-th">ADR</th>
-              <th className="co-th">Total</th>
+              <th className="co-th co-th-total-col">
+                Grand Total
+                <span className="co-th-sub">incl. taxes &amp; fees</span>
+              </th>
             </tr>
           </thead>
           <tbody>

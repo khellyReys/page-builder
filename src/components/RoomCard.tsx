@@ -31,6 +31,9 @@ export function RoomCard({ room }: Props) {
           },
         ];
 
+  const roomFeatures = room.features.filter((f) => f.icon !== "gift");
+  const exclusivePerks = room.features.filter((f) => f.icon === "gift");
+
   return (
     <>
       <div className="room-label">
@@ -79,33 +82,52 @@ export function RoomCard({ room }: Props) {
         </div>
       </div>
 
+      {roomFeatures.length > 0 && (
+        <div className="room-features-section">
+          <div className="feat-grid">
+            {roomFeatures.map((feature) => (
+              <div key={feature.title} className="feat-box">
+                <div className="feat-title">
+                  <i className={`fas fa-${feature.icon}`} /> {feature.title}
+                </div>
+                <ul className="feat-ul">
+                  {feature.items.map((item) => (
+                    <li key={item} className="feat-li">
+                      <i className="fas fa-circle" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <ProposalInvestment room={room} />
 
-      <div className="perks-section">
-        <h3 className="section-sec-title perks-section-title">
-          Exclusive perks &amp; inclusions
-        </h3>
-        <p className="section-sec-sub perks-section-sub">
-          Included with every booking through Lorraine Travel — at no additional
-          cost
-        </p>
-        <div className="feat-grid">
-          {room.features.map((feature) => (
-            <div key={feature.title} className="feat-box">
-              <div className="feat-title">
-                <i className={`fas fa-${feature.icon}`} /> {feature.title}
-              </div>
-              <ul className="feat-ul">
+      {exclusivePerks.length > 0 && (
+        <div className="perks-section">
+          <h3 className="section-sec-title perks-section-title">
+            Exclusive perks &amp; inclusions
+          </h3>
+          <p className="section-sec-sub perks-section-sub">
+            Included with every booking through Lorraine Travel — at no
+            additional cost
+          </p>
+          {exclusivePerks.map((feature) => (
+            <div key={feature.title} className="perks-items-wrap">
+              <ul className="perks-ul">
                 {feature.items.map((item) => (
-                  <li key={item} className="feat-li">
-                    <i className="fas fa-circle" /> {item}
+                  <li key={item} className="perk-li">
+                    <i className="fas fa-circle" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-      </div>
+      )}
 
       <div className="room-book-cta">
         <a
