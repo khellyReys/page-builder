@@ -1,0 +1,103 @@
+name: Netlify Deploy → Merge to Main
+
+# Triggered by Netlify's outgoing webhook when a production deploy succeeds.
+#
+# HOW TO CONFIGURE IN NETLIFY:
+# 1. Go to: Site Settings → Build & Deploy → Deploy notifications
+# 2. Click "Add notification" → "Outgoing webhook"
+# 3. Event: "Deploy succeeded"
+# 4. URL: https://api.github.com/repos/khellyReys/page-builder/dispatches
+# 5. In GitHub: Settings → Secrets → Actions → add secret NETLIFY_MERGE_TOKEN
+#    (a GitHub PAT with repo + workflow scopes)
+# 6. Set Netlify env var: GITHUB_MERGE_TOKEN = <same PAT value>
+# 7. Netlify does NOT support custom headers on webhooks natively,
+#    so we use a lightweight Netlify Function (see scripts/notify-github.ts)
+#    to forward the event with auth.
+#
+# ALTERNATIVE — simpler: just enable auto-merge on PRs (auto-merge.yml does this).
+# When Netlify's check passes + CI passes, GitHub auto-merge fires automatically.
+# No webhook needed if you use the Netlify GitHub App.
+
+on:
+  repository_dispatch:
+    types: [netlify-deploy-success]
+
+  # Manual fallback: run from GitHub UI
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to merge into main'
+        required: true
+        default: 'pre-prod'
+      pr_number:
+        description: 'PR number (optional — will search by branch if empty)'
+        required: false
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  merge-on-deploy:
+    name: Merge branch → main after Netlify deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Resolve target branch
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
+            BRANCH="${{ github.event.client_payload.branch }}"
+          else
+            BRANCH="${{ inputs.branch }}"
+          fi
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "Deploying branch: $BRANCH"
+
+      - name: Find open PR for branch
+        id: find-pr
+        run: |
+          if [ -n "${{ inputs.pr_number }}" ] && [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            PR_NUMBER="${{ inputs.pr_number }}"
+          else
+            PR_NUMBER=$(gh pr list \
+              --repo "${{ github.repository }}" \
+              --head "${{ steps.resolve.outputs.branch }}" \
+              --base main \
+              --state open \
+              --json number \
+              --jq '.[0].number')
+          fi
+
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" == "null" ]; then
+            echo "No open PR found for branch ${{ steps.resolve.outputs.branch }} → main"
+            echo "pr_found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Found PR #$PR_NUMBER"
+            echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+            echo "pr_found=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge PR
+        if: steps.find-pr.outputs.pr_found == 'true'
+        run: |
+          gh pr merge "${{ steps.find-pr.outputs.pr_number }}" \
+            --squash \
+            --merge-when-ready \
+            --repo "${{ github.repository }}"
+          echo "✅ PR #${{ steps.find-pr.outputs.pr_number }} merged into main"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.find-pr.outputs.pr_found }}" == "true" ]; then
+            echo "### ✅ Merged PR #${{ steps.find-pr.outputs.pr_number }} into main" >> "$GITHUB_STEP_SUMMARY"
+            echo "Branch: \`${{ steps.resolve.outputs.branch }}\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "Triggered by: Netlify production deploy" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### ℹ️ No PR to merge" >> "$GITHUB_STEP_SUMMARY"
+            echo "Branch \`${{ steps.resolve.outputs.branch }}\` had no open PR → main" >> "$GITHUB_STEP_SUMMARY"
+          fi
