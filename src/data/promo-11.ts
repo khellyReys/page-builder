@@ -5,9 +5,9 @@ export const promo11: Promo = {
   id: "promo-11",
   createdAt: "2026-03-24T21:00:00Z",
   mastheadEyebrow: "Travel Proposal",
-  title: "Dubai, United Arab Emirates",
+  title: "Dubai, UAE",
   client: "",
-  dates: "August 25–28, 2026 | 3 Nights | 3 Room Options",
+  dates: "August 26–30, 2026 | 3 Nights | 3 Room Options",
   portalTotalLabel: "Starting From",
   portalTotalValue: "AED 12,495",
 
@@ -53,7 +53,7 @@ export const promo11: Promo = {
         checkInOut: "Aug 25 → Aug 28",
         nights: "3",
         adr: "AED 3,400",
-        total: "AED 12,495",
+        total: "AED 10,495",
       },
       images: [],
       features: [
