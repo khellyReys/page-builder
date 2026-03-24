@@ -5,7 +5,7 @@ export const promo10: Promo = {
   id: "promo-10",
   createdAt: "2026-03-24T20:00:00Z",
   mastheadEyebrow: "Travel Proposal",
-  title: "Lake Como, Italy",
+  title: "Lake Como",
   client: "",
   dates: "August 17–20, 2026 | 3 Nights | 3 Room Options",
   portalTotalLabel: "Starting From",
