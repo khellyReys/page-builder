@@ -125,7 +125,12 @@ export const promo9: Promo = {
             adr: "€2,253",
             total: "€9,012",
           },
-          images: [],
+          images: [
+            {
+          src: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/5e/02/12/grace-santorini-hotel.jpg?w=700&h=-1&s=1",
+          alt: "Deluxe Room with Heated Plunge Pool",
+        },
+          ],
           features: [
             {
               title: "Room Features",
@@ -289,7 +294,7 @@ export const promo9: Promo = {
     // ── Hotel 2: Canaves Oia Epitome ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://www.whatahotel.com/content/hotels/2710/0000_canaves_epitome.jpg",
         alt: "Canaves Oia Epitome — Santorini, Greece",
         hotel: "Canaves Oia Epitome",
         location:
@@ -376,7 +381,7 @@ export const promo9: Promo = {
     // ── Hotel 3: Belmond Hotel Caruso (Sep 5–7, 2 Nights) ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://www.whatahotel.com/content/hotels/1655/orav_1366x650_dining_belvedere_restaurant01.jpg",
         alt: "Belmond Hotel Caruso — Ravello, Amalfi Coast, Italy",
         hotel: "Belmond Hotel Caruso",
         location:
@@ -585,7 +590,7 @@ export const promo9: Promo = {
     // ── Hotel 4: Palazzo Avino (Sep 5–7, 2 Nights) ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://whatahotel.com/content/hotels/1054/palazzo-avino-9-gallery-306.jpg",
         alt: "Palazzo Avino — Ravello, Amalfi Coast, Italy",
         hotel: "Palazzo Avino",
         location:
@@ -670,7 +675,7 @@ export const promo9: Promo = {
     // ── Hotel 5: Il San Pietro di Positano (Sep 7–9, 2 Nights) ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://whatahotel.com/content/hotels/1720/1-001.jpg",
         alt: "Il San Pietro di Positano — Positano, Amalfi Coast, Italy",
         hotel: "Il San Pietro di Positano",
         location:
@@ -711,7 +716,12 @@ export const promo9: Promo = {
             adr: "€2,960",
             total: "€6,512",
           },
-          images: [],
+          images: [
+            {
+          src: "https://www.ilsanpietro.com/wp-content/uploads/2020/03/CLASSIC_rooms_hotel_san_pietro_positano.webp",
+          alt: "Panoramic One Bedroom Suite — Burj Al Arab, Jumeirah",
+        },
+          ],
           features: [
             {
               title: "Room Features",
@@ -769,7 +779,12 @@ export const promo9: Promo = {
             adr: "€3,610",
             total: "€7,942",
           },
-          images: [],
+          images: [
+            {
+          src: "https://www.ilsanpietro.com/wp-content/uploads/2020/01/Suite_at_il_san_pietro_positano_1-768x512.jpg",
+          alt: "Panoramic One Bedroom Suite — Burj Al Arab, Jumeirah",
+        },
+          ],
           features: [
             {
               title: "Room Features",
@@ -815,7 +830,7 @@ export const promo9: Promo = {
     // ── Hotel 6: Grand-Hotel Du Cap-Ferrat, A Four Seasons Hotel ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://whatahotel.com/content/cities/Cap_Ferrat.jpg",
         alt: "Grand-Hotel Du Cap-Ferrat, A Four Seasons Hotel — Saint-Jean-Cap-Ferrat, France",
         hotel: "Grand-Hotel Du Cap-Ferrat, A Four Seasons Hotel",
         location:
@@ -899,7 +914,7 @@ export const promo9: Promo = {
     // ── Hotel 7: The Maybourne Riviera ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://whatahotel.com/content/hotels/5051/homepage-panoramic-suite-shot_1920x1275.jpg",
         alt: "The Maybourne Riviera — Roquebrune-Cap-Martin, France",
         hotel: "The Maybourne Riviera",
         location:
@@ -981,7 +996,7 @@ export const promo9: Promo = {
     // ── Hotel 8: Hotel Royal Riviera ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "/content/hotels/1062/f8d2b682086256b532c42d741406bfd6.jpg",
         alt: "Hotel Royal Riviera — Saint-Jean-Cap-Ferrat, France",
         hotel: "Hotel Royal Riviera",
         location:
