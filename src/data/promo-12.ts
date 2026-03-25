@@ -20,7 +20,7 @@ export const promo12: Promo = {
 
   hero: {
     imageUrl:
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/0c/ce/30/the-palace-hotel.jpg?w=1200&h=800&s=1",
+      "https://www.gardencourt-restaurant.com/images/restaurant-wide-ashoot.jpg",
     alt: "Palace Hotel — San Francisco, California",
     hotel: "Palace Hotel, a Luxury Collection Hotel",
     location:
