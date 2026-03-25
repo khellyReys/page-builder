@@ -115,7 +115,7 @@ export const promo9: Promo = {
           priceRate: "€2,253",
           priceStrike: "",
           priceTotal: "4-Night Total: €9,012",
-          stayTotalExclAmount: "€9,012",
+          stayTotalExclAmount: "€9,072",
           stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
@@ -123,7 +123,7 @@ export const promo9: Promo = {
             checkInOut: "Sep 1 → Sep 5",
             nights: "4",
             adr: "€2,253",
-            total: "€9,012",
+            total: "€9,072",
           },
           images: [
             {
@@ -160,7 +160,7 @@ export const promo9: Promo = {
             leftSub:
               "Exclusive rate: €2,253/night &times; 4 = <strong>€9,012</strong> (excl. taxes) · Free cancellation before Aug 11, 2026",
             rightLabel: "(excl. taxes)",
-            rightValue: "€9,012",
+            rightValue: "€9,072",
           },
           bookUrl:
             "https://whatahotel.com/booking/showRates.cfm?hotelID=2927&checkIn=2026-09-01&checkOut=2026-09-05&guests=2&children=0&rooms=1",
@@ -236,8 +236,8 @@ export const promo9: Promo = {
           priceLabel: "Per night · WhataHotel! Exclusive",
           priceRate: "€3,130",
           priceStrike: "",
-          priceTotal: "4-Night Total: €12,520",
-          stayTotalExclAmount: "€12,520",
+          priceTotal: "4-Night Total: €12,580",
+          stayTotalExclAmount: "€12,580",
           stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
@@ -245,7 +245,7 @@ export const promo9: Promo = {
             checkInOut: "Sep 1 → Sep 5",
             nights: "4",
             adr: "€3,130",
-            total: "€12,520",
+            total: "€12,580",
           },
           images: [
             {
@@ -282,7 +282,7 @@ export const promo9: Promo = {
             leftSub:
               "Exclusive rate: €3,130/night &times; 4 = <strong>€12,520</strong> (excl. taxes) · Free cancellation before Aug 11, 2026",
             rightLabel: "(excl. taxes)",
-            rightValue: "€12,520",
+            rightValue: "€12,580",
           },
           bookUrl:
             "https://whatahotel.com/booking/showRates.cfm?hotelID=2927&checkIn=2026-09-01&checkOut=2026-09-05&guests=2&children=0&rooms=1",
