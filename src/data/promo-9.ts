@@ -987,7 +987,7 @@ export const promo9: Promo = {
             rightValue: "€5,250",
           },
           bookUrl:
-            "https://whatahotel.com/booking/showRates.cfm?hotelID=5051&checkIn=2026-09-09&checkOut=2026-09-13&guests=2&children=0&rooms=1",
+            "https://whatahotel.com/booking/booking_info.cfm?room=C1KJKL&rate=SGP&hotel=5051&checkin=2026-09-09&checkout=2026-09-13&guests=2&children=0&rooms=1",
           bookLabel: "Book Now — Grand Sea View Studio",
         },
       ],
@@ -1134,7 +1134,7 @@ export const promo9: Promo = {
             rightValue: "€5,259.52",
           },
           bookUrl:
-            "https://whatahotel.com/booking/showRates.cfm?hotelID=1062&checkIn=2026-09-09&checkOut=2026-09-13&guests=2&children=0&rooms=1",
+            "https://whatahotel.com/booking/booking_info.cfm?room=D**2SH&rate=2SH&hotel=1062&checkin=2026-09-09&checkout=2026-09-13&guests=2&children=0&rooms=1",
           bookLabel: "Book Now — Superior Sea & Garden View",
         },
       ],
