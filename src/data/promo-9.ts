@@ -25,7 +25,7 @@ export const promo9: Promo = {
     // ── Hotel 1: Grace Santorini, Auberge Collection ──
     {
       hero: {
-        imageUrl: "",
+        imageUrl: "https://cdn.jumeirah.com/api/public/content/44737e54389e42f699cee6c99680c24e?v=d5822cab",
         alt: "Grace Santorini, Auberge Collection — Santorini, Greece",
         hotel: "Grace Santorini, Auberge Collection",
         location:
