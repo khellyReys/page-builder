@@ -224,16 +224,16 @@ export const promo9: Promo = {
             rightValue: "€10,016",
           },
           bookUrl:
-            "https://whatahotel.com/booking/showRates.cfm?hotelID=2927&checkIn=2026-09-01&checkOut=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Suite (Book Early)",
+            "https://whatahotel.com/booking/booking_info.cfm?room=N1K3SH&rate=2SH&hotel=2927&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
+          bookLabel: "Book Now — Superior Suite (Non-Refundable)",
         },
         // Superior Suite — WhataHotel! Exclusive Rate
         {
-          badgeText: "✨ Exclusive Rate",
+          badgeText: "✨ Flexible Rate",
           name: "Superior Suite with Plunge Pool",
           subtitle:
             "King Bed · Sea View · Heated Plunge Pool · Sun Loungers<br/><strong style='color: var(--burgundy)'>Exclusive: €3,130/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
+          priceLabel: "Per night · WhataHotel! Flexible",
           priceRate: "€3,130",
           priceStrike: "",
           priceTotal: "4-Night Total: €12,580",
@@ -278,15 +278,15 @@ export const promo9: Promo = {
           ],
           savings: {
             leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
+              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Flexible Rate</span>",
             leftSub:
               "Exclusive rate: €3,130/night &times; 4 = <strong>€12,520</strong> (excl. taxes) · Free cancellation before Aug 11, 2026",
             rightLabel: "(excl. taxes)",
             rightValue: "€12,580",
           },
           bookUrl:
-            "https://whatahotel.com/booking/showRates.cfm?hotelID=2927&checkIn=2026-09-01&checkOut=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Suite (Exclusive)",
+            "https://whatahotel.com/booking/booking_info.cfm?room=N1K2SH&rate=2SH&hotel=2927&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
+          bookLabel: "Book Now — Superior Suite (Flexible Rate)",
         },
       ],
     },
