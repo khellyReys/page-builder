@@ -996,7 +996,7 @@ export const promo9: Promo = {
     // ── Hotel 8: Hotel Royal Riviera ──
     {
       hero: {
-        imageUrl: "/content/hotels/1062/f8d2b682086256b532c42d741406bfd6.jpg",
+        imageUrl: "https://www.whatahotel.com/content/hotels/1062/f8d2b682086256b532c42d741406bfd6.jpg",
         alt: "Hotel Royal Riviera — Saint-Jean-Cap-Ferrat, France",
         hotel: "Hotel Royal Riviera",
         location:
