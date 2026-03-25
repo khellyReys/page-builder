@@ -20,7 +20,7 @@ export const promo1: Promo = {
 
   hero: {
     imageUrl:
-      "https://images.trvl-media.com/lodging/9000000/8700000/8695400/8695378/16953b0a.jpg",
+      "https://blubathworks.com/wp-content/uploads/2023/06/BahaMar_4_GAL-min.jpg",
     alt: "Rosewood Baha Mar — Nassau, Bahamas",
     hotel: "Rosewood Baha Mar",
     location:
