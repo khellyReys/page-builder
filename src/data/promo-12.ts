@@ -20,7 +20,7 @@ export const promo12: Promo = {
 
   hero: {
     imageUrl:
-      "https://www.gardencourt-restaurant.com/images/restaurant-wide-ashoot.jpg",
+      "https://phgcdn.com/images/uploads/SFOPH/masthead/SFOPH-masthead-exteriorentrance.jpg",
     alt: "Palace Hotel — San Francisco, California",
     hotel: "Palace Hotel, a Luxury Collection Hotel",
     location:
@@ -65,7 +65,12 @@ export const promo12: Promo = {
         adr: "$700.67",
         total: "$2,475.12",
       },
-      images: [],
+      images: [
+        {
+          src: "https://www.sfpalace.com/wp-content/uploads/2024/07/lc-sfolc-superior-double-room-31468-2-1.jpg",
+          alt: "Superior Room, 2 Double Beds — Palace Hotel San Francisco",
+        },
+      ],
       features: [
         {
           title: "Room Features",
@@ -126,7 +131,12 @@ export const promo12: Promo = {
         adr: "$727.33",
         total: "$2,569.32",
       },
-      images: [],
+      images: [
+        {
+          src: "https://www.sfpalace.com/wp-content/uploads/2024/07/sfolc-guest-room-6432-1-1.jpg",
+          alt: "Deluxe Room, 2 Double Beds — Palace Hotel San Francisco",
+        },
+      ],
       features: [
         {
           title: "Room Features",
