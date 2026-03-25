@@ -150,16 +150,16 @@ export default function PromoPage() {
 
         {promo.hotels.map((hotel, index) => (
           <div key={index}>
-            <HeroSection
-              imageUrl={hotel.hero.imageUrl || DEFAULT_HERO_IMAGE}
-              alt={hotel.hero.alt}
-            />
-            <div className="body body-tight-top">
+            <div className="body body-above-hero">
               <HotelIdentity
                 hotel={hotel.hero.hotel}
                 locationHtml={hotel.hero.location}
               />
             </div>
+            <HeroSection
+              imageUrl={hotel.hero.imageUrl || DEFAULT_HERO_IMAGE}
+              alt={hotel.hero.alt}
+            />
             {showOffer(hotel.offer) ? (
               <OfferBanner
                 heading={hotel.offer.heading}
@@ -248,13 +248,13 @@ export default function PromoPage() {
         logoHref="https://www.whatahotel.com/"
         eyebrow={promo.mastheadEyebrow}
       />
-      <HeroSection imageUrl={heroImage} alt={promo.hero!.alt} />
-      <div className="body body-tight-top">
+      <div className="body body-above-hero">
         <HotelIdentity
           hotel={promo.hero!.hotel}
           locationHtml={promo.hero!.location}
         />
       </div>
+      <HeroSection imageUrl={heroImage} alt={promo.hero!.alt} />
       {showOffer(promo.offer) ? (
         <OfferBanner
           heading={promo.offer!.heading}

@@ -2127,9 +2127,9 @@ body {
 
 .hotel-stars {
   color: #c9a227;
-  font-size: 14px;
-  letter-spacing: 6px;
-  margin-bottom: 10px;
+  font-size: 15px;
+  letter-spacing: 8px;
+  margin-bottom: 12px;
 }
 
 .hotel-star {
@@ -2138,17 +2138,24 @@ body {
 
 .hotel-identity-name {
   font-family: "Cormorant Garamond", "Times New Roman", serif;
-  font-size: 28px;
+  font-size: 38px;
   font-weight: 700;
   color: var(--slate);
-  margin: 0 0 8px 0;
-  line-height: 1.2;
+  margin: 0 0 10px 0;
+  line-height: 1.15;
+  letter-spacing: 1px;
 }
 
 .hotel-identity-loc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--gray);
   line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+
+.body-above-hero {
+  padding-top: 28px;
+  padding-bottom: 16px;
 }
 
 .room-meta-strip {
