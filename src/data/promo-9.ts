@@ -11,8 +11,8 @@ export const promo9: Promo = {
   id: "promo-9",
   createdAt: "2026-03-24T18:00:00Z",
   mastheadEyebrow: "Travel Proposal",
-  title: "The Silverster's Honeymoon",
-  client: "The Silversters",
+  title: "The Silvester's Honeymoon",
+  client: "The Silvester's",
   dates: "September 1–13, 2026 | 12 Nights | 3 Destinations",
   portalTotalLabel: "Starting From",
   portalTotalValue: "€5,179.52",
@@ -95,23 +95,23 @@ export const promo9: Promo = {
           ],
           savings: {
             leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>BOOK EARLY Rate</span>",
+              "4 Nights &nbsp;|&nbsp; <span>BOOK EARLY/NON-REFUNABLE Rate</span>",
             leftSub:
               "Book Early rate: €1,802.40/night &times; 4 = <strong>€7,209.60</strong> (excl. taxes) · Deposit required",
             rightLabel: "(excl. taxes)",
             rightValue: "€7,209.60",
           },
           bookUrl:
-            "https://whatahotel.com/booking/showRates.cfm?hotelID=2927&checkIn=2026-09-01&checkOut=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Room (Book Early)",
+            "https://whatahotel.com/booking/booking_info.cfm?room=V1K3SH&hotel=2927&rate=2SH&checkin=2026-09-01&checkout=2026-09-05&guests=2",
+          bookLabel: "Book Now — Deluxe Room (Non-Refunable Rate)",
         },
         // Deluxe Room — WhataHotel! Exclusive Rate
         {
-          badgeText: "✨ Exclusive Rate",
+          badgeText: "✨ Flexible Rate",
           name: "Deluxe Room with Heated Plunge Pool",
           subtitle:
             "34 sqm · King Bed · Heated Plunge Pool on Terrace<br/><strong style='color: var(--burgundy)'>Exclusive: €2,253/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
+          priceLabel: "Per night · WhataHotel! Flexible",
           priceRate: "€2,253",
           priceStrike: "",
           priceTotal: "4-Night Total: €9,012",
@@ -163,7 +163,7 @@ export const promo9: Promo = {
             rightValue: "€9,072",
           },
           bookUrl:
-            "https://whatahotel.com/booking/showRates.cfm?hotelID=2927&checkIn=2026-09-01&checkOut=2026-09-05&guests=2&children=0&rooms=1",
+            "https://whatahotel.com/booking/booking_info.cfm?room=V1K2SH&rate=2SH&hotel=2927&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
           bookLabel: "Book Now — Deluxe Room (Exclusive)",
         },
         // Superior Suite — BOOK EARLY
