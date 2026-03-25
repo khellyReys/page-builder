@@ -25,7 +25,7 @@ export const promo9: Promo = {
     // ── Hotel 1: Grace Santorini, Auberge Collection ──
     {
       hero: {
-        imageUrl: "https://cdn.jumeirah.com/api/public/content/44737e54389e42f699cee6c99680c24e?v=d5822cab",
+        imageUrl: "https://www.whatahotel.com/content/hotels/2927/Grace-Santorini.jpg",
         alt: "Grace Santorini, Auberge Collection — Santorini, Greece",
         hotel: "Grace Santorini, Auberge Collection",
         location:
@@ -66,7 +66,7 @@ export const promo9: Promo = {
           },
           images: [
             {
-          src: "https://d2573qu6qrjt8c.cloudfront.net/23DFF956626846FC9A446956F3AE8870/23DFF956626846FC9A446956F3AE8870.jpg",
+          src: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/5e/02/12/grace-santorini-hotel.jpg?w=700&h=-1&s=1",
           alt: "Deluxe Room with Heated Plunge Pool",
         },
           ],
@@ -181,7 +181,12 @@ export const promo9: Promo = {
             adr: "€2,504",
             total: "€10,016",
           },
-          images: [],
+          images: [
+            {
+          src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/406003416.jpg?k=aae023b201a9be92916c402c50f66c8dca2813a65ffcb9990413083fa34da7fc&o=",
+          alt: "Deluxe Room with Heated Plunge Pool",
+        },
+          ],
           features: [
             {
               title: "Suite Features",
@@ -237,7 +242,12 @@ export const promo9: Promo = {
             adr: "€3,130",
             total: "€12,520",
           },
-          images: [],
+          images: [
+            {
+          src: "https://www.carrier.co.uk/media/eyrnq3eh/trg-1943-1.jpg?rxy=0.62531328320802,0.47326649958228906&v=1d9a83ad2bfe060",
+          alt: "Deluxe Room with Heated Plunge Pool",
+        },
+          ],
           features: [
             {
               title: "Suite Features",
