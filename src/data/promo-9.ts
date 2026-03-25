@@ -298,62 +298,6 @@ export const promo9: Promo = {
         ],
       },
       rooms: [
-        // Hideaway Pool Suite — WhataHotel! Exclusive
-        {
-          badgeText: "✨ WhataHotel! Exclusive",
-          name: "Hideaway Pool Suite",
-          subtitle:
-            "60 sqm · King Bed · Balcony with Pool, Sea & Sunset View<br/><strong style='color: var(--burgundy)'>WhataHotel! Exclusive: €1,500/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
-          priceRate: "€1,500",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €6,000",
-          stayTotalExclAmount: "€6,000",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
-          stayCheckInOut: "Sep 1 → Sep 5",
-          nightsLabel: "4",
-          bookingSummary: {
-            checkInOut: "Sep 1 → Sep 5",
-            nights: "4",
-            adr: "€1,500",
-            total: "€6,000",
-          },
-          images: [],
-          features: [
-            {
-              title: "Suite Features",
-              icon: "door-open",
-              items: [
-                "60 sqm suite with private pool",
-                "King bed with premium linens",
-                "Balcony with sea and sunset views",
-                "WiFi, AC, rain shower, luxury amenities",
-              ],
-            },
-            {
-              title: "WhataHotel! Exclusive Perks",
-              icon: "gift",
-              items: [
-                "Room upgrade (subject to availability at check-in)",
-                "Complimentary full breakfast for 2 daily",
-                "$100 USD food & beverage credit per stay",
-                "Complimentary WiFi",
-                "Late check-out (upon request)",
-              ],
-            },
-          ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive</span>",
-            leftSub:
-              "WhataHotel! Exclusive rate: €1,500/night &times; 4 = <strong>€6,000</strong> (excl. taxes) · Free cancellation before Aug 12, 2026",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€6,000",
-          },
-          bookUrl:
-            "https://www.whatahotel.com/booking/booking_info.cfm?room=S112SH&rate=2SH&hotel=2710&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Hideaway Pool Suite (Exclusive)",
-        },
         // Hideaway Pool Suite — TVL WhataHotel! Exclu
         {
           badgeText: "✨ TVL WhataHotel! Exclu",
@@ -374,7 +318,9 @@ export const promo9: Promo = {
             adr: "€1,500",
             total: "€6,000",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/DDA828A1C78041F0990BDE1DFBEB7F6D/DDA828A1C78041F0990BDE1DFBEB7F6D.JPEG", alt: "Hideaway Pool Suite" },
+          ],
           features: [
             {
               title: "Suite Features",
@@ -461,7 +407,12 @@ export const promo9: Promo = {
             adr: "€2,150",
             total: "€4,750",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/5F327DB69E3542848C2F8F70947780BB/5F327DB69E3542848C2F8F70947780BB.JPEG", alt: "Superior Room with Garden" },
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/8286C351F2B3426D911709F2EB5C8016/E.JPEG", alt: "Superior Room with Garden" },
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/05F624A56E654A8CAB41B7C97FB1DB5C/E.JPEG", alt: "Superior Room with Garden" },
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/DC3D64A4101E43B59253813117B41DE0/E.JPEG", alt: "Superior Room with Garden" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -519,7 +470,9 @@ export const promo9: Promo = {
             adr: "€2,250",
             total: "€4,970",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/14C98AD5CC9742FF89C4842BCF6ACDCE/14C98AD5CC9742FF89C4842BCF6ACDCE.JPEG", alt: "Garden View Room with Terrace" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -577,7 +530,9 @@ export const promo9: Promo = {
             adr: "€3,125",
             total: "€6,895",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/1A3992EDDDB541F5B613CBA465F120E5/1A3992EDDDB541F5B613CBA465F120E5.JPEG", alt: "Deluxe Sea View Room with Balcony" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -660,7 +615,10 @@ export const promo9: Promo = {
             adr: "€2,208.25",
             total: "€4,436.50",
           },
-          images: [],
+          images: [
+            { src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/6/0/88/650/245/Deluxe_Suite_with_Terrace_and_Sea_view_P.jpg", alt: "Deluxe Sea View Room" },
+            { src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/6/0/88/86/443/Deluxe_suite_wt_Terrace_P.jpg", alt: "Deluxe Sea View Room" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -887,7 +845,9 @@ export const promo9: Promo = {
             adr: "€2,600",
             total: "€10,451.44",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/5CC8889E42F04CCDBACAFCD86C2899B5/5CC8889E42F04CCDBACAFCD86C2899B5.JPEG", alt: "Superior Pinewood Room King" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -967,7 +927,9 @@ export const promo9: Promo = {
             adr: "€1,312.50",
             total: "€5,250",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/A0AC8837AD864579B6787DDE1B8313EE/A0AC8837AD864579B6787DDE1B8313EE.JPEG", alt: "Grand Sea View Studio" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -1050,7 +1012,10 @@ export const promo9: Promo = {
             adr: "€1,285.50",
             total: "€5,179.52",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/CD098C23CB0B4B4786BFF5A97BFC537C/CD098C23CB0B4B4786BFF5A97BFC537C.jpg", alt: "Superior Orangerie Garden View Terrace" },
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/72449D85DA7441C9B2F304D151BF824E/72449D85DA7441C9B2F304D151BF824E.jpg", alt: "Superior Orangerie Garden View Terrace" },
+          ],
           features: [
             {
               title: "Room Features",
@@ -1108,7 +1073,10 @@ export const promo9: Promo = {
             adr: "€1,305.50",
             total: "€5,259.52",
           },
-          images: [],
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/3FB88E4A589042D4943313DB2FD669A7/3FB88E4A589042D4943313DB2FD669A7.jpg", alt: "Superior Sea and Garden View Historic Bldg" },
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/A893C00C417842A08F5E54E5EE4A5F0B/A893C00C417842A08F5E54E5EE4A5F0B.jpg", alt: "Superior Sea and Garden View Historic Bldg" },
+          ],
           features: [
             {
               title: "Room Features",
