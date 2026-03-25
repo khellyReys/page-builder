@@ -313,9 +313,9 @@ export const promo9: Promo = {
         ],
       },
       rooms: [
-        // Hideaway Pool Suite — TVL WhataHotel! Exclu
+        // Hideaway Pool Suite — WhataHotel! Exclusive
         {
-          badgeText: "✨ TVL WhataHotel! Exclu",
+          badgeText: "✨ WhataHotel! Exclusive",
           name: "Hideaway Pool Suite",
           subtitle:
             "60 sqm · King Bed · Balcony with Pool, Sea & Sunset View<br/><strong style='color: var(--burgundy)'>TVL WhataHotel! Exclu: €1,500/night</strong>",
@@ -369,7 +369,7 @@ export const promo9: Promo = {
           },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=S1128G&rate=28G&hotel=2710&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Hideaway Pool Suite (TVL Exclu)",
+          bookLabel: "Book Now — Hideaway Pool Suite (Exclusive)",
         },
       ],
     },
@@ -675,7 +675,7 @@ export const promo9: Promo = {
     // ── Hotel 5: Il San Pietro di Positano (Sep 7–9, 2 Nights) ──
     {
       hero: {
-        imageUrl: "https://whatahotel.com/content/hotels/1720/1-001.jpg",
+        imageUrl: "https://business.cornell.edu/wp-content/uploads/sites/2/2023/02/AdobeStock-Hotel-Il-San-Pietro-Positano.600x400.jpg",
         alt: "Il San Pietro di Positano — Positano, Amalfi Coast, Italy",
         hotel: "Il San Pietro di Positano",
         location:
