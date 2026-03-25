@@ -64,7 +64,12 @@ export const promo9: Promo = {
             adr: "€1,802.40",
             total: "€7,209.60",
           },
-          images: [],
+          images: [
+            {
+          src: "https://d2573qu6qrjt8c.cloudfront.net/23DFF956626846FC9A446956F3AE8870/23DFF956626846FC9A446956F3AE8870.jpg",
+          alt: "Deluxe Room with Heated Plunge Pool",
+        },
+          ],
           features: [
             {
               title: "Room Features",
