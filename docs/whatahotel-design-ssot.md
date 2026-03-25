@@ -1,7 +1,7 @@
 # WhataHotel! Proposal Site ? Single Source of Truth
 
 > **For:** Lorraine Travel / WhataHotel!  
-> **Stack:** React + TypeScript + Vite ù Deployed on Netlify via GitHub  
+> **Stack:** React + TypeScript + Vite ? Deployed on Netlify via GitHub  
 > **Last updated:** March 2026 ? **keep in sync with `src/types.ts` and `src/components/`**
 
 ---
@@ -102,10 +102,10 @@ Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatah
    - `RoomMetaStrip` ? optional `quickFacts` strip
    - Gallery images
    - **Room Features** (`features` with `icon: "door-open"`) ? displayed in a card below the gallery images, before the investment block
-   - **`ProposalInvestment`** ? 3-column **ADR ù Grand Total (incl. taxes & fees) ù Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
+   - **`ProposalInvestment`** ? 3-column **ADR ? Grand Total (incl. taxes & fees) ? Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
    - **Exclusive Perks** (`features` with `icon: "gift"`) ? centered list after the investment block, separated from room features
    - Primary **`bookUrl` / `bookLabel`** CTA (after perks, before optional `ExperienceMore`)
-7. `ComparisonOverview` ? **booking summary** table columns: Hotel ù Room category ù Check-in/out ù Nights ù ADR ù **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
+7. `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
 8. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
 9. `RoomOverviewGrid` per room when `keyAttributes` is set
 10. Optional `PriceSummaryTable`
@@ -244,7 +244,7 @@ interface Room {
   priceTotal: string;
   /** Large Grand Total figure (excl. taxes), e.g. "?35,541" */
   stayTotalExclAmount?: string;
-  /** Subline under Grand Total, e.g. "3 Nights ù excl. taxes & feesù" */
+  /** Subline under Grand Total, e.g. "3 Nights ? excl. taxes & fees?" */
   stayTotalExclSub?: string;
   /** Context line under "Rate & pricing breakdown" (HTML) */
   investmentContextLine?: string;
@@ -399,12 +399,12 @@ Use `<br/>` for line breaks. Always end with a colored highlight:
 
 Always exactly **2 feature blocks** per room:
 
-1. **Room/Suite/Residence Features** ù `icon: "door-open"` ù rendered in a card section **directly below the room gallery images**, before the investment block
-2. **WhataHotel! Exclusive Perks** ù `icon: "gift"` ù rendered as a **centered list after the investment block**, visually separated from room features
+1. **Room/Suite/Residence Features** ? `icon: "door-open"` ? rendered in a card section **directly below the room gallery images**, before the investment block
+2. **WhataHotel! Exclusive Perks** ? `icon: "gift"` ? rendered as a **centered list after the investment block**, visually separated from room features
 
 These two blocks are rendered in **different positions** in the RoomCard. The `RoomCard` splits `features` by icon: `icon !== "gift"` ? room features section; `icon === "gift"` ? perks section.
 
-Feature items are **plain text only** ù no HTML tags inside `items[]` strings.
+Feature items are **plain text only** ? no HTML tags inside `items[]` strings.
 
 ---
 
@@ -546,18 +546,18 @@ If the booking page does not display a tax-inclusive total, omit `grandTotalIncl
 
 ## Booking summary (`ComparisonOverview`) ?? Required for production-quality promos
 
-`<ComparisonOverview />` renders the **Booking summary / Comparison overview** table (columns: **Hotel ù Room category ù Check-in / out ù Nights ù ADR ù Grand Total (incl. taxes & fees)**). It is shown **after all `RoomCard`s for that hotel** and **requires**:
+`<ComparisonOverview />` renders the **Booking summary / Comparison overview** table (columns: **Hotel ? Room category ? Check-in / out ? Nights ? ADR ? Grand Total (incl. taxes & fees)**). It is shown **after all `RoomCard`s for that hotel** and **requires**:
 
 - `rooms={...}`
-- `hotelName={...}` ù use `hero.hotel` (plain string; repeats in each row).
+- `hotelName={...}` ? use `hero.hotel` (plain string; repeats in each row).
 
-### Grand Total column ù data priority
+### Grand Total column ? data priority
 
 The Grand Total column always shows the **tax-inclusive total** using this priority:
 
-1. `room.grandTotalInclTaxes` ù **always preferred**; the authoritative incl.-tax total
-2. `room.bookingSummary.total` ù fallback (per pricing consistency rules, should equal `grandTotalInclTaxes`)
-3. `room.savings.rightValue` ù legacy fallback only
+1. `room.grandTotalInclTaxes` ? **always preferred**; the authoritative incl.-tax total
+2. `room.bookingSummary.total` ? fallback (per pricing consistency rules, should equal `grandTotalInclTaxes`)
+3. `room.savings.rightValue` ? legacy fallback only
 
 > Per the Pricing Consistency rules, all three should be the same number. If they differ, fix the data.
 
@@ -577,11 +577,11 @@ grandTotalInclTaxes: "EUR 35,541",   // <- same number
 
 **Fallbacks** (if `bookingSummary` is omitted):
 
-- **Room category** ù plain text from `room.name` (HTML stripped)
-- **Check-in / out** ù `stayCheckInOut` or `"ù"`
-- **Nights** ù `nightsLabel` or `"ù"`
-- **ADR** ù `priceRate`
-- **Grand Total** ù `grandTotalInclTaxes` ? then `savings.rightValue`
+- **Room category** ? plain text from `room.name` (HTML stripped)
+- **Check-in / out** ? `stayCheckInOut` or `"?"`
+- **Nights** ? `nightsLabel` or `"?"`
+- **ADR** ? `priceRate`
+- **Grand Total** ? `grandTotalInclTaxes` ? then `savings.rightValue`
 
 Populate `stayCheckInOut`, `nightsLabel`, and `grandTotalInclTaxes` (or `bookingSummary`) so the table never shows meaningless placeholders.
 
@@ -702,7 +702,7 @@ specialOffer?: {
   description: "Your August 12?20 dates qualify for the Four Seasons' 'Fourth Night Free' promotion. On an 8-night stay, each room earns TWO (2) completely free nights.",
   highlights: [
     { icon: "check", text: "Qualifies Aug 12?20" },
-    { icon: "check", text: "2 Free Nights ù 2 Rooms" },
+    { icon: "check", text: "2 Free Nights ? 2 Rooms" },
     { icon: "star", text: "Combinable with WhataHotel! Perks" },
   ],
   validityText: "Valid May 7 ? Nov 19, 2026 (selected dates). Subject to availability at booking.",
@@ -810,49 +810,108 @@ priceSummary?: {
 
 ## Room Images ?? Always Scrape from Page ? Never Default to Placeholder
 
-Each `.bookingItem` on the WhataHotel booking page contains an image carousel with `<img>` tags containing full CloudFront URLs.
+Each `.bookingItem` on the WhataHotel booking page contains an image carousel inside `<ul class="booking-img-list">`. Images are wrapped in `<a>` tags whose `href` holds the **full-resolution URL**.
 
-### HTML Structure
+### Two CDN Domains (both valid)
+
+WhataHotel uses **two different CloudFront CDNs** depending on the hotel. Both are valid:
+
+| CDN domain | URL pattern | Example |
+|---|---|---|
+| `d2573qu6qrjt8c.cloudfront.net` | `/{HASH}/{HASH}.JPEG` | Most hotels (newer format) |
+| `d321ocj5nbe62c.cloudfront.net` | `/imageRepo/7/0/{path}/{file}.jpg` | Some older hotels |
+
+**Do NOT reject URLs from either CDN.** Accept any URL on `d2573qu6qrjt8c.cloudfront.net` OR `d321ocj5nbe62c.cloudfront.net`.
+
+### HTML Structure (actual markup)
 
 ```html
 <div class="bookingItem">
-  <div class="roomHeader">...</div>
-  <div class="carousel">
-    <!-- or .imageSlider or similar image container -->
-    <img
-      src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
-      alt="Deluxe Room"
-    />
-    <img
-      src="https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg"
-      alt="Bathroom"
-    />
-    <img src="https://d321ocj5nbe62c.cloudfront.net/..." alt="..." />
-    <!-- 3rd image; we only use first 2 -->
+  <div class="bookingItem-img">
+    <ul class="booking-img-list" data-cycle-speed="2000" data-cycle-slides="li">
+
+      <li>
+        <a href="https://d2573qu6qrjt8c.cloudfront.net/{HASH_A}/{HASH_A}.JPEG"
+           class="modalRooms roomImg" rel="gal" data-room-group="771" title="Room Name">
+          <img src="https://d2573qu6qrjt8c.cloudfront.net/{HASH_A}/{HASH_A}.JPEG"
+               alt="Room Name" loading="lazy" data-source="ama">
+        </a>
+        <span><strong>Room Name</strong></span>
+      </li>
+
+      <li>
+        <a href="https://d2573qu6qrjt8c.cloudfront.net/{HASH_B}/{HASH_B}.JPEG"
+           class="modalRooms roomImg" rel="gal" data-room-group="771" title="Room Name">
+          <img src="https://d2573qu6qrjt8c.cloudfront.net/{HASH_B}/E.JPEG"
+               alt="Room Name" loading="lazy" data-source="ama">
+        </a>
+        <!-- NOTE: <img src> is a THUMBNAIL (/E.JPEG); always use <a href> instead -->
+      </li>
+
+    </ul>
+    <p class="smallType"><i>Actual room layout, furnishings & views may differ...</i></p>
   </div>
-  <div class="rates">...</div>
+  <div class="bookingItem-content">
+    <h3>Room Name</h3>
+    <!-- rates, booking links, etc. -->
+  </div>
 </div>
 ```
 
+**When a room has zero images** (e.g., Grace Santorini), the carousel falls back to:
+
+```html
+<li><a><img src="/img/paceholder.jpg" alt="Room image not available" loading="lazy"></a></li>
+```
+
+### ?? CRITICAL: Always Use `<a href>`, NOT `<img src>`
+
+On the newer CDN (`d2573qu6qrjt8c`), the `<img src>` for the 2nd+ image in a carousel is often a **truncated thumbnail** ending in `/E.JPEG`. The `<a href>` **always** contains the full-resolution URL.
+
+| Attribute | URL example | Use this? |
+|---|---|---|
+| `<a href="...">` | `.../{HASH}/{HASH}.JPEG` (full-resolution) | **YES ? always** |
+| `<img src="...">` | `.../{HASH}/E.JPEG` (truncated thumbnail) | **NO ? often truncated** |
+
+**Extraction priority:**
+1. Use the `<a href>` URL from each `<li>` inside `<ul class="booking-img-list">`
+2. Only fall back to `<img src>` if there is no wrapping `<a>` tag (older page format)
+3. Skip any `<a>` without an `href` or with `href` pointing to `/img/paceholder.jpg`
+
 ### CSS Selector Rules
 
-- **Find all room images where they live**: Within each `.bookingItem`, look for `<img>` tags located in an image carousel/slider container
-- **Selector may vary** ? the container can be `.imageSlider`, `.carousel`, `.images`, or an unlabeled `<div>` near the room header
-- **Handle both `src` and `data-src`** ? some images use lazy-loading with `data-src` attributes. Always check for:
-  - `<img src="https://d321ocj5nbe62c.cloudfront.net/...">` ? Standard
-  - `<img data-src="https://d321ocj5nbe62c.cloudfront.net/...">` ? Lazy-loaded; use `data-src` value if `src` is missing
-- **Size filtering** ? Skip images with width or height below 200px (likely icons/logos); only use room photos
+- **Primary selector**: `.bookingItem .bookingItem-img ul.booking-img-list li a.modalRooms[href]`
+- **Fallback selector**: `.bookingItem .bookingItem-img ul.booking-img-list li a[href]` (some pages omit the `modalRooms` class)
+- **Image URL source**: Read from the `<a>` tag's `href` attribute, NOT from the `<img>` tag's `src`
+- **Alt text**: Read from the `<img>` tag's `alt` attribute inside the `<a>`, or from the `<a>` tag's `title` attribute, or derive from the room name
+- **Skip placeholders**: If `href` is missing, empty, or points to `/img/paceholder.jpg`, that room has no real images
 
 ### Rules
 
-- Always extract the **first 2 image URLs** from the room's image list
-- ALL images must be from `d321ocj5nbe62c.cloudfront.net` CDN; use URLs as-is (never modify the URL)
-- Extract the `alt` text from the `<img>` tag and use it as-is, or use the room name if `alt` is blank
+- Always extract the **first 2 image URLs** from the room's `<a href>` links inside `booking-img-list`
+- ALL room images must be from either `d2573qu6qrjt8c.cloudfront.net` or `d321ocj5nbe62c.cloudfront.net` CDN; use URLs as-is (never modify the URL)
+- Extract the `alt` text from the `<img>` tag and use it as-is, or use the room name if `alt` is blank or generic
 - If a room has fewer than 2 images available, use what's there (e.g., just 1 image) ? do NOT pad with placeholder
-- The placeholder `https://www.whatahotel.com/img/paceholder.jpg` is **only** used if the page genuinely has zero images for a room type ? this is rare
+- Some hotels have **zero room images** for all room types (the page shows `/img/paceholder.jpg`). In that case, leave `images: []` and the app will use `DEFAULT_ROOM_IMAGE`. This is not rare ? it happens for entire hotels.
 - The same image URL may be reused across room types if the hotel uses a shared bathroom/detail shot ? this is acceptable and expected
 
-### Example
+### Example (newer CDN ? most common)
+
+```ts
+// URLs extracted from <a href> inside ul.booking-img-list (NOT from <img src>)
+images: [
+  {
+    src: "https://d2573qu6qrjt8c.cloudfront.net/{HASH_A}/{HASH_A}.JPEG",
+    alt: "Room Name",
+  },
+  {
+    src: "https://d2573qu6qrjt8c.cloudfront.net/{HASH_B}/{HASH_B}.JPEG",
+    alt: "Room Name",
+  },
+],
+```
+
+### Example (older CDN ? some hotels)
 
 ```ts
 images: [
@@ -871,13 +930,13 @@ images: [
 
 | Mistake                            | Fix                                                                                                                          |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Using nav/header logo images       | Check image width/height: skip those < 200px; be selective about closeness to room header                                    |
-| Missing lazy-loaded images         | Check both `src` AND `data-src` attributes; modern pages use lazy-loading                                                    |
-| Using placeholder URLs             | Never use image URLs from `whatahotel.com/img/` domain; ALL room images must come from `d321ocj5nbe62c.cloudfront.net`       |
-| Only finding 1 image when 2 exist  | Make sure you're extracting from the image carousel, not just the first `<img>` on the page                                  |
-| Using wrong CDN format             | Some pages might have Amazon S3 URLs or other CDNs; verify the full URL starts with `https://d321ocj5nbe62c.cloudfront.net/` |
+| Using `<img src>` instead of `<a href>` | `<img src>` is often a truncated thumbnail (`/E.JPEG`). **Always extract from `<a href>`** which has the full-resolution URL |
+| Rejecting `d2573qu6qrjt8c` CDN URLs | Both `d2573qu6qrjt8c.cloudfront.net` and `d321ocj5nbe62c.cloudfront.net` are valid WhataHotel CDNs                          |
+| Using nav/header logo images       | Only look inside `.bookingItem .bookingItem-img ul.booking-img-list`; never pull from page header or nav                     |
+| Using placeholder URLs             | Skip any `href` pointing to `/img/paceholder.jpg`; leave `images: []` and let the app use `DEFAULT_ROOM_IMAGE`              |
+| Only finding 1 image when 2+ exist | Make sure you're iterating all `<li>` elements inside `ul.booking-img-list`, not just the first `<img>` on the page          |
 | Extracting images from page header | The hero/page banner images are NOT room images; look within each `.bookingItem` row only                                    |
-| Leaving `hero.imageUrl` blank      | Extract from `<ul id="subSlides">` background-image; prepend `https://www.whatahotel.com`; if truly absent, add `// AGENT NOTE` |
+| Leaving `hero.imageUrl` blank      | Extract from `<ul id="subSlides">` background-image; prepend `https://whatahotel.com`; if truly absent, add `// AGENT NOTE` |
 
 ---
 
@@ -950,10 +1009,10 @@ Use these in strings rendered via `dangerouslySetInnerHTML` (hero location, offe
 | `&nbsp;`   | (space) | spacing around `\|`        |
 | `&amp;`    | &       | ampersands in HTML strings |
 | `&mdash;`  | ?       | em dashes                  |
-| `&middot;` | ù       | bullet separators          |
-| `&times;`  | ù       | multiplication             |
+| `&middot;` | ?       | bullet separators          |
+| `&times;`  | ?       | multiplication             |
 
-Use plain characters (?, ù, ù, &) inside **plain text fields** like `items[]`, `bookLabel`, `title`, `dates`.
+Use plain characters (?, ?, ?, &) inside **plain text fields** like `items[]`, `bookLabel`, `title`, `dates`.
 
 ---
 
@@ -1140,10 +1199,10 @@ If the user provides a WhataHotel! booking URL (`https://www.whatahotel.com/book
 - **Room names** ? in `<h3>` tags inside each `.bookingItem`
 - **Rate variants** ? each room has multiple rows: look for `SEASONAL OFFER` (lowest) and `BAR` (standard/higher)
 - **Nightly rates** ? in `<h4>Starting at: <b>X,XXX.00 EUR/USD</b>` (lowest) and in individual rate rows
-- **N-night totals** ? in `Totalù for N Nights: X,XXX.XX` inside the expanded rate info
-- **Room images** ? `<img>` tags inside each room's image list; use the first 2 per room; URLs are on `d321ocj5nbe62c.cloudfront.net`
+- **N-night totals** ? in `Total? for N Nights: X,XXX.XX` inside the expanded rate info
+- **Room images** ? `<a href>` URLs (NOT `<img src>`) inside each room's `<ul class="booking-img-list">`; use the first 2 per room; URLs are on `d2573qu6qrjt8c.cloudfront.net` or `d321ocj5nbe62c.cloudfront.net`
 - **Room-specific booking URLs** ? in `href="/booking/booking_info.cfm?room=ROOMCODE&rate=RATE&hotel=HOTELID&..."` on each "Book Now" link; prepend `https://www.whatahotel.com`
-- **Hero image** ?? ? in the `<ul id="subSlides">` background-image style ? prepend `https://www.whatahotel.com` ? **must never be blank** (see Step 4b)
+- **Hero image** ?? ? in the `<ul id="subSlides">` background-image style ? prepend `https://whatahotel.com` ? **must never be blank** (see Step 4b)
 - **Hotel name** ? in `<h1>` tag
 - **Perks** ? in `.perksList` or the "Exclusive Complimentary Perks" section
 - **Cancellation policy** ? in the expanded rate info per room
@@ -1172,35 +1231,32 @@ Extract `room`, `rate`, and `hotel` from the SEASONAL OFFER row's "Book Now" `hr
 
 ?? **This is critical ? missing images is the most common error.**
 
-For each room row in the table:
+For each `.bookingItem` on the page:
 
-1. **Locate the room's image carousel**: Scroll to the room row and find the image slider/carousel container. It will be in or near the room's header area.
-2. **Extract all `<img>` tags** with width/height >= 200px (skip icons/logos)
-3. **Check both `src` and `data-src`** attributes:
-   - If `<img src="https://d321ocj5nbe62c.cloudfront.net/..."` exists, use the `src` URL
-   - If `src` is missing/placeholder but `data-src="https://d321ocj5nbe62c.cloudfront.net/..."` exists, use `data-src`
-   - If both are placeholder/missing, move to the next image
-4. **Take the first 2 valid CloudFront URLs**
-5. **Validate**: All URLs must start with `https://d321ocj5nbe62c.cloudfront.net/` (not whatahotel.com or other CDN)
-6. **Use alt text**: Extract the `alt` attribute from each `<img>` tag; if blank, derive from room name (e.g., "Deluxe Room ? Hotel Name")
+1. **Locate the image carousel**: Find `<ul class="booking-img-list">` inside `<div class="bookingItem-img">`
+2. **Extract the `<a href>` URL** from each `<li>` ? this is the full-resolution image. **Do NOT use the `<img src>`** (it is often a truncated thumbnail ending in `/E.JPEG`)
+3. **Validate the URL**: Must be on `d2573qu6qrjt8c.cloudfront.net` (newer, most common) OR `d321ocj5nbe62c.cloudfront.net` (older, some hotels). Both are valid CloudFront CDNs.
+4. **Skip placeholders**: If the `<a>` has no `href`, or `href` contains `/img/paceholder.jpg`, that room has zero images ? set `images: []`
+5. **Take the first 2 valid CloudFront URLs** from the `<a href>` attributes
+6. **Use alt text**: Extract the `alt` attribute from the `<img>` inside the `<a>`, or use the `<a title>` attribute, or derive from room name
 
 **Troubleshooting**:
 
-- If you find 0 images after this process, use the placeholder URL `https://www.whatahotel.com/img/paceholder.jpg` (rare)
-- If first image is tiny/pixelated, skip it and use the 2nd image instead
+- If you find 0 images for a room, set `images: []` (the app uses `DEFAULT_ROOM_IMAGE`). Some hotels have zero images for **all** room types ? this is normal.
 - If you see only 1 image per room, include only 1 URL
+- Never use URLs from `/img/paceholder.jpg` ? this is the site's own placeholder for missing images
 
-**Example result**:
+**Example result** (newer CDN):
 
 ```ts
 images: [
   {
-    src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/391/DeluxeRoom_204_ThePeninsulaParis_(c)WillPryce_HD_P.jpg",
-    alt: "Deluxe Room ? The Peninsula Paris",
+    src: "https://d2573qu6qrjt8c.cloudfront.net/5F327DB69E3542848C2F8F70947780BB/5F327DB69E3542848C2F8F70947780BB.JPEG",
+    alt: "Superior Room with Garden",
   },
   {
-    src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/164/472/597/DeluxeRoom_204_Bathroom_ThePeninsulaParis_(c)WillPryce_HD_P.jpg",
-    alt: "Bathroom ? The Peninsula Paris",
+    src: "https://d2573qu6qrjt8c.cloudfront.net/8286C351F2B3426D911709F2EB5C8016/8286C351F2B3426D911709F2EB5C8016.JPEG",
+    alt: "Superior Room with Garden",
   },
 ];
 ```
@@ -1209,22 +1265,26 @@ images: [
 
 ?? **`hero.imageUrl` must NEVER be blank.** The app has a `DEFAULT_HERO_IMAGE` fallback, but the agent must still always attempt extraction ? the default is a generic photo, not the actual hotel.
 
-**Where to find it:** The hero/banner image is in the page's `<ul id="subSlides">` element as an inline `background-image` style:
+**Where to find it:** The hero/banner image is in the page's `<ul id="subSlides">` element as an inline `background-image` style on a `<li class="headerSlide">`:
 
 ```html
-<ul id="subSlides">
-  <li style="background-image: url('/imageRepo/7/0/164/472/hotel-hero.jpg');">
-  </li>
-</ul>
+<header class="subHead">
+  <!-- SlideShow Background -->
+  <ul id="subSlides" class="cycle-slideshow center" data-cycle-speed="1000" data-cycle-slides="li">
+    <li class="headerSlide" style="background-image: url(/content/hotels/{HOTEL_ID}/{filename}.jpg)"></li>
+  </ul>
+</header>
 ```
+
+The URL path follows the pattern `/content/hotels/{hotelID}/{filename}.jpg` (NOT `/imageRepo/...`). The `{HOTEL_ID}` matches the `hotelID` query parameter in the booking page URL.
 
 **Extraction rules:**
 
 1. Find `<ul id="subSlides">` and extract the `background-image: url(...)` from the first `<li>` style attribute
-2. The URL is relative ? prepend `https://www.whatahotel.com` to get the full URL
+2. The URL is **relative** (starts with `/content/...`) ? prepend `https://whatahotel.com` to get the full URL (both `https://whatahotel.com` and `https://www.whatahotel.com` work; either is fine)
 3. If `subSlides` is missing, look for the largest `<img>` in the page header/banner area (above the room table)
 4. Check both `style="background-image: url(...)"` and `data-bg="..."` attributes (lazy-loading variant)
-5. Validate: the final URL should resolve to a real image (CloudFront CDN or `whatahotel.com/imageRepo/`)
+5. Validate: the final URL should start with `https://whatahotel.com/content/` or `https://www.whatahotel.com/content/`
 
 **If extraction fails:** Set `hero.imageUrl` to `""` (the app falls back to `DEFAULT_HERO_IMAGE` from `src/constants.ts`) **AND** add an `// AGENT NOTE: hero image not found on page ? using default` comment in the data file. This should be rare.
 
@@ -1247,8 +1307,8 @@ For each room, compute:
 ```
 standard nightly  = BAR rate (e.g. ?1,700)
 whatahotel nightly = SEASONAL OFFER rate (e.g. ?1,530)
-standard total    = standard nightly ù N nights
-whatahotel total  = whatahotel nightly ù N nights  (= priceTotal amount)
+standard total    = standard nightly ? N nights
+whatahotel total  = whatahotel nightly ? N nights  (= priceTotal amount)
 savings           = standard total ? whatahotel total
 ```
 
@@ -1359,8 +1419,9 @@ From rate table rows:
   - BAR: higher rate ? priceStrike source
 From <h3> inside .bookingItem: Room names (for THIS hotel only)
 From .bookingItem images (first 2 only, for THIS hotel only):
-  - Check src attribute for d321ocj5nbe62c.cloudfront.net URL
-  - If src is placeholder, check data-src attribute (lazy-loaded)
+  - Extract from <a href> (NOT <img src>) inside ul.booking-img-list
+  - Valid CDNs: d2573qu6qrjt8c.cloudfront.net (most hotels) or d321ocj5nbe62c.cloudfront.net (older hotels)
+  - If <a> has no href or href is /img/paceholder.jpg, set images: []
   - Skip images < 200px; validate CDN domain
 From <a href="/booking/booking_info.cfm...">: Extract room code, rate code, hotel ID (for THIS hotel only)
 From page totals: N-night cost for each rate variant
@@ -1419,7 +1480,7 @@ Never combine rooms from different hotels into one table.
 MANDATORY FIELDS (NEVER OMIT ? applies to every room in every hotel):
 - createdAt: ISO 8601 string for portal ordering
 - priceStrike: use "" (empty string) if no BAR rate exists
-- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only (unless documented exception)
+- images: up to 2 URLs per room from <a href> in ul.booking-img-list (CDN: d2573qu6qrjt8c or d321ocj5nbe62c); empty array if hotel has no room images
 - booking table: set `bookingSummary` OR `stayCheckInOut` + `nightsLabel` + `savings.rightValue` (and ADR from `priceRate`)
 - savings.leftLabel: must wrap rate name in <span> (data quality)
 - savings.leftSub: must show "Standard: X/night (total: Y) ? WhataHotel!: A/night (total: B) ? you save Z" (data quality)
@@ -1494,7 +1555,7 @@ Multi-Hotel Promo (2+ URLs):
 MANDATORY FIELDS (NEVER OMIT ? every room, every hotel):
 - createdAt (ISO 8601)
 - priceStrike: use "" (empty string) if no BAR rate exists
-- images: exactly 2 URLs per room, from d321ocj5nbe62c.cloudfront.net only (or empty array ? app placeholder)
+- images: up to 2 URLs per room from <a href> in ul.booking-img-list (CDN: d2573qu6qrjt8c or d321ocj5nbe62c); empty array if hotel has no room images ? app uses DEFAULT_ROOM_IMAGE
 - booking table data: `bookingSummary` OR valid fallbacks (`stayCheckInOut`, `nightsLabel`, `savings.rightValue`, `priceRate`)
 - savings.leftLabel: must wrap rate name in <span>
 - savings.leftSub: must show "Standard: X/night (total: Y) ? WhataHotel!: A/night (total: B) ? you save Z"
@@ -1584,4 +1645,4 @@ For **each room**, verify all four of these hold. If any do not match, fix them 
 
 ---
 
-_WhataHotel! / Lorraine Travel ù Updated March 2026_
+_WhataHotel! / Lorraine Travel ? Updated March 2026_
