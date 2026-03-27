@@ -926,17 +926,32 @@ images: [
 ],
 ```
 
-### Common Image Extraction Mistakes ??
+### Hero Image Extraction
 
-| Mistake                            | Fix                                                                                                                          |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Using `<img src>` instead of `<a href>` | `<img src>` is often a truncated thumbnail (`/E.JPEG`). **Always extract from `<a href>`** which has the full-resolution URL |
-| Rejecting `d2573qu6qrjt8c` CDN URLs | Both `d2573qu6qrjt8c.cloudfront.net` and `d321ocj5nbe62c.cloudfront.net` are valid WhataHotel CDNs                          |
-| Using nav/header logo images       | Only look inside `.bookingItem .bookingItem-img ul.booking-img-list`; never pull from page header or nav                     |
-| Using placeholder URLs             | Skip any `href` pointing to `/img/paceholder.jpg`; leave `images: []` and let the app use `DEFAULT_ROOM_IMAGE`              |
-| Only finding 1 image when 2+ exist | Make sure you're iterating all `<li>` elements inside `ul.booking-img-list`, not just the first `<img>` on the page          |
-| Extracting images from page header | The hero/page banner images are NOT room images; look within each `.bookingItem` row only                                    |
-| Leaving `hero.imageUrl` blank      | Extract from `<ul id="subSlides">` background-image; prepend `https://whatahotel.com`; if truly absent, add `// AGENT NOTE` |
+The hero/banner image is in `<ul id="subSlides">` as a `background-image` on a `<li class="headerSlide">`:
+
+```html
+<ul id="subSlides" class="cycle-slideshow center" data-cycle-speed="1000" data-cycle-slides="li">
+  <li class="headerSlide" style="background-image: url(/content/hotels/{HOTEL_ID}/{filename}.jpg)"></li>
+</ul>
+```
+
+**Rules:**
+1. Extract the `background-image: url(...)` value from the first `<li>` inside `<ul id="subSlides">`
+2. The URL is **relative** ? prepend `https://whatahotel.com` to get the full URL
+3. The path pattern is `/content/hotels/{hotelID}/{filename}.jpg`
+4. Set **both** `hero.imageUrl` and `thumbnailUrl` to this full URL
+5. If extraction fails, set `hero.imageUrl: ""` with `// AGENT NOTE: hero image not found` ? the app falls back to `DEFAULT_HERO_IMAGE`
+
+### Common Image Mistakes ??
+
+| Mistake | Fix |
+|---------|-----|
+| Using `<img src>` instead of `<a href>` | `<img src>` is often a truncated thumbnail (`/E.JPEG`). **Always use `<a href>`** |
+| Rejecting `d2573qu6qrjt8c` CDN URLs | Both `d2573qu6qrjt8c` and `d321ocj5nbe62c` CloudFront CDNs are valid |
+| Using placeholder URLs | Skip `/img/paceholder.jpg`; set `images: []` instead |
+| Extracting images from page header | Room images are inside `.bookingItem` only; hero is in `<ul id="subSlides">` |
+| Leaving `hero.imageUrl` blank | Extract from `<ul id="subSlides">` background-image; prepend `https://whatahotel.com` |
 
 ---
 
@@ -1229,68 +1244,22 @@ Extract `room`, `rate`, and `hotel` from the SEASONAL OFFER row's "Book Now" `hr
 
 ### Step 4 ? Extract room images
 
-?? **This is critical ? missing images is the most common error.**
+See **"Room Images"** section above for full rules, HTML structure, and examples.
 
-For each `.bookingItem` on the page:
-
-1. **Locate the image carousel**: Find `<ul class="booking-img-list">` inside `<div class="bookingItem-img">`
-2. **Extract the `<a href>` URL** from each `<li>` ? this is the full-resolution image. **Do NOT use the `<img src>`** (it is often a truncated thumbnail ending in `/E.JPEG`)
-3. **Validate the URL**: Must be on `d2573qu6qrjt8c.cloudfront.net` (newer, most common) OR `d321ocj5nbe62c.cloudfront.net` (older, some hotels). Both are valid CloudFront CDNs.
-4. **Skip placeholders**: If the `<a>` has no `href`, or `href` contains `/img/paceholder.jpg`, that room has zero images ? set `images: []`
-5. **Take the first 2 valid CloudFront URLs** from the `<a href>` attributes
-6. **Use alt text**: Extract the `alt` attribute from the `<img>` inside the `<a>`, or use the `<a title>` attribute, or derive from room name
-
-**Troubleshooting**:
-
-- If you find 0 images for a room, set `images: []` (the app uses `DEFAULT_ROOM_IMAGE`). Some hotels have zero images for **all** room types ? this is normal.
-- If you see only 1 image per room, include only 1 URL
-- Never use URLs from `/img/paceholder.jpg` ? this is the site's own placeholder for missing images
-
-**Example result** (newer CDN):
-
-```ts
-images: [
-  {
-    src: "https://d2573qu6qrjt8c.cloudfront.net/5F327DB69E3542848C2F8F70947780BB/5F327DB69E3542848C2F8F70947780BB.JPEG",
-    alt: "Superior Room with Garden",
-  },
-  {
-    src: "https://d2573qu6qrjt8c.cloudfront.net/8286C351F2B3426D911709F2EB5C8016/8286C351F2B3426D911709F2EB5C8016.JPEG",
-    alt: "Superior Room with Garden",
-  },
-];
-```
+Quick checklist:
+1. Find `<ul class="booking-img-list">` inside each `.bookingItem`
+2. Extract from `<a href>` (NOT `<img src>` ? it's often a truncated thumbnail)
+3. Take first 2 valid CloudFront URLs per room; set `images: []` if none found
+4. Also set `thumbnailUrl` to the hero image URL
 
 ### Step 4b ? Extract hero image
 
-?? **`hero.imageUrl` must NEVER be blank.** The app has a `DEFAULT_HERO_IMAGE` fallback, but the agent must still always attempt extraction ? the default is a generic photo, not the actual hotel.
+See **"Hero Image"** subsection within "Room Images" above for full rules and HTML structure.
 
-**Where to find it:** The hero/banner image is in the page's `<ul id="subSlides">` element as an inline `background-image` style on a `<li class="headerSlide">`:
-
-```html
-<header class="subHead">
-  <!-- SlideShow Background -->
-  <ul id="subSlides" class="cycle-slideshow center" data-cycle-speed="1000" data-cycle-slides="li">
-    <li class="headerSlide" style="background-image: url(/content/hotels/{HOTEL_ID}/{filename}.jpg)"></li>
-  </ul>
-</header>
-```
-
-The URL path follows the pattern `/content/hotels/{hotelID}/{filename}.jpg` (NOT `/imageRepo/...`). The `{HOTEL_ID}` matches the `hotelID` query parameter in the booking page URL.
-
-**Extraction rules:**
-
-1. Find `<ul id="subSlides">` and extract the `background-image: url(...)` from the first `<li>` style attribute
-2. The URL is **relative** (starts with `/content/...`) ? prepend `https://whatahotel.com` to get the full URL (both `https://whatahotel.com` and `https://www.whatahotel.com` work; either is fine)
-3. If `subSlides` is missing, look for the largest `<img>` in the page header/banner area (above the room table)
-4. Check both `style="background-image: url(...)"` and `data-bg="..."` attributes (lazy-loading variant)
-5. Validate: the final URL should start with `https://whatahotel.com/content/` or `https://www.whatahotel.com/content/`
-
-**If extraction fails:** Set `hero.imageUrl` to `""` (the app falls back to `DEFAULT_HERO_IMAGE` from `src/constants.ts`) **AND** add an `// AGENT NOTE: hero image not found on page ? using default` comment in the data file. This should be rare.
-
-**Never leave `imageUrl` blank without a comment.** If the field is `""`, the agent note must explain why.
-
-Also set `thumbnailUrl` to the hero image URL (same value) so the portal card shows the correct hotel photo.
+Quick checklist:
+1. Find `<ul id="subSlides">` ? extract `background-image: url(...)` from the `<li>`
+2. Prepend `https://whatahotel.com` to the relative path (e.g. `/content/hotels/{ID}/...`)
+3. Set both `hero.imageUrl` and `thumbnailUrl` to this URL
 
 ### Step 5 ? Select the rooms to show
 
@@ -1360,288 +1329,96 @@ Edit the relevant `src/data/promo-N.ts` file directly. Commit to GitHub. Netlify
 
 ---
 
-## Netlify Project Context (Agent Prompt) ? Token-Optimized for Efficiency
+## Netlify Project Context (Agent Prompt)
 
 Paste this into **Netlify ? Site configuration ? Agent runs ? Project context**:
 
 ```
-?? TOKEN EFFICIENCY RULES ? MANDATORY ??
-
-MISSION: Create WhataHotel! proposal data files following the SSOT only.
-ONE FETCH PER HOTEL URL. DIRECT CREATION. ZERO RE-FETCHING. ZERO VERIFICATION FETCHES.
+MISSION: Create WhataHotel! proposal data files. Follow docs/whatahotel-design-ssot.md (the SSOT).
 
 CONSTRAINTS:
-- React SPA ? only create src/data/promo-N.ts files
-- Register every new promo in src/data/promos.ts (import + export)
-- Never modify component files
-- Never create HTML files or folders
+- React SPA ? only create/edit src/data/promo-N.ts files + src/data/promos.ts
+- Never modify component files, never create HTML files
 
-? CRITICAL FETCH RULES:
-- Read the SSOT first (docs/whatahotel-design-ssot.md) ? this is NOT a network fetch
-- For EACH hotel URL the user provides: fetch it EXACTLY ONCE, parse completely in one pass
-- 1 hotel URL ? 1 fetch total | 2 hotel URLs ? 2 fetches total | N URLs ? N fetches total
-- Do NOT re-fetch any URL for "verification", "checking", or any other reason
-- Do NOT fetch the hero image separately ? extract it during each page's initial parse
-- Do NOT fetch existing promo files for reference ? use the SSOT only
+FETCH RULES:
+- Read the SSOT first (NOT a network fetch)
+- Fetch EACH hotel URL EXACTLY ONCE; parse completely in one pass
+- NEVER re-fetch any URL for verification
 
-SINGLE vs MULTI-HOTEL DETECTION (decide before fetching):
-- User provides 1 URL, or multiple URLs with the same hotelID ? SINGLE-HOTEL promo (flat hero/offer/rooms)
-- User provides 2+ URLs with different hotelIDs ? MULTI-HOTEL promo (hotels[] array)
-Never use hotels[] for one hotel. Never use flat structure for multiple hotels.
-
-WORKFLOW ? SINGLE HOTEL (1 URL):
+WORKFLOW:
 1. Read /docs/whatahotel-design-ssot.md
-2. Ask user for URL (and promo id / client if needed)
-3. Fetch that URL ONCE ? extract hotel name, hero, rooms, rates, images, perks, totals
-4. Build promo object with flat hero, offer, rooms[]
-5. Create src/data/promo-N.ts; register in src/data/promos.ts; set createdAt (ISO 8601)
-6. Commit: promo-N-YYYYMMDD
-7. Done
+2. Detect mode: 1 hotelID = single-hotel (flat hero/offer/rooms); 2+ hotelIDs = multi-hotel (hotels[])
+3. Fetch each URL once; extract everything in one pass (see EXTRACTION below)
+4. Build src/data/promo-N.ts; register in promos.ts; set createdAt (ISO 8601)
+5. Commit and push
 
-WORKFLOW ? MULTI-HOTEL (2+ URLs):
-1. Read /docs/whatahotel-design-ssot.md
-2. Ask user for ALL hotel URLs + promo id + client name
-3. Fetch URL 1 ONCE ? parse completely ? store as Hotel A data (all rooms, rates, images, hero, perks)
-4. Fetch URL 2 ONCE ? parse completely ? store as Hotel B data (all rooms, rates, images, hero, perks)
-   (Repeat for URL 3, 4, etc. ? one fetch per URL, never re-fetch)
-5. DATA ISOLATION ? MANDATORY: data from Hotel A URL goes ONLY into hotels[0]; data from Hotel B URL goes ONLY into hotels[1]. NEVER mix data across hotels.
-6. Build promo object with hotels[] array; each entry has its own hero, offer, rooms[]
-7. Create src/data/promo-N.ts; register in src/data/promos.ts; set createdAt (ISO 8601)
-8. Commit: promo-N-YYYYMMDD
-9. Done
+?? IMAGE EXTRACTION ? #1 MOST COMMON ERROR ??
 
-EXTRACTION RULES (per URL, complete in one pass):
+HERO IMAGE (per hotel URL):
+- Find <ul id="subSlides"> in page HTML
+- Extract background-image: url(/content/hotels/{HOTEL_ID}/{filename}.jpg) from first <li>
+- Prepend https://whatahotel.com to make it absolute
+- Set BOTH hero.imageUrl AND thumbnailUrl to this full URL
+- Example: url(/content/hotels/2710/0000_canaves_epitome.jpg) ? https://whatahotel.com/content/hotels/2710/0000_canaves_epitome.jpg
 
-From <h1>: Hotel name ? hero.hotel (for THIS hotel only)
-From <h4>: Starting-at rate per night (lowest SEASONAL OFFER)
-From rate table rows:
-  - SEASONAL OFFER: lowest rate ? bookUrl source
-  - BAR: higher rate ? priceStrike source
-From <h3> inside .bookingItem: Room names (for THIS hotel only)
-From .bookingItem images (first 2 only, for THIS hotel only):
-  - Extract from <a href> (NOT <img src>) inside ul.booking-img-list
-  - Valid CDNs: d2573qu6qrjt8c.cloudfront.net (most hotels) or d321ocj5nbe62c.cloudfront.net (older hotels)
-  - If <a> has no href or href is /img/paceholder.jpg, set images: []
-  - Skip images < 200px; validate CDN domain
-From <a href="/booking/booking_info.cfm...">: Extract room code, rate code, hotel ID (for THIS hotel only)
-From page totals: N-night cost for each rate variant
-From hero section: Background image URL ? hero.imageUrl (for THIS hotel only)
-From perks section: offer.heading, offer.description, offer.pills[] (for THIS hotel only)
+ROOM IMAGES (per .bookingItem):
+- Find <ul class="booking-img-list"> inside <div class="bookingItem-img">
+- Extract URLs from <a href> tags (NOT from <img src> ? img src is often a truncated thumbnail ending in /E.JPEG)
+- Take first 2 <a href> URLs per room
+- Valid CDNs: d2573qu6qrjt8c.cloudfront.net (most hotels) OR d321ocj5nbe62c.cloudfront.net (older hotels)
+- If <a> has no href or href is /img/paceholder.jpg ? set images: []
+- NEVER use <img src> as the image URL; ALWAYS use <a href>
 
-REQUIRED DATA STRUCTURE:
+OTHER EXTRACTION (per URL, one pass):
+- Hotel name: <h1> tag ? hero.hotel
+- Room names: <h3> inside each .bookingItem
+- Rates: SEASONAL OFFER (lowest) ? bookUrl + priceRate; BAR (higher) ? priceStrike
+- Booking URLs: <a href="/booking/booking_info.cfm?room=..."> ? prepend https://www.whatahotel.com
+- Totals: "Total for N Nights: X,XXX.XX" inside expanded rate info
+- Perks: "Exclusive Complimentary Perks" section ? offer.pills[]
 
-Single-Hotel Promo (1 URL):
-- id, createdAt (ISO), title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
-- hero: imageUrl, alt, hotel, location
-- offer: heading, description, pills[]
-- rooms[]: badgeText, name, subtitle, priceRate, priceTotal, images[], features[], savings, bookUrl, bookLabel
-- priceLabel?: optional; priceStrike: "" if no BAR
-- quickFacts?, stayCheckInOut?, nightsLabel?, stayTotalExclAmount?, stayTotalExclSub?, investmentContextLine?, bookingSummary?, experienceMore? ? see Full Type Reference
-- pricingFootnote? on promo (HTML)
-- contact: sharedContact
+DATA STRUCTURE:
 
-Multi-Hotel Promo (2+ URLs):
-- id, createdAt (ISO), title (mention both hotels), client, dates, thumbnailUrl (first hotel hero), portalTotalLabel ("Starting From"), portalTotalValue (lowest grandTotalInclTaxes across ALL hotels/rooms)
-- hotels: [
-    {  // hotels[0] ? data from URL 1 ONLY
-      hero: { imageUrl, alt, hotel, location },   // from URL 1
-      offer: { heading, description, pills[] },   // from URL 1 perks
-      rooms: [                                    // from URL 1 only; max 3
-        { badgeText: "?? Hotel Option 1 ? Room 1", ...all room fields..., bookUrl: "...hotel=HOTEL_A_ID..." },
-        { badgeText: "?? Hotel Option 1 ? Room 2", ... },
-      ],
-    },
-    {  // hotels[1] ? data from URL 2 ONLY
-      hero: { imageUrl, alt, hotel, location },   // from URL 2
-      offer: { heading, description, pills[] },   // from URL 2 perks
-      rooms: [                                    // from URL 2 only; max 3
-        { badgeText: "?? Hotel Option 2 ? Room 1", ...all room fields..., bookUrl: "...hotel=HOTEL_B_ID..." },
-      ],
-    },
-  ]
-- specialOffer?: optional, promo-level (rendered ONCE before hotel loop)
-- priceSummary?: optional, promo-level (rendered after all hotels)
-- pricingFootnote?: promo-level (rendered after last hotel's booking table)
-- contact: sharedContact
+Single-Hotel: id, createdAt, title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue, hero, offer, rooms[], contact: sharedContact
+Multi-Hotel: same root fields + hotels[] array (each entry: hero + offer + rooms[] from ONE URL only)
+- Multi-hotel data isolation: hotels[0] = URL 1 data ONLY; hotels[1] = URL 2 data ONLY
+- Each hotel gets its own ComparisonOverview booking table
 
-MULTI-HOTEL DATA ISOLATION ? CRITICAL:
-- hotels[0].hero.imageUrl ? from URL 1 ONLY
-- hotels[0].rooms[].bookUrl ? must contain hotel=HOTEL_A_ID from URL 1
-- hotels[1].hero.imageUrl ? from URL 2 ONLY
-- hotels[1].rooms[].bookUrl ? must contain hotel=HOTEL_B_ID from URL 2
-- If hotel IDs match between hotels[], you have a bug ? fix before committing
+MANDATORY PER ROOM:
+- priceStrike: "" if no BAR rate
+- images: from <a href> (NOT <img src>); empty [] if none found
+- bookingSummary OR stayCheckInOut + nightsLabel + savings.rightValue
+- savings.leftLabel with <span> wrapper; savings.leftSub with full breakdown
+- 2 feature blocks: icon "door-open" (room features) + icon "gift" (perks)
 
-MULTI-HOTEL COMPARISONOVERVIEW (booking table):
-Each hotel's ComparisonOverview is rendered separately after that hotel's room cards.
-- hotels[0] rooms ? their own booking table with hotelName = hotels[0].hero.hotel
-- hotels[1] rooms ? their own booking table with hotelName = hotels[1].hero.hotel
-Never combine rooms from different hotels into one table.
+PRICING CONSISTENCY (verify before commit):
+- grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (all same number)
 
-MANDATORY FIELDS (NEVER OMIT ? applies to every room in every hotel):
-- createdAt: ISO 8601 string for portal ordering
-- priceStrike: use "" (empty string) if no BAR rate exists
-- images: up to 2 URLs per room from <a href> in ul.booking-img-list (CDN: d2573qu6qrjt8c or d321ocj5nbe62c); empty array if hotel has no room images
-- booking table: set `bookingSummary` OR `stayCheckInOut` + `nightsLabel` + `savings.rightValue` (and ADR from `priceRate`)
-- savings.leftLabel: must wrap rate name in <span> (data quality)
-- savings.leftSub: must show "Standard: X/night (total: Y) ? WhataHotel!: A/night (total: B) ? you save Z" (data quality)
-
-?? PRICING CONSISTENCY ? MANDATORY (most common agent error):
-The tax-inclusive total shown on the booking page IS the canonical grand total. It must be the SAME number in every field that shows a total. Before committing, verify for each room:
-- grandTotalInclTaxes = tax-incl. stay total from booking page (NEVER omit when page shows it)
-- bookingSummary.total = SAME as grandTotalInclTaxes (never the excl.-tax amount)
-- savings.rightValue = SAME as bookingSummary.total / grandTotalInclTaxes
-- portalTotalValue = SAME as grandTotalInclTaxes (or lowest across rooms for multi-room)
-If savingsBreakdown is used: whatahotelTotalInclTaxes = tax-incl. total; bookingSummary.total and savings.rightValue must equal that same amount.
-
-WRONG (fields disagree ? agent error):
-  grandTotalInclTaxes: "$20,200.00"
-  bookingSummary.total: "$18,648.00"   ? excl.-tax ? WRONG
-  savings.rightValue: "$18,648.00"     ? excl.-tax ? WRONG
-  portalTotalValue: "$18,648.00"       ? excl.-tax ? WRONG
-
-CORRECT (all fields agree):
-  grandTotalInclTaxes: "$20,200.00"
-  bookingSummary.total: "$20,200.00"   ? same ?
-  savings.rightValue: "$20,200.00"     ? same ?
-  portalTotalValue: "$20,200.00"       ? same ?
-
-OPTIONAL COMPONENTS (use if applicable):
-- savingsBreakdown?: If set, investment block uses `<SavingsBreakdown />` instead of the ADR / nights / grand total grid
-- specialOffer?: For highlighted promotions or cancellation policies
-- priceSummary?: For multi-unit or package pricing tables
-- mastheadEyebrow?, keyAttributes?, galleryTitle?, image captions ? layout polish
-
-?? FORBIDDEN ACTIONS (THESE WASTE TOKENS):
-- ? Do NOT "check" an existing promo file for reference ? use the SSOT examples
-- ? Do NOT fetch the hero image separately ? extract from initial page parse
-- ? Do NOT re-read the booking page after initial fetch
-- ? Do NOT verify data by fetching again
-- ? Do NOT find/read src/data/promo-9.ts for examples ? refer to SSOT sections instead
-- ? Do NOT run verification commands after building the file
-- ? Do NOT browse the project directory ? only edit needed files
-
-? CORRECT FLOW ? SINGLE HOTEL:
-- Read SSOT first
-- Fetch the 1 hotel URL once; parse everything in one pass
-- Build TypeScript file from parsed data + SSOT rules
-- Register in promos.ts; commit; done
-
-? CORRECT FLOW ? MULTI-HOTEL:
-- Read SSOT first
-- Fetch URL 1 once; parse completely; store Hotel A data
-- Fetch URL 2 once; parse completely; store Hotel B data
-- Build hotels[] ? Hotel A data into hotels[0] ONLY; Hotel B data into hotels[1] ONLY
-- Verify: hotels[0].rooms[].bookUrl has Hotel A's hotel ID; hotels[1] has Hotel B's hotel ID
-- Register in promos.ts; commit; done
-
-REQUIRED DATA STRUCTURE:
-
-Single-Hotel Promo (1 URL):
-- id, createdAt (ISO), title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue
-- hero: imageUrl, alt, hotel, location
-- offer: heading, description, pills[]
-- rooms[]: badgeText, name, subtitle, priceRate, priceStrike, priceTotal, images[], features[], savings, bookUrl, bookLabel
-- priceLabel?: optional
-- quickFacts?, bookingSummary?, stayCheckInOut?, nightsLabel?, investment fields ? see Full Type Reference
-- pricingFootnote?, suppressOfferBanner?, offer.hidden? as needed
-- contact: sharedContact
-
-Multi-Hotel Promo (2+ URLs):
-- hotels[] array; each entry has: hero (from that hotel's URL only), offer (from that hotel's URL only), rooms[] (from that hotel's URL only; max 3)
-- Data isolation: hotels[0] data comes from URL 1 ONLY; hotels[1] data comes from URL 2 ONLY
-- bookUrl in each room must have the hotel ID from that room's own URL
-- Each hotel gets its own ComparisonOverview booking table (never combined)
-
-MANDATORY FIELDS (NEVER OMIT ? every room, every hotel):
-- createdAt (ISO 8601)
-- priceStrike: use "" (empty string) if no BAR rate exists
-- images: up to 2 URLs per room from <a href> in ul.booking-img-list (CDN: d2573qu6qrjt8c or d321ocj5nbe62c); empty array if hotel has no room images ? app uses DEFAULT_ROOM_IMAGE
-- booking table data: `bookingSummary` OR valid fallbacks (`stayCheckInOut`, `nightsLabel`, `savings.rightValue`, `priceRate`)
-- savings.leftLabel: must wrap rate name in <span>
-- savings.leftSub: must show "Standard: X/night (total: Y) ? WhataHotel!: A/night (total: B) ? you save Z"
-
-PRICING CONSISTENCY (applies per room, per hotel ? same rules as above):
-- grandTotalInclTaxes = tax-incl. stay total from booking page; NEVER omit when page shows it
-- bookingSummary.total = SAME as grandTotalInclTaxes
-- savings.rightValue = SAME as grandTotalInclTaxes
-- portalTotalValue = lowest grandTotalInclTaxes across ALL rooms across ALL hotels
-
-CODE EXAMPLES IN SSOT:
-- Multi-Hotel Workflow: step-by-step for 2+ URLs (see "Multi-Hotel Workflow" section)
-- Clarification Protocol: step-by-step extraction checklist
-- Booking summary section: `bookingSummary` + fallbacks
-- CloudFront image rules: see "Step 4 ? Extract room images" in this doc
-
-FINAL WORKFLOW ? SINGLE HOTEL:
-1. Read SSOT; ask user for URL + id + client
-2. Fetch URL once; parse completely
-3. Build promo with flat hero/offer/rooms[]
-4. Create src/data/promo-N.ts; update promos.ts; set createdAt
-5. Commit promo-N-YYYYMMDD; push; Netlify deploys; done
-
-FINAL WORKFLOW ? MULTI-HOTEL:
-1. Read SSOT; ask user for ALL URLs + id + client
-2. Fetch URL 1 once ? parse completely ? Hotel A data in memory
-3. Fetch URL 2 once ? parse completely ? Hotel B data in memory
-4. Build promo with hotels[]: hotels[0] = Hotel A data ONLY; hotels[1] = Hotel B data ONLY
-5. Verify hotel IDs differ between hotels[0] and hotels[1] bookUrls
-6. Create src/data/promo-N.ts; update promos.ts; set createdAt
-7. Commit promo-N-YYYYMMDD; push; Netlify deploys; done
+FORBIDDEN:
+- Do NOT re-fetch any URL
+- Do NOT read existing promo files for reference
+- Do NOT browse the project directory
 ```
 
 ---
 
 ## New Promo Checklist
 
-- [ ] **Read** this SSOT (and `src/types.ts` if needed) before building data ? know booking table fields, `savings`, investment block, optional legacy `comparison[]`
-- [ ] Create `src/data/promo-N.ts` with correct `id`, **`createdAt` (ISO 8601)**, `title`, `client`, `dates`
-- [ ] All rooms have exactly 2 feature blocks (door-open + gift)
-- [ ] All `savings.leftLabel` strings use `<span>` wrapper
-- [ ] `savings.leftSub` includes per-night breakdown, total calculation, AND savings amount (data quality)
-- [ ] `priceStrike` is `""` not omitted when no strikethrough exists
-- [ ] **Hero image** scraped from page (`hero.imageUrl` populated) ? if truly missing, set `""` with `// AGENT NOTE` explaining why; `thumbnailUrl` matches hero image
-- [ ] Room images scraped from page (CloudFront CDN URLs) ? empty `images[]` uses app default photo
-- [ ] Booking table: `bookingSummary` **or** `stayCheckInOut` + `nightsLabel` + `priceRate` + `savings.rightValue` populated
-- [ ] Optional: `quickFacts`, `investmentContextLine`, `stayTotalExclAmount` / `stayTotalExclSub` for sample-style investment block
-- [ ] Multi-hotel promos use `hotels[]` not flat structure
-- [ ] Each room's `bookUrl` uses the SEASONAL OFFER (lowest) rate's unique room code
-- [ ] BAR rate used only for `priceStrike` (and optional legacy `comparison[]`) ? never as `bookUrl`
-- [ ] `// AGENT NOTE` comment added when multiple rate variants exist per room
-- [ ] No room data was hallucinated ? all rates, names, images, and URLs came from fetched page
-- [ ] If any data is missing, `// AGENT NOTE:` comment is present listing what needs updating
-- [ ] `PromoPage` flow satisfied: room cards (book CTA **after Exclusive perks** in `RoomCard`) ? booking table ? optional `pricingFootnote` ? `RoomOverviewGrid` ? optional price summary ? `<AppDownload />` ? `<ContactFooter />` (handled by app when promo is registered)
-- [ ] `[OPTIONAL]` `savingsBreakdown` field present in rooms if detailed pricing breakdown is needed (e.g., free nights promo)
-- [ ] `[OPTIONAL]` `specialOffer` field present in promo if special promotion/offer exists to highlight
-- [ ] `[OPTIONAL]` `priceSummary` field present in promo if multi-unit pricing table is needed
-- [ ] If optional components used: data is complete and formatted correctly (see SavingsBreakdown, SpecialOfferBox, PriceSummaryTable sections)
-- [ ] `<AppDownload />` remains on every promo route (component-level; do not remove from `PromoPage`)
-- [ ] Promo registered in `src/data/promos.ts`
-- [ ] Committed to GitHub and verified live on Netlify
+### Required
 
-### ?? Pricing Consistency Self-Check (run before committing)
-
-For **each room**, verify all four of these hold. If any do not match, fix them before committing:
-
-- [ ] **`grandTotalInclTaxes`** is populated with the tax-inclusive stay total from the booking page ? never omitted when the page shows it
-- [ ] **`bookingSummary.total`** equals `grandTotalInclTaxes` (same formatted string, e.g. `"$20,200.00"`)
-- [ ] **`savings.rightValue`** equals `bookingSummary.total` / `grandTotalInclTaxes` (same number ? not the excl.-tax amount)
-- [ ] **`portalTotalValue`** equals `grandTotalInclTaxes` for single-room promos, or the lowest `grandTotalInclTaxes` across all rooms/hotels for multi-room or multi-hotel promos
-- [ ] **If using `savingsBreakdown`:** `whatahotelTotalInclTaxes` is set, and `bookingSummary.total` + `savings.rightValue` both equal that same amount
-
-### ?? Multi-Hotel Self-Check (run before committing ? multi-hotel promos only)
-
-- [ ] `hotels[]` is used (not flat `hero/offer/rooms`) ? confirmed the user provided 2+ URLs with different `hotelID` values
-- [ ] Every room in `hotels[0]` has a `bookUrl` containing the Hotel A `hotel=` ID from URL 1
-- [ ] Every room in `hotels[1]` has a `bookUrl` containing the Hotel B `hotel=` ID from URL 2
-- [ ] `hotels[0].hero.imageUrl` comes from URL 1's hero section ? not from URL 2
-- [ ] `hotels[1].hero.imageUrl` comes from URL 2's hero section ? not from URL 1
-- [ ] `hotels[0].offer.pills[]` lists Hotel A's perks ? not Hotel B's
-- [ ] `hotels[1].offer.pills[]` lists Hotel B's perks ? not Hotel A's
-- [ ] No room name, rate, or image from Hotel A appears anywhere inside `hotels[1]`, and vice versa
-- [ ] `thumbnailUrl` uses the first hotel's (`hotels[0]`) hero image
-- [ ] `portalTotalValue` is the lowest `grandTotalInclTaxes` across ALL rooms across ALL hotels
-- [ ] `title` references both hotels (e.g. `"New York City ? Two Hotel Options"`) or both destinations
-- [ ] `badgeText` clearly identifies hotel and room number: `"?? Hotel Option 1 ? Room 1"`, `"?? Hotel Option 2 ? Room 1"`, etc.
+- [ ] Read this SSOT before building data
+- [ ] `id`, `createdAt` (ISO 8601), `title`, `client`, `dates` populated
+- [ ] **Hero image** extracted from `<ul id="subSlides">` ? `hero.imageUrl` and `thumbnailUrl` both set (see "Room Images" section)
+- [ ] **Room images** extracted from `<a href>` in `ul.booking-img-list` (NOT `<img src>`) ? CloudFront CDN URLs
+- [ ] 2 feature blocks per room: `icon: "door-open"` + `icon: "gift"`
+- [ ] `priceStrike: ""` when no BAR rate exists (never omit the field)
+- [ ] `bookUrl` uses SEASONAL OFFER (lowest) rate
+- [ ] `bookingSummary` or fallbacks (`stayCheckInOut` + `nightsLabel` + `savings.rightValue`) populated
+- [ ] `savings.leftLabel` uses `<span>` wrapper; `savings.leftSub` has full breakdown
+- [ ] Pricing consistency: `grandTotalInclTaxes` = `bookingSummary.total` = `savings.rightValue` = `portalTotalValue`
+- [ ] Multi-hotel promos use `hotels[]`; data from each URL isolated to its own entry
+- [ ] Registered in `src/data/promos.ts`
+- [ ] No hallucinated data ? everything from fetched page
 
 ---
 
