@@ -141,6 +141,9 @@ export type HotelBlock = {
   hero: HeroBlock;
   offer: OfferBlock;
   rooms: Room[];
+  /** When true, the per-hotel booking-summary table is suppressed so its rooms
+   *  can be merged into a later hotel's combined table. */
+  suppressBookingSummary?: boolean;
 };
 
 export type SpecialOffer = {
