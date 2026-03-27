@@ -8,7 +8,10 @@ import { HotelIdentity } from "../components/HotelIdentity";
 import { OfferBanner } from "../components/OfferBanner";
 import { SpecialOfferBox } from "../components/SpecialOfferBox";
 import { RoomCard } from "../components/RoomCard";
-import { ComparisonOverview } from "../components/ComparisonOverview";
+import {
+  ComparisonOverview,
+  type RoomGroup,
+} from "../components/ComparisonOverview";
 import { PriceSummaryTable } from "../components/PriceSummaryTable";
 import { AppDownload } from "../components/AppDownload";
 import { ContactFooter } from "../components/ContactFooter";
@@ -19,16 +22,26 @@ function ProposalBookingSection({
   rooms,
   hotelName,
   footnoteHtml,
+  entries,
 }: {
-  rooms: Room[];
-  hotelName: string;
+  rooms?: Room[];
+  hotelName?: string;
   footnoteHtml?: string;
+  /** When provided, renders a combined multi-hotel table instead. */
+  entries?: RoomGroup[];
 }) {
-  if (!rooms.length) return null;
+  const allRooms = entries
+    ? entries.flatMap((e) => e.rooms)
+    : rooms ?? [];
+  if (!allRooms.length) return null;
 
   return (
     <>
-      <ComparisonOverview rooms={rooms} hotelName={hotelName} />
+      {entries ? (
+        <ComparisonOverview entries={entries} />
+      ) : (
+        <ComparisonOverview rooms={rooms!} hotelName={hotelName!} />
+      )}
       {footnoteHtml ? (
         <div className="body">
           <div
@@ -37,7 +50,7 @@ function ProposalBookingSection({
           />
         </div>
       ) : null}
-      {rooms.map((room) =>
+      {allRooms.map((room) =>
         room.keyAttributes?.length ? (
           <div key={room.badgeText} className="body">
             <RoomOverviewGrid
@@ -148,50 +161,94 @@ export default function PromoPage() {
           </div>
         ) : null}
 
-        {promo.hotels.map((hotel, index) => (
-          <div key={index}>
-            <div className="body body-above-hero">
-              <HotelIdentity
-                hotel={hotel.hero.hotel}
-                locationHtml={hotel.hero.location}
-              />
-            </div>
-            <HeroSection
-              imageUrl={hotel.hero.imageUrl || DEFAULT_HERO_IMAGE}
-              alt={hotel.hero.alt}
-            />
-            {showOffer(hotel.offer) ? (
-              <OfferBanner
-                heading={hotel.offer.heading}
-                description={hotel.offer.description}
-                pills={hotel.offer.pills}
-              />
-            ) : null}
-            <div className="body">
-              {hotel.rooms.length ? (
-                hotel.rooms.map((room) => (
-                  <RoomCard key={room.badgeText} room={room} />
-                ))
-              ) : (
-                <p style={{ margin: "32px 0", textAlign: "center" }}>
-                  This proposal is under construction. Check back soon for room
-                  details.
-                </p>
-              )}
-            </div>
-            {hotel.rooms.length > 0 ? (
-              <ProposalBookingSection
-                rooms={hotel.rooms}
-                hotelName={hotel.hero.hotel}
-                footnoteHtml={
-                  index === promo.hotels!.length - 1
-                    ? promo.pricingFootnote
-                    : undefined
+        {promo.hotels.map((hotel, index) => {
+          // Accumulate suppressed booking-summary rooms from prior hotels
+          // that share the same name so they appear in a combined table.
+          const pendingEntries: RoomGroup[] = [];
+          for (let i = 0; i < index; i++) {
+            const prev = promo.hotels![i];
+            if (prev.suppressBookingSummary && prev.rooms.length > 0) {
+              // Only include if no non-suppressed hotel between prev and this
+              // hotel already consumed it.
+              let consumed = false;
+              for (let j = i + 1; j < index; j++) {
+                if (!promo.hotels![j].suppressBookingSummary) {
+                  consumed = true;
+                  break;
                 }
+              }
+              if (!consumed) {
+                pendingEntries.push({
+                  rooms: prev.rooms,
+                  hotelName: prev.hero.hotel,
+                });
+              }
+            }
+          }
+
+          const showBookingSummary =
+            !hotel.suppressBookingSummary && hotel.rooms.length > 0;
+          const hasCombined = pendingEntries.length > 0;
+
+          return (
+            <div key={index}>
+              <div className="body body-above-hero">
+                <HotelIdentity
+                  hotel={hotel.hero.hotel}
+                  locationHtml={hotel.hero.location}
+                />
+              </div>
+              <HeroSection
+                imageUrl={hotel.hero.imageUrl || DEFAULT_HERO_IMAGE}
+                alt={hotel.hero.alt}
               />
-            ) : null}
-          </div>
-        ))}
+              {showOffer(hotel.offer) ? (
+                <OfferBanner
+                  heading={hotel.offer.heading}
+                  description={hotel.offer.description}
+                  pills={hotel.offer.pills}
+                />
+              ) : null}
+              <div className="body">
+                {hotel.rooms.length ? (
+                  hotel.rooms.map((room) => (
+                    <RoomCard key={room.badgeText} room={room} />
+                  ))
+                ) : (
+                  <p style={{ margin: "32px 0", textAlign: "center" }}>
+                    This proposal is under construction. Check back soon for room
+                    details.
+                  </p>
+                )}
+              </div>
+              {showBookingSummary ? (
+                hasCombined ? (
+                  <ProposalBookingSection
+                    entries={[
+                      ...pendingEntries,
+                      { rooms: hotel.rooms, hotelName: hotel.hero.hotel },
+                    ]}
+                    footnoteHtml={
+                      index === promo.hotels!.length - 1
+                        ? promo.pricingFootnote
+                        : undefined
+                    }
+                  />
+                ) : (
+                  <ProposalBookingSection
+                    rooms={hotel.rooms}
+                    hotelName={hotel.hero.hotel}
+                    footnoteHtml={
+                      index === promo.hotels!.length - 1
+                        ? promo.pricingFootnote
+                        : undefined
+                    }
+                  />
+                )
+              ) : null}
+            </div>
+          );
+        })}
 
         {promo.priceSummary ? (
           <div className="body">

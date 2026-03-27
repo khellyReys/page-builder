@@ -1,10 +1,15 @@
 import type { Room } from "../types";
 import { stripHtml } from "../lib/html";
 
-type Props = {
+/** A group of rooms sharing one hotel name. */
+export type RoomGroup = {
   rooms: Room[];
   hotelName: string;
 };
+
+type Props =
+  | { rooms: Room[]; hotelName: string; entries?: undefined }
+  | { entries: RoomGroup[]; rooms?: undefined; hotelName?: undefined };
 
 function bookingRow(room: Room, hotelName: string) {
   // Always show the highest (tax-inclusive) total when available.
@@ -34,8 +39,17 @@ function bookingRow(room: Room, hotelName: string) {
   };
 }
 
-export function ComparisonOverview({ rooms, hotelName }: Props) {
-  if (!rooms.length) return null;
+export function ComparisonOverview(props: Props) {
+  // Normalise to entries array
+  const entries: RoomGroup[] = props.entries
+    ? props.entries
+    : [{ rooms: props.rooms!, hotelName: props.hotelName! }];
+
+  const allRooms = entries.flatMap((e) =>
+    e.rooms.map((room) => ({ room, hotelName: e.hotelName })),
+  );
+
+  if (!allRooms.length) return null;
 
   return (
     <div className="comparison-overview booking-summary-overview">
@@ -50,7 +64,7 @@ export function ComparisonOverview({ rooms, hotelName }: Props) {
       </div>
 
       <div className="co-mobile-cards" aria-label="Booking summary by room">
-        {rooms.map((room) => {
+        {allRooms.map(({ room, hotelName }) => {
           const row = bookingRow(room, hotelName);
           return (
             <div key={room.badgeText} className="co-m-card co-booking-card">
@@ -108,7 +122,7 @@ export function ComparisonOverview({ rooms, hotelName }: Props) {
             </tr>
           </thead>
           <tbody>
-            {rooms.map((room) => {
+            {allRooms.map(({ room, hotelName }) => {
               const row = bookingRow(room, hotelName);
               return (
                 <tr key={room.badgeText} className="co-tr">
