@@ -20,6 +20,7 @@ import { promo18 } from "./promo-18";
 import { promo19 } from "./promo-19";
 import { promo20 } from "./promo-20";
 import { promo21 } from "./promo-21";
+import { promo22 } from "./promo-22";
 
 /** Register new proposals here: `import { promoN } from "./promo-N";` then add to the array. */
-export const promos: Promo[] = [promo1, promo2, promo3, promo4, promo5, promo6, promo7, promo8, promo9, promo10, promo11, promo12, promo13, promo14, promo15, promo16, promo17, promo18, promo19, promo20, promo21];
+export const promos: Promo[] = [promo1, promo2, promo3, promo4, promo5, promo6, promo7, promo8, promo9, promo10, promo11, promo12, promo13, promo14, promo15, promo16, promo17, promo18, promo19, promo20, promo21, promo22];
