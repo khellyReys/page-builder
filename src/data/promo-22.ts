@@ -45,12 +45,12 @@ export const promo22: Promo = {
         "300 sqft · Golf or City Views · Mini Fridge<br/><strong style='color: var(--burgundy)'>Best Value – From $577.10/night</strong>",
       priceRate: "$577.10",
       priceStrike: "Standard: $675.13/night",
-      priceTotal: "1-Night Total: $577.10 (excl. taxes)",
+      priceTotal: "1-Night Total: $577.10 (incl. taxes)",
       bookingSummary: {
         checkInOut: "May 5 → May 6",
         nights: "1",
         adr: "$577.10",
-        total: "$577.10",
+        total: "$675.13",
       },
       savings: {
         leftLabel:
@@ -58,7 +58,7 @@ export const promo22: Promo = {
         leftSub:
           "Standard rate: $675.13/night &times; 1 = $675.13 &mdash; WhataHotel! rate: $577.10/night &times; 1 = $577.10 &mdash; you save <strong>$98.03</strong>",
         rightLabel: "(excl. taxes)",
-        rightValue: "$577.10",
+        rightValue: "$675.13 USD",
       },
       images: [
         {
@@ -103,7 +103,7 @@ export const promo22: Promo = {
         "300 sqft · Two Queen Beds · Mini Fridge<br/><strong style='color: var(--burgundy)'>From $604.10/night</strong>",
       priceRate: "$604.10",
       priceStrike: "Standard: $705.64/night",
-      priceTotal: "1-Night Total: $604.10 (excl. taxes)",
+      priceTotal: "1-Night Total: $705.64 (incl. taxes)",
       bookingSummary: {
         checkInOut: "May 5 → May 6",
         nights: "1",
@@ -161,7 +161,7 @@ export const promo22: Promo = {
         "355 sqft · Various Views<br/><strong style='color: var(--burgundy)'>From $613.10/night</strong>",
       priceRate: "$613.10",
       priceStrike: "Standard: $715.81/night",
-      priceTotal: "1-Night Total: $613.10 (excl. taxes)",
+      priceTotal: "1-Night Total: $715.81 (incl. taxes)",
       bookingSummary: {
         checkInOut: "May 5 → May 6",
         nights: "1",
