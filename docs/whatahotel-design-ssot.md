@@ -694,7 +694,10 @@ savingsBreakdown: {
 
 ## SpecialOfferBox (Promo-Level) ?? Optional
 
-The `<SpecialOfferBox />` component highlights key promotions or special terms **below the offer banner (if any) and above room cards**. On **multi-hotel** promos it is rendered **once** before the hotel loop (not repeated per hotel).
+The `<SpecialOfferBox />` component highlights key promotions or special terms.
+
+- **Single-hotel (`PromoPage.tsx`):** rendered **after** `OfferBanner` and **before** room cards (below the offer banner when it is shown).
+- **Multi-hotel:** rendered **once** immediately **after** `Masthead` and **before** the hotel loop ? so it appears **above** each hotel?s `OfferBanner` / identity block, not below the first hotel?s offer banner. (This matches current `PromoPage` behavior.)
 
 ### When to use
 

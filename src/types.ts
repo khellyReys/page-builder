@@ -3,6 +3,10 @@ export type HeroBlock = {
   alt: string;
   hotel: string;
   location: string;
+  /** Optional destination / city image (full-bleed below masthead; not from supplier `subSlides`). */
+  cityImageUrl?: string;
+  /** Alt text for `cityImageUrl`; include place name when set. */
+  cityImageAlt?: string;
 };
 
 export type OfferBlock = {
@@ -120,7 +124,7 @@ export type Room = {
     leftLabel: string;
     leftSub: string;
     rightLabel: string;
-    /** WhataHotel! total for the stay, typically excl. taxes — matches priceTotal */
+    /** Booking-table fallback Total; must match `bookingSummary.total` / `grandTotalInclTaxes` when incl.-tax totals are used (see SSOT Pricing Consistency). */
     rightValue: string;
     /** Second line in the savings strip, e.g. total incl. taxes from booking page */
     rightInclTaxesLabel?: string;

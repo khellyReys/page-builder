@@ -2,6 +2,8 @@
 
 **Read this file first.** The full design SSOT (`whatahotel-design-ssot.md`) is **longer than most tools’ single-file read limits** (~15k+ tokens). Agents that load the entire SSOT often fail mid-read and **miss image rules** entirely.
 
+**Which doc is “the” SSOT?** There is **one** canonical spec: **`docs/whatahotel-design-ssot.md`**. This file is a **short agent companion** (workflow, images, Netlify limits). **`docs/netlify-agent-project-context.txt`** is a **compressed** copy of the same rules for Netlify?s character cap ? if anything disagrees, **trust the full SSOT + `src/types.ts` + `PromoPage.tsx`**.
+
 ---
 
 ## Read order (do this every time)
@@ -13,12 +15,14 @@
 
 ### `types.ts` vs docs — do not patch types in data-only runs
 
-After you read **`src/types.ts`**, treat it as **authoritative** for what fields exist. If the SSOT or this guide mentions optional fields (e.g. `hero.cityImageUrl`) that are **not** on `HeroBlock` in the repo you have:
+After you read **`src/types.ts`**, treat it as **authoritative**. On **main**, `HeroBlock` includes optional **`cityImageUrl`** and **`cityImageAlt`** (see `CityHeroImage` on the proposal page).
 
-- **Do not** edit `src/types.ts` or any file under `src/components/` when your job is **only** new promo data (e.g. Netlify agent scope).
-- **Stop** and report: types are out of sync with docs; a human must merge `main` or update types/components on the branch first.
+If your checkout’s `HeroBlock` **still** lacks those fields while docs mention them:
 
-Editing types “because the SSOT says so” causes drift and bypasses code review for the app contract.
+- **Do not** edit `src/types.ts` or `src/components/` when your job is **only** new promo data (e.g. Netlify agent scope).
+- **Stop** and report: branch is behind `main` — merge or rebase first.
+
+Never add types or components ad hoc in a data-only run; that bypasses review.
 
 ---
 
