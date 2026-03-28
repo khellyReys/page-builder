@@ -1,0 +1,18 @@
+WhataHotel: edit ONLY src/data/promo-N.ts + src/data/promos.ts. No components/HTML.
+
+READ docs/whatahotel-agent-new-promo.md first. Do NOT read all of docs/whatahotel-design-ssot.md in one call—use search or partial read (section "Room Images" ~L820+).
+
+FETCH each booking URL ONCE; parse full HTML in one pass (must be real markup, not a text summary). Never re-fetch.
+
+IMAGES (top failure):
+• Hero: <ul id="subSlides"> first <li> style background-image url(...); prepend https://whatahotel.com → hero.imageUrl AND thumbnailUrl.
+• Rooms: each .bookingItem → ul.booking-img-list → copy <a href> only (NOT <img src>; /E.JPEG is wrong). First 2 links per room. CDNs: d2573qu6qrjt8c or d321ocj5nbe62c. Skip paceholder.jpg.
+• User-supplied city photo → hero.cityImageUrl + hero.cityImageAlt ONLY. Never replace hero.imageUrl or room images[] with it if the page has subSlides/booking-img-list.
+
+RATES: Lowest offer → bookUrl; higher BAR → priceStrike "". Prepend https://www.whatahotel.com to relative booking links.
+
+MODE: 1 hotelID = { hero, offer, rooms }. 2+ hotel IDs = hotels[]; isolate data per URL.
+
+PER ROOM: bookingSummary; savings leftLabel/leftSub; features door-open + gift; priceStrike "" if no BAR.
+
+VERIFY: grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (use lowest featured room for portal total). createdAt ISO 8601. npm run build.

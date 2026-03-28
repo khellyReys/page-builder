@@ -4,6 +4,12 @@
 > **Stack:** React + TypeScript + Vite ? Deployed on Netlify via GitHub  
 > **Last updated:** March 2026 ? **keep in sync with `src/types.ts` and `src/components/`**
 
+### AI agents: read this before the full SSOT
+
+- **This file is large (~15k+ tokens).** Many agent environments **cannot load it in one read** and will error (`exceeds maximum allowed tokens`). If that happens, you did **not** receive image-extraction rules — **stop** and use partial reads (`offset` / `limit`) or search.
+- **Start with:** [`docs/whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) — short guide: **mandatory hero + room image steps**, **city vs property URLs**, workflow, and an **SSOT line-range index** for chunked reads.
+- **Then** open only the SSOT sections you need (see **Room Images** ~line 811, **Booking URL Rules** ~line 958, **Multi-Hotel Workflow** ~line 1050).
+
 ---
 
 ## Production readiness (agents & maintainers)
@@ -38,7 +44,7 @@ No HTML files. No new folders. No template copying.
 
 Use this order so you know **what to extract** before you touch the booking page:
 
-1. **Read this SSOT** (`docs/whatahotel-design-ssot.md`) ? field rules, booking-summary row data, investment block fields, `savings` (still required by types), optional `comparison[]` (legacy). Optionally skim **`src/types.ts`** for the exact TypeScript contract.
+1. **Read** [`docs/whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) first (image rules + workflow; fits one read). **Then** read this SSOT **in sections** (see AI callout above) or search for headings ? do not rely on a single full-file read. Optionally skim **`src/types.ts`** for the exact TypeScript contract.
 2. **Get the WhataHotel booking page URL** from the user (and promo id / client name if needed).
 3. **Fetch that URL exactly once** ? parse HTML in one pass (rooms, rates, images, hero, perks, totals). No re-fetch for ?verification.?
 4. **Create** `src/data/promo-N.ts` from parsed data + SSOT rules.
@@ -65,8 +71,9 @@ src/
     html.ts           ? stripHtml helper (booking table fallbacks)
   components/
     Masthead.tsx
-    HeroSection.tsx           ? Hero image only (no overlay text)
-    HotelIdentity.tsx         ? Stars + hotel name + location above hero
+    CityHeroImage.tsx         ? Optional full-bleed destination photo + ?Destination? row (`hero.cityImageUrl`)
+    HeroSection.tsx           ? Inset framed **property** hero + caption (`hero.imageUrl`)
+    HotelIdentity.tsx         ? Stars + hotel name + location above property hero
     OfferBanner.tsx
     RoomMetaStrip.tsx         ? Optional quickFacts strip (Room Category, Suite Size, ?)
     ProposalInvestment.tsx   ? ADR / Grand total / Nights (3-column grid); no book button inside
@@ -94,25 +101,26 @@ Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatah
 **Single-hotel render order (`PromoPage.tsx`):**
 
 1. `Masthead` ? logo links to `https://www.whatahotel.com/`
-2. `HotelIdentity` ? star row, `hero.hotel`, `hero.location` (HTML) ? displayed **above** the hero image for prominence
-3. `HeroSection` ? full-width image (`hero.imageUrl` or `DEFAULT_HERO_IMAGE` from `src/constants.ts`)
-4. `OfferBanner` ? only if `offer` exists and **`!offer.hidden`** and **`!promo.suppressOfferBanner`**
-5. `SpecialOfferBox` ? optional, promo-level
-6. `RoomCard` for each room:
+2. Optional `CityHeroImage` ? when `hero.cityImageUrl` is set: **full-bleed** destination photo, then ?Destination? label row (user/agent-supplied URL; **not** from `subSlides`)
+3. `HotelIdentity` ? star row, `hero.hotel`, `hero.location` (HTML) ? above the **property** hero
+4. `HeroSection` ? **inset** framed property image (`hero.imageUrl` from `<ul id="subSlides">`, or `DEFAULT_HERO_IMAGE`) + caption strip
+5. `OfferBanner` ? only if `offer` exists and **`!offer.hidden`** and **`!promo.suppressOfferBanner`**
+6. `SpecialOfferBox` ? optional, promo-level
+7. `RoomCard` for each room:
    - `RoomMetaStrip` ? optional `quickFacts` strip
    - Gallery images
    - **Room Features** (`features` with `icon: "door-open"`) ? displayed in a card below the gallery images, before the investment block
    - **`ProposalInvestment`** ? 3-column **ADR ? Grand Total (incl. taxes & fees) ? Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
    - **Exclusive Perks** (`features` with `icon: "gift"`) ? centered list after the investment block, separated from room features
    - Primary **`bookUrl` / `bookLabel`** CTA (after perks, before optional `ExperienceMore`)
-7. `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
-8. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
-9. `RoomOverviewGrid` per room when `keyAttributes` is set
-10. Optional `PriceSummaryTable`
-11. `AppDownload` ? unchanged
-12. `ContactFooter`
+8. `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
+9. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
+10. `RoomOverviewGrid` per room when `keyAttributes` is set
+11. Optional `PriceSummaryTable`
+12. `AppDownload` ? unchanged
+13. `ContactFooter`
 
-**Multi-hotel:** For **each** `hotels[]` entry, repeat steps 2?9 (through that hotel?s `RoomOverviewGrid`). **`specialOffer`** is rendered **once** before the hotel loop. **`promo.pricingFootnote`** appears after the **last** hotel?s booking table (current `PromoPage` behavior). After all hotels: step 10 ? 11 ? 12 (optional price summary, then `AppDownload`, then `ContactFooter`). Hotel name appears **above** the hero image for each hotel.
+**Multi-hotel:** For **each** `hotels[]` entry, repeat steps **2?5** then **7?10** (optional city ? identity ? property hero ? offer ? room cards ? booking table ? footnote ? room overview). Layout step **6** (`specialOffer`) is **once** before the loop. **`promo.pricingFootnote`** appears after the **last** hotel?s booking table. After all hotels: steps **11?13** (optional price summary, `AppDownload`, `ContactFooter`).
 
 **Default images:** Empty `images[]` uses `DEFAULT_ROOM_IMAGE`; missing hero URL uses `DEFAULT_HERO_IMAGE`.
 
@@ -179,10 +187,13 @@ interface HotelBlock {
 }
 
 interface HeroBlock {
-  imageUrl: string; // App uses DEFAULT_HERO_IMAGE if missing/empty
+  imageUrl: string; // Property hero from <ul id="subSlides">; app uses DEFAULT_HERO_IMAGE if missing/empty
   alt: string;
   hotel: string;
-  location: string; // HTML string with <i> icon tag ? shown in HotelIdentity above hero
+  location: string; // HTML string with <i> icon tag ? shown in HotelIdentity above property hero
+  /** Optional destination/city image (full-bleed); do NOT reuse for imageUrl or room images */
+  cityImageUrl?: string;
+  cityImageAlt?: string;
 }
 
 interface OfferBlock {
@@ -810,6 +821,8 @@ priceSummary?: {
 
 ## Room Images ?? Always Scrape from Page ? Never Default to Placeholder
 
+> **Agents:** This section is **mandatory** for every new promo. If your environment failed a full-file SSOT read, you may have missed it ? read [`whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) first, then this section.
+
 Each `.bookingItem` on the WhataHotel booking page contains an image carousel inside `<ul class="booking-img-list">`. Images are wrapped in `<a>` tags whose `href` holds the **full-resolution URL**.
 
 ### Two CDN Domains (both valid)
@@ -1062,7 +1075,7 @@ Never use `hotels[]` for a single hotel. Never use flat structure for multiple h
 
 ### Step 1 ? Read the SSOT first (same as always)
 
-Read `docs/whatahotel-design-ssot.md` before any fetching. Know the full schema for `HotelBlock` and its sub-fields before you start.
+Read [`docs/whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) and the **relevant sections** of `docs/whatahotel-design-ssot.md` (see AI callout at top of SSOT ? avoid a single full-file read). Know the schema for `HotelBlock` and its sub-fields before you start.
 
 ### Step 2 ? Fetch each URL exactly once, in sequence
 
@@ -1331,73 +1344,29 @@ Edit the relevant `src/data/promo-N.ts` file directly. Commit to GitHub. Netlify
 
 ## Netlify Project Context (Agent Prompt)
 
-Paste this into **Netlify ? Site configuration ? Agent runs ? Project context**:
+Netlify’s **Project context** field is limited (**~3000 characters**). Use the short block below or copy the same text from **`docs/netlify-agent-project-context.txt`** (kept in sync; ~1.5k chars). Full rules live in **`docs/whatahotel-agent-new-promo.md`** and the SSOT (**Room Images** section ~line 820+).
+
+Paste into **Netlify ? Site configuration ? Agent runs ? Project context**:
 
 ```
-MISSION: Create WhataHotel! proposal data files. Follow docs/whatahotel-design-ssot.md (the SSOT).
+WhataHotel: edit ONLY src/data/promo-N.ts + src/data/promos.ts. No components/HTML.
 
-CONSTRAINTS:
-- React SPA ? only create/edit src/data/promo-N.ts files + src/data/promos.ts
-- Never modify component files, never create HTML files
+READ docs/whatahotel-agent-new-promo.md first. Do NOT read all of docs/whatahotel-design-ssot.md in one call—use search or partial read (section "Room Images" ~L820+).
 
-FETCH RULES:
-- Read the SSOT first (NOT a network fetch)
-- Fetch EACH hotel URL EXACTLY ONCE; parse completely in one pass
-- NEVER re-fetch any URL for verification
+FETCH each booking URL ONCE; parse full HTML in one pass (must be real markup, not a text summary). Never re-fetch.
 
-WORKFLOW:
-1. Read /docs/whatahotel-design-ssot.md
-2. Detect mode: 1 hotelID = single-hotel (flat hero/offer/rooms); 2+ hotelIDs = multi-hotel (hotels[])
-3. Fetch each URL once; extract everything in one pass (see EXTRACTION below)
-4. Build src/data/promo-N.ts; register in promos.ts; set createdAt (ISO 8601)
-5. Commit and push
+IMAGES (top failure):
+• Hero: <ul id="subSlides"> first <li> style background-image url(...); prepend https://whatahotel.com → hero.imageUrl AND thumbnailUrl.
+• Rooms: each .bookingItem → ul.booking-img-list → copy <a href> only (NOT <img src>; /E.JPEG is wrong). First 2 links per room. CDNs: d2573qu6qrjt8c or d321ocj5nbe62c. Skip paceholder.jpg.
+• User-supplied city photo → hero.cityImageUrl + hero.cityImageAlt ONLY. Never replace hero.imageUrl or room images[] with it if the page has subSlides/booking-img-list.
 
-?? IMAGE EXTRACTION ? #1 MOST COMMON ERROR ??
+RATES: Lowest offer → bookUrl; higher BAR → priceStrike "". Prepend https://www.whatahotel.com to relative booking links.
 
-HERO IMAGE (per hotel URL):
-- Find <ul id="subSlides"> in page HTML
-- Extract background-image: url(/content/hotels/{HOTEL_ID}/{filename}.jpg) from first <li>
-- Prepend https://whatahotel.com to make it absolute
-- Set BOTH hero.imageUrl AND thumbnailUrl to this full URL
-- Example: url(/content/hotels/2710/0000_canaves_epitome.jpg) ? https://whatahotel.com/content/hotels/2710/0000_canaves_epitome.jpg
+MODE: 1 hotelID = { hero, offer, rooms }. 2+ hotel IDs = hotels[]; isolate data per URL.
 
-ROOM IMAGES (per .bookingItem):
-- Find <ul class="booking-img-list"> inside <div class="bookingItem-img">
-- Extract URLs from <a href> tags (NOT from <img src> ? img src is often a truncated thumbnail ending in /E.JPEG)
-- Take first 2 <a href> URLs per room
-- Valid CDNs: d2573qu6qrjt8c.cloudfront.net (most hotels) OR d321ocj5nbe62c.cloudfront.net (older hotels)
-- If <a> has no href or href is /img/paceholder.jpg ? set images: []
-- NEVER use <img src> as the image URL; ALWAYS use <a href>
+PER ROOM: bookingSummary; savings leftLabel/leftSub; features door-open + gift; priceStrike "" if no BAR.
 
-OTHER EXTRACTION (per URL, one pass):
-- Hotel name: <h1> tag ? hero.hotel
-- Room names: <h3> inside each .bookingItem
-- Rates: SEASONAL OFFER (lowest) ? bookUrl + priceRate; BAR (higher) ? priceStrike
-- Booking URLs: <a href="/booking/booking_info.cfm?room=..."> ? prepend https://www.whatahotel.com
-- Totals: "Total for N Nights: X,XXX.XX" inside expanded rate info
-- Perks: "Exclusive Complimentary Perks" section ? offer.pills[]
-
-DATA STRUCTURE:
-
-Single-Hotel: id, createdAt, title, client, dates, thumbnailUrl, portalTotalLabel, portalTotalValue, hero, offer, rooms[], contact: sharedContact
-Multi-Hotel: same root fields + hotels[] array (each entry: hero + offer + rooms[] from ONE URL only)
-- Multi-hotel data isolation: hotels[0] = URL 1 data ONLY; hotels[1] = URL 2 data ONLY
-- Each hotel gets its own ComparisonOverview booking table
-
-MANDATORY PER ROOM:
-- priceStrike: "" if no BAR rate
-- images: from <a href> (NOT <img src>); empty [] if none found
-- bookingSummary OR stayCheckInOut + nightsLabel + savings.rightValue
-- savings.leftLabel with <span> wrapper; savings.leftSub with full breakdown
-- 2 feature blocks: icon "door-open" (room features) + icon "gift" (perks)
-
-PRICING CONSISTENCY (verify before commit):
-- grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (all same number)
-
-FORBIDDEN:
-- Do NOT re-fetch any URL
-- Do NOT read existing promo files for reference
-- Do NOT browse the project directory
+VERIFY: grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (use lowest featured room for portal total). createdAt ISO 8601. npm run build.
 ```
 
 ---
@@ -1406,10 +1375,11 @@ FORBIDDEN:
 
 ### Required
 
-- [ ] Read this SSOT before building data
+- [ ] Read [`whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) and **SSOT image section** (~line 811+) before building data (do not rely on one full SSOT read)
 - [ ] `id`, `createdAt` (ISO 8601), `title`, `client`, `dates` populated
-- [ ] **Hero image** extracted from `<ul id="subSlides">` ? `hero.imageUrl` and `thumbnailUrl` both set (see "Room Images" section)
-- [ ] **Room images** extracted from `<a href>` in `ul.booking-img-list` (NOT `<img src>`) ? CloudFront CDN URLs
+- [ ] **Property hero** from `<ul id="subSlides">` ? `hero.imageUrl` and `thumbnailUrl` both set (see "Room Images" section); **not** the city URL
+- [ ] If user gave a **city** URL ? `hero.cityImageUrl` + `hero.cityImageAlt` only (never substitute for `hero.imageUrl` or `images[]` when page has assets)
+- [ ] **Room images** extracted from `<a href>` in `ul.booking-img-list` (NOT `<img src>`) ? CloudFront CDN URLs; **no** `images: []` for all rooms when the HTML lists carousel links
 - [ ] 2 feature blocks per room: `icon: "door-open"` + `icon: "gift"`
 - [ ] `priceStrike: ""` when no BAR rate exists (never omit the field)
 - [ ] `bookUrl` uses SEASONAL OFFER (lowest) rate
