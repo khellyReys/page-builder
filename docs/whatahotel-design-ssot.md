@@ -1367,6 +1367,8 @@ MODE: 1 hotelID = { hero, offer, rooms }. 2+ hotel IDs = hotels[]; isolate data 
 PER ROOM: bookingSummary; savings leftLabel/leftSub; features door-open + gift; priceStrike "" if no BAR.
 
 VERIFY: grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (use lowest featured room for portal total). createdAt ISO 8601. npm run build.
+
+USER MAY SEND ONLY a WhataHotel booking URL +/- a second URL for city/destination ("create a promo", "use as city image"). Still run the full workflow. Second URL -> hero.cityImageUrl + hero.cityImageAlt only. Default 3 lowest-priced rooms; next free promo-N from promos.ts if id not given; client "" if omitted.
 ```
 
 ---

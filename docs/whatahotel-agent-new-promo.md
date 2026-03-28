@@ -13,6 +13,39 @@
 
 ---
 
+## Minimal user prompt (agents: full rules still apply)
+
+The user may send **only**:
+
+1. A **WhataHotel booking URL** (`showRates.cfm`, `booking_info.cfm`, etc.), and  
+2. Optionally a **second URL** with a short line like *“create a promo”*, *“use this as the city image”*, or *“destination photo”*.
+
+**You must still:** fetch that booking URL **once**, parse **full HTML**, extract **subSlides** + **booking-img-list**, build a complete `Promo`, register in `promos.ts`, and run `npm run build`. Do **not** skip image extraction because the user was brief.
+
+| User intent | What you do |
+|-------------|-------------|
+| Single booking link only | Full promo; **no** `cityImageUrl` unless they also pass a city URL. |
+| Booking link + separate image URL labeled city/destination | Second URL → **`hero.cityImageUrl`** + **`hero.cityImageAlt`** only. **Never** put it in `hero.imageUrl`, `thumbnailUrl`, or `rooms[].images[]` when the page has hotel assets. |
+| `cityImageAlt` not given | Derive from hotel location / title (e.g. `"Amsterdam, Netherlands"`). |
+
+**Defaults when the user does not specify:**
+
+- **Rooms:** feature the **3 lowest-priced** room types on the page (SSOT default).  
+- **Promo id:** if they did not give `promo-N`, open `src/data/promos.ts` and use the **next free** `promo-N` (or ask once if unclear).  
+- **Client:** `""` if not provided.
+
+**Example (minimal — valid user message):**
+
+```text
+Create a promo.
+
+https://www.whatahotel.com/booking/showRates.cfm?hotelID=2772&checkIn=2026-08-24&checkOut=2026-08-27&guests=2&children=0&rooms=1
+
+City image: https://example.com/amsterdam.jpg
+```
+
+---
+
 ## Images — mandatory (most common failure)
 
 **Never ship `images: []` for every room and a wrong/missing hero** if the live booking page has carousels. Extract from **raw HTML** of the fetched URL. If your fetch returns no `subSlides` / no `booking-img-list`, the HTML may be truncated or JS-rendered — fix the fetch or ask the user to paste HTML; do not guess URLs.
