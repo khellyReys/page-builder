@@ -1349,11 +1349,13 @@ Netlify’s **Project context** field is limited (**~3000 characters**). Use the
 Paste into **Netlify ? Site configuration ? Agent runs ? Project context**:
 
 ```
-WhataHotel: edit ONLY src/data/promo-N.ts + src/data/promos.ts. No components/HTML.
+WhataHotel: edit ONLY src/data/promo-N.ts + src/data/promos.ts. NEVER src/types.ts or src/components/—if HeroBlock lacks fields the docs mention, stop and report (sync branch with main).
 
 READ docs/whatahotel-agent-new-promo.md first. Do NOT read all of docs/whatahotel-design-ssot.md in one call—use search or partial read (section "Room Images" ~L820+).
 
-FETCH each booking URL ONCE; parse full HTML in one pass (must be real markup, not a text summary). Never re-fetch.
+Build new promos from src/types.ts + docs only. FORBIDDEN: opening any existing src/data/promo-*.ts (e.g. promo-20) as a template—even after globbing for the next id. Only read promos.ts for the next N; never read old promo files. Edit only the new promo-N.ts + promos.ts.
+
+FETCH each booking URL ONCE; parse full HTML in one pass (must be real markup, not a text summary). Never re-fetch. If web fetch refuses or summarizes only, use curl -sL "<URL>" to temp file. Extract by HTML markers (subSlides, booking-img-list, booking_info.cfm)—never fixed sed line ranges.
 
 IMAGES (top failure):
 • Hero: <ul id="subSlides"> first <li> style background-image url(...); prepend https://whatahotel.com → hero.imageUrl AND thumbnailUrl.

@@ -7,9 +7,18 @@
 ## Read order (do this every time)
 
 1. **Read this file** end-to-end (you are here).
-2. **`src/types.ts`** — confirm `Promo`, `Room`, `HeroBlock` required fields.
+2. **`src/types.ts`** — confirm `Promo`, `Room`, `HeroBlock` required fields; this is the **canonical shape** for new data.
 3. **Full SSOT only in chunks** if needed — use the [SSOT section index](#ssot-section-index-line-ranges) below and `offset`/`limit` (or search), never assume you saw “Room Images” without opening that section.
-4. **Optional:** one recent `src/data/promo-*.ts` for tone and field patterns (if your environment allows).
+4. **Do not** open any **existing** `src/data/promo-*.ts` as a reference (even after a glob to pick the next id — use **`promos.ts` imports only** to infer the next `promo-N`). Older files can predate current layout (`cityImageUrl`, `CityHeroImage`, framed `HeroSection`, etc.). Construct each promo from **types + this guide + SSOT**, not from another promo file. The only promo TS files you read are **`promos.ts`** and the **new** `promo-N.ts` you create.
+
+### `types.ts` vs docs — do not patch types in data-only runs
+
+After you read **`src/types.ts`**, treat it as **authoritative** for what fields exist. If the SSOT or this guide mentions optional fields (e.g. `hero.cityImageUrl`) that are **not** on `HeroBlock` in the repo you have:
+
+- **Do not** edit `src/types.ts` or any file under `src/components/` when your job is **only** new promo data (e.g. Netlify agent scope).
+- **Stop** and report: types are out of sync with docs; a human must merge `main` or update types/components on the branch first.
+
+Editing types “because the SSOT says so” causes drift and bypasses code review for the app contract.
 
 ---
 
@@ -138,6 +147,16 @@ Use these with **partial reads** of `docs/whatahotel-design-ssot.md` (approximat
 - Confirm the response is **HTML**, not a text summary or markdown table from another tool.
 - Search the raw string for `subSlides` and `booking-img-list`.
 - `showRates.cfm` should still contain the same hotel markup as other booking flows for that hotel; if not, try the hotel’s main booking/rates page the user can open in a browser.
+
+### Browse / “Fetch web” refuses or returns only a summary
+
+Some tools **refuse** to return full page HTML (copyright policy) or return **structured summaries** instead of markup. For this **authorized** WhataHotel proposal workflow, **do not stop**:
+
+1. **Fetch raw HTML** with a shell HTTP client, e.g. `curl -sL "<booking URL>"` (follow redirects), save to a temp file **once** (same single-fetch rule).
+2. **Verify** the file contains `subSlides` and/or `bookingItem` / `booking-img-list` before parsing.
+3. **Parse by stable markers** — search for `id="subSlides"`, `booking-img-list`, `booking_info.cfm`, room codes, etc. **Do not** rely on **fixed line ranges** (e.g. `sed -n '381,700p'`): any site update shifts line numbers and breaks extraction.
+
+If `curl` returns a bot challenge or empty shell, say so and ask the user to paste HTML or try from an environment that receives the normal booking page.
 
 ---
 
