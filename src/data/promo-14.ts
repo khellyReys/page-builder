@@ -25,6 +25,9 @@ export const promo14: Promo = {
     hotel: "Four Seasons Resort Hualalai",
     location:
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Kailua-Kona, Hawaii &nbsp;|&nbsp; Five-Star Oceanfront Resort",
+    cityImageUrl:
+      "https://images.ctfassets.net/bth3mlrehms2/4HYNsMdjQpSQJRjMhfchhh/7163187a226b3806d040767663004a91/O-ahu__Hawaii__USA.jpg?w=1400&q=60&fm=webp",
+    cityImageAlt: "Big Island, Hawaii",
   },
 
   offer: {

@@ -4,6 +4,7 @@ import { promos } from "../data/promos";
 import { DEFAULT_HERO_IMAGE } from "../constants";
 import { Masthead } from "../components/Masthead";
 import { HeroSection } from "../components/HeroSection";
+import { CityHeroImage } from "../components/CityHeroImage";
 import { HotelIdentity } from "../components/HotelIdentity";
 import { OfferBanner } from "../components/OfferBanner";
 import { SpecialOfferBox } from "../components/SpecialOfferBox";
@@ -150,6 +151,12 @@ export default function PromoPage() {
 
         {promo.hotels.map((hotel, index) => (
           <div key={index}>
+            {hotel.hero.cityImageUrl ? (
+              <CityHeroImage
+                imageUrl={hotel.hero.cityImageUrl}
+                alt={hotel.hero.cityImageAlt ?? "Destination"}
+              />
+            ) : null}
             <div className="body body-above-hero">
               <HotelIdentity
                 hotel={hotel.hero.hotel}
@@ -248,6 +255,12 @@ export default function PromoPage() {
         logoHref="https://www.whatahotel.com/"
         eyebrow={promo.mastheadEyebrow}
       />
+      {promo.hero!.cityImageUrl ? (
+        <CityHeroImage
+          imageUrl={promo.hero!.cityImageUrl}
+          alt={promo.hero!.cityImageAlt ?? "Destination"}
+        />
+      ) : null}
       <div className="body body-above-hero">
         <HotelIdentity
           hotel={promo.hero!.hotel}

@@ -94,25 +94,26 @@ Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatah
 **Single-hotel render order (`PromoPage.tsx`):**
 
 1. `Masthead` ? logo links to `https://www.whatahotel.com/`
-2. `HotelIdentity` ? star row, `hero.hotel`, `hero.location` (HTML) ? displayed **above** the hero image for prominence
-3. `HeroSection` ? full-width image (`hero.imageUrl` or `DEFAULT_HERO_IMAGE` from `src/constants.ts`)
-4. `OfferBanner` ? only if `offer` exists and **`!offer.hidden`** and **`!promo.suppressOfferBanner`**
-5. `SpecialOfferBox` ? optional, promo-level
-6. `RoomCard` for each room:
+2. Optional `CityHeroImage` ? full-bleed city / destination photo when `hero.cityImageUrl` is set (authoring agent supplies URL + `hero.cityImageAlt`); **above** `HotelIdentity`, not from the supplier site
+3. `HotelIdentity` ? star row, `hero.hotel`, `hero.location` (HTML) ? displayed **above** the property hero image for prominence
+4. `HeroSection` ? full-width image (`hero.imageUrl` or `DEFAULT_HERO_IMAGE` from `src/constants.ts`)
+5. `OfferBanner` ? only if `offer` exists and **`!offer.hidden`** and **`!promo.suppressOfferBanner`**
+6. `SpecialOfferBox` ? optional, promo-level
+7. `RoomCard` for each room:
    - `RoomMetaStrip` ? optional `quickFacts` strip
    - Gallery images
    - **Room Features** (`features` with `icon: "door-open"`) ? displayed in a card below the gallery images, before the investment block
    - **`ProposalInvestment`** ? 3-column **ADR ? Grand Total (incl. taxes & fees) ? Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
    - **Exclusive Perks** (`features` with `icon: "gift"`) ? centered list after the investment block, separated from room features
    - Primary **`bookUrl` / `bookLabel`** CTA (after perks, before optional `ExperienceMore`)
-7. `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
-8. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
-9. `RoomOverviewGrid` per room when `keyAttributes` is set
-10. Optional `PriceSummaryTable`
-11. `AppDownload` ? unchanged
-12. `ContactFooter`
+8. `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
+9. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
+10. `RoomOverviewGrid` per room when `keyAttributes` is set
+11. Optional `PriceSummaryTable`
+12. `AppDownload` ? unchanged
+13. `ContactFooter`
 
-**Multi-hotel:** For **each** `hotels[]` entry, repeat steps 2?9 (through that hotel?s `RoomOverviewGrid`). **`specialOffer`** is rendered **once** before the hotel loop. **`promo.pricingFootnote`** appears after the **last** hotel?s booking table (current `PromoPage` behavior). After all hotels: step 10 ? 11 ? 12 (optional price summary, then `AppDownload`, then `ContactFooter`). Hotel name appears **above** the hero image for each hotel.
+**Multi-hotel:** For **each** `hotels[]` entry, repeat steps 2?10 (through that hotel?s `RoomOverviewGrid`), including optional `CityHeroImage` per hotel when that entry?s `hero.cityImageUrl` is set. **`specialOffer`** is rendered **once** before the hotel loop. **`promo.pricingFootnote`** appears after the **last** hotel?s booking table (current `PromoPage` behavior). After all hotels: step 11 ? 12 ? 13 (optional price summary, then `AppDownload`, then `ContactFooter`). Hotel name appears **above** the property hero image for each hotel.
 
 **Default images:** Empty `images[]` uses `DEFAULT_ROOM_IMAGE`; missing hero URL uses `DEFAULT_HERO_IMAGE`.
 
@@ -183,6 +184,10 @@ interface HeroBlock {
   alt: string;
   hotel: string;
   location: string; // HTML string with <i> icon tag ? shown in HotelIdentity above hero
+  /** Optional iconic city / destination image (authoring agent ? licensed URL); full-bleed above HotelIdentity. */
+  cityImageUrl?: string;
+  /** Alt text for city image; include city name (e.g. ?Paris skyline?). */
+  cityImageAlt?: string;
 }
 
 interface OfferBlock {

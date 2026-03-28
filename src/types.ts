@@ -3,6 +3,10 @@ export type HeroBlock = {
   alt: string;
   hotel: string;
   location: string;
+  /** Iconic city / destination image from the authoring agent (full-bleed below masthead, above hotel identity). */
+  cityImageUrl?: string;
+  /** Alt text for `cityImageUrl`; include city name when set. */
+  cityImageAlt?: string;
 };
 
 export type OfferBlock = {
