@@ -1,22 +1,49 @@
-WhataHotel: edit ONLY src/data/promo-N.ts + src/data/promos.ts. NEVER src/types.ts or src/components/—if HeroBlock lacks fields the docs mention, stop and report (sync branch with main).
+WhataHotel Netlify Agent Rules (edit ONLY `src/data/promo-N.ts` + `src/data/promos.ts`).
+Never edit `src/types.ts` or `src/components/`. If types mismatch docs, stop and report branch needs sync.
 
-READ docs/whatahotel-agent-new-promo.md first. Do NOT read all of docs/whatahotel-design-ssot.md in one call—use search or partial read (section "Room Images" ~L820+).
+Read `docs/whatahotel-agent-new-promo.md` first. Do not read full SSOT in one call.
+Never use old `promo-*.ts` as template. Use `src/types.ts` + docs + booking HTML only.
 
-Build new promos from src/types.ts + docs only. FORBIDDEN: opening any existing src/data/promo-*.ts (e.g. promo-20) as a template—even after globbing for the next id. Only read promos.ts for the next N; never read old promo files. Edit only the new promo-N.ts + promos.ts.
+Fetch each booking URL ONCE. Parse full HTML (not summaries). If fetch tool summarizes/refuses, use curl once and parse markers (`subSlides`, `booking-img-list`, `booking_info.cfm`).
 
-FETCH each booking URL ONCE; parse full HTML in one pass (must be real markup, not a text summary). Never re-fetch. If web fetch refuses or summarizes only, use curl -sL "<URL>" to temp file. Extract by HTML markers (subSlides, booking-img-list, booking_info.cfm)—never fixed sed line ranges.
+Images:
+- Hero: `ul#subSlides` first `li` background-image URL -> prepend `https://whatahotel.com` -> set BOTH `hero.imageUrl` + `thumbnailUrl`.
+- Rooms: `.bookingItem ul.booking-img-list li a[href]` only (NOT `img src`). First 2 valid links per room. Valid CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`.
+- Skip placeholders (`/img/paceholder.jpg`). If room has only placeholder/logo, use `images: []` (do not invent/fallback room image).
+- User city image URL goes ONLY to `hero.cityImageUrl` + `hero.cityImageAlt`.
 
-IMAGES (top failure):
-• Hero: <ul id="subSlides"> first <li> style background-image url(...); prepend https://whatahotel.com → hero.imageUrl AND thumbnailUrl.
-• Rooms: each .bookingItem → ul.booking-img-list → copy <a href> only (NOT <img src>; /E.JPEG is wrong). First 2 links per room. CDNs: d2573qu6qrjt8c or d321ocj5nbe62c. Skip paceholder.jpg.
-• User-supplied city photo → hero.cityImageUrl + hero.cityImageAlt ONLY. Never replace hero.imageUrl or room images[] with it if the page has subSlides/booking-img-list.
+Rates:
+- ADR is EXCL. taxes/fees.
+- Grand Total is INCL. taxes/fees whenever provided by booking page.
+- UI copy rule: do NOT add "excluding taxes/fees" text next to ADR; only Grand Total should carry the "incl. taxes & fees" note.
+- Canonical equality per room: `grandTotalInclTaxes = bookingSummary.total = savings.rightValue`.
+- `portalTotalValue` = lowest featured room grand total (across all featured rooms/all hotels).
+- Use lowest offer row for `bookUrl`; prepend `https://www.whatahotel.com` to relative links.
+- Do NOT compute/show Standard-vs-Offered or “You Save” comparisons; keep `priceStrike: ""`.
 
-RATES: Lowest offer → bookUrl; higher BAR → priceStrike "". Prepend https://www.whatahotel.com to relative booking links.
+Mode:
+- 1 hotelID => single-hotel (`hero/offer/rooms`)
+- 2+ distinct hotelIDs => `hotels[]` with strict per-URL data isolation.
 
-MODE: 1 hotelID = { hero, offer, rooms }. 2+ hotel IDs = hotels[]; isolate data per URL.
+Per room required: nights, ADR, grand total, bookingSummary, features (`door-open` and `gift`), ISO `createdAt`.
+Default when unspecified: 3 lowest-priced rooms, next free promo id from `promos.ts`, client = `""`.
+Density rule (avoid large vertical gaps between room cards):
+- Keep copy concise (no long repeated paragraphs).
+- Do not add empty placeholders / filler text / extra `<br>` spacing.
+- If a section has no real data (images, notes, etc.), leave the field empty and let UI skip it.
 
-PER ROOM: bookingSummary; savings leftLabel/leftSub; features door-open + gift; priceStrike "" if no BAR.
+Hard gate: do NOT output completion until all checks pass and `npm run build` passes.
+If any check fails, report field-level failures and fix before final output.
 
-VERIFY: grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (use lowest featured room for portal total). createdAt ISO 8601. npm run build.
-
-USER MAY SEND ONLY a WhataHotel booking URL +/- a second URL for city/destination ("create a promo", "use as city image"). Still run the full workflow. Second URL -> hero.cityImageUrl + hero.cityImageAlt only. Default 3 lowest-priced rooms; next free promo-N from promos.ts if id not given; client "" if omitted.
+Final output must include:
+Validation Report (PASS/FAIL with counts X/Y):
+1) Rooms parsed
+2) Nights present
+3) ADR present
+4) Grand total present
+5) Equality check (`grandTotalInclTaxes=bookingSummary.total=savings.rightValue`)
+6) Logical check (for multi-night stays, grand total >= ADR)
+7) `portalTotalValue` matches lowest featured room total
+8) Hero/room image extraction rule compliance
+9) `npm run build` status
+Only print `PROMO COMPLETE` if all are PASS.

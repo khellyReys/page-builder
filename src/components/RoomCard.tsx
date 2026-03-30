@@ -1,5 +1,4 @@
 import type { Room } from "../types";
-import { DEFAULT_ROOM_IMAGE } from "../constants";
 import { RoomMetaStrip } from "./RoomMetaStrip";
 import { ProposalInvestment } from "./ProposalInvestment";
 import { ExperienceMore } from "./ExperienceMore";
@@ -11,25 +10,19 @@ type Props = {
 };
 
 export function RoomCard({ room }: Props) {
+  const validRoomImages = room.images.filter((img) => isValidRoomImage(img.src));
   const showGalleryHead =
     Boolean(
       room.galleryTitle ||
         room.gallerySubtitle ||
-        room.images.some((img) => img.caption),
+        validRoomImages.some((img) => img.caption),
     );
 
   const galleryHeading =
     room.galleryTitle ?? (showGalleryHead ? "Suite gallery" : undefined);
 
-  const galleryImages =
-    room.images.length > 0
-      ? room.images
-      : [
-          {
-            src: DEFAULT_ROOM_IMAGE,
-            alt: stripPlain(room.name),
-          },
-        ];
+  const galleryImages = validRoomImages;
+  const showGalleryBlock = galleryImages.length > 0;
 
   const roomFeatures = room.features.filter((f) => f.icon !== "gift");
   const exclusivePerks = room.features.filter((f) => f.icon === "gift");
@@ -57,7 +50,7 @@ export function RoomCard({ room }: Props) {
 
       <RoomMetaStrip facts={room.quickFacts ?? []} />
 
-      {!room.hideGallery && (
+      {!room.hideGallery && showGalleryBlock ? (
         <div className="room-gallery-block">
           {showGalleryHead ? (
             <div className="gallery-head">
@@ -82,7 +75,7 @@ export function RoomCard({ room }: Props) {
             ))}
           </div>
         </div>
-      )}
+      ) : null}
 
       {roomFeatures.length > 0 && (
         <div className="room-features-section">
@@ -152,6 +145,11 @@ export function RoomCard({ room }: Props) {
   );
 }
 
-function stripPlain(html: string): string {
-  return html.replace(/<[^>]*>/g, "").trim() || "Room";
+function isValidRoomImage(src: string): boolean {
+  const value = src.trim().toLowerCase();
+  if (!value) return false;
+  if (value.includes("paceholder.jpg")) return false;
+  if (value.includes("wah_logo")) return false;
+  if (value.includes("/content/general/wah_logo")) return false;
+  return true;
 }

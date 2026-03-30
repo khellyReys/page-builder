@@ -1,4 +1,5 @@
 import type { Promo } from "../types";
+import { normalizePromos } from "../lib/promoNormalizer";
 import { promo1 } from "./promo-1";
 import { promo2 } from "./promo-2";
 import { promo3 } from "./promo-3";
@@ -26,4 +27,33 @@ import { promo24 } from "./promo-24";
 import { promo25 } from "./promo-25";
 
 /** Register new proposals here: `import { promoN } from "./promo-N";` then add to the array. */
-export const promos: Promo[] = [promo1, promo2, promo3, promo4, promo5, promo6, promo7, promo8, promo9, promo10, promo11, promo12, promo13, promo14, promo15, promo16, promo17, promo18, promo19, promo20, promo21, promo22, promo23, promo24, promo25];
+const rawPromos: Promo[] = [
+  promo1,
+  promo2,
+  promo3,
+  promo4,
+  promo5,
+  promo6,
+  promo7,
+  promo8,
+  promo9,
+  promo10,
+  promo11,
+  promo12,
+  promo13,
+  promo14,
+  promo15,
+  promo16,
+  promo17,
+  promo18,
+  promo19,
+  promo20,
+  promo21,
+  promo22,
+  promo23,
+  promo24,
+  promo25,
+];
+
+/** Normalize room totals / nights so booking summary stays consistent across all cards and tables. */
+export const promos: Promo[] = normalizePromos(rawPromos);

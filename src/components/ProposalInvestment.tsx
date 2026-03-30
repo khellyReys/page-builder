@@ -16,17 +16,14 @@ function stripExclTaxVerbiage(s: string): string {
     .trim();
 }
 
-function adrLine(room: Room, hasInclTaxGrand: boolean): string {
-  if (hasInclTaxGrand) {
-    if (room.priceLabel && !/\bexcl\b/i.test(room.priceLabel)) {
-      return room.priceLabel;
-    }
-    return "Per night";
+function adrLine(room: Room): string {
+  if (room.priceLabel) {
+    return room.priceLabel
+      .replace(/\s*[·•]\s*(?:excl|incl)\.?\s*taxes?(?:\s*(?:&|and)\s*fees?)?/gi, "")
+      .replace(/\b(?:excluding|including)\s+taxes?(?:\s*(?:&|and)\s*fees?)?/gi, "")
+      .trim();
   }
-  if (room.priceLabel && room.priceLabel.toLowerCase().includes("excl")) {
-    return room.priceLabel;
-  }
-  return "Per night · excl. taxes & fees";
+  return "Per night";
 }
 
 function grandSubline(room: Room, hasInclTaxGrand: boolean): string | null {
@@ -51,7 +48,7 @@ function grandSubline(room: Room, hasInclTaxGrand: boolean): string | null {
   if (room.nightsLabel) {
     const n = Number(room.nightsLabel);
     const nk = Number.isFinite(n) && n === 1 ? "Night" : "Nights";
-    return `${room.nightsLabel} ${nk} · excl. taxes & fees¹`;
+    return `${room.nightsLabel} ${nk}`;
   }
   return null;
 }
@@ -81,10 +78,13 @@ export function ProposalInvestment({ room }: Props) {
     );
   }
 
-  const adrSub = adrLine(room, hasInclTaxGrand);
-  // When an incl.-tax total exists it IS the grand total — show it in the card directly.
+  const adrSub = adrLine(room);
+  // Use only canonical total fields for Grand Total; avoid excl.-tax display fields.
   const grandAmount =
-    room.grandTotalInclTaxes ?? room.stayTotalExclAmount ?? room.priceTotal;
+    room.grandTotalInclTaxes ??
+    room.bookingSummary?.total ??
+    room.savings.rightValue ??
+    "—";
   const grandCardLabel = hasInclTaxGrand
     ? (room.grandTotalInclTaxesLabel ?? "Grand Total (incl. taxes & fees)")
     : "Grand Total";
@@ -128,13 +128,6 @@ export function ProposalInvestment({ room }: Props) {
           </div>
         </div>
       </div>
-
-      {room.priceStrike ? (
-        <div className="proposal-inv-bar">
-          <span className="proposal-inv-bar-label">Standard reference</span>
-          <span className="proposal-inv-bar-val">{room.priceStrike}</span>
-        </div>
-      ) : null}
 
       {room.includedValueLines?.length ? (
         <div className="included-value-stack">

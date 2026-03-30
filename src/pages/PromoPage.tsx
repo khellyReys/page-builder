@@ -19,6 +19,46 @@ import { ContactFooter } from "../components/ContactFooter";
 import { RoomOverviewGrid } from "../components/RoomOverviewGrid";
 import type { Room } from "../types";
 
+function renderRepeatedPerks(rooms: Room[]) {
+  if (rooms.length <= 1) return null;
+  const perkItems = Array.from(
+    new Set(
+      rooms
+        .flatMap((room) => room.features)
+        .filter((feature) => feature.icon === "gift")
+        .flatMap((feature) => feature.items)
+        .map((item) => item.trim())
+        .filter(Boolean),
+    ),
+  );
+
+  if (!perkItems.length) return null;
+
+  return (
+    <div className="body">
+      <div className="perks-section">
+        <h3 className="section-sec-title perks-section-title">
+          Exclusive perks &amp; inclusions
+        </h3>
+        <p className="section-sec-sub perks-section-sub">
+          Included with every booking through Lorraine Travel — at no additional
+          cost
+        </p>
+        <div className="perks-items-wrap">
+          <ul className="perks-ul">
+            {perkItems.map((item) => (
+              <li key={item} className="perk-li">
+                <i className="fas fa-circle" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ProposalBookingSection({
   rooms,
   hotelName,
@@ -228,6 +268,7 @@ export default function PromoPage() {
                   </p>
                 )}
               </div>
+              {renderRepeatedPerks(hotel.rooms)}
               {showBookingSummary ? (
                 hasCombined ? (
                   <ProposalBookingSection
@@ -351,6 +392,7 @@ export default function PromoPage() {
           </p>
         )}
       </div>
+      {renderRepeatedPerks(promo.rooms!)}
 
       {promo.rooms!.length > 0 ? (
         <ProposalBookingSection
