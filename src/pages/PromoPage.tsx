@@ -21,7 +21,7 @@ import type { Room } from "../types";
 
 function renderRepeatedPerks(rooms: Room[]) {
   if (rooms.length <= 1) return null;
-  const perkItems = Array.from(
+  const allPerkItems = Array.from(
     new Set(
       rooms
         .flatMap((room) => room.features)
@@ -31,6 +31,14 @@ function renderRepeatedPerks(rooms: Room[]) {
         .filter(Boolean),
     ),
   );
+  const lastRoomPerkItems = new Set(
+    rooms[rooms.length - 1].features
+      .filter((feature) => feature.icon === "gift")
+      .flatMap((feature) => feature.items)
+      .map((item) => item.trim())
+      .filter(Boolean),
+  );
+  const perkItems = allPerkItems.filter((item) => !lastRoomPerkItems.has(item));
 
   if (!perkItems.length) return null;
 

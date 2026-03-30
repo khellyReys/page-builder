@@ -1,49 +1,50 @@
-WhataHotel Netlify Agent Rules (edit ONLY `src/data/promo-N.ts` + `src/data/promos.ts`).
-Never edit `src/types.ts` or `src/components/`. If types mismatch docs, stop and report branch needs sync.
+WhataHotel Netlify Agent Rules
 
-Read `docs/whatahotel-agent-new-promo.md` first. Do not read full SSOT in one call.
-Never use old `promo-*.ts` as template. Use `src/types.ts` + docs + booking HTML only.
+Scope:
+- Edit ONLY `src/data/promo-N.ts` and `src/data/promos.ts`.
+- Never edit `src/types.ts` or `src/components/`.
+- Read `docs/whatahotel-agent-new-promo.md` first.
+- Do not use old `promo-*.ts` as template.
 
-Fetch each booking URL ONCE. Parse full HTML (not summaries). If fetch tool summarizes/refuses, use curl once and parse markers (`subSlides`, `booking-img-list`, `booking_info.cfm`).
+Fetch:
+- Fetch each booking URL ONCE, parse real HTML (not summaries).
+- If tool summarizes/refuses, use curl once and parse markers: `subSlides`, `booking-img-list`, `booking_info.cfm`.
 
 Images:
-- Hero: `ul#subSlides` first `li` background-image URL -> prepend `https://whatahotel.com` -> set BOTH `hero.imageUrl` + `thumbnailUrl`.
-- Rooms: `.bookingItem ul.booking-img-list li a[href]` only (NOT `img src`). First 2 valid links per room. Valid CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`.
-- Skip placeholders (`/img/paceholder.jpg`). If room has only placeholder/logo, use `images: []` (do not invent/fallback room image).
-- User city image URL goes ONLY to `hero.cityImageUrl` + `hero.cityImageAlt`.
+- Hero from `ul#subSlides` first `li` background-image; prepend `https://whatahotel.com`; set BOTH `hero.imageUrl` + `thumbnailUrl`.
+- Room images from `.bookingItem ul.booking-img-list li a[href]` only (never `img src`), first 2 valid links/room.
+- Valid room CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`.
+- Skip placeholder/logo (`/img/paceholder.jpg`, logo URLs). If only placeholder/logo, use `images: []`.
+- User city image goes ONLY to `hero.cityImageUrl` + `hero.cityImageAlt`.
 
-Rates:
-- ADR is EXCL. taxes/fees.
-- Grand Total is INCL. taxes/fees whenever provided by booking page.
-- UI copy rule: do NOT add "excluding taxes/fees" text next to ADR; only Grand Total should carry the "incl. taxes & fees" note.
-- Canonical equality per room: `grandTotalInclTaxes = bookingSummary.total = savings.rightValue`.
-- `portalTotalValue` = lowest featured room grand total (across all featured rooms/all hotels).
+Rates (strict):
+- ADR = per-night value (no tax note text beside ADR).
+- Grand Total = INCL. taxes & fees when booking page provides it.
+- Per room equality: `grandTotalInclTaxes = bookingSummary.total = savings.rightValue`.
+- `portalTotalValue` = lowest featured room grand total across all featured rooms/all hotels.
 - Use lowest offer row for `bookUrl`; prepend `https://www.whatahotel.com` to relative links.
 - Do NOT compute/show Standard-vs-Offered or “You Save” comparisons; keep `priceStrike: ""`.
+- Never output copy saying totals are excluding taxes/fees.
 
-Mode:
-- 1 hotelID => single-hotel (`hero/offer/rooms`)
-- 2+ distinct hotelIDs => `hotels[]` with strict per-URL data isolation.
+Layout/data hygiene:
+- 1 hotelID => single-hotel mode (`hero/offer/rooms`); 2+ hotelIDs => `hotels[]` with strict per-URL data isolation.
+- Per room required: nights, ADR, grand total, bookingSummary, `features` with `door-open` + `gift`, ISO `createdAt`.
+- Keep copy concise; no filler text or extra `<br>`.
+- Avoid duplicate perks prose in extra fields (subtitle/offer/footnote). Perks content should live in the `gift` feature list.
 
-Per room required: nights, ADR, grand total, bookingSummary, features (`door-open` and `gift`), ISO `createdAt`.
-Default when unspecified: 3 lowest-priced rooms, next free promo id from `promos.ts`, client = `""`.
-Density rule (avoid large vertical gaps between room cards):
-- Keep copy concise (no long repeated paragraphs).
-- Do not add empty placeholders / filler text / extra `<br>` spacing.
-- If a section has no real data (images, notes, etc.), leave the field empty and let UI skip it.
+Defaults:
+- 3 lowest-priced rooms when unspecified; next free promo id from `promos.ts`; `client: ""` if missing.
 
-Hard gate: do NOT output completion until all checks pass and `npm run build` passes.
-If any check fails, report field-level failures and fix before final output.
-
-Final output must include:
-Validation Report (PASS/FAIL with counts X/Y):
-1) Rooms parsed
-2) Nights present
-3) ADR present
-4) Grand total present
-5) Equality check (`grandTotalInclTaxes=bookingSummary.total=savings.rightValue`)
-6) Logical check (for multi-night stays, grand total >= ADR)
-7) `portalTotalValue` matches lowest featured room total
-8) Hero/room image extraction rule compliance
-9) `npm run build` status
-Only print `PROMO COMPLETE` if all are PASS.
+Completion gate:
+- Do NOT output completion until all checks pass and `npm run build` passes.
+- Final output must include `Validation Report` (PASS/FAIL with X/Y counts) for:
+  1) Rooms parsed
+  2) Nights present
+  3) ADR present
+  4) Grand total present
+  5) Equality check (`grandTotalInclTaxes=bookingSummary.total=savings.rightValue`)
+  6) Logical check (multi-night: grand total > ADR)
+  7) `portalTotalValue` correctness
+  8) Image extraction rule compliance
+  9) Build status
+- Print `PROMO COMPLETE` only if all are PASS.
