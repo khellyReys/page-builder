@@ -114,6 +114,8 @@ export type Room = {
   /** Gallery section heading; optional */
   galleryTitle?: string;
   gallerySubtitle?: string;
+  /** When true, the entire room gallery block (images + placeholder) is hidden */
+  hideGallery?: boolean;
   images: Array<{ src: string; alt: string; caption?: string }>;
   features: Array<{
     title: string;

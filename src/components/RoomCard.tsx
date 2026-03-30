@@ -57,30 +57,32 @@ export function RoomCard({ room }: Props) {
 
       <RoomMetaStrip facts={room.quickFacts ?? []} />
 
-      <div className="room-gallery-block">
-        {showGalleryHead ? (
-          <div className="gallery-head">
-            {galleryHeading ? (
-              <h3 className="section-sec-title gallery-title">
-                {galleryHeading}
-              </h3>
-            ) : null}
-            {room.gallerySubtitle ? (
-              <p className="section-sec-sub gallery-sub">{room.gallerySubtitle}</p>
-            ) : null}
-          </div>
-        ) : null}
-        <div className="room-imgs">
-          {galleryImages.map((img) => (
-            <figure key={img.src} className="room-img">
-              <img src={img.src} alt={img.alt} />
-              {img.caption ? (
-                <figcaption className="room-img-caption">{img.caption}</figcaption>
+      {!room.hideGallery && (
+        <div className="room-gallery-block">
+          {showGalleryHead ? (
+            <div className="gallery-head">
+              {galleryHeading ? (
+                <h3 className="section-sec-title gallery-title">
+                  {galleryHeading}
+                </h3>
               ) : null}
-            </figure>
-          ))}
+              {room.gallerySubtitle ? (
+                <p className="section-sec-sub gallery-sub">{room.gallerySubtitle}</p>
+              ) : null}
+            </div>
+          ) : null}
+          <div className="room-imgs">
+            {galleryImages.map((img) => (
+              <figure key={img.src} className="room-img">
+                <img src={img.src} alt={img.alt} />
+                {img.caption ? (
+                  <figcaption className="room-img-caption">{img.caption}</figcaption>
+                ) : null}
+              </figure>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {roomFeatures.length > 0 && (
         <div className="room-features-section">
