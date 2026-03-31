@@ -25,8 +25,6 @@ export function RoomCard({ room }: Props) {
   const showGalleryBlock = galleryImages.length > 0;
 
   const roomFeatures = room.features.filter((f) => f.icon !== "gift");
-  const exclusivePerks = room.features.filter((f) => f.icon === "gift");
-
   return (
     <>
       <div className="room-label">
@@ -99,30 +97,6 @@ export function RoomCard({ room }: Props) {
       )}
 
       <ProposalInvestment room={room} />
-
-      {exclusivePerks.length > 0 && (
-        <div className="perks-section">
-          <h3 className="section-sec-title perks-section-title">
-            Exclusive perks &amp; inclusions
-          </h3>
-          <p className="section-sec-sub perks-section-sub">
-            Included with every booking through Lorraine Travel — at no
-            additional cost
-          </p>
-          {exclusivePerks.map((feature) => (
-            <div key={feature.title} className="perks-items-wrap">
-              <ul className="perks-ul">
-                {feature.items.map((item) => (
-                  <li key={item} className="perk-li">
-                    <i className="fas fa-circle" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
 
       <div className="room-book-cta">
         <a

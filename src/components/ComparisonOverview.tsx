@@ -66,8 +66,9 @@ export function ComparisonOverview(props: Props) {
       <div className="co-mobile-cards" aria-label="Booking summary by room">
         {allRooms.map(({ room, hotelName }) => {
           const row = bookingRow(room, hotelName);
+          const roomKey = `${hotelName}-${room.badgeText}`;
           return (
-            <div key={room.badgeText} className="co-m-card co-booking-card">
+            <div key={roomKey} className="co-m-card co-booking-card">
               <div
                 className="co-m-card-badge"
                 dangerouslySetInnerHTML={{ __html: room.badgeText }}
@@ -124,8 +125,9 @@ export function ComparisonOverview(props: Props) {
           <tbody>
             {allRooms.map(({ room, hotelName }) => {
               const row = bookingRow(room, hotelName);
+              const roomKey = `${hotelName}-${room.badgeText}`;
               return (
-                <tr key={room.badgeText} className="co-tr">
+                <tr key={roomKey} className="co-tr">
                   <td className="co-td">{row.hotel}</td>
                   <td className="co-td">{row.roomCategory}</td>
                   <td className="co-td">{row.checkInOut}</td>

@@ -19,11 +19,11 @@ import { ContactFooter } from "../components/ContactFooter";
 import { RoomOverviewGrid } from "../components/RoomOverviewGrid";
 import type { Room } from "../types";
 
-function renderRepeatedPerks(rooms: Room[]) {
-  if (rooms.length <= 1) return null;
+function renderGlobalPerks(entries: RoomGroup[]) {
   const allPerkItems = Array.from(
     new Set(
-      rooms
+      entries
+        .flatMap((entry) => entry.rooms)
         .flatMap((room) => room.features)
         .filter((feature) => feature.icon === "gift")
         .flatMap((feature) => feature.items)
@@ -31,16 +31,7 @@ function renderRepeatedPerks(rooms: Room[]) {
         .filter(Boolean),
     ),
   );
-  const lastRoomPerkItems = new Set(
-    rooms[rooms.length - 1].features
-      .filter((feature) => feature.icon === "gift")
-      .flatMap((feature) => feature.items)
-      .map((item) => item.trim())
-      .filter(Boolean),
-  );
-  const perkItems = allPerkItems.filter((item) => !lastRoomPerkItems.has(item));
-
-  if (!perkItems.length) return null;
+  if (!allPerkItems.length) return null;
 
   return (
     <div className="body">
@@ -54,7 +45,7 @@ function renderRepeatedPerks(rooms: Room[]) {
         </p>
         <div className="perks-items-wrap">
           <ul className="perks-ul">
-            {perkItems.map((item) => (
+            {allPerkItems.map((item) => (
               <li key={item} className="perk-li">
                 <i className="fas fa-circle" />
                 <span>{item}</span>
@@ -169,6 +160,13 @@ export default function PromoPage() {
 
   // ── Multi-hotel promo ────────────────────────────────────────────
   if (promo.hotels && promo.hotels.length > 0) {
+    const combinedHotelEntries: RoomGroup[] = promo.hotels
+      .filter((hotel) => hotel.rooms.length > 0)
+      .map((hotel) => ({
+        rooms: hotel.rooms,
+        hotelName: hotel.hero.hotel,
+      }));
+
     const heroImage =
       promo.hotels[0]?.hero?.imageUrl ||
       promo.thumbnailUrl ||
@@ -211,34 +209,6 @@ export default function PromoPage() {
         ) : null}
 
         {promo.hotels.map((hotel, index) => {
-          // Accumulate suppressed booking-summary rooms from prior hotels
-          // that share the same name so they appear in a combined table.
-          const pendingEntries: RoomGroup[] = [];
-          for (let i = 0; i < index; i++) {
-            const prev = promo.hotels![i];
-            if (prev.suppressBookingSummary && prev.rooms.length > 0) {
-              // Only include if no non-suppressed hotel between prev and this
-              // hotel already consumed it.
-              let consumed = false;
-              for (let j = i + 1; j < index; j++) {
-                if (!promo.hotels![j].suppressBookingSummary) {
-                  consumed = true;
-                  break;
-                }
-              }
-              if (!consumed) {
-                pendingEntries.push({
-                  rooms: prev.rooms,
-                  hotelName: prev.hero.hotel,
-                });
-              }
-            }
-          }
-
-          const showBookingSummary =
-            !hotel.suppressBookingSummary && hotel.rooms.length > 0;
-          const hasCombined = pendingEntries.length > 0;
-
           return (
             <div key={index}>
               {hotel.hero.cityImageUrl ? (
@@ -276,35 +246,14 @@ export default function PromoPage() {
                   </p>
                 )}
               </div>
-              {renderRepeatedPerks(hotel.rooms)}
-              {showBookingSummary ? (
-                hasCombined ? (
-                  <ProposalBookingSection
-                    entries={[
-                      ...pendingEntries,
-                      { rooms: hotel.rooms, hotelName: hotel.hero.hotel },
-                    ]}
-                    footnoteHtml={
-                      index === promo.hotels!.length - 1
-                        ? promo.pricingFootnote
-                        : undefined
-                    }
-                  />
-                ) : (
-                  <ProposalBookingSection
-                    rooms={hotel.rooms}
-                    hotelName={hotel.hero.hotel}
-                    footnoteHtml={
-                      index === promo.hotels!.length - 1
-                        ? promo.pricingFootnote
-                        : undefined
-                    }
-                  />
-                )
-              ) : null}
             </div>
           );
         })}
+        {renderGlobalPerks(combinedHotelEntries)}
+        <ProposalBookingSection
+          entries={combinedHotelEntries}
+          footnoteHtml={promo.pricingFootnote}
+        />
 
         {promo.priceSummary ? (
           <div className="body">
@@ -338,6 +287,9 @@ export default function PromoPage() {
     typeof window !== "undefined"
       ? `${window.location.origin}/promo/${promo.id}`
       : "";
+  const singleHotelEntries: RoomGroup[] = [
+    { rooms: promo.rooms!, hotelName: promo.hero!.hotel },
+  ];
 
   return (
     <div className="wrap">
@@ -400,15 +352,11 @@ export default function PromoPage() {
           </p>
         )}
       </div>
-      {renderRepeatedPerks(promo.rooms!)}
-
-      {promo.rooms!.length > 0 ? (
-        <ProposalBookingSection
-          rooms={promo.rooms!}
-          hotelName={promo.hero!.hotel}
-          footnoteHtml={promo.pricingFootnote}
-        />
-      ) : null}
+      {renderGlobalPerks(singleHotelEntries)}
+      <ProposalBookingSection
+        entries={singleHotelEntries}
+        footnoteHtml={promo.pricingFootnote}
+      />
 
       {promo.priceSummary ? (
         <div className="body">

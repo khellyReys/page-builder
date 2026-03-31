@@ -114,7 +114,9 @@ If the user gives a **city** image URL:
 2. Optional **`CityHeroImage`** — full-bleed when `hero.cityImageUrl` is set; then “Destination” label row
 3. `HotelIdentity` (stars, name, location)
 4. **`HeroSection`** — **inset** framed property photo (`hero.imageUrl`), not edge-to-edge
-5. `OfferBanner` … rest unchanged
+5. `OfferBanner` … room cards … then **once per promo** (not per hotel): **Exclusive perks & inclusions** (deduped from all rooms’ `gift` features) **above** a single **Booking summary / Comparison overview** table. Book CTAs stay inside each **`RoomCard`**.
+
+**Data:** Keep `features` with `icon: "gift"` on each room as today; the UI aggregates them into one section. Multi-hotel promos still use one combined table with the correct `hero.hotel` per row (from each `hotels[]` entry).
 
 ---
 
@@ -122,10 +124,15 @@ If the user gives a **city** image URL:
 
 1. User booking URL (e.g. `showRates.cfm` or `booking_info.cfm`) — **fetch once**, full HTML.
 2. Parse in one pass: hotel name, **hero (`subSlides`)**, **per-room `booking-img-list`**, rates, lowest `bookUrl`, perks, totals.
-3. Apply **city image** to `cityImageUrl` / `cityImageAlt` only if user provided it.
-4. Build `src/data/promo-N.ts`; register in `src/data/promos.ts`; set `createdAt` (ISO 8601).
-5. Run **`npm run build`** before merge.
-6. Self-verify: **every featured room** has `images.length >= 1` when the source page had carousel links; **hero.imageUrl** is from `subSlides`, not the city URL.
+3. Set `badgeText` from the room marketing line:
+   - Source line pattern is usually: `WhataHotel! [PROMO PHRASE] [ROOM NAME] - More Info`.
+   - Extract phrase between `WhataHotel!` and room-name / `More Info` when present (examples: `3RD NIGHT FREE W BKFST`, `LAST NIGHT FREE`, `FREE PARKING`).
+   - If no promo phrase exists, use fallback: `badgeText: "Exclusive Rate"`.
+   - Never keep generic placeholders like `Hotel Option 1 — Room 1`.
+4. Apply **city image** to `cityImageUrl` / `cityImageAlt` only if user provided it.
+5. Build `src/data/promo-N.ts`; register in `src/data/promos.ts`; set `createdAt` (ISO 8601).
+6. Run **`npm run build`** before merge.
+7. Self-verify: **every featured room** has `images.length >= 1` when the source page had carousel links; **hero.imageUrl** is from `subSlides`, not the city URL.
 
 ---
 

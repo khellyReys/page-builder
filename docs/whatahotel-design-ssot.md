@@ -77,18 +77,18 @@ src/
     OfferBanner.tsx
     RoomMetaStrip.tsx         ? Optional quickFacts strip (Room Category, Suite Size, ?)
     ProposalInvestment.tsx   ? ADR / Grand total / Nights (3-column grid); no book button inside
-    RoomCard.tsx              ? ? investment ? Exclusive perks ? **Book** CTA ? optional ExperienceMore
+    RoomCard.tsx              ? ? investment ? **Book** CTA ? optional ExperienceMore (no perks block in-card)
     ExperienceMore.tsx      ? Optional spending-credit style block
-    RoomOverviewGrid.tsx      ? Key-attribute grid (after table + footnote; book link is in RoomCard after perks)
+    RoomOverviewGrid.tsx      ? Key-attribute grid (after table + footnote; book link is in RoomCard)
     SavingsBreakdown.tsx      ? Standard vs WhataHotel! breakdown (optional per room)
-    ComparisonOverview.tsx    ? Booking summary table ? requires `hotelName` + `rooms`
+    ComparisonOverview.tsx    ? Booking summary table ? `entries` (multi-hotel) or `rooms` + `hotelName`
     SpecialOfferBox.tsx
     PriceSummaryTable.tsx
     PromoCard.tsx
     AppDownload.tsx           ? App store section (always rendered on promo pages)
     ContactFooter.tsx
   pages/
-    PromoPage.tsx     ? Renders single or multi-hotel promos (table ? footnote ? overview; book CTA is in RoomCard)
+    PromoPage.tsx     ? Renders single or multi-hotel promos (one global perks section ? one global table ? footnote ? overview; book CTA is in RoomCard)
     Portal.tsx          ? Homepage portal list (not PortalPage.tsx)
 ```
 
@@ -111,16 +111,16 @@ Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatah
    - Gallery images
    - **Room Features** (`features` with `icon: "door-open"`) ? displayed in a card below the gallery images, before the investment block
    - **`ProposalInvestment`** ? 3-column **ADR ? Grand Total (incl. taxes & fees) ? Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
-   - **Exclusive Perks** (`features` with `icon: "gift"`) ? centered list after the investment block, separated from room features
-   - Primary **`bookUrl` / `bookLabel`** CTA (after perks, before optional `ExperienceMore`)
-8. `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (`rooms` + **`hotelName`** from `hero.hotel`)
-9. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
-10. `RoomOverviewGrid` per room when `keyAttributes` is set
-11. Optional `PriceSummaryTable`
-12. `AppDownload` ? unchanged
-13. `ContactFooter`
+   - Primary **`bookUrl` / `bookLabel`** CTA (before optional `ExperienceMore`)
+8. One global **Exclusive perks & inclusions** section (deduped from all room `features` with `icon: "gift"`) rendered once, above comparison.
+9. One global `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (all rooms across the promo)
+10. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
+11. `RoomOverviewGrid` per room when `keyAttributes` is set
+12. Optional `PriceSummaryTable`
+13. `AppDownload` ? unchanged
+14. `ContactFooter`
 
-**Multi-hotel:** For **each** `hotels[]` entry, repeat steps **2?5** then **7?10** (optional city ? identity ? property hero ? offer ? room cards ? booking table ? footnote ? room overview). Layout step **6** (`specialOffer`) is **once** before the loop. **`promo.pricingFootnote`** appears after the **last** hotel?s booking table. After all hotels: steps **11?13** (optional price summary, `AppDownload`, `ContactFooter`).
+**Multi-hotel:** For each `hotels[]` entry, render hotel identity/hero/offer + room cards. After the hotel loop, render one global perks section, one global booking summary table, then optional footnote and room overviews. Layout step **6** (`specialOffer`) remains once before the loop. After global booking content: optional price summary, `AppDownload`, `ContactFooter`.
 
 **Default images:** Empty `images[]` uses `DEFAULT_ROOM_IMAGE`; missing hero URL uses `DEFAULT_HERO_IMAGE`.
 
@@ -279,7 +279,7 @@ interface Room {
   };
   grandTotalInclTaxes?: string;
   grandTotalInclTaxesLabel?: string;
-  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // After table + footnote; book CTA is in RoomCard (after perks)
+  keyAttributes?: Array<{ label: string; value: string; sub?: string }>; // After table + footnote; book CTA is in RoomCard
   galleryTitle?: string;
   gallerySubtitle?: string;
   images: Array<{ src: string; alt: string; caption?: string }>; // [] ? default room image
@@ -374,13 +374,13 @@ Each pill starts with `"? "` (checkmark + space). Plain text only inside pills.
 
 ### `badgeText`
 
-Use the appropriate emoji + label:
+Use a source-derived promo label, not placeholders:
 
-- Standard rooms: `"?? Option 1"`, `"?? Option 2"`, etc.
-- Residences/suites: `"?? Residence 1"`, `"?? Residence 2"`, etc.
-- Multi-hotel, single hotel rooms: `"?? Hotel Option 1 ? Room 1"`, etc.
-- Multi-hotel, suites: `"?? Hotel Option 2 ? Suite 1"`, etc.
-- Connecting units (family): `"??? Unit 1 ? Parents"`, `"??? Unit 2 ? Kids"`, etc.
+- Parse the room marketing line that usually contains: `WhataHotel! ... More Info`.
+- If a promo phrase exists between `WhataHotel!` and `More Info` (or before room-name tokens), use that phrase as `badgeText`.
+  - Examples: `"3rd Night Free w/ BKFST"`, `"Last Night Free"`, `"Free Parking"`.
+- If no promo phrase exists, set `badgeText: "Exclusive Rate"`.
+- Never use generic labels such as `"Hotel Option 1 - Room 1"` or `"Option 2"`.
 
 ### `name`
 
@@ -411,9 +411,9 @@ Use `<br/>` for line breaks. Always end with a colored highlight:
 Always exactly **2 feature blocks** per room:
 
 1. **Room/Suite/Residence Features** ? `icon: "door-open"` ? rendered in a card section **directly below the room gallery images**, before the investment block
-2. **WhataHotel! Exclusive Perks** ? `icon: "gift"` ? rendered as a **centered list after the investment block**, visually separated from room features
+2. **WhataHotel! Exclusive Perks** ? `icon: "gift"` ? consumed by `PromoPage` and rendered once in a global perks section above the booking summary table
 
-These two blocks are rendered in **different positions** in the RoomCard. The `RoomCard` splits `features` by icon: `icon !== "gift"` ? room features section; `icon === "gift"` ? perks section.
+`RoomCard` renders only non-gift features (`icon !== "gift"`). Gift features are aggregated by `PromoPage` into one deduplicated perks section.
 
 Feature items are **plain text only** ? no HTML tags inside `items[]` strings.
 
@@ -557,10 +557,10 @@ If the booking page does not display a tax-inclusive total, omit `grandTotalIncl
 
 ## Booking summary (`ComparisonOverview`) ?? Required for production-quality promos
 
-`<ComparisonOverview />` renders the **Booking summary / Comparison overview** table (columns: **Hotel ? Room category ? Check-in / out ? Nights ? ADR ? Grand Total (incl. taxes & fees)**). It is shown **after all `RoomCard`s for that hotel** and **requires**:
+`<ComparisonOverview />` renders the **Booking summary / Comparison overview** table (columns: **Hotel ? Room category ? Check-in / out ? Nights ? ADR ? Grand Total (incl. taxes & fees)**). It is rendered **once per promo** after the global perks section and accepts either:
 
-- `rooms={...}`
-- `hotelName={...}` ? use `hero.hotel` (plain string; repeats in each row).
+- `entries={...}` for combined multi-hotel/single-hotel normalized rendering (preferred), or
+- `rooms={...}` + `hotelName={...}` for a single group.
 
 ### Grand Total column ? data priority
 
@@ -602,7 +602,7 @@ The old **Standard vs WhataHotel** row model (`comparison[]`) is **not** consume
 
 ### Placement (implemented in `PromoPage.tsx`)
 
-`PromoPage` renders: all room cards (each **`RoomCard`** includes the **Book** link for that room **after Exclusive perks**) ? `<ComparisonOverview rooms={...} hotelName={...} />` ? optional `pricingFootnote` ? `RoomOverviewGrid` when `keyAttributes` is set ? optional `PriceSummaryTable` ? `AppDownload` ? `ContactFooter`.
+`PromoPage` renders: all room cards (each **`RoomCard`** includes the **Book** link for that room) ? one global **Exclusive perks & inclusions** section ? one global `<ComparisonOverview ... />` ? optional `pricingFootnote` ? `RoomOverviewGrid` when `keyAttributes` is set ? optional `PriceSummaryTable` ? `AppDownload` ? `ContactFooter`.
 
 ---
 
@@ -651,13 +651,11 @@ Investment summary (ProposalInvestment)
   -- Else: context line -> 3-column grid: ADR | Grand Total (incl. taxes & fees) | Nights -> BAR line -> partner line
      NOTE: when grandTotalInclTaxes is set it IS the Grand Total card value (no separate block below)
     |
-Exclusive perks & inclusions (features with icon: "gift") -- CENTERED list, separate from room features
-    |
 **Book** (`bookUrl` / `bookLabel`) + secure-booking hint
     |
 [ExperienceMore] -- optional
     |
-(PromoPage) Booking summary table (Grand Total col = grandTotalInclTaxes) -> footnote -> RoomOverviewGrid(keyAttributes) -- no separate book row below the table
+(PromoPage) Global Exclusive perks & inclusions (deduped from all rooms) -> one Booking summary table (Grand Total col = grandTotalInclTaxes) -> footnote -> RoomOverviewGrid(keyAttributes) -- no separate book row below the table
 ```
 
 ### Rules
@@ -792,8 +790,9 @@ priceSummary?: {
 
 ```tsx
 {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
+{/* PromoPage: global Exclusive perks (gift features) then one ComparisonOverview */}
 <ComparisonOverview rooms={promo.rooms!} hotelName={promo.hero!.hotel} />
-{/* footnote + RoomOverviewGrid ? book CTAs are in RoomCard after perks; see Proposal page layout section */}
+{/* footnote + RoomOverviewGrid ? book CTAs are in RoomCard; see Proposal page layout section */}
 {promo.priceSummary && (
   <div className="body">
     <PriceSummaryTable
@@ -1014,7 +1013,7 @@ Each room type has a **unique `room` code** (e.g. `A1KP77`, `A13P77`, `P1KP77`).
 
 ## App Download Section ?? Required on Every Promo Page
 
-Every promo page **must** include the `<AppDownload />` component after the booking section (table, footnote, room overview grids, optional price summary) and before `<ContactFooter />`. Primary **Book** links live in each **`RoomCard`** (**after Exclusive perks**, before `ExperienceMore`), not below the booking table.
+Every promo page **must** include the `<AppDownload />` component after the booking section (global perks, table, footnote, room overview grids, optional price summary) and before `<ContactFooter />`. Primary **Book** links live in each **`RoomCard`** (before `ExperienceMore`), not below the booking table.
 
 ### App Store Links (hardcoded in component ? never change)
 
@@ -1025,7 +1024,7 @@ Every promo page **must** include the `<AppDownload />` component after the book
 ### Rules
 
 - `AppDownload` takes no props ? links are hardcoded inside the component
-- Placement order: RoomCards (book CTA after perks inside each card) ? ComparisonOverview (booking table) ? footnote ? RoomOverviewGrid(s) ? optional PriceSummaryTable ? AppDownload ? ContactFooter
+- Placement order: RoomCards ? global Exclusive perks ? one ComparisonOverview (booking table) ? footnote ? RoomOverviewGrid(s) ? optional PriceSummaryTable ? AppDownload ? ContactFooter
 - Never omit from any promo page ? single-hotel or multi-hotel
 - Never change the app store URLs
 
@@ -1160,28 +1159,21 @@ hotels: [
 ],
 ```
 
-### Step 5 ? Each hotel's ComparisonOverview uses its own `hotelName`
+### Step 5 ? One booking table for the whole promo (multi-hotel)
 
-The `<ComparisonOverview />` booking table is rendered once per hotel, immediately after that hotel's room cards. It receives:
-- `rooms={hotels[N].rooms}` ? that hotel's rooms only
-- `hotelName={hotels[N].hero.hotel}` ? that hotel's name only
-
-**Hotel A's room cards + Hotel A's booking table ? then Hotel B's room cards + Hotel B's booking table.** They are never combined into one table.
+After **all** hotel blocks and room cards, `PromoPage` renders **one** `<ComparisonOverview />` with combined `entries`: each group is `{ rooms: hotels[N].rooms, hotelName: hotels[N].hero.hotel }`. Every row shows the correct hotel name. Do **not** assume a separate table per hotel in the UI (data is still isolated per `hotels[]` entry).
 
 ### Step 6 ? badgeText for multi-hotel
 
-Use this format so the client can tell which room belongs to which hotel:
+Use source-derived promo labels for each room:
 
 ```
-Hotel Option 1 rooms ? "?? Hotel Option 1 ? Room 1", "?? Hotel Option 1 ? Room 2"
-Hotel Option 2 rooms ? "?? Hotel Option 2 ? Room 1", "?? Hotel Option 2 ? Room 2"
+Hotel A room badges -> "3rd Night Free w/ BKFST", "Exclusive Rate"
+Hotel B room badges -> "Last Night Free", "Free Parking"
 ```
 
-Or if hotels have custom names (e.g. "Four Seasons" and "Aman"):
-```
-"?? Four Seasons ? Deluxe"
-"?? Aman ? Garden Suite"
-```
+If no promo phrase is present on a room, use `badgeText: "Exclusive Rate"`.
+Never use `Hotel Option X - Room X` placeholders.
 
 ### Step 7 ? Promo-level fields for multi-hotel
 
@@ -1196,7 +1188,7 @@ These live at the root `Promo` level (outside `hotels[]`):
 | `portalTotalLabel` | `"Starting From"` |
 | `portalTotalValue` | Lowest `grandTotalInclTaxes` across ALL rooms across ALL hotels |
 | `specialOffer` | Optional; rendered once before the hotel loop ? not per-hotel |
-| `pricingFootnote` | Rendered after the last hotel's booking table ? cover both hotels if needed |
+| `pricingFootnote` | Rendered after the global booking table ? cover both hotels if needed |
 | `priceSummary` | Optional; rendered after all hotels ? use for a combined total across hotels |
 | `contact` | `sharedContact` |
 
@@ -1215,7 +1207,7 @@ The pricing consistency rules (see "Pricing Consistency" section) apply to each 
 | Using Hotel A's rooms in `hotels[1]` | Hotel B shows Hotel A's rates and images | Strict data isolation: one URL = one hotels[] entry |
 | Using Hotel A's `bookUrl` for Hotel B rooms | Guest books wrong hotel | Each room's `bookUrl` must have the `hotel=` param from its own URL |
 | Same `hero.imageUrl` for both hotels | Both hotel sections show the same hero photo | Extract hero from each URL's own `<ul id="subSlides">` |
-| One combined ComparisonOverview for all rooms | Booking table mixes hotels | Each hotel gets its own `ComparisonOverview` with its own `rooms` and `hotelName` |
+| Wrong `hero.hotel` on a `hotels[]` entry | Rows show the wrong hotel name in the single combined table | Each `hotels[N].hero.hotel` must match that entry's fetched page; rooms stay under that entry only |
 | Re-fetching URL 1 to "verify" Hotel B data | Wastes tokens, may corrupt data | Parse each URL completely in one pass; never re-fetch |
 | Copying Hotel A's `offer.pills` to Hotel B | Hotel B shows Hotel A's perks | Each hotel's `offer` comes from its own URL's perks section |
 
@@ -1369,7 +1361,11 @@ RATES: Lowest offer → bookUrl; higher BAR → priceStrike "". Prepend https://
 
 MODE: 1 hotelID = { hero, offer, rooms }. 2+ hotel IDs = hotels[]; isolate data per URL.
 
+UI: One global Exclusive perks section + one booking-summary table per promo (multi-hotel: combined table; keep gift features per room in data).
+
 PER ROOM: bookingSummary; savings leftLabel/leftSub; features door-open + gift; priceStrike "" if no BAR.
+
+BADGETEXT: Parse room marketing text (`WhataHotel! ... More Info`). If a promo phrase exists between `WhataHotel!` and room details/`More Info`, use it. If not, use `Exclusive Rate`. Never use `Hotel Option X - Room X`.
 
 VERIFY: grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (use lowest featured room for portal total). createdAt ISO 8601. npm run build.
 
