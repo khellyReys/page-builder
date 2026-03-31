@@ -14,9 +14,9 @@ export const promo32: Promo = {
   hero: {
     imageUrl:
       "https://whatahotel.com/content/hotels/4746/TMR_011_aspect16x9.jpg",
-    alt: "Four Seasons Resort Tamarindo, Costa Rica",
+    alt: "Four Seasons Resort Tamarindo, Mexico",
     hotel: "Four Seasons Resort Tamarindo",
-    location: "Tamarindo, Costa Rica",
+    location: "Tamarindo, Mexico",
   },
 
   offer: {
