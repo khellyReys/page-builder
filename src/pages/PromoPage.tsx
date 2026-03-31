@@ -34,7 +34,7 @@ function renderGlobalPerks(entries: RoomGroup[]) {
   if (!allPerkItems.length) return null;
 
   return (
-    <div className="body">
+    <div className="body body-perks">
       <div className="perks-section">
         <h3 className="section-sec-title perks-section-title">
           Exclusive perks &amp; inclusions
