@@ -250,10 +250,4 @@ export const promo21: Promo = {
 
   pricingFootnote:
     "¹ Totals include applicable taxes and fees. Rates are per room, per night, based on double occupancy. Subject to availability.",
-
-  contact: {
-    email: "info@whatahotel.com",
-    footerHtml:
-      "For questions about this proposal, please contact your WhataHotel! travel advisor.",
-  },
 };

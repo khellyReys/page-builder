@@ -724,7 +724,7 @@ body {
   text-align: center;
 }
 .perks-section-title {
-  margin-top: 8px;
+  margin-top: 0;
 }
 .perks-section-sub {
   margin-bottom: 18px !important;
@@ -733,9 +733,17 @@ body {
   display: flex;
   justify-content: center;
 }
+/* Tighten gap before Exclusive perks (room block uses large default .body bottom padding). */
+.body:has(+ .body-perks) {
+  padding-bottom: 22px;
+}
 .body-perks {
-  padding-top: 10px;
+  padding-top: 2px;
   padding-bottom: 14px;
+}
+/* Multi-hotel: perks sit under each hotel’s room cards (not above the combined table). */
+.body-perks--after-hotel {
+  padding-top: 0;
 }
 .body-perks + .comparison-overview {
   margin-top: 1rem;
@@ -1227,6 +1235,14 @@ body {
   color: var(--burgundy);
   font-weight: 600;
 }
+.contact-mail-link {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+.contact-mail-link:hover {
+  text-decoration: underline;
+}
 .contact-foot {
   font-size: 11px;
   color: #a0aec0;
@@ -1510,6 +1526,15 @@ body {
   text-transform: uppercase;
 }
 
+/* Booking-summary mobile cards: full hotel name in the black bar (not rate/badgeText). */
+.co-m-card-badge--hotel-name {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .co-m-card-name {
   background: var(--lgray);
   padding: 12px 14px;
@@ -1727,8 +1752,11 @@ body {
   .comparison-overview {
     margin: 2rem 16px 1rem;
   }
+  .body:has(+ .body-perks) {
+    padding-bottom: 18px;
+  }
   .body-perks {
-    padding-top: 6px;
+    padding-top: 0;
     padding-bottom: 10px;
   }
   .body-perks + .comparison-overview {

@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-destination honeymoon proposal — 3 stops, 8 hotels, 16 room/rate entries.
 // Stop 1: Santorini (Sep 1–5, 4 nights) — Grace Santorini (2927), Canaves Oia Epitome (2710)
@@ -1144,5 +1143,4 @@ export const promo9: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night. Where noted, grand totals include applicable taxes &amp; fees. Rates subject to availability. Cancellation policies vary by hotel and rate program — see individual booking links for details.",
 
-  contact: sharedContact,
 };

@@ -69,15 +69,10 @@ export function ComparisonOverview(props: Props) {
           const roomKey = `${hotelName}-${room.badgeText}`;
           return (
             <div key={roomKey} className="co-m-card co-booking-card">
-              <div
-                className="co-m-card-badge"
-                dangerouslySetInnerHTML={{ __html: room.badgeText }}
-              />
+              <div className="co-m-card-badge co-m-card-badge--hotel-name">
+                {row.hotel}
+              </div>
               <dl className="co-booking-dl">
-                <div className="co-booking-dl-row">
-                  <dt>Hotel</dt>
-                  <dd>{row.hotel}</dd>
-                </div>
                 <div className="co-booking-dl-row">
                   <dt>Room category</dt>
                   <dd>{row.roomCategory}</dd>

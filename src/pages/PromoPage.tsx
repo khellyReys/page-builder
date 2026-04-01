@@ -19,11 +19,10 @@ import { ContactFooter } from "../components/ContactFooter";
 import { RoomOverviewGrid } from "../components/RoomOverviewGrid";
 import type { Room } from "../types";
 
-function renderGlobalPerks(entries: RoomGroup[]) {
-  const allPerkItems = Array.from(
+function collectGiftPerkItems(rooms: Room[]): string[] {
+  return Array.from(
     new Set(
-      entries
-        .flatMap((entry) => entry.rooms)
+      rooms
         .flatMap((room) => room.features)
         .filter((feature) => feature.icon === "gift")
         .flatMap((feature) => feature.items)
@@ -31,7 +30,12 @@ function renderGlobalPerks(entries: RoomGroup[]) {
         .filter(Boolean),
     ),
   );
-  if (!allPerkItems.length) return null;
+}
+
+/** Single-hotel promos: one deduped block after all room cards, before the booking table. */
+function renderSingleHotelPerks(rooms: Room[]) {
+  const items = collectGiftPerkItems(rooms);
+  if (!items.length) return null;
 
   return (
     <div className="body body-perks">
@@ -45,7 +49,37 @@ function renderGlobalPerks(entries: RoomGroup[]) {
         </p>
         <div className="perks-items-wrap">
           <ul className="perks-ul">
-            {allPerkItems.map((item) => (
+            {items.map((item) => (
+              <li key={item} className="perk-li">
+                <i className="fas fa-circle" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Multi-hotel promos: one deduped block per hotel, directly under that hotel's room cards (not above the combined table). */
+function renderPerHotelPerks(rooms: Room[], hotelName: string) {
+  const items = collectGiftPerkItems(rooms);
+  if (!items.length) return null;
+
+  return (
+    <div className="body body-perks body-perks--after-hotel">
+      <div className="perks-section">
+        <h3 className="section-sec-title perks-section-title">
+          Exclusive perks &amp; inclusions
+        </h3>
+        <p className="section-sec-sub perks-section-sub">
+          Included when you book <strong>{hotelName}</strong> through Lorraine
+          Travel — at no additional cost
+        </p>
+        <div className="perks-items-wrap">
+          <ul className="perks-ul">
+            {items.map((item) => (
               <li key={item} className="perk-li">
                 <i className="fas fa-circle" />
                 <span>{item}</span>
@@ -246,10 +280,10 @@ export default function PromoPage() {
                   </p>
                 )}
               </div>
+              {renderPerHotelPerks(hotel.rooms, hotel.hero.hotel)}
             </div>
           );
         })}
-        {renderGlobalPerks(combinedHotelEntries)}
         <ProposalBookingSection
           entries={combinedHotelEntries}
           footnoteHtml={promo.pricingFootnote}
@@ -268,11 +302,7 @@ export default function PromoPage() {
 
         <AppDownload />
 
-        <ContactFooter
-          email={promo.contact.email}
-          footerHtml={promo.contact.footerHtml}
-          advisorName={promo.contact.advisorName}
-        />
+        <ContactFooter />
       </div>
     );
   }
@@ -352,7 +382,7 @@ export default function PromoPage() {
           </p>
         )}
       </div>
-      {renderGlobalPerks(singleHotelEntries)}
+      {renderSingleHotelPerks(promo.rooms!)}
       <ProposalBookingSection
         entries={singleHotelEntries}
         footnoteHtml={promo.pricingFootnote}
@@ -371,11 +401,7 @@ export default function PromoPage() {
 
       <AppDownload />
 
-      <ContactFooter
-        email={promo.contact.email}
-        footerHtml={promo.contact.footerHtml}
-        advisorName={promo.contact.advisorName}
-      />
+      <ContactFooter />
     </div>
   );
 }

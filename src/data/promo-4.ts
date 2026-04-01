@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-hotel proposal — 3 resorts, cheapest room category only.
 // Hotel 1: Malliouhana, Auberge Collection (Anguilla) — rate=2SH
@@ -309,5 +308,4 @@ export const promo4: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability.",
 
-  contact: sharedContact,
 };

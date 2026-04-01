@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 export const promo15: Promo = {
   id: "promo-15",
@@ -107,5 +106,4 @@ export const promo15: Promo = {
   ],
   pricingFootnote:
     "*Room category upgrade is subject to availability at check-in. **Hotel credit is once per stay, even for back-to-back reservations.",
-  contact: sharedContact,
 };

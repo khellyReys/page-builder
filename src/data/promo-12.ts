@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel Palace Hotel, San Francisco proposal.
 // Exclusive Rate (Authorized Travel Advisors Only) — rate code 0S8.
@@ -179,5 +178,4 @@ export const promo12: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night. Grand totals include applicable taxes, resort fees, and service charges. The Exclusive Rate (Authorized Travel Advisors Only) includes an <strong>EXTRA $100 Resort Credit that is COMBINABLE</strong> with all standard WhataHotel! perks. Rates subject to availability.",
 
-  contact: sharedContact,
 };

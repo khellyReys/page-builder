@@ -46,6 +46,7 @@ The user may send **only**:
 - **Rooms:** feature the **3 lowest-priced** room types on the page (SSOT default).  
 - **Promo id:** if they did not give `promo-N`, open `src/data/promos.ts` and use the **next free** `promo-N` (or ask once if unclear).  
 - **Client:** `""` if not provided.
+- **Contact footer:** Omit entirely — `Promo` has no `contact` field. The page footer (Questions? Contact your advisor / Lorraine Travel / Reservations@WhataHotel.com) is hardcoded in `ContactFooter`; agents must not invent footer HTML or emails in promo data.
 
 **Example (minimal — valid user message):**
 
@@ -114,9 +115,9 @@ If the user gives a **city** image URL:
 2. Optional **`CityHeroImage`** — full-bleed when `hero.cityImageUrl` is set; then “Destination” label row
 3. `HotelIdentity` (stars, name, location)
 4. **`HeroSection`** — **inset** framed property photo (`hero.imageUrl`), not edge-to-edge
-5. `OfferBanner` … room cards … then **once per promo** (not per hotel): **Exclusive perks & inclusions** (deduped from all rooms’ `gift` features) **above** a single **Booking summary / Comparison overview** table. Book CTAs stay inside each **`RoomCard`**.
+5. `OfferBanner` … room cards … **Exclusive perks & inclusions**: **single-hotel** — one deduped section (all rooms’ `gift` features) **after** all room cards, **before** the booking summary table. **Multi-hotel** (`hotels[]`) — **per hotel**, one deduped perks section **immediately under that hotel’s room cards** (never one merged perks block above the combined table); perks can differ by hotel. Then one combined **Booking summary / Comparison overview** table. Book CTAs stay inside each **`RoomCard`**.
 
-**Data:** Keep `features` with `icon: "gift"` on each room as today; the UI aggregates them into one section. Multi-hotel promos still use one combined table with the correct `hero.hotel` per row (from each `hotels[]` entry).
+**Data:** Keep `features` with `icon: "gift"` on each room; `RoomCard` still omits `gift` from the card body — `PromoPage` renders perks in the sections described above.
 
 ---
 

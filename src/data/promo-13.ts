@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel VEA Newport Beach proposal.
 // WhataHotel! Exclusive Rate — rate code L72, hotel ID 6431.
@@ -236,5 +235,4 @@ export const promo13: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night. Grand totals include applicable taxes, resort fees, and service charges. Rates subject to availability. Free cancellation before March 25, 2026.",
 
-  contact: sharedContact,
 };

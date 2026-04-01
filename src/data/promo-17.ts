@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-hotel SoCal getaway — 2 properties, 3 date-range blocks.
 // Hotel 1: Ojai Valley Inn & Spa (1485) — Mar 31–Apr 1, 2026 (1 night), 4 rooms
@@ -835,5 +834,4 @@ export const promo17: Promo = {
     },
   ],
 
-  contact: sharedContact,
 };

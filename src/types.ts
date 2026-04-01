@@ -203,12 +203,6 @@ export type Promo = {
     savingsNote?: string;
   };
 
-  contact: {
-    email: string;
-    footerHtml: string;
-    advisorName?: string;
-  };
-
   /** Footnote after booking summary (e.g. taxes disclaimer). HTML allowed. */
   pricingFootnote?: string;
   /** Hide offer banner (sample proposal omits it). */

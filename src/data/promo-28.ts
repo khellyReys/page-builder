@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 export const promo28: Promo = {
   id: "promo-28",
@@ -313,7 +312,6 @@ export const promo28: Promo = {
     },
   ],
 
-  contact: sharedContact,
   pricingFootnote:
     "¹ Totals include taxes & fees as displayed on the booking page.",
 };

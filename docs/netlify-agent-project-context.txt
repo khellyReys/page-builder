@@ -33,12 +33,13 @@ Layout/data hygiene:
   - If text exists between `WhataHotel!` and `More Info`, use it as badgeText (cleaned + title cased), e.g. `3rd Night Free w/ BKFST`.
   - If no promo phrase exists, set `badgeText: "Exclusive Rate"`.
   - Do NOT output `Hotel Option X — Room X`.
-- UI: one global Exclusive perks block + one booking-summary table per promo (multi-hotel: all rooms in one table; `gift` data still per-room).
+- UI: Single-hotel — one deduped Exclusive perks block after all room cards, then one booking-summary table. Multi-hotel (`hotels[]`) — perks are **per hotel**: dedupe `gift` items **within that hotel only**, render **once under that hotel’s room cards** (not one merged block above the table); then one combined booking-summary table. `gift` data stays per-room in source.
 - Keep copy concise; no filler text or extra `<br>`.
 - Avoid duplicate perks prose in extra fields (subtitle/offer/footnote). Perks content should live in the `gift` feature list.
 
 Defaults:
 - 3 lowest-priced rooms when unspecified; next free promo id from `promos.ts`; `client: ""` if missing.
+- Do NOT add a `contact` field to promos — it was removed from `Promo`. Footer copy (Lorraine Travel / Reservations@WhataHotel.com) is hardcoded in `ContactFooter`.
 
 Completion gate:
 - Do NOT output completion until all checks pass and `npm run build` passes.

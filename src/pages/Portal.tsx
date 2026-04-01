@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { promos } from "../data/promos";
 import { PromoCard } from "../components/PromoCard";
 import { ContactFooter } from "../components/ContactFooter";
-import { sharedContact } from "../data/contact";
+import { portalContactFootnoteHtml } from "../data/contact";
 
 const PAGE_SIZE = 6;
 
@@ -194,11 +194,7 @@ export default function Portal() {
         )}
       </div>
 
-      <ContactFooter
-        email={sharedContact.email}
-        footerHtml={sharedContact.footerHtml}
-        advisorName={sharedContact.advisorName}
-      />
+      <ContactFooter footerHtml={portalContactFootnoteHtml} />
     </div>
   );
 }

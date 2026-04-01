@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-hotel proposal — 3 Fort Lauderdale hotels, filtered rooms + rates per user request.
 // Hotel 1: Four Seasons Fort Lauderdale — Lauderdale View King & Intracoastal View King (4TH NIGHT FREE)
@@ -447,5 +446,4 @@ export const promo19: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and reflect the 4th Night Free promotional average. Grand totals include taxes & fees. Rates subject to availability. Free cancellation deadlines vary by hotel — please check individual booking pages for details.",
 
-  contact: sharedContact,
 };

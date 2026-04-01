@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-hotel comparison proposal — Andaz Maui at Wailea vs Four Seasons Maui at Wailea.
 // Check-in: Sep 27, 2026 — Check-out: Sep 30, 2026 (3 nights), 2 guests.
@@ -483,5 +482,4 @@ export const promo8: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Andaz Maui villa rates are estimates based on nearest available dates; final rates may vary. Free cancellation for Four Seasons Maui available until September 13, 2026.",
 
-  contact: sharedContact,
 };

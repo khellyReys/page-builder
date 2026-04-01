@@ -213,10 +213,4 @@ export const promo22: Promo = {
 
   pricingFootnote:
     "Rates shown exclude applicable taxes and fees. Final pricing will be confirmed at time of booking.",
-
-  contact: {
-    email: "info@whatahotel.com",
-    footerHtml:
-      "For questions or to customize your stay, contact us at <a href='mailto:info@whatahotel.com'>info@whatahotel.com</a>",
-  },
 };

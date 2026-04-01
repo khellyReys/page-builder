@@ -379,10 +379,4 @@ export const promo25: Promo = {
 
   pricingFootnote:
     "¹ Taxes & fees are additional. Grand Total reflects the full stay cost including applicable taxes and resort fees. Rates shown are per room, per night based on double occupancy. Advance Purchase rates require prepayment and may have different cancellation policies.",
-
-  contact: {
-    email: "",
-    footerHtml:
-      "Exclusive rates and perks available only through <strong>WhataHotel!</strong>",
-  },
 };

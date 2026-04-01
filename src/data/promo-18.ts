@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel proposal — Sanctuary on Camelback Mountain
 // Check-in: May 30, 2026 — Check-out: Jun 1, 2026 (2 nights)
@@ -399,5 +398,4 @@ export const promo18: Promo = {
     },
   ],
 
-  contact: sharedContact,
 };

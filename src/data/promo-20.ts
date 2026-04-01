@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel proposal — The Tokyo EDITION Toranomon
 // Premier Room Tokyo Tower View (Premier Tokyo Tower King) — two date ranges
@@ -180,5 +179,4 @@ export const promo20: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and reflect the Stay 3+ Nights & 25% Off promotional rate. Grand totals include taxes & fees. Currency: JPY. Rates subject to availability. Free cancellation available — please check individual booking pages for details.",
 
-  contact: sharedContact,
 };

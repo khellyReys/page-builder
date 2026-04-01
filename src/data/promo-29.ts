@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 export const promo29: Promo = {
   id: "promo-29",
@@ -10,6 +9,9 @@ export const promo29: Promo = {
   thumbnailUrl: "https://whatahotel.com/content/hotels/2719/327265.jpg",
   portalTotalLabel: "Starting From",
   portalTotalValue: "\u20AC3,018.80",
+
+  // Footer: not part of this object. PromoPage always renders <ContactFooter /> — hardcoded
+  // “Questions? Contact your advisor” / Lorraine Travel / Reservations@WhataHotel.com (see ContactFooter.tsx).
 
   hotels: [
     /* ──────────────────────────────────────────────────────────────
@@ -925,5 +927,4 @@ export const promo29: Promo = {
     },
   ],
 
-  contact: sharedContact,
 };

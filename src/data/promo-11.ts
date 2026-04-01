@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-hotel Maui proposal — 3 hotels, 6 room/rate entries.
 // Hotel 1: Fairmont Kea Lani (1223) — 4TH NIGHT FREE rate (3LN), 3 rooms
@@ -499,5 +498,4 @@ export const promo11: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night. When the total rate exceeds the sum of nightly rates, hotel taxes are included. Grand totals include applicable taxes, resort fees, and service charges. Rates subject to availability. Free cancellation available — see individual booking pages for deadlines.",
 
-  contact: sharedContact,
 };

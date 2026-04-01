@@ -154,9 +154,4 @@ export const promo23: Promo = {
       bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=E1KPR9&rate=PP6&hotel=2551&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
       bookLabel: "Book Now",
     },
-  ],
-  contact: {
-    email: "info@whatahotel.com",
-    footerHtml: "Questions? Contact us at <a href=\"mailto:info@whatahotel.com\">info@whatahotel.com</a>",
-  },
-};
+  ],};

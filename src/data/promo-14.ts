@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel Four Seasons Resort Hualalai proposal.
 // WhataHotel! RATE W BKFST — rate code PP6, hotel ID 2154.
@@ -303,5 +302,4 @@ export const promo14: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night. Grand totals include applicable taxes, resort fees, and service charges. Rates subject to availability. Free cancellation before July 11, 2026.",
 
-  contact: sharedContact,
 };

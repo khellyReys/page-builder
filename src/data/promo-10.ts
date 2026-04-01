@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel proposal — Kimpton Vividora Barcelona (hotelID=6258).
 // Check-in: Jun 10, 2026 — Check-out: Jun 14, 2026 (4 nights), rate=2SH.
@@ -111,5 +110,4 @@ export const promo10: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation available until June 9, 2026.",
 
-  contact: sharedContact,
 };

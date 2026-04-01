@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Standard and Flexible rate variants have identical pricing.
 // Using Standard rate booking URLs (room codes: K1KEE1, J1KEE1, G1KEE1).
@@ -253,5 +252,4 @@ export const promo1: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability.",
 
-  contact: sharedContact,
 };

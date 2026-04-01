@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Multi-hotel honeymoon proposal — 2 Four Seasons properties, King beds only.
 // Hotel 1: Four Seasons Hotel Madrid (hotelID=3897) — Aug 25–28, 2026 (3 nights), rate=PP6
@@ -645,5 +644,4 @@ export const promo5: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation: Madrid before August 24, 2026; Mallorca before August 16, 2026.",
 
-  contact: sharedContact,
 };

@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single rate variant per room (rate code 1HZ). All 11 room types included.
 // Currency: JPY (¥). Nightly rates are excl. taxes; 2-Night Totals are incl. taxes & fees.
@@ -795,5 +794,4 @@ export const promo3: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes &amp; service charges. Grand totals include taxes &amp; fees. Rates are in Japanese Yen (JPY). Free cancellation before May 30, 2026. Rates subject to availability.",
 
-  contact: sharedContact,
 };

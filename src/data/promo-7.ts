@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel proposal — Burj Al Arab, Jumeirah (hotelID=1164).
 // Check-in: Aug 25, 2026 — Check-out: Aug 28, 2026 (3 nights), rate=JPL (Jumeirah Escapes BB).
@@ -242,5 +241,4 @@ export const promo7: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation available until August 22, 2026.",
 
-  contact: sharedContact,
 };

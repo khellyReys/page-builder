@@ -574,10 +574,4 @@ export const promo24: Promo = {
 
   pricingFootnote:
     "¹ Taxes and fees are included in the Grand Total. Rates are in EUR and subject to change.",
-
-  contact: {
-    email: "",
-    footerHtml:
-      "For questions or to customize your stay, contact your WhataHotel! advisor.",
-  },
 };

@@ -1,5 +1,4 @@
 import type { Promo } from "../types";
-import { sharedContact } from "./contact";
 
 // AGENT NOTE: Single-hotel proposal — Mandarin Oriental, Lago di Como (hotelID=3705).
 // Check-in: Aug 17, 2026 — Check-out: Aug 20, 2026 (3 nights), rate=3MF.
@@ -253,5 +252,4 @@ export const promo6: Promo = {
   pricingFootnote:
     "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability.",
 
-  contact: sharedContact,
 };
