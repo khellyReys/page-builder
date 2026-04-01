@@ -4,13 +4,13 @@ Scope: ONLY `src/data/promo-N.ts` + `src/data/promos.ts`. Never `src/types.ts` o
 
 Fetch: Each booking URL ONCE; full HTML (not summaries). If tool refuses: `curl -sL` once; parse `subSlides`, `booking-img-list`, `booking_info.cfm`.
 
-Images: Hero = `ul#subSlides` first `li` bg-url → prepend `https://whatahotel.com` → `hero.imageUrl` AND `thumbnailUrl`. Rooms = `.bookingItem` `ul.booking-img-list` `<a href>` only (not `<img src>`), 2/room. CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`. Skip paceholder/logo → `images: []`. City URL → ONLY `hero.cityImageUrl` + `hero.cityImageAlt`.
+Images: Hero = `ul#subSlides` first `li` bg-url → prepend `https://whatahotel.com` → `hero.imageUrl` AND `thumbnailUrl`. Rooms = `.bookingItem` `ul.booking-img-list` `<a href>` only (not `<img src>`), 2/room. CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`. Skip paceholder/logo → `images: []`. City URL → ONLY `cityImageUrl` + `cityImageAlt` (single-hotel: flat `hero`; multi-hotel: `hotels[0].hero` only — one shared strip, not repeated per hotel).
 
 Rates: ADR =/night no tax note. Grand total INCL taxes/fees when page shows it. `grandTotalInclTaxes=bookingSummary.total=savings.rightValue`. `portalTotalValue` = lowest featured room grand total. Lowest offer → `bookUrl`; prepend `https://www.whatahotel.com`. `priceStrike: ""`. No excl.-tax-as-total copy.
 
 COPY (SSOT “Client-approved copy & labels”): `gift` → always `title: "Exclusive Perks"`. NEVER `WhataHotel! Exclusive Perks`, `& Inclusions`, partner text in title. Perks only in `gift.items[]` — no Lorraine “included when you book…” in data. UI headings are fixed in code (Exclusive Perks, Rate Comparisons, Rate & pricing breakdown).
 
-Layout: 1 hotelID → `hero/offer/rooms`. 2+ → `hotels[]`, isolate per URL. Per room: bookingSummary, `door-open`+`gift`, ISO `createdAt`. badgeText: line with `WhataHotel! … More Info` → phrase between WhataHotel! and More Info (title case); else `"Exclusive Rate"`. Never `Hotel Option X — Room X`. Single-hotel: Exclusive Perks after all rooms → Rate Comparisons table. Multi: perks deduped per hotel under that hotel’s cards → one combined Rate Comparisons table. Concise copy; perks not duplicated in subtitle/offer/footnote.
+Layout: 1 hotelID → `hero/offer/rooms`. 2+ → `hotels[]`, isolate per URL. Per room: bookingSummary, `door-open`+`gift`, ISO `createdAt`. badgeText: line with `WhataHotel! … More Info` → phrase between WhataHotel! and More Info (title case); else `"Exclusive Rate"`. Never `Hotel Option X — Room X`. Single-hotel: Exclusive Perks after all rooms → Rate Comparisons table. Multi: optional city strip once (`hotels[0].hero` only); divider band before each hotel (UI); perks deduped per hotel under that hotel’s cards → one combined Rate Comparisons table. Concise copy; perks not duplicated in subtitle/offer/footnote.
 
 Defaults: 3 lowest rooms; next id from `promos.ts`; `client: ""` if missing. No `contact` on Promo. Footer hardcoded in `ContactFooter`.
 

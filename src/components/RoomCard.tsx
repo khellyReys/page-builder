@@ -80,16 +80,25 @@ export function RoomCard({ room }: Props) {
           <div className="feat-grid">
             {roomFeatures.map((feature) => (
               <div key={feature.title} className="feat-box">
-                <div className="feat-title">
-                  <i className={`fas fa-${feature.icon}`} /> {feature.title}
+                <div className="perks-section room-feature-perks">
+                  <h3 className="section-sec-title perks-section-title room-feature-perks-title">
+                    <i
+                      className={`fas fa-${feature.icon} room-feature-perks-icon`}
+                      aria-hidden="true"
+                    />
+                    <span>{feature.title}</span>
+                  </h3>
+                  <div className="perks-items-wrap">
+                    <ul className="perks-ul">
+                      {feature.items.map((item) => (
+                        <li key={item} className="perk-li">
+                          <i className="fas fa-circle" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <ul className="feat-ul">
-                  {feature.items.map((item) => (
-                    <li key={item} className="feat-li">
-                      <i className="fas fa-circle" /> {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>

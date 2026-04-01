@@ -5,6 +5,7 @@ import { DEFAULT_HERO_IMAGE } from "../constants";
 import { Masthead } from "../components/Masthead";
 import { HeroSection } from "../components/HeroSection";
 import { CityHeroImage } from "../components/CityHeroImage";
+import { HotelSectionDivider } from "../components/HotelSectionDivider";
 import { HotelIdentity } from "../components/HotelIdentity";
 import { OfferBanner } from "../components/OfferBanner";
 import { SpecialOfferBox } from "../components/SpecialOfferBox";
@@ -205,6 +206,10 @@ export default function PromoPage() {
         ? `${window.location.origin}/promo/${promo.id}`
         : "";
 
+    const firstHotelHero = promo.hotels[0]?.hero;
+    const sharedCityImageUrl = firstHotelHero?.cityImageUrl;
+    const sharedCityImageAlt = firstHotelHero?.cityImageAlt;
+
     return (
       <div className="wrap">
         <Helmet>
@@ -234,15 +239,18 @@ export default function PromoPage() {
           </div>
         ) : null}
 
+        {sharedCityImageUrl ? (
+          <CityHeroImage
+            imageUrl={sharedCityImageUrl}
+            alt={sharedCityImageAlt ?? "Destination"}
+          />
+        ) : null}
+
         {promo.hotels.map((hotel, index) => {
+          const showHotelDivider = promo.hotels!.length > 1;
           return (
             <div key={index}>
-              {hotel.hero.cityImageUrl ? (
-                <CityHeroImage
-                  imageUrl={hotel.hero.cityImageUrl}
-                  alt={hotel.hero.cityImageAlt ?? "Destination"}
-                />
-              ) : null}
+              {showHotelDivider ? <HotelSectionDivider /> : null}
               <div className="body body-above-hero">
                 <HotelIdentity
                   hotel={hotel.hero.hotel}

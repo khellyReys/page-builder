@@ -15,4 +15,4 @@ Before changing **`PromoPage.tsx`**, **`ComparisonOverview.tsx`**, **`ProposalIn
 - **Room pricing block** (`ProposalInvestment`): heading **Rate & pricing breakdown** only. No “Investment summary”. No per-room “Preferred Partner” / “What A Hotel! · Preferred Partner” line.
 - **Footer:** org-level lines stay in **`ContactFooter`** / **`contact.ts`**; that is not the same as the removed per-room partner line.
 
-Netlify agents: scope is usually data-only (`promo-N.ts`, `promos.ts`); still follow the **`gift` title** rule and avoid prose that duplicates removed UI. Paste **`docs/netlify-agent-project-context.txt`** into Netlify Project context.
+Netlify agents: scope is usually data-only (`promo-N.ts`, `promos.ts`); still follow the **`gift` title** rule and avoid prose that duplicates removed UI. **Multi-hotel:** set **`cityImageUrl` / `cityImageAlt` on `hotels[0].hero` only** for a shared destination strip (not on every entry). Paste **`docs/netlify-agent-project-context.txt`** into Netlify Project context.

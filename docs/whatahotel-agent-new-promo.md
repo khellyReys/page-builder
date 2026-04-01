@@ -104,7 +104,7 @@ If the user gives a **city** image URL:
 
 | Field | Use |
 |-------|-----|
-| `hero.cityImageUrl` | That URL |
+| `hero.cityImageUrl` | That URL (**single-hotel:** flat `hero`; **multi-hotel:** put on **`hotels[0].hero` only** ? one shared destination strip, not repeated per hotel) |
 | `hero.cityImageAlt` | e.g. `"Amsterdam, Netherlands"` |
 
 **Do not** put the city URL in `hero.imageUrl` or `rooms[].images[]`. Property hero stays from **`subSlides`**; room images stay from **`booking-img-list`**.
@@ -114,10 +114,11 @@ If the user gives a **city** image URL:
 ## Layout (current app behavior)
 
 1. `Masthead`
-2. Optional **`CityHeroImage`** — full-bleed when `hero.cityImageUrl` is set; then “Destination” label row
-3. `HotelIdentity` (stars, name, location)
-4. **`HeroSection`** — **inset** framed property photo (`hero.imageUrl`), not edge-to-edge
-5. `OfferBanner` … room cards … **Exclusive Perks**: **single-hotel** — one deduped section (all rooms’ `gift` features) **after** all room cards, **before** the **Rate Comparisons** table. **Multi-hotel** (`hotels[]`) — **per hotel**, one deduped perks section **immediately under that hotel’s room cards** (never one merged perks block above the combined table); perks can differ by hotel. Then one combined **Rate Comparisons** table (`ComparisonOverview`). Book CTAs stay inside each **`RoomCard`**. The app does **not** show an “inclusions” subtitle or Lorraine boilerplate under Exclusive Perks — only bullets from `gift.items[]`.
+2. Optional **`CityHeroImage`** — full-bleed when `hero.cityImageUrl` is set (**single-hotel**); **multi-hotel:** when **`hotels[0].hero.cityImageUrl`** is set, **once** above the first hotel (set city fields on the first `hotels[]` entry only). Then “Destination” label row.
+3. **Multi-hotel (2+ hotels):** **`HotelSectionDivider`** before each hotel ? cream band + burgundy gradient line (**no** “Destination” text).
+4. `HotelIdentity` (stars, name, location)
+5. **`HeroSection`** — **inset** framed property photo (`hero.imageUrl`), not edge-to-edge
+6. `OfferBanner` … room cards (**non-gift** room features / e.g. **Room Highlights** use the same list/title treatment as **Exclusive Perks** in the UI) … **Exclusive Perks**: **single-hotel** — one deduped section (all rooms’ `gift` features) **after** all room cards, **before** the **Rate Comparisons** table. **Multi-hotel** (`hotels[]`) — **per hotel**, one deduped perks section **immediately under that hotel’s room cards** (never one merged perks block above the combined table); perks can differ by hotel. Then one combined **Rate Comparisons** table (`ComparisonOverview`). Book CTAs stay inside each **`RoomCard`**. The app does **not** show an “inclusions” subtitle or Lorraine boilerplate under Exclusive Perks — only bullets from `gift.items[]`.
 
 **Data:** Keep `features` with `icon: "gift"` on each room; use **`title: "Exclusive Perks"`** (not `WhataHotel! Exclusive Perks` or `& Inclusions`). `RoomCard` still omits `gift` from the card body — `PromoPage` renders perks in the sections described above.
 
@@ -132,7 +133,7 @@ If the user gives a **city** image URL:
    - Extract phrase between `WhataHotel!` and room-name / `More Info` when present (examples: `3RD NIGHT FREE W BKFST`, `LAST NIGHT FREE`, `FREE PARKING`).
    - If no promo phrase exists, use fallback: `badgeText: "Exclusive Rate"`.
    - Never keep generic placeholders like `Hotel Option 1 — Room 1`.
-4. Apply **city image** to `cityImageUrl` / `cityImageAlt` only if user provided it.
+4. Apply **city image** to `cityImageUrl` / `cityImageAlt` only if the user provided it (**multi-hotel:** on **`hotels[0].hero` only**).
 5. Build `src/data/promo-N.ts`; register in `src/data/promos.ts`; set `createdAt` (ISO 8601).
 6. Run **`npm run build`** before merge.
 7. Self-verify: **every featured room** has `images.length >= 1` when the source page had carousel links; **hero.imageUrl** is from `subSlides`, not the city URL.

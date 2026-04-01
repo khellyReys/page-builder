@@ -3,7 +3,7 @@ export type HeroBlock = {
   alt: string;
   hotel: string;
   location: string;
-  /** Optional destination / city image (full-bleed below masthead; not from supplier `subSlides`). */
+  /** Optional destination / city image (full-bleed below masthead; not from supplier `subSlides`). Multi-hotel: UI reads this from `hotels[0].hero` only (one shared strip). */
   cityImageUrl?: string;
   /** Alt text for `cityImageUrl`; include place name when set. */
   cityImageAlt?: string;

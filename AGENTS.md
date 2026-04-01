@@ -14,6 +14,8 @@ The SSOT section **“Client-approved copy & labels (do not regress)”** is man
 - **Rate Comparisons** (not “Booking summary / Comparison overview”) for the combined table
 - **Rate & pricing breakdown** in the room card (not “Investment summary”; no per-room Preferred Partner line)
 
+**Multi-hotel data:** Optional destination photo uses **`hotels[0].hero.cityImageUrl` / `cityImageAlt` only** (one shared strip in the UI). See SSOT **Proposal page layout** for `HotelSectionDivider` and full order.
+
 Cursor loads **`.cursor/rules/whatahotel-proposal-copy.mdc`** for the same rules.
 
 ## Scope
