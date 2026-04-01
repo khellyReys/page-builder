@@ -152,10 +152,4 @@ export const promo32: Promo = {
       bookLabel: "Book Now",
     },
   ],
-
-  contact: {
-    email: "info@whatahotel.com",
-    footerHtml:
-      "For questions or to customize your stay, contact your WhataHotel! advisor.",
-  },
 };

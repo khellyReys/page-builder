@@ -446,10 +446,4 @@ export const promo30: Promo = {
       ],
     },
   ],
-
-  contact: {
-    email: "info@whatahotel.com",
-    footerHtml:
-      "For questions or to customize this proposal, contact your WhataHotel! advisor.",
-  },
 };

@@ -478,9 +478,4 @@ export const promo33: Promo = {
       ],
     },
   ],
-
-  contact: {
-    email: "info@whatahotel.com",
-    footerHtml: "For questions or to modify your reservation, contact us at <a href=\"mailto:info@whatahotel.com\">info@whatahotel.com</a>.",
-  },
 };
