@@ -54,16 +54,12 @@ function grandSubline(room: Room, hasInclTaxGrand: boolean): string | null {
 }
 
 export function ProposalInvestment({ room }: Props) {
-  const partnerLine = "What A Hotel! · Preferred Partner";
   const hasInclTaxGrand = Boolean(room.grandTotalInclTaxes);
 
   if (room.savingsBreakdown) {
     return (
       <div className="investment-block proposal-investment">
-        <h3 className="section-sec-title">Investment summary</h3>
-        <p className="section-sec-sub investment-sub">
-          Rate &amp; pricing breakdown
-        </p>
+        <h3 className="section-sec-title">Rate &amp; pricing breakdown</h3>
         {room.investmentContextLine ? (
           <p
             className="proposal-inv-context"
@@ -73,7 +69,6 @@ export function ProposalInvestment({ room }: Props) {
           />
         ) : null}
         <SavingsBreakdown breakdown={room.savingsBreakdown} />
-        <p className="proposal-inv-partner">{partnerLine}</p>
       </div>
     );
   }
@@ -92,10 +87,7 @@ export function ProposalInvestment({ room }: Props) {
 
   return (
     <div className="investment-block proposal-investment">
-      <h3 className="section-sec-title">Investment summary</h3>
-      <p className="section-sec-sub investment-sub">
-        Rate &amp; pricing breakdown
-      </p>
+      <h3 className="section-sec-title">Rate &amp; pricing breakdown</h3>
       {room.investmentContextLine ? (
         <p
           className="proposal-inv-context"
@@ -171,8 +163,6 @@ export function ProposalInvestment({ room }: Props) {
           )}
         </div>
       ) : null}
-
-      <p className="proposal-inv-partner">{partnerLine}</p>
     </div>
   );
 }

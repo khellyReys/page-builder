@@ -75,7 +75,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Upgrade subject to availability at check-in",
@@ -136,7 +136,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Upgrade subject to availability at check-in",
@@ -201,7 +201,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Upgrade subject to availability at check-in",
@@ -290,7 +290,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room upgrade within 48 hours of booking",
@@ -352,7 +352,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room upgrade within 48 hours of booking",
@@ -442,7 +442,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade if available at check-in",
@@ -504,7 +504,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade if available at check-in",
@@ -592,7 +592,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade if available at check-in",
@@ -654,7 +654,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade if available at check-in",
@@ -747,7 +747,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free",
@@ -837,7 +837,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "3rd Night Free",
@@ -899,7 +899,7 @@ export const promo29: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "3rd Night Free",

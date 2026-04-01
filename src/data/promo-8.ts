@@ -91,7 +91,7 @@ export const promo8: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Complimentary full breakfast for 2 daily",
@@ -159,7 +159,7 @@ export const promo8: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Complimentary full breakfast for 2 daily",
@@ -227,7 +227,7 @@ export const promo8: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Complimentary full breakfast for 2 daily",
@@ -318,7 +318,7 @@ export const promo8: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade (subject to availability at check-in)",
@@ -387,7 +387,7 @@ export const promo8: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade (subject to availability at check-in)",
@@ -452,7 +452,7 @@ export const promo8: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room category upgrade (subject to availability at check-in)",

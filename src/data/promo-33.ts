@@ -62,7 +62,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade subject to availability at check-in",
@@ -115,7 +115,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade subject to availability at check-in",
@@ -184,7 +184,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Confirmed Room Category Upgrade within 48 hours of booking",
@@ -235,7 +235,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Confirmed Room Category Upgrade within 48 hours of booking",
@@ -285,7 +285,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Confirmed Room Category Upgrade within 48 hours of booking",
@@ -354,7 +354,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade subject to availability at check-in",
@@ -404,7 +404,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade subject to availability at check-in",
@@ -455,7 +455,7 @@ export const promo33: Promo = {
               ],
             },
             {
-              title: "Exclusive Perks & Inclusions",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade subject to availability at check-in",

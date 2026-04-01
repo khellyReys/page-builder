@@ -83,7 +83,7 @@ export type Room = {
   investmentContextLine?: string;
   /** Top meta strip before gallery (Room Category, Suite Size, …). */
   quickFacts?: RoomQuickFact[];
-  /** e.g. "Apr 27 → Apr 30" for booking summary table */
+  /** e.g. "Apr 27 → Apr 30" for Rate Comparisons table (`ComparisonOverview`) */
   stayCheckInOut?: string;
   /** Night count for table + investment block, e.g. "3" */
   nightsLabel?: string;
@@ -98,7 +98,7 @@ export type Room = {
   /** Room overview section headings (defaults in component) */
   overviewTitle?: string;
   overviewSubtitle?: string;
-  /** Row for booking summary table; optional — can be derived from stay fields + rates */
+  /** Row for Rate Comparisons table; optional — can be derived from stay fields + rates */
   bookingSummary?: {
     checkInOut: string;
     nights: string;
@@ -147,8 +147,8 @@ export type HotelBlock = {
   hero: HeroBlock;
   offer: OfferBlock;
   rooms: Room[];
-  /** When true, the per-hotel booking-summary table is suppressed so its rooms
-   *  can be merged into a later hotel's combined table. */
+  /** When true, this hotel’s rooms are omitted from the per-hotel Rate Comparisons
+   *  slice so they can be merged into a later hotel’s combined table. */
   suppressBookingSummary?: boolean;
 };
 
@@ -203,7 +203,7 @@ export type Promo = {
     savingsNote?: string;
   };
 
-  /** Footnote after booking summary (e.g. taxes disclaimer). HTML allowed. */
+  /** Footnote after Rate Comparisons table (e.g. taxes disclaimer). HTML allowed. */
   pricingFootnote?: string;
   /** Hide offer banner (sample proposal omits it). */
   suppressOfferBanner?: boolean;

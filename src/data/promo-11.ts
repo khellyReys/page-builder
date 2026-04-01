@@ -82,7 +82,7 @@ export const promo11: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free (6 paid nights, 2 free)",
@@ -147,7 +147,7 @@ export const promo11: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free (6 paid nights, 2 free)",
@@ -212,7 +212,7 @@ export const promo11: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free (6 paid nights, 2 free)",
@@ -309,7 +309,7 @@ export const promo11: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Guaranteed upgrade to Garden View Room with 2 Queen Beds",
@@ -402,7 +402,7 @@ export const promo11: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "20% off best available rate",
@@ -467,7 +467,7 @@ export const promo11: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "20% off best available rate",

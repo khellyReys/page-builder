@@ -88,7 +88,7 @@ export const promo19: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free",
@@ -155,7 +155,7 @@ export const promo19: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free",
@@ -251,7 +251,7 @@ export const promo19: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Stay 3 Nights, Get the 4th Night Free",
@@ -318,7 +318,7 @@ export const promo19: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Stay 3 Nights, Get the 4th Night Free",
@@ -415,7 +415,7 @@ export const promo19: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "4th Night Free",

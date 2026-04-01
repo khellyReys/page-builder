@@ -1,56 +1,17 @@
 WhataHotel Netlify Agent Rules
 
-Scope:
-- Edit ONLY `src/data/promo-N.ts` and `src/data/promos.ts`.
-- Never edit `src/types.ts` or `src/components/`.
-- Read `docs/whatahotel-agent-new-promo.md` first.
-- Do not use old `promo-*.ts` as template.
+Scope: ONLY `src/data/promo-N.ts` + `src/data/promos.ts`. Never `src/types.ts` or `src/components/`. Read `docs/whatahotel-agent-new-promo.md` first. Do not use old `promo-*.ts` as template.
 
-Fetch:
-- Fetch each booking URL ONCE, parse real HTML (not summaries).
-- If tool summarizes/refuses, use curl once and parse markers: `subSlides`, `booking-img-list`, `booking_info.cfm`.
+Fetch: Each booking URL ONCE; full HTML (not summaries). If tool refuses: `curl -sL` once; parse `subSlides`, `booking-img-list`, `booking_info.cfm`.
 
-Images:
-- Hero from `ul#subSlides` first `li` background-image; prepend `https://whatahotel.com`; set BOTH `hero.imageUrl` + `thumbnailUrl`.
-- Room images from `.bookingItem ul.booking-img-list li a[href]` only (never `img src`), first 2 valid links/room.
-- Valid room CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`.
-- Skip placeholder/logo (`/img/paceholder.jpg`, logo URLs). If only placeholder/logo, use `images: []`.
-- User city image goes ONLY to `hero.cityImageUrl` + `hero.cityImageAlt`.
+Images: Hero = `ul#subSlides` first `li` bg-url → prepend `https://whatahotel.com` → `hero.imageUrl` AND `thumbnailUrl`. Rooms = `.bookingItem` `ul.booking-img-list` `<a href>` only (not `<img src>`), 2/room. CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`. Skip paceholder/logo → `images: []`. City URL → ONLY `hero.cityImageUrl` + `hero.cityImageAlt`.
 
-Rates (strict):
-- ADR = per-night value (no tax note text beside ADR).
-- Grand Total = INCL. taxes & fees when booking page provides it.
-- Per room equality: `grandTotalInclTaxes = bookingSummary.total = savings.rightValue`.
-- `portalTotalValue` = lowest featured room grand total across all featured rooms/all hotels.
-- Use lowest offer row for `bookUrl`; prepend `https://www.whatahotel.com` to relative links.
-- Do NOT compute/show Standard-vs-Offered or “You Save” comparisons; keep `priceStrike: ""`.
-- Never output copy saying totals are excluding taxes/fees.
+Rates: ADR =/night no tax note. Grand total INCL taxes/fees when page shows it. `grandTotalInclTaxes=bookingSummary.total=savings.rightValue`. `portalTotalValue` = lowest featured room grand total. Lowest offer → `bookUrl`; prepend `https://www.whatahotel.com`. `priceStrike: ""`. No excl.-tax-as-total copy.
 
-Layout/data hygiene:
-- 1 hotelID => single-hotel mode (`hero/offer/rooms`); 2+ hotelIDs => `hotels[]` with strict per-URL data isolation.
-- Per room required: nights, ADR, grand total, bookingSummary, `features` with `door-open` + `gift`, ISO `createdAt`.
-- badgeText rule (never generic placeholders): parse the room marketing line text that contains `WhataHotel! ... More Info`.
-  - If text exists between `WhataHotel!` and `More Info`, use it as badgeText (cleaned + title cased), e.g. `3rd Night Free w/ BKFST`.
-  - If no promo phrase exists, set `badgeText: "Exclusive Rate"`.
-  - Do NOT output `Hotel Option X — Room X`.
-- UI: Single-hotel — one deduped Exclusive perks block after all room cards, then one booking-summary table. Multi-hotel (`hotels[]`) — perks are **per hotel**: dedupe `gift` items **within that hotel only**, render **once under that hotel’s room cards** (not one merged block above the table); then one combined booking-summary table. `gift` data stays per-room in source.
-- Keep copy concise; no filler text or extra `<br>`.
-- Avoid duplicate perks prose in extra fields (subtitle/offer/footnote). Perks content should live in the `gift` feature list.
+COPY (SSOT “Client-approved copy & labels”): `gift` → always `title: "Exclusive Perks"`. NEVER `WhataHotel! Exclusive Perks`, `& Inclusions`, partner text in title. Perks only in `gift.items[]` — no Lorraine “included when you book…” in data. UI headings are fixed in code (Exclusive Perks, Rate Comparisons, Rate & pricing breakdown).
 
-Defaults:
-- 3 lowest-priced rooms when unspecified; next free promo id from `promos.ts`; `client: ""` if missing.
-- Do NOT add a `contact` field to promos — it was removed from `Promo`. Footer copy (Lorraine Travel / Reservations@WhataHotel.com) is hardcoded in `ContactFooter`.
+Layout: 1 hotelID → `hero/offer/rooms`. 2+ → `hotels[]`, isolate per URL. Per room: bookingSummary, `door-open`+`gift`, ISO `createdAt`. badgeText: line with `WhataHotel! … More Info` → phrase between WhataHotel! and More Info (title case); else `"Exclusive Rate"`. Never `Hotel Option X — Room X`. Single-hotel: Exclusive Perks after all rooms → Rate Comparisons table. Multi: perks deduped per hotel under that hotel’s cards → one combined Rate Comparisons table. Concise copy; perks not duplicated in subtitle/offer/footnote.
 
-Completion gate:
-- Do NOT output completion until all checks pass and `npm run build` passes.
-- Final output must include `Validation Report` (PASS/FAIL with X/Y counts) for:
-  1) Rooms parsed
-  2) Nights present
-  3) ADR present
-  4) Grand total present
-  5) Equality check (`grandTotalInclTaxes=bookingSummary.total=savings.rightValue`)
-  6) Logical check (multi-night: grand total > ADR)
-  7) `portalTotalValue` correctness
-  8) Image extraction rule compliance
-  9) Build status
-- Print `PROMO COMPLETE` only if all are PASS.
+Defaults: 3 lowest rooms; next id from `promos.ts`; `client: ""` if missing. No `contact` on Promo. Footer hardcoded in `ContactFooter`.
+
+Gate: `npm run build` + Validation Report PASS for: rooms, nights, ADR, grand total, equality, logic, portalTotal, images, build. `PROMO COMPLETE` only if all PASS.

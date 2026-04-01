@@ -695,9 +695,6 @@ body {
   min-width: 0;
   overflow-x: clip;
 }
-.investment-sub {
-  margin-bottom: 10px !important;
-}
 .investment-partner {
   font-size: 11px;
   font-weight: 700;
@@ -725,15 +722,13 @@ body {
 }
 .perks-section-title {
   margin-top: 0;
-}
-.perks-section-sub {
-  margin-bottom: 18px !important;
+  margin-bottom: 18px;
 }
 .perks-items-wrap {
   display: flex;
   justify-content: center;
 }
-/* Tighten gap before Exclusive perks (room block uses large default .body bottom padding). */
+/* Tighten gap before Exclusive Perks block (room block uses large default .body bottom padding). */
 .body:has(+ .body-perks) {
   padding-bottom: 22px;
 }
@@ -758,9 +753,10 @@ body {
   gap: 9px;
 }
 .perk-li {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 10px 1fr;
   gap: 9px;
+  align-items: start;
   font-size: 13px;
   color: var(--gray);
   line-height: 1.4;
@@ -768,7 +764,10 @@ body {
 .perk-li i {
   color: var(--burgundy);
   font-size: 7px;
-  flex-shrink: 0;
+  width: 10px;
+  text-align: center;
+  line-height: inherit;
+  margin-top: 0.45em;
 }
 .room-hd {
   display: flex;
@@ -1762,6 +1761,20 @@ body {
   .body-perks + .comparison-overview {
     margin-top: 0.75rem;
   }
+
+  /* Exclusive Perks: left-align bullet copy on small screens (title stays centered). */
+  .body-perks .perks-items-wrap {
+    justify-content: flex-start;
+  }
+  .body-perks .perks-ul {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+  .body-perks .perk-li {
+    text-align: left;
+  }
 }
 
 /* ── Special Offer Box ─────────────────────────────────────────── */
@@ -2568,16 +2581,6 @@ body {
   font-size: 12px;
   color: var(--burgundy);
   font-weight: 600;
-}
-
-.proposal-inv-partner {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--burgundy);
-  margin: 16px 0 0 0;
-  text-align: center;
 }
 
 .experience-more {

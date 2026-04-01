@@ -41,12 +41,8 @@ function renderSingleHotelPerks(rooms: Room[]) {
     <div className="body body-perks">
       <div className="perks-section">
         <h3 className="section-sec-title perks-section-title">
-          Exclusive perks &amp; inclusions
+          Exclusive Perks
         </h3>
-        <p className="section-sec-sub perks-section-sub">
-          Included with every booking through Lorraine Travel — at no additional
-          cost
-        </p>
         <div className="perks-items-wrap">
           <ul className="perks-ul">
             {items.map((item) => (
@@ -63,7 +59,7 @@ function renderSingleHotelPerks(rooms: Room[]) {
 }
 
 /** Multi-hotel promos: one deduped block per hotel, directly under that hotel's room cards (not above the combined table). */
-function renderPerHotelPerks(rooms: Room[], hotelName: string) {
+function renderPerHotelPerks(rooms: Room[]) {
   const items = collectGiftPerkItems(rooms);
   if (!items.length) return null;
 
@@ -71,12 +67,8 @@ function renderPerHotelPerks(rooms: Room[], hotelName: string) {
     <div className="body body-perks body-perks--after-hotel">
       <div className="perks-section">
         <h3 className="section-sec-title perks-section-title">
-          Exclusive perks &amp; inclusions
+          Exclusive Perks
         </h3>
-        <p className="section-sec-sub perks-section-sub">
-          Included when you book <strong>{hotelName}</strong> through Lorraine
-          Travel — at no additional cost
-        </p>
         <div className="perks-items-wrap">
           <ul className="perks-ul">
             {items.map((item) => (
@@ -280,7 +272,7 @@ export default function PromoPage() {
                   </p>
                 )}
               </div>
-              {renderPerHotelPerks(hotel.rooms, hotel.hero.hotel)}
+              {renderPerHotelPerks(hotel.rooms)}
             </div>
           );
         })}

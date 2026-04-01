@@ -79,7 +79,7 @@ export const promo22: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "Upgrade subject to availability at Check-In",
@@ -137,7 +137,7 @@ export const promo22: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "Upgrade subject to availability at Check-In",
@@ -194,7 +194,7 @@ export const promo22: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "Upgrade subject to availability at Check-In",

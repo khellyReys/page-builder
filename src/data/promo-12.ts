@@ -82,7 +82,7 @@ export const promo12: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "EXTRA $100 Resort Credit — COMBINABLE with all perks below!",
@@ -148,7 +148,7 @@ export const promo12: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "EXTRA $100 Resort Credit — COMBINABLE with all perks below!",

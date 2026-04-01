@@ -81,7 +81,7 @@ export const promo15: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "Room category upgrade subject to availability",

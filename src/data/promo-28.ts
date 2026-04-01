@@ -77,7 +77,7 @@ export const promo28: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade (subject to availability)",
@@ -138,7 +138,7 @@ export const promo28: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade (subject to availability)",
@@ -224,7 +224,7 @@ export const promo28: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade (subject to availability)",
@@ -287,7 +287,7 @@ export const promo28: Promo = {
               ],
             },
             {
-              title: "WhataHotel! Exclusive Perks",
+              title: "Exclusive Perks",
               icon: "gift",
               items: [
                 "Room Category Upgrade (subject to availability)",

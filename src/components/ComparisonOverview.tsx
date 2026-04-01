@@ -54,16 +54,10 @@ export function ComparisonOverview(props: Props) {
   return (
     <div className="comparison-overview booking-summary-overview">
       <div className="proposal-co-header">
-        <h2 className="proposal-co-heading">Booking summary</h2>
-        <span className="proposal-co-divider" aria-hidden="true">
-          ·
-        </span>
-        <h2 className="proposal-co-heading proposal-co-heading-muted">
-          Comparison overview
-        </h2>
+        <h2 className="proposal-co-heading">Rate Comparisons</h2>
       </div>
 
-      <div className="co-mobile-cards" aria-label="Booking summary by room">
+      <div className="co-mobile-cards" aria-label="Rate comparisons by room">
         {allRooms.map(({ room, hotelName }) => {
           const row = bookingRow(room, hotelName);
           const roomKey = `${hotelName}-${room.badgeText}`;

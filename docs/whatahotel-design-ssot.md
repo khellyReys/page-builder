@@ -2,13 +2,29 @@
 
 > **For:** Lorraine Travel / WhataHotel!  
 > **Stack:** React + TypeScript + Vite ? Deployed on Netlify via GitHub  
-> **Last updated:** March 2026 ? **keep in sync with `src/types.ts` and `src/components/`**
+> **Last updated:** April 2026 ? **keep in sync with `src/types.ts` and `src/components/`**
 
 ### AI agents: read this before the full SSOT
 
 - **This file is large (~15k+ tokens).** Many agent environments **cannot load it in one read** and will error (`exceeds maximum allowed tokens`). If that happens, you did **not** receive image-extraction rules — **stop** and use partial reads (`offset` / `limit`) or search.
 - **Start with:** [`docs/whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) — short guide: **mandatory hero + room image steps**, **city vs property URLs**, workflow, and an **SSOT line-range index** for chunked reads.
 - **Then** open only the SSOT sections you need (see **Room Images** ~line 811, **Booking URL Rules** ~line 958, **Multi-Hotel Workflow** ~line 1050).
+
+---
+
+## Client-approved copy & labels (do not regress)
+
+**Product decision (2026):** Redundant headings and boilerplate were removed from the live UI. Agents and maintainers **must not** reintroduce them in **components** or **promo data** without an explicit product change.
+
+| Area | Rule |
+|------|------|
+| **Exclusive Perks block** | `PromoPage` shows the heading **Exclusive Perks** only (capital **P**). **No** “& inclusions”, **no** Lorraine Travel subline (“included when you book…”). Body copy is **only** the deduped bullets from `features[]` with `icon: "gift"` → `items[]`. |
+| **`gift` feature `title` in data** | Use **`"Exclusive Perks"`** on every room’s `icon: "gift"` block. **Do not** use `WhataHotel! Exclusive Perks`, `Exclusive Perks & Inclusions`, or partner wording in `title`. |
+| **Rate table (`ComparisonOverview`)** | User-facing heading: **Rate Comparisons**. **Do not** restore the old paired labels “Booking summary” / “Comparison overview” in UI copy. |
+| **Room card pricing (`ProposalInvestment`)** | Section heading: **Rate & pricing breakdown** only. **Do not** use “Investment summary”. **Do not** add a per-room “Preferred Partner” / “What A Hotel! · Preferred Partner” line. |
+| **Global footer** | Org-level lines stay in `ContactFooter` / `contact.ts`. That is separate from the removed per-room partner line. |
+
+**Pre-merge check:** If you edit `PromoPage.tsx`, `ComparisonOverview.tsx`, `ProposalInvestment.tsx`, or `gift` blocks in `promo-*.ts`, confirm forbidden user-facing strings above are absent.
 
 ---
 
@@ -19,7 +35,7 @@
 | **Build / types** | OK | `npm run build` should pass before merge. |
 | **Data-only workflow** | OK | New promos are TS data + `promos.ts` registry; no per-promo routes. |
 | **SSOT doc** | **Must stay aligned** | This file previously drifted from the app (file names, room layout, optional fields). Sections below are updated; **re-verify after UI changes.** |
-| **Redundancy** | Mitigated | If `savingsBreakdown` is set, the default **ADR / nights / grand total** investment layout is replaced by `<SavingsBreakdown />`. There is **no** savings strip under the room card; totals appear in the **booking summary** table and investment block. |
+| **Redundancy** | Mitigated | If `savingsBreakdown` is set, the default **ADR / nights / grand total** pricing layout is replaced by `<SavingsBreakdown />`. There is **no** savings strip under the room card; totals appear in the **Rate Comparisons** table and the room **Rate & pricing breakdown** block. |
 | **Gaps to improve** | Optional | Automated CI (`build` + lint), visual regression for proposal layouts, optional validation that `bookingSummary` or fallbacks (`stayCheckInOut`, `nightsLabel`, `savings.rightValue`) are populated. |
 
 **Ready for production** as a Netlify-hosted SPA **if** agents follow this SSOT and you run a build on PRs. The main risk is **stale agent prompts** (Netlify project context) ? update the block at the end of this doc when rules change.
@@ -76,12 +92,12 @@ src/
     HotelIdentity.tsx         ? Stars + hotel name + location above property hero
     OfferBanner.tsx
     RoomMetaStrip.tsx         ? Optional quickFacts strip (Room Category, Suite Size, ?)
-    ProposalInvestment.tsx   ? ADR / Grand total / Nights (3-column grid); no book button inside
+    ProposalInvestment.tsx   ? **Rate & pricing breakdown**: ADR / Grand total / Nights (3-column grid); no book button inside; no “Investment summary” or per-room partner line
     RoomCard.tsx              ? ? investment ? **Book** CTA ? optional ExperienceMore (no perks block in-card)
     ExperienceMore.tsx      ? Optional spending-credit style block
     RoomOverviewGrid.tsx      ? Key-attribute grid (after table + footnote; book link is in RoomCard)
     SavingsBreakdown.tsx      ? Standard vs WhataHotel! breakdown (optional per room)
-    ComparisonOverview.tsx    ? Booking summary table ? `entries` (multi-hotel) or `rooms` + `hotelName`
+    ComparisonOverview.tsx    ? Rate Comparisons table ? `entries` (multi-hotel) or `rooms` + `hotelName`
     SpecialOfferBox.tsx
     PriceSummaryTable.tsx
     PromoCard.tsx
@@ -110,17 +126,17 @@ Target UX matches **[pro.whatahotel.com/best-proposal-sample](https://pro.whatah
    - `RoomMetaStrip` ? optional `quickFacts` strip
    - Gallery images
    - **Room Features** (`features` with `icon: "door-open"`) ? displayed in a card below the gallery images, before the investment block
-   - **`ProposalInvestment`** ? 3-column **ADR ? Grand Total (incl. taxes & fees) ? Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
+   - **`ProposalInvestment`** (**Rate & pricing breakdown**) ? 3-column **ADR ? Grand Total (incl. taxes & fees) ? Nights** grid; when `grandTotalInclTaxes` is set it is the canonical total shown in the card (no separate incl.-tax block below)
    - Primary **`bookUrl` / `bookLabel`** CTA (before optional `ExperienceMore`)
-8. **Exclusive perks & inclusions** (from room `features` with `icon: "gift"`; `RoomCard` does not render `gift` in-card): **single-hotel** ? one deduped section after all room cards, before the table. **Multi-hotel** (`hotels[]`) ? **per hotel**, one deduped section **under that hotel's room cards** (not one merged block above the table).
-9. One global `ComparisonOverview` ? **booking summary** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (all rooms across the promo)
+8. **Exclusive Perks** (from room `features` with `icon: "gift"`; `RoomCard` does not render `gift` in-card): **single-hotel** ? one deduped section after all room cards, before the table. **Multi-hotel** (`hotels[]`) ? **per hotel**, one deduped section **under that hotel's room cards** (not one merged block above the table). Heading and bullets only ? **no** extra “inclusions” wording or Lorraine Travel subline in the app.
+9. One global `ComparisonOverview` ? **Rate Comparisons** table columns: Hotel ? Room category ? Check-in/out ? Nights ? ADR ? **Grand Total (incl. taxes & fees)** (all rooms across the promo)
 10. Optional `promo.pricingFootnote` (HTML) ? e.g. taxes disclaimer
 11. `RoomOverviewGrid` per room when `keyAttributes` is set
 12. Optional `PriceSummaryTable`
 13. `AppDownload` ? unchanged
 14. `ContactFooter`
 
-**Multi-hotel:** For each `hotels[]` entry, render hotel identity/hero/offer + room cards, then **that hotel's** deduped Exclusive perks section (from its rooms' `gift` features only). After **all** hotels, render one global booking summary table, then optional footnote and room overviews. Layout step **6** (`specialOffer`) remains once before the loop. After global booking content: optional price summary, `AppDownload`, `ContactFooter`.
+**Multi-hotel:** For each `hotels[]` entry, render hotel identity/hero/offer + room cards, then **that hotel's** deduped **Exclusive Perks** section (from its rooms' `gift` features only). After **all** hotels, render one global **Rate Comparisons** table, then optional footnote and room overviews. Layout step **6** (`specialOffer`) remains once before the loop. After global booking content: optional price summary, `AppDownload`, `ContactFooter`.
 
 **Default images:** Empty `images[]` uses `DEFAULT_ROOM_IMAGE`; missing hero URL uses `DEFAULT_HERO_IMAGE`.
 
@@ -166,7 +182,7 @@ interface Promo {
   // Multi-hotel only
   hotels?: HotelBlock[];
 
-  /** HTML footnote after booking summary (e.g. taxes disclaimer). */
+  /** HTML footnote after Rate Comparisons table (e.g. taxes disclaimer). */
   pricingFootnote?: string;
   /** When true, `OfferBanner` is not rendered. */
   suppressOfferBanner?: boolean;
@@ -290,7 +306,7 @@ interface Room {
     rightInclTaxesValue?: string;
   };
   savingsBreakdown?: SavingsBreakdown; // Replaces default ADR / nights / grand total layout
-  /** Legacy BAR vs WH rows ? not used by the booking summary table; optional to keep for archives */
+  /** Legacy BAR vs WH rows ? not used by the Rate Comparisons table; optional to keep for archives */
   comparison?: ComparisonRow[];
   bookUrl: string;
   bookLabel: string;
@@ -403,7 +419,7 @@ Use `<br/>` for line breaks. Always end with a colored highlight:
 Always exactly **2 feature blocks** per room:
 
 1. **Room/Suite/Residence Features** ? `icon: "door-open"` ? rendered in a card section **directly below the room gallery images**, before the investment block
-2. **WhataHotel! Exclusive Perks** ? `icon: "gift"` ? consumed by `PromoPage`: **single-hotel** ? one deduped section after all room cards, before the table; **multi-hotel** ? one deduped section per hotel under that hotel's room cards (not one merged block above the table)
+2. **Exclusive Perks** ? `icon: "gift"`, **`title: "Exclusive Perks"`** ? consumed by `PromoPage`: **single-hotel** ? one deduped section after all room cards, before the table; **multi-hotel** ? one deduped section per hotel under that hotel's room cards (not one merged block above the table)
 
 `RoomCard` renders only non-gift features (`icon !== "gift"`). Gift features are aggregated by `PromoPage` into deduplicated perks sections per rules above (single-hotel: once before table; multi-hotel: once per hotel under that hotel's cards).
 
@@ -471,7 +487,7 @@ When `savingsBreakdown` is present, use `standardTotalInclTaxes` / `whatahotelTo
 
 ## Pricing Consistency ? Cross-Field Alignment ?? MANDATORY
 
-The WhataHotel booking page always displays a **tax-inclusive grand total** for the stay. This is the number the client actually pays. It must be **the same number that appears in every section of the proposal page that shows a total** ? the investment block, the booking summary table, the portal card, and any summary row.
+The WhataHotel booking page always displays a **tax-inclusive grand total** for the stay. This is the number the client actually pays. It must be **the same number that appears in every section of the proposal page that shows a total** ? the room **Rate & pricing breakdown** block, the **Rate Comparisons** table, the portal card, and any summary row.
 
 **This is the most common source of errors by the AI agent. Follow these rules without exception.**
 
@@ -481,9 +497,9 @@ When the booking page shows a tax-inclusive total for the stay, populate `grandT
 
 > ? Never feature the excl.-tax total as the "Grand Total" when an incl.-tax total is available.
 
-### Rule 2 ? Booking summary table Total MUST match `grandTotalInclTaxes`
+### Rule 2 ? Rate Comparisons table Total MUST match `grandTotalInclTaxes`
 
-The **Total** column in `<ComparisonOverview />` (the Booking summary / Comparison overview table) must show the **same number** as `grandTotalInclTaxes`. Always set `bookingSummary.total` explicitly to that incl.-tax amount:
+The **Total** column in `<ComparisonOverview />` (UI heading **Rate Comparisons**) must show the **same number** as `grandTotalInclTaxes`. Always set `bookingSummary.total` explicitly to that incl.-tax amount:
 
 ```ts
 // ? CORRECT ? all fields agree on the same canonical total
@@ -547,9 +563,9 @@ If the booking page does not display a tax-inclusive total, omit `grandTotalIncl
 
 ---
 
-## Booking summary (`ComparisonOverview`) ?? Required for production-quality promos
+## Rate Comparisons (`ComparisonOverview`) ?? Required for production-quality promos
 
-`<ComparisonOverview />` renders the **Booking summary / Comparison overview** table (columns: **Hotel ? Room category ? Check-in / out ? Nights ? ADR ? Grand Total (incl. taxes & fees)**). It is rendered **once per promo** after all room content and perks sections (single-hotel: perks block immediately before this table; multi-hotel: perks already rendered under each hotel) and accepts either:
+`<ComparisonOverview />` renders the **Rate Comparisons** table (columns: **Hotel ? Room category ? Check-in / out ? Nights ? ADR ? Grand Total (incl. taxes & fees)**). It is rendered **once per promo** after all room content and perks sections (single-hotel: perks block immediately before this table; multi-hotel: perks already rendered under each hotel) and accepts either:
 
 - `entries={...}` for combined multi-hotel/single-hotel normalized rendering (preferred), or
 - `rooms={...}` + `hotelName={...}` for a single group.
@@ -594,7 +610,7 @@ The old **Standard vs WhataHotel** row model (`comparison[]`) is **not** consume
 
 ### Placement (implemented in `PromoPage.tsx`)
 
-`PromoPage` renders: **single-hotel:** all room cards ? one **Exclusive perks** block ? one `<ComparisonOverview ... />`. **Multi-hotel:** for each `hotels[]` entry, that hotel's room cards ? that hotel's **Exclusive perks** block; after all hotels, one combined `<ComparisonOverview ... />`. Then optional `pricingFootnote` ? `RoomOverviewGrid` when `keyAttributes` is set ? optional `PriceSummaryTable` ? `AppDownload` ? `ContactFooter`. Each **`RoomCard`** includes the **Book** link.
+`PromoPage` renders: **single-hotel:** all room cards ? one **Exclusive Perks** block ? one `<ComparisonOverview ... />`. **Multi-hotel:** for each `hotels[]` entry, that hotel's room cards ? that hotel's **Exclusive Perks** block; after all hotels, one combined `<ComparisonOverview ... />`. Then optional `pricingFootnote` ? `RoomOverviewGrid` when `keyAttributes` is set ? optional `PriceSummaryTable` ? `AppDownload` ? `ContactFooter`. Each **`RoomCard`** includes the **Book** link.
 
 ---
 
@@ -638,16 +654,16 @@ Gallery (optional headings + images; empty images[] -> default room photo)
     |
 Room Features (features with icon: "door-open") -- card section below gallery
     |
-Investment summary (ProposalInvestment)
-  -- If savingsBreakdown: context line -> SavingsBreakdown -> partner line
-  -- Else: context line -> 3-column grid: ADR | Grand Total (incl. taxes & fees) | Nights -> BAR line -> partner line
-     NOTE: when grandTotalInclTaxes is set it IS the Grand Total card value (no separate block below)
+Rate & pricing breakdown (ProposalInvestment)
+  -- If savingsBreakdown: context line -> SavingsBreakdown
+  -- Else: context line -> 3-column grid: ADR | Grand Total (incl. taxes & fees) | Nights -> included value stack when set
+     NOTE: when grandTotalInclTaxes is set it IS the Grand Total card value (no separate block below). No per-room partner slogan.
     |
 **Book** (`bookUrl` / `bookLabel`) + secure-booking hint
     |
 [ExperienceMore] -- optional
     |
-(PromoPage) Exclusive perks (single: deduped once; multi: deduped per hotel under its cards) -> one Booking summary table (Grand Total col = grandTotalInclTaxes) -> footnote -> RoomOverviewGrid(keyAttributes) -- no separate book row below the table
+(PromoPage) Exclusive Perks (single: deduped once; multi: deduped per hotel under its cards) -> one Rate Comparisons table (Grand Total col = grandTotalInclTaxes) -> footnote -> RoomOverviewGrid(keyAttributes) -- no separate book row below the table
 ```
 
 ### Rules
@@ -782,7 +798,7 @@ priceSummary?: {
 
 ```tsx
 {promo.rooms!.map((room) => <RoomCard key={room.badgeText} room={room} />)}
-{/* PromoPage: Exclusive perks (layout rules above) then one ComparisonOverview */}
+{/* PromoPage: Exclusive Perks (layout rules above) then one ComparisonOverview (Rate Comparisons) */}
 <ComparisonOverview rooms={promo.rooms!} hotelName={promo.hero!.hotel} />
 {/* footnote + RoomOverviewGrid ? book CTAs are in RoomCard; see Proposal page layout section */}
 {promo.priceSummary && (
@@ -1016,7 +1032,7 @@ Every promo page **must** include the `<AppDownload />` component after the book
 ### Rules
 
 - `AppDownload` takes no props ? links are hardcoded inside the component
-- Placement order: **Single-hotel:** RoomCards ? Exclusive perks ? ComparisonOverview ? … **Multi-hotel:** (RoomCards ? Exclusive perks) per hotel, then one ComparisonOverview ? footnote ? RoomOverviewGrid(s) ? optional PriceSummaryTable ? AppDownload ? ContactFooter
+- Placement order: **Single-hotel:** RoomCards ? Exclusive Perks ? ComparisonOverview (Rate Comparisons) ? … **Multi-hotel:** (RoomCards ? Exclusive Perks) per hotel, then one ComparisonOverview ? footnote ? RoomOverviewGrid(s) ? optional PriceSummaryTable ? AppDownload ? ContactFooter
 - Never omit from any promo page ? single-hotel or multi-hotel
 - Never change the app store URLs
 
@@ -1331,37 +1347,28 @@ Edit the relevant `src/data/promo-N.ts` file directly. Commit to GitHub. Netlify
 
 ## Netlify Project Context (Agent Prompt)
 
-Netlify’s **Project context** field is limited (**~3000 characters**). Use the short block below or copy the same text from **`docs/netlify-agent-project-context.txt`** (kept in sync; ~1.5k chars). Full rules live in **`docs/whatahotel-agent-new-promo.md`** and the SSOT (**Room Images** section ~line 820+).
+Netlify’s **Project context** field is limited (**~3000 characters**). **Paste the full contents of `docs/netlify-agent-project-context.txt`** (kept in sync with this section; ~2.2k chars) or use the block below. Full rules also live in **`docs/whatahotel-agent-new-promo.md`** and the SSOT (**Room Images** ~line 830+, **Client-approved copy** near top).
 
 Paste into **Netlify ? Site configuration ? Agent runs ? Project context**:
 
 ```
-WhataHotel: edit ONLY src/data/promo-N.ts + src/data/promos.ts. NEVER src/types.ts or src/components/—if HeroBlock lacks fields the docs mention, stop and report (sync branch with main).
+WhataHotel Netlify Agent Rules
 
-READ docs/whatahotel-agent-new-promo.md first. Do NOT read all of docs/whatahotel-design-ssot.md in one call—use search or partial read (section "Room Images" ~L820+).
+Scope: ONLY `src/data/promo-N.ts` + `src/data/promos.ts`. Never `src/types.ts` or `src/components/`. Read `docs/whatahotel-agent-new-promo.md` first. Do not use old `promo-*.ts` as template.
 
-Build new promos from src/types.ts + docs only. FORBIDDEN: opening any existing src/data/promo-*.ts (e.g. promo-20) as a template—even after globbing for the next id. Only read promos.ts for the next N; never read old promo files. Edit only the new promo-N.ts + promos.ts.
+Fetch: Each booking URL ONCE; full HTML (not summaries). If tool refuses: `curl -sL` once; parse `subSlides`, `booking-img-list`, `booking_info.cfm`.
 
-FETCH each booking URL ONCE; parse full HTML in one pass (must be real markup, not a text summary). Never re-fetch. If web fetch refuses or summarizes only, use curl -sL "<URL>" to temp file. Extract by HTML markers (subSlides, booking-img-list, booking_info.cfm)—never fixed sed line ranges.
+Images: Hero = `ul#subSlides` first `li` bg-url → prepend `https://whatahotel.com` → `hero.imageUrl` AND `thumbnailUrl`. Rooms = `.bookingItem` `ul.booking-img-list` `<a href>` only (not `<img src>`), 2/room. CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`. Skip paceholder/logo → `images: []`. City URL → ONLY `hero.cityImageUrl` + `hero.cityImageAlt`.
 
-IMAGES (top failure):
-• Hero: <ul id="subSlides"> first <li> style background-image url(...); prepend https://whatahotel.com → hero.imageUrl AND thumbnailUrl.
-• Rooms: each .bookingItem → ul.booking-img-list → copy <a href> only (NOT <img src>; /E.JPEG is wrong). First 2 links per room. CDNs: d2573qu6qrjt8c or d321ocj5nbe62c. Skip paceholder.jpg.
-• User-supplied city photo → hero.cityImageUrl + hero.cityImageAlt ONLY. Never replace hero.imageUrl or room images[] with it if the page has subSlides/booking-img-list.
+Rates: ADR =/night no tax note. Grand total INCL taxes/fees when page shows it. `grandTotalInclTaxes=bookingSummary.total=savings.rightValue`. `portalTotalValue` = lowest featured room grand total. Lowest offer → `bookUrl`; prepend `https://www.whatahotel.com`. `priceStrike: ""`. No excl.-tax-as-total copy.
 
-RATES: Lowest offer → bookUrl; higher BAR → priceStrike "". Prepend https://www.whatahotel.com to relative booking links.
+COPY (SSOT “Client-approved copy & labels”): `gift` → always `title: "Exclusive Perks"`. NEVER `WhataHotel! Exclusive Perks`, `& Inclusions`, partner text in title. Perks only in `gift.items[]` — no Lorraine “included when you book…” in data. UI headings are fixed in code (Exclusive Perks, Rate Comparisons, Rate & pricing breakdown).
 
-MODE: 1 hotelID = { hero, offer, rooms }. 2+ hotel IDs = hotels[]; isolate data per URL.
+Layout: 1 hotelID → `hero/offer/rooms`. 2+ → `hotels[]`, isolate per URL. Per room: bookingSummary, `door-open`+`gift`, ISO `createdAt`. badgeText: line with `WhataHotel! … More Info` → phrase between WhataHotel! and More Info (title case); else `"Exclusive Rate"`. Never `Hotel Option X — Room X`. Single-hotel: Exclusive Perks after all rooms → Rate Comparisons table. Multi: perks deduped per hotel under that hotel’s cards → one combined Rate Comparisons table. Concise copy; perks not duplicated in subtitle/offer/footnote.
 
-UI: Exclusive perks: single-hotel = one deduped block after all room cards; multi-hotel = one deduped block per hotel under that hotel's room cards (not merged above the table). One booking-summary table per promo (multi-hotel: combined table). Keep `gift` features per room in data.
+Defaults: 3 lowest rooms; next id from `promos.ts`; `client: ""` if missing. No `contact` on Promo. Footer hardcoded in `ContactFooter`.
 
-PER ROOM: bookingSummary; savings leftLabel/leftSub; features door-open + gift; priceStrike "" if no BAR.
-
-BADGETEXT: Parse room marketing text (`WhataHotel! ... More Info`). If a promo phrase exists between `WhataHotel!` and room details/`More Info`, use it. If not, use `Exclusive Rate`. Never use `Hotel Option X - Room X`.
-
-VERIFY: grandTotalInclTaxes = bookingSummary.total = savings.rightValue = portalTotalValue (use lowest featured room for portal total). createdAt ISO 8601. npm run build.
-
-USER MAY SEND ONLY a WhataHotel booking URL +/- a second URL for city/destination ("create a promo", "use as city image"). Still run the full workflow. Second URL -> hero.cityImageUrl + hero.cityImageAlt only. Default 3 lowest-priced rooms; next free promo-N from promos.ts if id not given; client "" if omitted.
+Gate: `npm run build` + Validation Report PASS for: rooms, nights, ADR, grand total, equality, logic, portalTotal, images, build. `PROMO COMPLETE` only if all PASS.
 ```
 
 ---
@@ -1370,12 +1377,12 @@ USER MAY SEND ONLY a WhataHotel booking URL +/- a second URL for city/destinatio
 
 ### Required
 
-- [ ] Read [`whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md) and **SSOT image section** (~line 811+) before building data (do not rely on one full SSOT read)
+- [ ] Read [`whatahotel-agent-new-promo.md`](./whatahotel-agent-new-promo.md), **SSOT “Client-approved copy & labels”**, and **SSOT image section** (~line 830+) before building data (do not rely on one full SSOT read)
 - [ ] `id`, `createdAt` (ISO 8601), `title`, `client`, `dates` populated
 - [ ] **Property hero** from `<ul id="subSlides">` ? `hero.imageUrl` and `thumbnailUrl` both set (see "Room Images" section); **not** the city URL
 - [ ] If user gave a **city** URL ? `hero.cityImageUrl` + `hero.cityImageAlt` only (never substitute for `hero.imageUrl` or `images[]` when page has assets)
 - [ ] **Room images** extracted from `<a href>` in `ul.booking-img-list` (NOT `<img src>`) ? CloudFront CDN URLs; **no** `images: []` for all rooms when the HTML lists carousel links
-- [ ] 2 feature blocks per room: `icon: "door-open"` + `icon: "gift"`
+- [ ] 2 feature blocks per room: `icon: "door-open"` + `icon: "gift"` with **`title: "Exclusive Perks"`** on the gift block (no `WhataHotel!` prefix, no “& Inclusions”)
 - [ ] `priceStrike: ""` when no BAR rate exists (never omit the field)
 - [ ] `bookUrl` uses SEASONAL OFFER (lowest) rate
 - [ ] `bookingSummary` or fallbacks (`stayCheckInOut` + `nightsLabel` + `savings.rightValue`) populated
@@ -1387,4 +1394,4 @@ USER MAY SEND ONLY a WhataHotel booking URL +/- a second URL for city/destinatio
 
 ---
 
-_WhataHotel! / Lorraine Travel ? Updated March 2026_
+_WhataHotel! / Lorraine Travel ? Updated April 2026_

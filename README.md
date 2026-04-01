@@ -12,6 +12,10 @@ Netlify sets **`URL`** during build; the script uses it for `og:url` / canonical
 
 ## Netlify Agents
 
+**Project context:** paste the full text of [`docs/netlify-agent-project-context.txt`](docs/netlify-agent-project-context.txt) into Netlify **Site configuration → Agent runs → Project context** (character limit ~3000). It includes **copy conventions** (Exclusive Perks, Rate Comparisons, `gift` titles) so agents do not reintroduce removed headings. The same block is embedded in [`docs/whatahotel-design-ssot.md`](docs/whatahotel-design-ssot.md) under *Netlify Project Context* — keep file and SSOT in sync when rules change.
+
+**Cursor / other AI:** see root [`AGENTS.md`](AGENTS.md) and [`.cursor/rules/whatahotel-proposal-copy.mdc`](.cursor/rules/whatahotel-proposal-copy.mdc).
+
 Create a Netlify agent from the CLI with a prompt and target branch (see [`netlify agents:create`](https://cli.netlify.com/commands/agents/)):
 
 ```bash

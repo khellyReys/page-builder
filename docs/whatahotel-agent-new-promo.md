@@ -2,7 +2,9 @@
 
 **Read this file first.** The full design SSOT (`whatahotel-design-ssot.md`) is **longer than most tools’ single-file read limits** (~15k+ tokens). Agents that load the entire SSOT often fail mid-read and **miss image rules** entirely.
 
-**Which doc is “the” SSOT?** There is **one** canonical spec: **`docs/whatahotel-design-ssot.md`**. This file is a **short agent companion** (workflow, images, Netlify limits). **`docs/netlify-agent-project-context.txt`** is a **compressed** copy of the same rules for Netlify?s character cap ? if anything disagrees, **trust the full SSOT + `src/types.ts` + `PromoPage.tsx`**.
+**Which doc is “the” SSOT?** There is **one** canonical spec: **`docs/whatahotel-design-ssot.md`**. This file is a **short agent companion** (workflow, images, Netlify limits). **`docs/netlify-agent-project-context.txt`** is a **compressed** copy of the same rules for Netlify’s character cap — if anything disagrees, **trust the full SSOT + `src/types.ts` + `PromoPage.tsx`**.
+
+**Copy that must not regress:** Read the SSOT section **“Client-approved copy & labels (do not regress)”** near the top of `whatahotel-design-ssot.md`. It defines **`gift` `title: "Exclusive Perks"`**, no redundant Lorraine sublines in the app, **Rate Comparisons** table naming, and no **Investment summary** / per-room **Preferred Partner** in components.
 
 ---
 
@@ -115,9 +117,9 @@ If the user gives a **city** image URL:
 2. Optional **`CityHeroImage`** — full-bleed when `hero.cityImageUrl` is set; then “Destination” label row
 3. `HotelIdentity` (stars, name, location)
 4. **`HeroSection`** — **inset** framed property photo (`hero.imageUrl`), not edge-to-edge
-5. `OfferBanner` … room cards … **Exclusive perks & inclusions**: **single-hotel** — one deduped section (all rooms’ `gift` features) **after** all room cards, **before** the booking summary table. **Multi-hotel** (`hotels[]`) — **per hotel**, one deduped perks section **immediately under that hotel’s room cards** (never one merged perks block above the combined table); perks can differ by hotel. Then one combined **Booking summary / Comparison overview** table. Book CTAs stay inside each **`RoomCard`**.
+5. `OfferBanner` … room cards … **Exclusive Perks**: **single-hotel** — one deduped section (all rooms’ `gift` features) **after** all room cards, **before** the **Rate Comparisons** table. **Multi-hotel** (`hotels[]`) — **per hotel**, one deduped perks section **immediately under that hotel’s room cards** (never one merged perks block above the combined table); perks can differ by hotel. Then one combined **Rate Comparisons** table (`ComparisonOverview`). Book CTAs stay inside each **`RoomCard`**. The app does **not** show an “inclusions” subtitle or Lorraine boilerplate under Exclusive Perks — only bullets from `gift.items[]`.
 
-**Data:** Keep `features` with `icon: "gift"` on each room; `RoomCard` still omits `gift` from the card body — `PromoPage` renders perks in the sections described above.
+**Data:** Keep `features` with `icon: "gift"` on each room; use **`title: "Exclusive Perks"`** (not `WhataHotel! Exclusive Perks` or `& Inclusions`). `RoomCard` still omits `gift` from the card body — `PromoPage` renders perks in the sections described above.
 
 ---
 
@@ -143,7 +145,8 @@ Use these with **partial reads** of `docs/whatahotel-design-ssot.md` (approximat
 
 | Lines (approx.) | Topic |
 |-------------------|--------|
-| 90–120 | Proposal page layout |
+| ~15–35 | **Client-approved copy & labels (do not regress)** |
+| 90–140 | Proposal page layout |
 | 321–410 | Field rules |
 | 469–545 | Pricing consistency |
 | **811–956** | **Room + hero image extraction (critical)** |

@@ -84,7 +84,7 @@ export const promo21: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "3rd Night Free",
@@ -153,7 +153,7 @@ export const promo21: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "3rd Night Free",
@@ -222,7 +222,7 @@ export const promo21: Promo = {
           ],
         },
         {
-          title: "WhataHotel! Exclusive Perks",
+          title: "Exclusive Perks",
           icon: "gift",
           items: [
             "3rd Night Free",
