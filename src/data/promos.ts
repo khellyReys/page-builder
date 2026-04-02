@@ -39,6 +39,7 @@ import { promo36 } from "./promo-36";
 import { promo37 } from "./promo-37";
 import { promo38 } from "./promo-38";
 import { promo39 } from "./promo-39";
+import { promo40 } from "./promo-40";
 
 /** Register new proposals here: `import { promoN } from "./promo-N";` then add to the array. */
 const rawPromos: Promo[] = [
@@ -81,6 +82,7 @@ const rawPromos: Promo[] = [
   promo37,
   promo38,
   promo39,
+  promo40,
 ];
 
 /** Normalize room totals / nights so booking summary stays consistent across all cards and tables. */
