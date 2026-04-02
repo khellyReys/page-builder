@@ -23,21 +23,12 @@ export const promo35: Promo = {
           "https://media.cntraveler.com/photos/689cea3689e9d4922fa6abc0/16:9/w_2992,h_1683,c_limit/081325-TTD-Vancouver-Lede-GettyImages-589148746.jpg",
         cityImageAlt: "Vancouver, British Columbia",
       },
-      offer: {
-        heading: "Fairmont Pacific Rim — Exclusive Rates",
-        description:
-          "Luxury waterfront hotel on Vancouver's Coal Harbour with panoramic harbour and mountain views.",
-        pills: ["2 Nights", "Breakfast Daily", "$100 Hotel Credit"],
-      },
       rooms: [
         {
           badgeText: "Exclusive Rate",
           name: "Fairmont City View 2 Queen",
           subtitle: "Floors vary · City View · 2 Queen beds",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $827.90 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,655.80",
+          priceRate: "CAD $827.90",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -61,24 +52,14 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $827.90 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,998.55",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=D2Q1TW&rate=1TW&hotel=2362&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         {
           badgeText: "Exclusive Rate",
           name: "Fairmont City View King",
           subtitle: "Floors vary · City View · 1 King bed",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $827.90 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,655.80",
+          priceRate: "CAD $827.90",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -102,24 +83,14 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $827.90 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,998.55",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=D1K1TW&rate=1TW&hotel=2362&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         {
           badgeText: "Exclusive Rate",
           name: "Deluxe City View 2 Queen",
           subtitle: "Floors vary · City View · 2 Queen beds",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $861.90 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,723.80",
+          priceRate: "CAD $861.90",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -143,15 +114,8 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $861.90 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $2,080.63",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C2Q1TW&rate=1TW&hotel=2362&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -164,21 +128,12 @@ export const promo35: Promo = {
         hotel: "Opus Hotel Vancouver",
         location: "Vancouver, British Columbia, Canada",
       },
-      offer: {
-        heading: "Opus Hotel Vancouver — Exclusive Rates",
-        description:
-          "Boutique hotel in the heart of Yaletown with bold design and personalized service.",
-        pills: ["2 Nights", "Breakfast Daily", "$100 F&B Credit"],
-      },
       rooms: [
         {
           badgeText: "Exclusive Rate",
           name: "Standard Queen",
           subtitle: "1 Queen-size bed",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $719.10 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,438.20",
+          priceRate: "CAD $719.10",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -202,24 +157,14 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $719.10 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,757.02",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1Q2SH&rate=2SH&hotel=2994&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         {
           badgeText: "Exclusive Rate",
           name: "Standard King",
           subtitle: "1 King-size bed",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $728.10 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,456.20",
+          priceRate: "CAD $728.10",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -243,24 +188,14 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $728.10 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,778.72",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1K2SH&rate=2SH&hotel=2994&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         {
           badgeText: "Exclusive Rate",
           name: "Superior King",
           subtitle: "1 King-size bed",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $773.10 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,546.20",
+          priceRate: "CAD $773.10",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -284,15 +219,8 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $773.10 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,887.16",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1K2SH&rate=2SH&hotel=2994&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -305,21 +233,12 @@ export const promo35: Promo = {
         hotel: "The Fairmont Hotel Vancouver",
         location: "Vancouver, British Columbia, Canada",
       },
-      offer: {
-        heading: "The Fairmont Hotel Vancouver — Exclusive Rates",
-        description:
-          "Iconic castle-style landmark hotel in the heart of downtown Vancouver.",
-        pills: ["2 Nights", "Breakfast Daily", "$100 Hotel Credit"],
-      },
       rooms: [
         {
           badgeText: "Exclusive Rate",
           name: "Fairmont 2 Queen",
           subtitle: "Floors 2–8 · City View · 300 SF · 2 Queen beds",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $798.15 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,596.30",
+          priceRate: "CAD $798.15",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -343,25 +262,15 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $798.15 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,926.41",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C2D1TW&rate=1TW&hotel=1208&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         {
           badgeText: "Exclusive Rate",
           name: "Fairmont Gallery View King",
           subtitle:
             "Floors 2–8 · Art Gallery Square View · 300 SF · 1 King bed",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $823.65 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,647.30",
+          priceRate: "CAD $823.65",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -385,25 +294,15 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $823.65 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,987.96",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=E1K1TW&rate=1TW&hotel=1208&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         {
           badgeText: "Exclusive Rate",
           name: "Fairmont Gallery View 2 Queen",
           subtitle:
             "Floors 2–8 · Art Gallery Square View · 300 SF · 2 Queen beds",
-          priceLabel: "WhataHotel! Rate",
-          priceRate: "CAD $823.65 /night",
-          priceStrike: "",
-          priceTotal: "2-Night Total: CAD $1,647.30",
+          priceRate: "CAD $823.65",
           stayCheckInOut: "May 13 → May 15",
           nightsLabel: "2",
           bookingSummary: {
@@ -427,19 +326,10 @@ export const promo35: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "CAD $823.65 /night",
-            rightLabel: "Total",
-            rightValue: "CAD $1,987.96",
-          },
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=D2D1TW&rate=1TW&hotel=1208&checkin=2026-05-13&checkout=2026-05-15&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
   ],
-  pricingFootnote:
-    "All rates in CAD. Totals include applicable taxes and fees. *Subject to availability at check-in. **Per stay.",
 };
