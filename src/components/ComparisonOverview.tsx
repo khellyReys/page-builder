@@ -1,7 +1,6 @@
 import type { Room } from "../types";
 import { stripHtml } from "../lib/html";
 
-/** A group of rooms sharing one hotel name. */
 export type RoomGroup = {
   rooms: Room[];
   hotelName: string;
@@ -12,35 +11,17 @@ type Props =
   | { entries: RoomGroup[]; rooms?: undefined; hotelName?: undefined };
 
 function bookingRow(room: Room, hotelName: string) {
-  // Always show the highest (tax-inclusive) total when available.
-  const total =
-    room.grandTotalInclTaxes ??
-    room.bookingSummary?.total ??
-    room.savings?.rightValue ??
-    "—";
-
-  if (room.bookingSummary) {
-    return {
-      hotel: hotelName,
-      roomCategory: stripHtml(room.name),
-      checkInOut: room.bookingSummary.checkInOut,
-      nights: room.bookingSummary.nights,
-      adr: room.bookingSummary.adr,
-      total,
-    };
-  }
   return {
     hotel: hotelName,
     roomCategory: stripHtml(room.name),
-    checkInOut: room.stayCheckInOut ?? "—",
-    nights: room.nightsLabel ?? "—",
-    adr: room.priceRate,
-    total,
+    checkInOut: room.bookingSummary.checkInOut,
+    nights: room.bookingSummary.nights,
+    adr: room.bookingSummary.adr,
+    total: room.grandTotalInclTaxes,
   };
 }
 
 export function ComparisonOverview(props: Props) {
-  // Normalise to entries array
   const entries: RoomGroup[] = props.entries
     ? props.entries
     : [{ rooms: props.rooms!, hotelName: props.hotelName! }];

@@ -10,7 +10,6 @@ import type { Promo } from "../types";
 export const promo7: Promo = {
   id: "promo-7",
   createdAt: "2026-03-23T23:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Diana in Dubai",
   client: "Diana",
   dates: "August 25–28, 2026 | 3 Nights | 3 Suite Options",
@@ -28,19 +27,6 @@ export const promo7: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Dubai, United Arab Emirates &nbsp;|&nbsp; Iconic Luxury All-Suite Hotel",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Burj Al Arab, Jumeirah</strong> — including a room upgrade, daily breakfast for 2, $100 daily food &amp; spa credit, and more.",
-    pills: [
-      "✔ Room Category Upgrade (subject to availability)",
-      "✔ Complimentary Buffet Breakfast for 2 Daily",
-      "✔ $100 Daily Credit Toward F&B and Spa",
-      "✔ Complimentary WiFi",
-      "✔ Late Check-Out (subject to availability)",
-    ],
-  },
-
   rooms: [
     // ─── Room Option 1: Panoramic One Bedroom Suite ───
     {
@@ -48,14 +34,8 @@ export const promo7: Promo = {
       name: "Panoramic One Bedroom Suite",
       subtitle:
         "170 sqm · Duplex · Sea View Jacuzzi<br/><strong style='color: var(--burgundy)'>From AED 3,400/night</strong>",
-      priceLabel: "Per night",
       priceRate: "AED 3,400",
-      priceStrike: "",
-      priceTotal: "3-Night Total: AED 10,200",
-      stayTotalExclAmount: "AED 10,200",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "AED 12,495",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Aug 25 → Aug 28",
       nightsLabel: "3",
       bookingSummary: {
@@ -94,17 +74,9 @@ export const promo7: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: AED 3,400/night &times; 3 = <strong>AED 10,200</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>AED 12,495</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "AED 12,495",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=S1KSN3&rate=JPL&hotel=1164&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Panoramic One Bedroom Suite",
     },
 
     // ─── Room Option 2: Sky Marina Suite ───
@@ -113,14 +85,8 @@ export const promo7: Promo = {
       name: "Sky Marina Suite",
       subtitle:
         "170 sqm · High Floor Duplex · Sea View Jacuzzi<br/><strong style='color: var(--burgundy)'>From AED 3,570/night</strong>",
-      priceLabel: "Per night",
       priceRate: "AED 3,570",
-      priceStrike: "",
-      priceTotal: "3-Night Total: AED 10,710",
-      stayTotalExclAmount: "AED 10,710",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "AED 13,119.75",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Aug 25 → Aug 28",
       nightsLabel: "3",
       bookingSummary: {
@@ -159,17 +125,9 @@ export const promo7: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: AED 3,570/night &times; 3 = <strong>AED 10,710</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>AED 13,119.75</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "AED 13,119.75",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=S1OSN3&rate=JPL&hotel=1164&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Sky Marina Suite",
     },
 
     // ─── Room Option 3: Panoramic Suite ───
@@ -178,14 +136,8 @@ export const promo7: Promo = {
       name: "Panoramic Suite",
       subtitle:
         "225 sqm · Duplex · King Bed · Jacuzzi · iMac<br/><strong style='color: var(--burgundy)'>From AED 4,646.67/night</strong>",
-      priceLabel: "Per night",
       priceRate: "AED 4,646.67",
-      priceStrike: "",
-      priceTotal: "3-Night Total: AED 13,940.01",
-      stayTotalExclAmount: "AED 13,940.01",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "AED 17,076.51",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Aug 25 → Aug 28",
       nightsLabel: "3",
       bookingSummary: {
@@ -224,21 +176,10 @@ export const promo7: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: AED 4,646.67/night &times; 3 = <strong>AED 13,940.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>AED 17,076.51</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "AED 17,076.51",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=P1KSN3&rate=JPL&hotel=1164&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Panoramic Suite",
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation available until August 22, 2026.",
 
 };

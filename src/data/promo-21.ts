@@ -25,20 +25,6 @@ export const promo21: Promo = {
     cityImageAlt: "Amsterdam, Netherlands",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive Offer",
-    description:
-      "Book through WhataHotel! and enjoy exclusive perks at the Mandarin Oriental Conservatorium, including a 3rd Night Free promotion, daily breakfast for two, and a USD 100 Food & Beverage or Spa credit.",
-    pills: [
-      "✓ 3rd Night Free",
-      "✓ Complimentary Full Breakfast for Two Daily",
-      "✓ USD 100 Food & Beverage or Spa Credit",
-      "✓ Room Category Upgrade if Available",
-      "✓ Late Check-out Based on Availability",
-      "✓ Complimentary WiFi",
-    ],
-  },
-
   rooms: [
     // ── Room 1: Duplex Room ──
     {
@@ -47,8 +33,6 @@ export const promo21: Promo = {
       subtitle:
         "1 King or Queen · 30 sqm / 323 sqf · Bi-Level<br/><strong style='color: var(--burgundy)'>Best Value — From €653.33/night</strong>",
       priceRate: "€653.33",
-      priceStrike: "Standard: €784.00/night",
-      priceTotal: "3-Night Total: €2,162.46",
       stayCheckInOut: "Aug 24 → Aug 27",
       nightsLabel: "3",
       bookingSummary: {
@@ -58,7 +42,6 @@ export const promo21: Promo = {
         total: "€2,162.46",
       },
       grandTotalInclTaxes: "€2,162.46",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       images: [
         {
           src: "https://media.ffycdn.net/eu/mandarin-oriental-hotel-group/1JnNwGF15CHdDq6xkavv.jpg?mod=v1/contain=1280x-&quality=75",
@@ -96,17 +79,9 @@ export const promo21: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "Standard rate: €784.00/night × 3 = €2,352.00 — WhataHotel! rate: €653.33/night × 3 = €1,959.99 — you save <strong>€432.51</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "€2,162.46",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=C1K3M5&rate=3MF&hotel=2772&checkin=2026-08-24&checkout=2026-08-27&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── Room 2: Deluxe Room ──
@@ -116,8 +91,6 @@ export const promo21: Promo = {
       subtitle:
         "1 King or Queen · 36 sqm / 388 sqf<br/><strong style='color: var(--burgundy)'>From €738.33/night</strong>",
       priceRate: "€738.33",
-      priceStrike: "Standard: €892.00/night",
-      priceTotal: "3-Night Total: €2,443.81",
       stayCheckInOut: "Aug 24 → Aug 27",
       nightsLabel: "3",
       bookingSummary: {
@@ -127,7 +100,6 @@ export const promo21: Promo = {
         total: "€2,443.81",
       },
       grandTotalInclTaxes: "€2,443.81",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       images: [
         {
           src: "https://media.ffycdn.net/eu/mandarin-oriental-hotel-group/iKyaESA6fAt3Ct1CPB2o.jpg?mod=v1/contain=1280x-&quality=75",
@@ -165,17 +137,9 @@ export const promo21: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "Standard rate: €892.00/night × 3 = €2,676.00 — WhataHotel! rate: €738.33/night × 3 = €2,214.99 — you save <strong>€508.61</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "€2,443.81",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=A1K3M5&rate=3MF&hotel=2772&checkin=2026-08-24&checkout=2026-08-27&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── Room 3: Junior Suite Duplex ──
@@ -185,8 +149,6 @@ export const promo21: Promo = {
       subtitle:
         "1 King · 48 sqm / 517 sqf · Bi-Level · 2 Bathrooms<br/><strong style='color: var(--burgundy)'>From €850.00/night</strong>",
       priceRate: "€850.00",
-      priceStrike: "Standard: €1,020.00/night",
-      priceTotal: "3-Night Total: €2,813.42",
       stayCheckInOut: "Aug 24 → Aug 27",
       nightsLabel: "3",
       bookingSummary: {
@@ -196,7 +158,6 @@ export const promo21: Promo = {
         total: "€2,813.42",
       },
       grandTotalInclTaxes: "€2,813.42",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       images: [
         {
           src: "https://media.ffycdn.net/eu/mandarin-oriental-hotel-group/E9Ag3gPfh2YMKrcutYXR.jpg?mod=v1/contain=1280x-&quality=75",
@@ -234,20 +195,10 @@ export const promo21: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "Standard rate: €1,020.00/night × 3 = €3,060.00 — WhataHotel! rate: €850.00/night × 3 = €2,550.00 — you save <strong>€562.68</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "€2,813.42",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=T1K3M5&rate=3MF&hotel=2772&checkin=2026-08-24&checkout=2026-08-27&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
   ],
 
-  pricingFootnote:
-    "¹ Totals include applicable taxes and fees. Rates are per room, per night, based on double occupancy. Subject to availability.",
 };

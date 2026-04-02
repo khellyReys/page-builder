@@ -22,12 +22,7 @@ export const promo34: Promo = {
           "https://www.pgaresort.com/images/hero/partial/beaches-cover.jpg",
         cityImageAlt: "South Florida Beaches",
       },
-      offer: {
-        heading: "Exclusive WhataHotel! Rates",
-        description: "Suites & villas with complimentary perks",
-        pills: ["4 Nights", "Breakfast Included", "$100 F&B Credit"],
-        hidden: true,
-      },
+
       rooms: [
         // Room 1 — Junior Suite Partial Ocean View
         {
@@ -35,10 +30,7 @@ export const promo34: Promo = {
           name: "Junior Suite Partial Ocean View",
           subtitle: "Partial Ocean View",
           priceRate: "$458.63 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $1,834.52",
           grandTotalInclTaxes: "$2,253.79",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -70,15 +62,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$458.63",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$2,253.79",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A11CBPC&rate=I70&hotel=3333&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 2 — 1 Bedroom Suite Intracoastal View
         {
@@ -86,10 +72,7 @@ export const promo34: Promo = {
           name: "1 Bedroom Suite Intracoastal View",
           subtitle: "Intracoastal View",
           priceRate: "$524.25 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $2,097.00",
           grandTotalInclTaxes: "$2,550.41",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -121,15 +104,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$524.25",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$2,550.41",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A05CBPC&rate=I70&hotel=3333&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 3 — 1 Bedroom Suite Partial Ocean View
         {
@@ -137,10 +114,7 @@ export const promo34: Promo = {
           name: "1 Bedroom Suite Partial Ocean View",
           subtitle: "Partial Ocean View",
           priceRate: "$524.25 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $2,097.00",
           grandTotalInclTaxes: "$2,550.41",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -172,15 +146,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$524.25",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$2,550.41",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A04CBPC&rate=I70&hotel=3333&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -197,12 +165,7 @@ export const promo34: Promo = {
           "https://www.pgaresort.com/images/hero/partial/beaches-cover.jpg",
         cityImageAlt: "South Florida Beaches",
       },
-      offer: {
-        heading: "Exclusive WhataHotel! Rates",
-        description: "4th night free with breakfast included",
-        pills: ["4 Nights", "4th Night Free", "Breakfast Included"],
-        hidden: true,
-      },
+
       rooms: [
         // Room 1 — Lauderdale View Room King Bed
         {
@@ -210,10 +173,7 @@ export const promo34: Promo = {
           name: "Lauderdale View Room King Bed",
           subtitle: "Lauderdale View · King Bed",
           priceRate: "$691.25 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $2,765.00",
           grandTotalInclTaxes: "$3,345.93",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -245,15 +205,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$691.25",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$3,345.93",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KPP1&rate=PP6&hotel=5035&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 2 — Lauderdale View Room Two Queen Beds
         {
@@ -261,10 +215,7 @@ export const promo34: Promo = {
           name: "Lauderdale View Room Two Queen Beds",
           subtitle: "Lauderdale View · Two Queen Beds",
           priceRate: "$728.75 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $2,915.00",
           grandTotalInclTaxes: "$3,515.43",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -296,15 +247,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$728.75",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$3,515.43",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A2QPP1&rate=PP6&hotel=5035&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 3 — Intracoastal Room King Bed
         {
@@ -312,10 +257,7 @@ export const promo34: Promo = {
           name: "Intracoastal Room King Bed",
           subtitle: "Intracoastal View · King Bed",
           priceRate: "$831.25 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $3,325.00",
           grandTotalInclTaxes: "$3,978.73",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -355,15 +297,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$831.25",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$3,978.73",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=K1KPP1&rate=PP6&hotel=5035&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -380,12 +316,7 @@ export const promo34: Promo = {
           "https://www.pgaresort.com/images/hero/partial/beaches-cover.jpg",
         cityImageAlt: "South Florida Beaches",
       },
-      offer: {
-        heading: "Exclusive WhataHotel! Rates",
-        description: "3rd night free with breakfast included",
-        pills: ["4 Nights", "3rd Night Free", "Breakfast Included"],
-        hidden: true,
-      },
+
       rooms: [
         // Room 1 — Bayfront Room King Bed
         {
@@ -393,10 +324,7 @@ export const promo34: Promo = {
           name: "Bayfront Room King Bed",
           subtitle: "Bayfront View · King Bed",
           priceRate: "$775.00 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $3,100.00",
           grandTotalInclTaxes: "$3,774.20",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -428,15 +356,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$775.00",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$3,774.20",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KPP2&rate=PP6&hotel=1326&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 2 — Premier Bayfront Room King Bed
         {
@@ -444,10 +366,7 @@ export const promo34: Promo = {
           name: "Premier Bayfront Room King Bed",
           subtitle: "Premier Bayfront · King Bed · Floor 20–29",
           priceRate: "$850.00 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $3,400.00",
           grandTotalInclTaxes: "$4,113.20",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -479,15 +398,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$850.00",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$4,113.20",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=P1KPP2&rate=PP6&hotel=1326&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 3 — Premier Cityscape Accessible King Bed
         {
@@ -495,10 +408,7 @@ export const promo34: Promo = {
           name: "Premier Cityscape Accessible King Bed",
           subtitle: "North City Views · King Bed",
           priceRate: "$900.00 / night",
-          priceStrike: "",
-          priceTotal: "4-Night Total: $3,600.00",
           grandTotalInclTaxes: "$4,339.20",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           nightsLabel: "4",
           stayCheckInOut: "Apr 5 → Apr 9",
           bookingSummary: {
@@ -530,15 +440,9 @@ export const promo34: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$900.00",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$4,339.20",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=F1KPP4&rate=PP6&hotel=1326&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },

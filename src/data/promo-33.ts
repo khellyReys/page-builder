@@ -21,22 +21,14 @@ export const promo33: Promo = {
         cityImageUrl: "https://rometourtickets.com/wp-content/uploads/2022/01/rome-city-to-visit-at-night.jpg",
         cityImageAlt: "Rome, Italy",
       },
-      offer: {
-        heading: "Exclusive WhataHotel! Rate",
-        description: "Book through WhataHotel! and receive exclusive perks and amenities at Hotel Hassler.",
-        pills: ["3 Nights", "Apr 10–13, 2026", "2 Guests"],
-        hidden: true,
-      },
+
       rooms: [
         /* Deluxe Double */
         {
           badgeText: "Exclusive Rate",
           name: "Deluxe Double Room",
           subtitle: "Approx 28 sqm · City / Garden / Courtyard View · King",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,690",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €5,636 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -73,24 +65,15 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€5,636",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=B2K2SH&rate=2SH&hotel=1660&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* Grand Deluxe Double */
         {
           badgeText: "Exclusive Rate",
           name: "Grand Deluxe Double Room",
           subtitle: "Approx 35 sqm · City / Garden / Courtyard View",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,919",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €6,393 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -126,14 +109,8 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€6,393",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=B2Q2SH&rate=2SH&hotel=1660&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -146,22 +123,14 @@ export const promo33: Promo = {
         hotel: "Hotel Eden",
         location: "Rome, Italy",
       },
-      offer: {
-        heading: "Exclusive WhataHotel! Rate",
-        description: "Book through WhataHotel! and receive exclusive perks and amenities at Hotel Eden.",
-        pills: ["3 Nights", "Apr 10–13, 2026", "2 Guests"],
-        hidden: true,
-      },
+
       rooms: [
         /* Prestige Room */
         {
           badgeText: "Exclusive Rate",
           name: "Prestige Room",
           subtitle: "",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,390",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,647 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -195,24 +164,15 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€4,647",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=A1DDZ2&rate=DZ9&hotel=1009&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* Prestige Room View */
         {
           badgeText: "Exclusive Rate",
           name: "Prestige Room View",
           subtitle: "",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,780",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €5,934 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -246,24 +206,15 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€5,934",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=C1QDZ2&rate=DZ9&hotel=1009&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* Prestige Room View Balcony */
         {
           badgeText: "Exclusive Rate",
           name: "Prestige Room View Balcony",
           subtitle: "",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,930",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €6,429 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -296,14 +247,8 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€6,429",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=D1QDZ2&rate=DZ9&hotel=1009&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -316,22 +261,14 @@ export const promo33: Promo = {
         hotel: "Hotel d'Inghilterra",
         location: "Rome, Italy",
       },
-      offer: {
-        heading: "Exclusive WhataHotel! Rate",
-        description: "Book through WhataHotel! and receive exclusive perks and amenities at Hotel d'Inghilterra.",
-        pills: ["3 Nights", "Apr 10–13, 2026", "2 Guests"],
-        hidden: true,
-      },
+
       rooms: [
         /* Junior Suite */
         {
           badgeText: "Exclusive Rate",
           name: "Junior Suite",
           subtitle: "",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,200",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €3,600 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -365,24 +302,15 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€3,600",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=S1D2SH&rate=2SH&hotel=3630&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* Suite */
         {
           badgeText: "Exclusive Rate",
           name: "Suite",
           subtitle: "",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,400",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,200 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -415,24 +343,15 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€4,200",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=S112SH&rate=2SH&hotel=3630&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* Balcony Suite */
         {
           badgeText: "Exclusive Rate",
           name: "Balcony Suite",
           subtitle: "",
-          priceLabel: "Avg Per Night",
           priceRate: "€1,650",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,950 (incl. taxes & fees)",
           nightsLabel: "3",
           stayCheckInOut: "Apr 10 → Apr 13",
           bookingSummary: {
@@ -466,14 +385,8 @@ export const promo33: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg Nightly Rate",
-            leftSub: "3-night stay",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "€4,950",
-          },
+
           bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=S1S2SH&rate=2SH&hotel=3630&checkin=2026-04-10&checkout=2026-04-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },

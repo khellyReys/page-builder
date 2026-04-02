@@ -16,17 +16,6 @@ export const promo15: Promo = {
     location:
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Maui, Hawaii, United States &nbsp;|&nbsp; Fairmont Hotels under Accor's HERA Program",
   },
-  offer: {
-    heading: "Exclusive Complimentary Perks",
-    description: "Complimentary amenities included with your WhataHotel! booking.",
-    pills: [
-      "✓ A Room Category Upgrade*",
-      "✓ Complimentary Breakfast for Two Daily",
-      "✓ A $100 Hotel Credit**",
-      "✓ Free WiFi",
-      "✓ Late Check-Out, Subj to Avails upon Request",
-    ],
-  },
   rooms: [
     {
       badgeText: "🏨 Option 1",
@@ -34,18 +23,6 @@ export const promo15: Promo = {
       subtitle:
         "Double sofabed &middot; 860 SF (79 SM)<br/><strong style='color: var(--burgundy)'>Best Value - From $1,146.60/night</strong>",
       priceRate: "$1,146.60",
-      priceStrike: "Standard: $1,274.00/night",
-      priceTotal: "2-Night Total: $2,840.96 (incl. taxes & fees)",
-      stayTotalExclAmount: "$2,840.96",
-      stayTotalExclSub: "2 Nights - incl. taxes & fees",
-      investmentContextLine:
-        "Suite &middot; Jul 3 - Jul 5, 2026 &middot; 2 Adults &middot; WhataHotel! Special Offer",
-      quickFacts: [
-        { label: "Room Category", value: "Suite" },
-        { label: "Bed Setup", value: "1 King + Double Sofabed" },
-        { label: "Size", value: "860 SF (79 SM)" },
-        { label: "View", value: "Neighborhood View" },
-      ],
       stayCheckInOut: "Jul 3 - Jul 5",
       nightsLabel: "2",
       bookingSummary: {
@@ -55,18 +32,10 @@ export const promo15: Promo = {
         total: "$2,840.96",
       },
       grandTotalInclTaxes: "$2,840.96",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
-      keyAttributes: [
-        { label: "Room Type", value: "Suite" },
-        { label: "Occupancy", value: "2 Adults" },
-        { label: "Outdoor Space", value: "Large Private Lanai" },
-        { label: "Cancellation", value: "Free cancellation before June 12, 2026" },
-      ],
       images: [
         {
           src: "https://d2573qu6qrjt8c.cloudfront.net/B4C355EEABA74A3BBDF5E9F8E577E415/B4C355EEABA74A3BBDF5E9F8E577E415.JPEG",
           alt: "Fairmont Suite 1 King",
-          caption: "Suite",
         },
       ],
       features: [
@@ -92,18 +61,8 @@ export const promo15: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Special Offer</span>",
-        leftSub:
-          "Standard rate: $1,274.00/night &times; 2 = $2,548.00 &mdash; WhataHotel! rate: $1,146.60/night &times; 2 = $2,293.20 &mdash; you save <strong>$254.80</strong>",
-        rightLabel: "Total (incl. taxes & fees)",
-        rightValue: "$2,840.96",
-      },
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=D1KQE2&rate=QE2&hotel=1223&checkin=2026-07-03&checkout=2026-07-05&guests=2&children=0&rooms=1",
-      bookLabel: "Book this option",
     },
   ],
-  pricingFootnote:
-    "*Room category upgrade is subject to availability at check-in. **Hotel credit is once per stay, even for back-to-back reservations.",
 };

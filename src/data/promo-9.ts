@@ -9,7 +9,6 @@ import type { Promo } from "../types";
 export const promo9: Promo = {
   id: "promo-9",
   createdAt: "2026-03-24T18:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "The Silvester's Honeymoon",
   client: "The Silvester's",
   dates: "September 1–13, 2026 | 12 Nights | 3 Destinations",
@@ -30,18 +29,7 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Santorini, Greece &nbsp;|&nbsp; Sep 1–5, 2026 · 4 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Grace Santorini, Auberge Collection</strong> — including a room upgrade, daily breakfast for 2, private arrival transfer, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Full Breakfast Daily for 2 (at Varoulko)",
-          "✔ Private Arrival Transfer",
-          "✔ Complimentary WiFi",
-          "✔ Early Check-In & Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // Deluxe Room — BOOK EARLY
         {
@@ -49,12 +37,7 @@ export const promo9: Promo = {
           name: "Deluxe Room with Heated Plunge Pool",
           subtitle:
             "34 sqm · King Bed · Heated Plunge Pool on Terrace<br/><strong style='color: var(--burgundy)'>Book Early: €1,802.40/night</strong>",
-          priceLabel: "Per night · Book Early",
           priceRate: "€1,802.40",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €7,209.60",
-          stayTotalExclAmount: "€7,209.60",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
           bookingSummary: {
@@ -63,6 +46,7 @@ export const promo9: Promo = {
             adr: "€1,802.40",
             total: "€7,209.60",
           },
+          grandTotalInclTaxes: "€7,209.60",
           images: [
             {
           src: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/5e/02/12/grace-santorini-hotel.jpg?w=700&h=-1&s=1",
@@ -92,17 +76,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>BOOK EARLY/NON-REFUNABLE Rate</span>",
-            leftSub:
-              "Book Early rate: €1,802.40/night &times; 4 = <strong>€7,209.60</strong> (excl. taxes) · Deposit required",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€7,209.60",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=V1K3SH&hotel=2927&rate=2SH&checkin=2026-09-01&checkout=2026-09-05&guests=2",
-          bookLabel: "Book Now — Deluxe Room (Non-Refunable Rate)",
         },
         // Deluxe Room — WhataHotel! Exclusive Rate
         {
@@ -110,12 +86,7 @@ export const promo9: Promo = {
           name: "Deluxe Room with Heated Plunge Pool",
           subtitle:
             "34 sqm · King Bed · Heated Plunge Pool on Terrace<br/><strong style='color: var(--burgundy)'>Exclusive: €2,253/night</strong>",
-          priceLabel: "Per night · WhataHotel! Flexible",
           priceRate: "€2,253",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €9,012",
-          stayTotalExclAmount: "€9,072",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
           bookingSummary: {
@@ -124,6 +95,7 @@ export const promo9: Promo = {
             adr: "€2,253",
             total: "€9,072",
           },
+          grandTotalInclTaxes: "€9,072",
           images: [
             {
           src: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/5e/02/12/grace-santorini-hotel.jpg?w=700&h=-1&s=1",
@@ -153,17 +125,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "Exclusive rate: €2,253/night &times; 4 = <strong>€9,012</strong> (excl. taxes) · Free cancellation before Aug 11, 2026",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€9,072",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=V1K2SH&rate=2SH&hotel=2927&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Room (Exclusive)",
         },
         // Superior Suite — BOOK EARLY
         {
@@ -171,12 +135,7 @@ export const promo9: Promo = {
           name: "Superior Suite with Plunge Pool",
           subtitle:
             "King Bed · Sea View · Heated Plunge Pool · Sun Loungers<br/><strong style='color: var(--burgundy)'>Book Early: €2,504/night</strong>",
-          priceLabel: "Per night · Book Early",
           priceRate: "€2,504",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €10,016",
-          stayTotalExclAmount: "€10,016",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
           bookingSummary: {
@@ -185,6 +144,7 @@ export const promo9: Promo = {
             adr: "€2,504",
             total: "€10,016",
           },
+          grandTotalInclTaxes: "€10,016",
           images: [
             {
           src: "https://q-xx.bstatic.com/xdata/images/hotel/max500/406003416.jpg?k=aae023b201a9be92916c402c50f66c8dca2813a65ffcb9990413083fa34da7fc&o=",
@@ -214,17 +174,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>BOOK EARLY Rate</span>",
-            leftSub:
-              "Book Early rate: €2,504/night &times; 4 = <strong>€10,016</strong> (excl. taxes) · Deposit required",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€10,016",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=N1K3SH&rate=2SH&hotel=2927&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Suite (Non-Refundable)",
         },
         // Superior Suite — WhataHotel! Exclusive Rate
         {
@@ -232,12 +184,7 @@ export const promo9: Promo = {
           name: "Superior Suite with Plunge Pool",
           subtitle:
             "King Bed · Sea View · Heated Plunge Pool · Sun Loungers<br/><strong style='color: var(--burgundy)'>Exclusive: €3,130/night</strong>",
-          priceLabel: "Per night · WhataHotel! Flexible",
           priceRate: "€3,130",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €12,580",
-          stayTotalExclAmount: "€12,580",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
           bookingSummary: {
@@ -246,6 +193,7 @@ export const promo9: Promo = {
             adr: "€3,130",
             total: "€12,580",
           },
+          grandTotalInclTaxes: "€12,580",
           images: [
             {
           src: "https://www.carrier.co.uk/media/eyrnq3eh/trg-1943-1.jpg?rxy=0.62531328320802,0.47326649958228906&v=1d9a83ad2bfe060",
@@ -275,17 +223,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Flexible Rate</span>",
-            leftSub:
-              "Exclusive rate: €3,130/night &times; 4 = <strong>€12,520</strong> (excl. taxes) · Free cancellation before Aug 11, 2026",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€12,580",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=N1K2SH&rate=2SH&hotel=2927&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Suite (Flexible Rate)",
         },
       ],
     },
@@ -299,18 +239,7 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Santorini, Greece &nbsp;|&nbsp; Sep 1–5, 2026 · 4 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Canaves Oia Epitome</strong> — including a room upgrade, daily breakfast for 2, $100 F&amp;B credit, and more.",
-        pills: [
-          "✔ Room Upgrade (subject to availability)",
-          "✔ Complimentary Full Breakfast for 2 Daily",
-          "✔ $100 USD Food & Beverage Credit per Stay",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (upon request)",
-        ],
-      },
+
       rooms: [
         // Hideaway Pool Suite — WhataHotel! Exclusive
         {
@@ -318,12 +247,7 @@ export const promo9: Promo = {
           name: "Hideaway Pool Suite",
           subtitle:
             "60 sqm · King Bed · Balcony with Pool, Sea & Sunset View<br/><strong style='color: var(--burgundy)'>TVL WhataHotel! Exclu: €1,500/night</strong>",
-          priceLabel: "Per night · TVL WhataHotel! Exclu",
           priceRate: "€1,500",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €6,000",
-          stayTotalExclAmount: "€6,000",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 1 → Sep 5",
           nightsLabel: "4",
           bookingSummary: {
@@ -332,6 +256,7 @@ export const promo9: Promo = {
             adr: "€1,500",
             total: "€6,000",
           },
+          grandTotalInclTaxes: "€6,000",
           images: [
             { src: "https://d2573qu6qrjt8c.cloudfront.net/DDA828A1C78041F0990BDE1DFBEB7F6D/DDA828A1C78041F0990BDE1DFBEB7F6D.JPEG", alt: "Hideaway Pool Suite" },
           ],
@@ -358,17 +283,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>TVL WhataHotel! Exclu</span>",
-            leftSub:
-              "TVL WhataHotel! Exclu rate: €1,500/night &times; 4 = <strong>€6,000</strong> (excl. taxes) · Free cancellation before Jul 3, 2026",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€6,000",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=S1128G&rate=28G&hotel=2710&checkin=2026-09-01&checkout=2026-09-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Hideaway Pool Suite (Exclusive)",
         },
       ],
     },
@@ -386,18 +303,7 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Ravello, Amalfi Coast, Italy &nbsp;|&nbsp; Sep 5–7, 2026 · 2 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Belmond Hotel Caruso</strong> — including a room upgrade, daily breakfast for 2, hotel credit, and more.",
-        pills: [
-          "✔ Room Upgrade (subject to availability)",
-          "✔ Full American Breakfast for 2 Daily",
-          "✔ Up to $200 Hotel Credit (suites) / $90 (rooms)",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // Superior Room with Garden
         {
@@ -405,14 +311,8 @@ export const promo9: Promo = {
           name: "Superior Room with Garden",
           subtitle:
             "48 sqm · King or Twin · Garden Wing · Marble Bathroom<br/><strong style='color: var(--burgundy)'>From €2,150/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
           priceRate: "€2,150",
-          priceStrike: "",
-          priceTotal: "2-Night Total: €4,300",
-          stayTotalExclAmount: "€4,300",
-          stayTotalExclSub: "2 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€4,750",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 5 → Sep 7",
           nightsLabel: "2",
           bookingSummary: {
@@ -450,17 +350,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €2,150/night &times; 2 = <strong>€4,300</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€4,750</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€4,750",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C3K59B&rate=59B&hotel=1655&checkin=2026-09-05&checkout=2026-09-07&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Room with Garden",
         },
         // Garden View Room with Terrace
         {
@@ -468,14 +360,8 @@ export const promo9: Promo = {
           name: "Garden View Room with Terrace",
           subtitle:
             "45 sqm · King or Twin · Main Building · Extra Large Marble Bathroom<br/><strong style='color: var(--burgundy)'>From €2,250/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
           priceRate: "€2,250",
-          priceStrike: "",
-          priceTotal: "2-Night Total: €4,500",
-          stayTotalExclAmount: "€4,500",
-          stayTotalExclSub: "2 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€4,970",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 5 → Sep 7",
           nightsLabel: "2",
           bookingSummary: {
@@ -510,17 +396,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €2,250/night &times; 2 = <strong>€4,500</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€4,970</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€4,970",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B3K59B&rate=59B&hotel=1655&checkin=2026-09-05&checkout=2026-09-07&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Garden View Room with Terrace",
         },
         // Deluxe Sea View Room with Balcony
         {
@@ -528,14 +406,8 @@ export const promo9: Promo = {
           name: "Deluxe Sea View Room with Balcony",
           subtitle:
             "60 sqm · King or Twin · Main Building · Sea & Coast Views<br/><strong style='color: var(--burgundy)'>From €3,125/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
           priceRate: "€3,125",
-          priceStrike: "",
-          priceTotal: "2-Night Total: €6,250",
-          stayTotalExclAmount: "€6,250",
-          stayTotalExclSub: "2 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€6,895",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 5 → Sep 7",
           nightsLabel: "2",
           bookingSummary: {
@@ -571,17 +443,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €3,125/night &times; 2 = <strong>€6,250</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€6,895</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€6,895",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=U3T59B&rate=59B&hotel=1655&checkin=2026-09-05&checkout=2026-09-07&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Sea View Room with Balcony",
         },
       ],
     },
@@ -595,32 +459,15 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Ravello, Amalfi Coast, Italy &nbsp;|&nbsp; Sep 5–7, 2026 · 2 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Palazzo Avino</strong> — including a room upgrade, daily buffet breakfast, €80 spa credit, and more.",
-        pills: [
-          "✔ Room Upgrade (subject to availability)",
-          "✔ Daily Buffet Breakfast for Each Guest",
-          "✔ €80 Spa Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         {
           badgeText: "✨ WhataHotel! Exclusive",
           name: "Deluxe Sea View Room",
           subtitle:
             "16 sqm · Twin/King · Bright Colours · Partial Sea View<br/><strong style='color: var(--burgundy)'>From €2,208.25/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive",
           priceRate: "€2,208.25",
-          priceStrike: "",
-          priceTotal: "2-Night Total: €4,416.50",
-          stayTotalExclAmount: "€4,416.50",
-          stayTotalExclSub: "2 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€4,436.50",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 5 → Sep 7",
           nightsLabel: "2",
           bookingSummary: {
@@ -656,17 +503,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €2,208.25/night &times; 2 = <strong>€4,416.50</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€4,436.50</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€4,436.50",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C2U2SH&rate=2SH&hotel=1054&checkin=2026-09-05&checkout=2026-09-07&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Sea View Room",
         },
       ],
     },
@@ -680,18 +519,7 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Positano, Amalfi Coast, Italy &nbsp;|&nbsp; Sep 7–9, 2026 · 2 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Il San Pietro di Positano</strong> — including a room upgrade, daily breakfast for 2, $100 hotel credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Complimentary Breakfast for 2 Daily",
-          "✔ $100 Hotel Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // Classic Room — Best Available Rate
         {
@@ -699,14 +527,8 @@ export const promo9: Promo = {
           name: "Classic Room",
           subtitle:
             "22 sqm · Queen Bed · Private Terrace · Sea View<br/><strong style='color: var(--burgundy)'>Best Available: €2,960/night</strong>",
-          priceLabel: "Per night · Best Available Rate",
           priceRate: "€2,960",
-          priceStrike: "",
-          priceTotal: "2-Night Total: €5,920",
-          stayTotalExclAmount: "€5,920",
-          stayTotalExclSub: "2 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€6,512",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 7 → Sep 9",
           nightsLabel: "2",
           bookingSummary: {
@@ -744,17 +566,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "2 Nights &nbsp;|&nbsp; <span>Best Available Rate</span>",
-            leftSub:
-              "Best Available rate: €2,960/night &times; 2 = <strong>€5,920</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€6,512</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€6,512",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1QBRA&rate=BRA&hotel=1720&checkin=2026-09-07&checkout=2026-09-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Classic Room",
         },
         // Deluxe Room — Best Available Rate
         {
@@ -762,14 +576,8 @@ export const promo9: Promo = {
           name: "Deluxe Room",
           subtitle:
             "26 sqm · Queen Bed · Private Terrace · Sea View<br/><strong style='color: var(--burgundy)'>Best Available: €3,610/night</strong>",
-          priceLabel: "Per night · Best Available Rate",
           priceRate: "€3,610",
-          priceStrike: "",
-          priceTotal: "2-Night Total: €7,220",
-          stayTotalExclAmount: "€7,220",
-          stayTotalExclSub: "2 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€7,942",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 7 → Sep 9",
           nightsLabel: "2",
           bookingSummary: {
@@ -807,17 +615,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "2 Nights &nbsp;|&nbsp; <span>Best Available Rate</span>",
-            leftSub:
-              "Best Available rate: €3,610/night &times; 2 = <strong>€7,220</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€7,942</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€7,942",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1QBRA&rate=BRA&hotel=1720&checkin=2026-09-07&checkout=2026-09-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Room",
         },
       ],
     },
@@ -835,32 +635,15 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Saint-Jean-Cap-Ferrat, France &nbsp;|&nbsp; Sep 9–13, 2026 · 4 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Grand-Hotel Du Cap-Ferrat</strong> — including a room upgrade, daily breakfast for 2, $100 hotel credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Daily Breakfast for 2",
-          "✔ $100 Hotel Credit",
-          "✔ Complimentary Internet",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         {
           badgeText: "🏨 Room Option",
           name: "Superior Pinewood Room King",
           subtitle:
             "290–365 sq ft · King Bed · Heritage Building · Floors 1–3<br/><strong style='color: var(--burgundy)'>From €2,600/night</strong>",
-          priceLabel: "Per night · WhataHotel! Rate w/ Breakfast",
           priceRate: "€2,600",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €10,400",
-          stayTotalExclAmount: "€10,400",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€10,451.44",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 9 → Sep 13",
           nightsLabel: "4",
           bookingSummary: {
@@ -895,17 +678,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Rate w/ Breakfast</span>",
-            leftSub:
-              "WhataHotel! rate: €2,600/night &times; 4 = <strong>€10,400</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€10,451.44</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€10,451.44",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=D1KPP6&rate=PP6&hotel=1079&checkin=2026-09-09&checkout=2026-09-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Pinewood Room King",
         },
       ],
     },
@@ -919,30 +694,14 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Roquebrune-Cap-Martin, France &nbsp;|&nbsp; Sep 9–13, 2026 · 4 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>The Maybourne Riviera</strong> — including a room upgrade, daily breakfast for 2, $100 resort credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Complimentary Full Breakfast for 2 Daily",
-          "✔ $100 Resort Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         {
           badgeText: "💰 Stay Four Longer",
           name: "Grand Sea View Studio",
           subtitle:
             "65 sqm (700 sq ft) · King Bed · Sea View Terrace · Living Area<br/><strong style='color: var(--burgundy)'>Stay Four Longer: €1,312.50/night</strong>",
-          priceLabel: "Per night · STAY FOUR LONGER",
           priceRate: "€1,312.50",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €5,250",
-          stayTotalExclAmount: "€5,250",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           stayCheckInOut: "Sep 9 → Sep 13",
           nightsLabel: "4",
           bookingSummary: {
@@ -951,6 +710,7 @@ export const promo9: Promo = {
             adr: "€1,312.50",
             total: "€5,250",
           },
+          grandTotalInclTaxes: "€5,250",
           images: [
             { src: "https://d2573qu6qrjt8c.cloudfront.net/A0AC8837AD864579B6787DDE1B8313EE/A0AC8837AD864579B6787DDE1B8313EE.JPEG", alt: "Grand Sea View Studio" },
           ],
@@ -977,17 +737,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>STAY FOUR LONGER</span>",
-            leftSub:
-              "Stay Four Longer rate: €1,312.50/night &times; 4 = <strong>€5,250</strong> (excl. taxes) · Free cancellation before Sep 2, 2026",
-            rightLabel: "(excl. taxes)",
-            rightValue: "€5,250",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/showRates.cfm?hotelID=5051&checkIn=2026-09-09&checkOut=2026-09-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Grand Sea View Studio",
         },
       ],
     },
@@ -1001,18 +753,7 @@ export const promo9: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Saint-Jean-Cap-Ferrat, France &nbsp;|&nbsp; Sep 9–13, 2026 · 4 Nights",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Hotel Royal Riviera</strong> — including a room upgrade, daily buffet breakfast, $100 spa credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ American Buffet Breakfast for 2 Daily",
-          "✔ $100 Spa Credit per Stay",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // Superior Orangerie Garden View Terrace
         {
@@ -1020,14 +761,8 @@ export const promo9: Promo = {
           name: "Superior Orangerie Garden View Terrace",
           subtitle:
             "30 sqm (323 sq ft) · King or Twin · Orangerie Building · Garden View<br/><strong style='color: var(--burgundy)'>From €1,285.50/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive Rate BAR",
           priceRate: "€1,285.50",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €5,142",
-          stayTotalExclAmount: "€5,142",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€5,179.52",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 9 → Sep 13",
           nightsLabel: "4",
           bookingSummary: {
@@ -1063,17 +798,9 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate BAR</span>",
-            leftSub:
-              "WhataHotel! rate: €1,285.50/night &times; 4 = <strong>€5,142</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€5,179.52</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€5,179.52",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1K2SH&rate=2SH&hotel=1062&checkin=2026-09-09&checkout=2026-09-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Orangerie Garden View",
         },
         // Superior Sea and Garden View Historic Bldg
         {
@@ -1081,14 +808,8 @@ export const promo9: Promo = {
           name: "Superior Sea and Garden View Historic Bldg",
           subtitle:
             "26 sqm (301 sq ft) · King or Twin · Historic Building · Sea & Garden View<br/><strong style='color: var(--burgundy)'>From €1,305.50/night</strong>",
-          priceLabel: "Per night · WhataHotel! Exclusive Rate BAR",
           priceRate: "€1,305.50",
-          priceStrike: "",
-          priceTotal: "4-Night Total: €5,222",
-          stayTotalExclAmount: "€5,222",
-          stayTotalExclSub: "4 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€5,259.52",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 9 → Sep 13",
           nightsLabel: "4",
           bookingSummary: {
@@ -1124,23 +845,12 @@ export const promo9: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate BAR</span>",
-            leftSub:
-              "WhataHotel! rate: €1,305.50/night &times; 4 = <strong>€5,222</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€5,259.52</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€5,259.52",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=D**2SH&rate=2SH&hotel=1062&checkin=2026-09-09&checkout=2026-09-13&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Superior Sea & Garden View",
         },
       ],
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night. Where noted, grand totals include applicable taxes &amp; fees. Rates subject to availability. Cancellation policies vary by hotel and rate program — see individual booking links for details.",
 
 };

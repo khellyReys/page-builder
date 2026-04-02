@@ -25,28 +25,14 @@ export const promo28: Promo = {
           "https://turksandcaicostourism.com/wp-content/uploads/2021/07/paddleboarding-SUP-turks-caicos-water-sports-1024x631.jpg",
         cityImageAlt: "Turks & Caicos",
       },
-      offer: {
-        heading: "Exclusive Complimentary Perks",
-        description: "WhataHotel! Exclusive Rate",
-        pills: [
-          "✦ Room Category Upgrade (subject to availability)",
-          "✦ Complimentary Breakfast x 2 Daily",
-          "✦ $100 F & B Credit",
-          "✦ Free Internet Access",
-          "✦ Late Check-Out (subject to availability)",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         // Room 1: Terrace King Room
         {
           badgeText: "✦ Hotel Option 1 · Room 1",
           name: "Terrace King Room",
           subtitle: "Lower floor overlooking lush gardens with private balcony",
-          priceLabel: "Per Night",
           priceRate: "$1,082.50",
-          priceStrike: "",
-          priceTotal: "",
           nightsLabel: "6",
           stayCheckInOut: "Jul 29 → Aug 4",
           bookingSummary: {
@@ -88,15 +74,9 @@ export const promo28: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$1,082.50 per night",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$8,248.65",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1D2S0&rate=2SH&hotel=1057&checkin=2026-07-29&checkout=2026-08-04&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 2: Upper Terrace King Room
         {
@@ -104,10 +84,7 @@ export const promo28: Promo = {
           name: "Upper Terrace King Room",
           subtitle:
             "Second floor with vaulted ceilings and spacious private balcony",
-          priceLabel: "Per Night",
           priceRate: "$1,165.83",
-          priceStrike: "",
-          priceTotal: "",
           nightsLabel: "6",
           stayCheckInOut: "Jul 29 → Aug 4",
           bookingSummary: {
@@ -149,15 +126,9 @@ export const promo28: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$1,165.83 per night",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$8,883.65",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1D2S0&rate=2SH&hotel=1057&checkin=2026-07-29&checkout=2026-08-04&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -171,18 +142,7 @@ export const promo28: Promo = {
         location:
           "<i class='fas fa-map-marker-alt'></i> Turks & Caicos, Caribbean",
       },
-      offer: {
-        heading: "Exclusive Complimentary Perks",
-        description: "WhataHotel! Exclusive Rate",
-        pills: [
-          "✦ Room Category Upgrade (subject to availability)",
-          "✦ Complimentary Continental Breakfast x 2 Daily",
-          "✦ $100 USD Spa Services Credit per room, per stay",
-          "✦ Free Basic WiFi",
-          "✦ Late Check-Out (subject to availability)",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         // Room 1: Alcove Pavilion
         {
@@ -190,10 +150,7 @@ export const promo28: Promo = {
           name: "Alcove Pavilion",
           subtitle:
             "King · 79 sqm / 850 sqft · Tranquil pond and private walled garden views",
-          priceLabel: "Per Night",
           priceRate: "$2,152.50",
-          priceStrike: "",
-          priceTotal: "",
           nightsLabel: "6",
           stayCheckInOut: "Jul 29 → Aug 4",
           bookingSummary: {
@@ -235,15 +192,9 @@ export const promo28: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$2,152.50 per night",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$16,531.20",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KEE8&rate=EE8&hotel=1523&checkin=2026-07-29&checkout=2026-08-04&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         // Room 2: Amanyara Pavilion
         {
@@ -251,10 +202,7 @@ export const promo28: Promo = {
           name: "Amanyara Pavilion",
           subtitle:
             "King · 79 sqm / 850 sqft · Ocean views · Private pool",
-          priceLabel: "Per Night",
           priceRate: "$5,721.67",
-          priceStrike: "",
-          priceTotal: "",
           nightsLabel: "6",
           stayCheckInOut: "Jul 29 → Aug 4",
           bookingSummary: {
@@ -298,20 +246,12 @@ export const promo28: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel: "Avg. Nightly Rate",
-            leftSub: "$5,721.67 per night",
-            rightLabel: "Grand Total (incl. taxes & fees)",
-            rightValue: "$43,942.40",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B1UE5X&rate=SGP&hotel=1523&checkin=2026-07-29&checkout=2026-08-04&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
   ],
 
-  pricingFootnote:
-    "¹ Totals include taxes & fees as displayed on the booking page.",
 };

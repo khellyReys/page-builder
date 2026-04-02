@@ -22,7 +22,6 @@ function chooseCanonicalTotal(room: Room): string | undefined {
   const candidates = [
     room.grandTotalInclTaxes,
     room.bookingSummary?.total,
-    room.savings?.rightValue,
   ].filter((v): v is string => Boolean(v && v.trim()));
 
   if (!candidates.length) return undefined;
@@ -39,6 +38,10 @@ function chooseCanonicalTotal(room: Room): string | undefined {
   return logical ?? candidates[0];
 }
 
+function stripNightSuffix(rate: string): string {
+  return rate.replace(/\s*\/\s*night\s*$/i, "").trim();
+}
+
 function normalizeRoom(room: Room, fallbackNights?: string): Room {
   const nights = firstNonEmpty([
     room.bookingSummary?.nights,
@@ -49,7 +52,8 @@ function normalizeRoom(room: Room, fallbackNights?: string): Room {
     room.bookingSummary?.checkInOut,
     room.stayCheckInOut,
   ]);
-  const adr = firstNonEmpty([room.bookingSummary?.adr, room.priceRate]);
+  const rawAdr = firstNonEmpty([room.bookingSummary?.adr, room.priceRate]);
+  const adr = rawAdr ? stripNightSuffix(rawAdr) : rawAdr;
   const canonicalTotal = chooseCanonicalTotal(room);
   const bookingSummary = {
     checkInOut: checkInOut ?? room.bookingSummary?.checkInOut ?? "—",
@@ -60,13 +64,10 @@ function normalizeRoom(room: Room, fallbackNights?: string): Room {
 
   const normalized: Room = {
     ...room,
+    priceRate: stripNightSuffix(room.priceRate),
     nightsLabel: nights ?? room.nightsLabel,
     stayCheckInOut: checkInOut ?? room.stayCheckInOut,
     grandTotalInclTaxes: canonicalTotal ?? room.grandTotalInclTaxes,
-    savings: {
-      ...room.savings,
-      rightValue: canonicalTotal ?? room.savings.rightValue,
-    },
     bookingSummary,
   };
 
@@ -96,7 +97,7 @@ function lowestRoomTotalValue(rooms: Room[]): string | undefined {
   let best: { amount: number; raw: string } | null = null;
   for (const room of rooms) {
     const totalRaw =
-      room.grandTotalInclTaxes ?? room.bookingSummary?.total ?? room.savings.rightValue;
+      room.grandTotalInclTaxes ?? room.bookingSummary?.total;
     const parsed = parseAmount(totalRaw);
     if (!parsed) continue;
     if (!best || parsed.value < best.amount) {

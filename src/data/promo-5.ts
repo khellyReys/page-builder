@@ -8,7 +8,6 @@ import type { Promo } from "../types";
 export const promo5: Promo = {
   id: "promo-5",
   createdAt: "2026-03-23T21:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Lucy & Luke's Honeymoon",
   client: "Lucy & Luke",
   dates: "Aug 25–28 & Sep 6–9, 2026 | 3 Nights Each | 2 Destinations",
@@ -30,18 +29,7 @@ export const promo5: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Madrid, Spain &nbsp;|&nbsp; Luxury City Hotel",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Four Seasons Hotel Madrid</strong> — including a room upgrade, daily full breakfast for 2, €100 hotel credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Full Breakfast for 2 Daily",
-          "✔ €100 Hotel Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ── Madrid Room 1: Deluxe King ──
         {
@@ -49,14 +37,8 @@ export const promo5: Promo = {
           name: "Deluxe King",
           subtitle:
             "484–538 sq ft · King Bed · Full Marble Bathroom<br/><strong style='color: var(--burgundy)'>From €931.67/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€931.67",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €2,795.01",
-          stayTotalExclAmount: "€2,795.01",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€3,074.50",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Aug 25 → Aug 28",
           nightsLabel: "3",
           bookingSummary: {
@@ -103,17 +85,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €931.67/night &times; 3 = <strong>€2,795.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€3,074.50</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€3,074.50",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KPP6&rate=PP6&hotel=3897&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe King",
         },
 
         // ── Madrid Room 2: Deluxe Juliet Balcony King ──
@@ -122,14 +96,8 @@ export const promo5: Promo = {
           name: "Deluxe Juliet Balcony King",
           subtitle:
             "484–538 sq ft · King Bed · City View · Juliet Balcony<br/><strong style='color: var(--burgundy)'>From €1,166.67/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€1,166.67",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €3,500.01",
-          stayTotalExclAmount: "€3,500.01",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€3,850.00",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Aug 25 → Aug 28",
           nightsLabel: "3",
           bookingSummary: {
@@ -176,17 +144,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €1,166.67/night &times; 3 = <strong>€3,500.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€3,850.00</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€3,850.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1KPP6&rate=PP6&hotel=3897&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Juliet Balcony King",
         },
 
         // ── Madrid Room 3: Grand Premier King ──
@@ -195,14 +155,8 @@ export const promo5: Promo = {
           name: "Grand Premier King",
           subtitle:
             "592–700 sq ft · King Bed · Spacious Layout<br/><strong style='color: var(--burgundy)'>From €1,390/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€1,390",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,170.00",
-          stayTotalExclAmount: "€4,170.00",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€4,587.00",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Aug 25 → Aug 28",
           nightsLabel: "3",
           bookingSummary: {
@@ -249,17 +203,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €1,390/night &times; 3 = <strong>€4,170.00</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€4,587.00</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€4,587.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1TPP6&rate=PP6&hotel=3897&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Grand Premier King",
         },
 
         // ── Madrid Room 4: Premier Terrace Room King ──
@@ -268,14 +214,8 @@ export const promo5: Promo = {
           name: "Premier Terrace Room King",
           subtitle:
             "484–538 sq ft · King Bed · Private Furnished Terrace · City View<br/><strong style='color: var(--burgundy)'>From €1,540/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€1,540",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,620.00",
-          stayTotalExclAmount: "€4,620.00",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€5,082.00",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Aug 25 → Aug 28",
           nightsLabel: "3",
           bookingSummary: {
@@ -318,17 +258,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €1,540/night &times; 3 = <strong>€4,620.00</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€5,082.00</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€5,082.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1OPP6&rate=PP6&hotel=3897&checkin=2026-08-25&checkout=2026-08-28&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Premier Terrace Room King",
         },
       ],
     },
@@ -345,18 +277,7 @@ export const promo5: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Formentor, Mallorca, Spain &nbsp;|&nbsp; Mediterranean Luxury Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Four Seasons Resort Mallorca at Formentor</strong> — including a room upgrade, daily full breakfast for 2, $100 hotel credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Complimentary Daily Full Breakfast for 2",
-          "✔ $100 Hotel Credit (spa, dining, bar)",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ── Mallorca Room 1: Pine View Room King ──
         {
@@ -364,14 +285,8 @@ export const promo5: Promo = {
           name: "Pine View Room King",
           subtitle:
             "431 sq ft · King Bed · Covered Terrace with Daybed<br/><strong style='color: var(--burgundy)'>From €1,487.50/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€1,487.50",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,462.50",
-          stayTotalExclAmount: "€4,462.50",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€4,968.45",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 6 → Sep 9",
           nightsLabel: "3",
           bookingSummary: {
@@ -414,17 +329,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €1,487.50/night &times; 3 = <strong>€4,462.50</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€4,968.45</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€4,968.45",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B1KPP1&rate=PP6&hotel=6664&checkin=2026-09-06&checkout=2026-09-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Pine View Room King",
         },
 
         // ── Mallorca Room 2: Sea View Room King ──
@@ -433,14 +340,8 @@ export const promo5: Promo = {
           name: "Sea View Room King",
           subtitle:
             "431 sq ft · King Bed · Covered Terrace · Sea View<br/><strong style='color: var(--burgundy)'>From €1,657.50/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€1,657.50",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €4,972.50",
-          stayTotalExclAmount: "€4,972.50",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€5,533.53",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 6 → Sep 9",
           nightsLabel: "3",
           bookingSummary: {
@@ -483,17 +384,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €1,657.50/night &times; 3 = <strong>€4,972.50</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€5,533.53</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€5,533.53",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=K1KPP1&rate=PP6&hotel=6664&checkin=2026-09-06&checkout=2026-09-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Sea View Room King",
         },
 
         // ── Mallorca Room 3: Grand Sea View Room King ──
@@ -502,14 +395,8 @@ export const promo5: Promo = {
           name: "Grand Sea View Room King",
           subtitle:
             "549 sq ft · King Bed · Extended Terrace · Sea View<br/><strong style='color: var(--burgundy)'>From €1,742.50/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€1,742.50",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €5,227.50",
-          stayTotalExclAmount: "€5,227.50",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€5,816.07",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 6 → Sep 9",
           nightsLabel: "3",
           bookingSummary: {
@@ -552,17 +439,9 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €1,742.50/night &times; 3 = <strong>€5,227.50</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€5,816.07</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€5,816.07",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=P1KPP1&rate=PP6&hotel=6664&checkin=2026-09-06&checkout=2026-09-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Grand Sea View Room King",
         },
 
         // ── Mallorca Room 4: Garden View Suite with Plunge Pool ──
@@ -571,14 +450,8 @@ export const promo5: Promo = {
           name: "Garden View Suite<br/>with Plunge Pool",
           subtitle:
             "1,044 sq ft · King Bed · Private Plunge Pool · Garden View<br/><strong style='color: var(--burgundy)'>From €2,839/night</strong>",
-          priceLabel: "Per night",
           priceRate: "€2,839",
-          priceStrike: "",
-          priceTotal: "3-Night Total: €8,517.00",
-          stayTotalExclAmount: "€8,517.00",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "€9,460.84",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 6 → Sep 9",
           nightsLabel: "3",
           bookingSummary: {
@@ -625,23 +498,12 @@ export const promo5: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: €2,839/night &times; 3 = <strong>€8,517.00</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€9,460.84</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "€9,460.84",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=J1KPP1&rate=PP6&hotel=6664&checkin=2026-09-06&checkout=2026-09-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Garden View Suite with Plunge Pool",
         },
       ],
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation: Madrid before August 24, 2026; Mallorca before August 16, 2026.",
 
 };

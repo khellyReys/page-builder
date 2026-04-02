@@ -9,7 +9,6 @@ import type { Promo } from "../types";
 export const promo17: Promo = {
   id: "promo-17",
   createdAt: "2026-03-27T12:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Rita & Friends | SoCal getaway ☀️",
   client: "Rita & Friends",
   dates: "March 31–April 1 vs. May 8–9, 2026 | 1 Night | 2 Hotels",
@@ -29,18 +28,7 @@ export const promo17: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Ojai, California &nbsp;|&nbsp; Scenic Mountain Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Ojai Valley Inn & Spa</strong> — including a room upgrade, daily breakfast for two, $100 resort credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Full Breakfast for Two Daily (up to $35/person)",
-          "✔ $100 Resort Credit (F&B or Spa)",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ─── Room 1: Ojai King Bed ───
         {
@@ -49,12 +37,7 @@ export const promo17: Promo = {
           subtitle:
             "425 SF · 1 King Bed · Balcony or Patio<br/><strong style='color: var(--burgundy)'>From $779/night</strong>",
           priceRate: "$779",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $779",
-          stayTotalExclAmount: "$779",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$966.37",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -93,17 +76,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $779/night &times; 1 = <strong>$779</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$966.37</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$966.37",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=DSK2SH&rate=2SH&hotel=1485&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Ojai King Bed",
         },
 
         // ─── Room 2: Ojai 2 Queens ───
@@ -113,12 +88,7 @@ export const promo17: Promo = {
           subtitle:
             "425 SF · 2 Queen Beds · Balcony or Patio<br/><strong style='color: var(--burgundy)'>From $829/night</strong>",
           priceRate: "$829",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $829",
-          stayTotalExclAmount: "$829",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$1,023.97",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -157,17 +127,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $829/night &times; 1 = <strong>$829</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$1,023.97</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$1,023.97",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=A2D2SH&rate=2SH&hotel=1485&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Ojai 2 Queens",
         },
 
         // ─── Room 3: Vista Luxury King ───
@@ -177,12 +139,7 @@ export const promo17: Promo = {
           subtitle:
             "445 SF · 1 King Bed · Balcony or Patio<br/><strong style='color: var(--burgundy)'>From $829/night</strong>",
           priceRate: "$829",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $829",
-          stayTotalExclAmount: "$829",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$1,023.97",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -224,17 +181,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $829/night &times; 1 = <strong>$829</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$1,023.97</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$1,023.97",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=ASK2SH&rate=2SH&hotel=1485&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Vista Luxury King",
         },
 
         // ─── Room 4: Vista 2 Queen Beds ───
@@ -244,12 +193,7 @@ export const promo17: Promo = {
           subtitle:
             "445 SF · 2 Queen Beds · Balcony or Patio<br/><strong style='color: var(--burgundy)'>From $919/night</strong>",
           priceRate: "$919",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $919",
-          stayTotalExclAmount: "$919",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$1,127.64",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -295,17 +239,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $919/night &times; 1 = <strong>$919</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$1,127.64</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$1,127.64",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=A222SH&rate=2SH&hotel=1485&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Vista 2 Queen Beds",
         },
       ],
     },
@@ -314,7 +250,6 @@ export const promo17: Promo = {
     // HOTEL 2 — ROSEWOOD MIRAMAR BEACH (Mar 31–Apr 1, 2026)
     // ═══════════════════════════════════════════════════════════
     {
-      suppressBookingSummary: true,
       hero: {
         imageUrl:
           "https://reservations.rosewoodhotels.com/shs-ngbe-image-resizer/images/hotel/80065/images/room/lka_lanai_king_1400x933.jpg",
@@ -323,18 +258,7 @@ export const promo17: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Santa Barbara, California &nbsp;|&nbsp; Mar 31–Apr 1, 2026",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Rosewood Miramar Beach</strong> — including a room upgrade, daily breakfast credits, $125 resort credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Daily Breakfast Credit x 2 (up to $90/day each)",
-          "✔ $125 Resort Credit per Stay",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ─── Room 1: Lanai King (Mar 31) ───
         {
@@ -343,12 +267,7 @@ export const promo17: Promo = {
           subtitle:
             "530–570 SF · 1 King Bed<br/><strong style='color: var(--burgundy)'>From $2,295/night</strong>",
           priceRate: "$2,295",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $2,295",
-          stayTotalExclAmount: "$2,295",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$2,753.39",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -389,17 +308,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $2,295/night &times; 1 = <strong>$2,295</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,753.39</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$2,753.39",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=G1KEE1&rate=1RW&hotel=3483&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Lanai King (Mar 31)",
         },
 
         // ─── Room 2: Lanai Two Queens (Mar 31) ───
@@ -409,12 +320,7 @@ export const promo17: Promo = {
           subtitle:
             "530 SF · 2 Queen Beds<br/><strong style='color: var(--burgundy)'>From $2,370/night</strong>",
           priceRate: "$2,370",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $2,370",
-          stayTotalExclAmount: "$2,370",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$2,840.57",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -459,17 +365,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $2,370/night &times; 1 = <strong>$2,370</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,840.57</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$2,840.57",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=G2QEE1&rate=1RW&hotel=3483&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Lanai Two Queens (Mar 31)",
         },
 
         // ─── Room 3: Garden Bungalow King (Mar 31) ───
@@ -479,12 +377,7 @@ export const promo17: Promo = {
           subtitle:
             "500 SF · 1 King Bed · Single-Story Bungalow<br/><strong style='color: var(--burgundy)'>From $2,495/night</strong>",
           priceRate: "$2,495",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $2,495",
-          stayTotalExclAmount: "$2,495",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$2,985.87",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Mar 31 → Apr 1",
           nightsLabel: "1",
           bookingSummary: {
@@ -526,17 +419,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $2,495/night &times; 1 = <strong>$2,495</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,985.87</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$2,985.87",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=F1KEE1&rate=1RW&hotel=3483&checkin=2026-03-31&checkout=2026-04-01&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Garden Bungalow King (Mar 31)",
         },
       ],
     },
@@ -553,18 +438,7 @@ export const promo17: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Santa Barbara, California &nbsp;|&nbsp; May 8–9, 2026",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Rosewood Miramar Beach</strong> — including a room upgrade, daily breakfast credits, $125 resort credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Daily Breakfast Credit x 2 (up to $90/day each)",
-          "✔ $125 Resort Credit per Stay",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ─── Room 1: Lanai King (May 8) ───
         {
@@ -573,12 +447,7 @@ export const promo17: Promo = {
           subtitle:
             "530–570 SF · 1 King Bed<br/><strong style='color: var(--burgundy)'>From $1,795/night</strong>",
           priceRate: "$1,795",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $1,795",
-          stayTotalExclAmount: "$1,795",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$2,172.19",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "May 8 → May 9",
           nightsLabel: "1",
           bookingSummary: {
@@ -619,17 +488,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,795/night &times; 1 = <strong>$1,795</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,172.19</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$2,172.19",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=G1KEE1&rate=1RW&hotel=3483&checkin=2026-05-08&checkout=2026-05-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Lanai King (May 8)",
         },
 
         // ─── Room 2: Lanai Two Queens (May 8) ───
@@ -639,12 +500,7 @@ export const promo17: Promo = {
           subtitle:
             "530 SF · 2 Queen Beds<br/><strong style='color: var(--burgundy)'>From $1,920/night</strong>",
           priceRate: "$1,920",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $1,920",
-          stayTotalExclAmount: "$1,920",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$2,317.49",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "May 8 → May 9",
           nightsLabel: "1",
           bookingSummary: {
@@ -689,17 +545,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,920/night &times; 1 = <strong>$1,920</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,317.49</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$2,317.49",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=G2QEE1&rate=1RW&hotel=3483&checkin=2026-05-08&checkout=2026-05-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Lanai Two Queens (May 8)",
         },
 
         // ─── Room 3: Garden Bungalow King (May 8) ───
@@ -709,12 +557,7 @@ export const promo17: Promo = {
           subtitle:
             "500 SF · 1 King Bed · Single-Story Bungalow<br/><strong style='color: var(--burgundy)'>From $2,440/night</strong>",
           priceRate: "$2,440",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $2,440",
-          stayTotalExclAmount: "$2,440",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$2,921.94",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "May 8 → May 9",
           nightsLabel: "1",
           bookingSummary: {
@@ -756,17 +599,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $2,440/night &times; 1 = <strong>$2,440</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,921.94</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$2,921.94",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=F1KEE1&rate=1RW&hotel=3483&checkin=2026-05-08&checkout=2026-05-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Garden Bungalow King (May 8)",
         },
 
         // ─── Room 4: Montecito Bungalow Queen (May 8) ───
@@ -776,12 +611,7 @@ export const promo17: Promo = {
           subtitle:
             "520–685 SF · 2 Queen Beds<br/><strong style='color: var(--burgundy)'>From $2,640/night</strong>",
           priceRate: "$2,640",
-          priceStrike: "",
-          priceTotal: "1-Night Total: $2,640",
-          stayTotalExclAmount: "$2,640",
-          stayTotalExclSub: "1 Night · excl. taxes & fees",
           grandTotalInclTaxes: "$3,154.42",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "May 8 → May 9",
           nightsLabel: "1",
           bookingSummary: {
@@ -818,17 +648,9 @@ export const promo17: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $2,640/night &times; 1 = <strong>$2,640</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$3,154.42</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$3,154.42",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=E2DEE1&rate=1RW&hotel=3483&checkin=2026-05-08&checkout=2026-05-09&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Montecito Bungalow Queen (May 8)",
         },
       ],
     },

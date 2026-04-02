@@ -10,7 +10,6 @@ import type { Promo } from "../types";
 export const promo14: Promo = {
   id: "promo-14",
   createdAt: "2026-03-26T18:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Big Island, Hawaii — Four Seasons Hualalai",
   client: "The Kashani Family",
   dates: "July 25 – 31, 2026 | 6 Nights | 4 Room Options",
@@ -26,19 +25,6 @@ export const promo14: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Kailua-Kona, Hawaii &nbsp;|&nbsp; Five-Star Oceanfront Resort",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy the <strong>WhataHotel! Rate with Breakfast</strong> at <strong>Four Seasons Resort Hualalai</strong> — including a room upgrade, full American breakfast daily for two, a <strong>$100 hotel credit</strong> ($200 for suites), complimentary WiFi, and late check-out.",
-    pills: [
-      "✔ Room Category Upgrade (subject to availability)",
-      "✔ Full American Breakfast for Two Daily",
-      "✔ $100 Hotel Credit ($200 for Suites)",
-      "✔ Complimentary Basic Internet",
-      "✔ Late Check-Out (based on availability)",
-    ],
-  },
-
   rooms: [
     // ─── Room 1: Ocean Golf View Room King Bed ───
     {
@@ -46,14 +32,8 @@ export const promo14: Promo = {
       name: "Ocean Golf View Room<br/>King Bed",
       subtitle:
         "King Bed · Ocean Golf View<br/><strong style='color: var(--burgundy)'>WhataHotel! Rate w/ Breakfast · From $1,834.17/night</strong>",
-      priceLabel: "Per night",
       priceRate: "$1,834.17",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $11,005",
-      stayTotalExclAmount: "$11,005",
-      stayTotalExclSub: "6 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$13,112.25",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Jul 25 → Jul 31",
       nightsLabel: "6",
       bookingSummary: {
@@ -91,17 +71,9 @@ export const promo14: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "6 Nights &nbsp;|&nbsp; <span>WhataHotel! Rate w/ Breakfast</span>",
-        leftSub:
-          "WhataHotel! rate: $1,834.17/night &times; 6 = <strong>$11,005</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$13,112.25</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$13,112.25",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=C1KPP6&rate=PP6&hotel=2154&checkin=2026-07-25&checkout=2026-07-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Ocean Golf View King",
     },
 
     // ─── Room 2: Partial Ocean View Room King Bed ───
@@ -111,14 +83,8 @@ export const promo14: Promo = {
 
       subtitle:
         "King Bed · Partial Ocean View<br/><strong style='color: var(--burgundy)'>WhataHotel! Rate w/ Breakfast · From $1,859.17/night</strong>",
-      priceLabel: "Per night",
       priceRate: "$1,859.17",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $11,155",
-      stayTotalExclAmount: "$11,155",
-      stayTotalExclSub: "6 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$13,290.33",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Jul 25 → Jul 31",
       nightsLabel: "6",
       bookingSummary: {
@@ -156,17 +122,9 @@ export const promo14: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "6 Nights &nbsp;|&nbsp; <span>WhataHotel! Rate w/ Breakfast</span>",
-        leftSub:
-          "WhataHotel! rate: $1,859.17/night &times; 6 = <strong>$11,155</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$13,290.33</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$13,290.33",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=E1KPP6&rate=PP6&hotel=2154&checkin=2026-07-25&checkout=2026-07-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Partial Ocean View King",
     },
 
     // ─── Room 3: Ocean View Room King Bed ───
@@ -175,14 +133,8 @@ export const promo14: Promo = {
       name: "Ocean View Room<br/>King Bed",
       subtitle:
         "King Bed · Ocean View<br/><strong style='color: var(--burgundy)'>WhataHotel! Rate w/ Breakfast · From $1,886.67/night</strong>",
-      priceLabel: "Per night",
       priceRate: "$1,886.67",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $11,320",
-      stayTotalExclAmount: "$11,320",
-      stayTotalExclSub: "6 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$13,486.20",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Jul 25 → Jul 31",
       nightsLabel: "6",
       bookingSummary: {
@@ -220,17 +172,9 @@ export const promo14: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "6 Nights &nbsp;|&nbsp; <span>WhataHotel! Rate w/ Breakfast</span>",
-        leftSub:
-          "WhataHotel! rate: $1,886.67/night &times; 6 = <strong>$11,320</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$13,486.20</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$13,486.20",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=B1KPP6&rate=PP6&hotel=2154&checkin=2026-07-25&checkout=2026-07-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Ocean View King",
     },
 
     // ─── Room 4: Superior Suite Ocean Golf View King ───
@@ -239,14 +183,8 @@ export const promo14: Promo = {
       name: "Superior Suite<br/>Ocean Golf View",
       subtitle:
         "King Bed · Suite · Ocean Golf View<br/><strong style='color: var(--burgundy)'>WhataHotel! Rate w/ Breakfast · From $3,390/night</strong>",
-      priceLabel: "Per night",
       priceRate: "$3,390",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $20,340",
-      stayTotalExclAmount: "$20,340",
-      stayTotalExclSub: "6 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$24,194.04",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Jul 25 → Jul 31",
       nightsLabel: "6",
       bookingSummary: {
@@ -285,21 +223,10 @@ export const promo14: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "6 Nights &nbsp;|&nbsp; <span>WhataHotel! Rate w/ Breakfast</span>",
-        leftSub:
-          "WhataHotel! rate: $3,390/night &times; 6 = <strong>$20,340</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$24,194.04</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$24,194.04",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=S1KPP6&rate=PP6&hotel=2154&checkin=2026-07-25&checkout=2026-07-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Superior Suite Ocean Golf View",
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night. Grand totals include applicable taxes, resort fees, and service charges. Rates subject to availability. Free cancellation before July 11, 2026.",
 
 };

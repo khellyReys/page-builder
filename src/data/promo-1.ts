@@ -8,7 +8,6 @@ import type { Promo } from "../types";
 export const promo1: Promo = {
   id: "promo-1",
   createdAt: "2026-03-21T12:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Nassau, Bahamas — Rosewood Baha Mar",
   client: "",
   dates: "March 28 – 31, 2026 | 3 Nights | 3 Room Options",
@@ -26,19 +25,6 @@ export const promo1: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Nassau, Bahamas &nbsp;|&nbsp; Caribbean Luxury Resort",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Rosewood Baha Mar</strong> — including a room upgrade, daily breakfast, resort credit, and more.",
-    pills: [
-      "✔ Room Category Upgrade (subject to availability)",
-      "✔ Daily Breakfast for 2",
-      "✔ $125 Resort Credit",
-      "✔ Complimentary WiFi",
-      "✔ Late Check-Out (subject to availability)",
-    ],
-  },
-
   rooms: [
     // ─── Room Option 1: Garden View Room King ───
     {
@@ -46,14 +32,8 @@ export const promo1: Promo = {
       name: "Garden View Room King",
       subtitle:
         "485 sq ft · King Bed · Garden View<br/><strong style='color: var(--burgundy)'>From $1,940/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "$1,940",
-      priceStrike: "",
-      priceTotal: "3-Night Total: $5,820",
-      stayTotalExclAmount: "$5,820",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$8,002.50",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Mar 28 → Mar 31",
       nightsLabel: "3",
       bookingSummary: {
@@ -96,17 +76,9 @@ export const promo1: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $1,940/night &times; 3 = <strong>$5,820</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$8,002.50</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$5,820",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=K1KEE1&rate=1RW&hotel=2982&checkin=2026-03-28&checkout=2026-03-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Garden View Room King",
     },
 
     // ─── Room Option 2: Ocean View King Room ───
@@ -115,14 +87,8 @@ export const promo1: Promo = {
       name: "Ocean View King Room",
       subtitle:
         "485 sq ft · King Bed · Ocean View<br/><strong style='color: var(--burgundy)'>From $2,256.67/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "$2,256.67",
-      priceStrike: "",
-      priceTotal: "3-Night Total: $6,770.01",
-      stayTotalExclAmount: "$6,770.01",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$9,308.75",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Mar 28 → Mar 31",
       nightsLabel: "3",
       bookingSummary: {
@@ -165,17 +131,9 @@ export const promo1: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $2,256.67/night &times; 3 = <strong>$6,770.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$9,308.75</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$6,770.01",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=J1KEE1&rate=1RW&hotel=2982&checkin=2026-03-28&checkout=2026-03-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Ocean View King Room",
     },
 
     // ─── Room Option 3: Garden View King Studio ───
@@ -184,14 +142,8 @@ export const promo1: Promo = {
       name: "Garden View King Studio",
       subtitle:
         "728 sq ft · King Bed · Garden View · Kitchenette<br/><strong style='color: var(--burgundy)'>From $2,406.67/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "$2,406.67",
-      priceStrike: "",
-      priceTotal: "3-Night Total: $7,220.01",
-      stayTotalExclAmount: "$7,220.01",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$9,927.50",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Mar 28 → Mar 31",
       nightsLabel: "3",
       bookingSummary: {
@@ -235,21 +187,10 @@ export const promo1: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $2,406.67/night &times; 3 = <strong>$7,220.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$9,927.50</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$7,220.01",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=G1KEE1&rate=1RW&hotel=2982&checkin=2026-03-28&checkout=2026-03-31&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Garden View King Studio",
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability.",
 
 };

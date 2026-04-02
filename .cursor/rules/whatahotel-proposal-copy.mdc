@@ -1,18 +1,35 @@
 ---
-description: WhataHotel proposal UI copy and data conventions — do not regress client-approved labels
+description: WhataHotel proposal site — agent rules
 alwaysApply: true
 ---
 
-# WhataHotel proposals — copy and labels
+# WhataHotel proposals — agent rules
 
-Before changing **`PromoPage.tsx`**, **`ComparisonOverview.tsx`**, **`ProposalInvestment.tsx`**, or **`gift`** feature blocks in **`src/data/promo-*.ts`**, read **`docs/whatahotel-design-ssot.md`** section **“Client-approved copy & labels (do not regress)”**.
+## Creating promos
 
-## Required behavior
+All promos must use `createPromo()` from `src/lib/promoFactory.ts`. The agent provides only raw data — the factory and components handle all labels, formatting, and layout.
 
-- **Exclusive Perks** (`PromoPage`): heading exactly that (capital **P**). No “& inclusions”, no Lorraine Travel subline under the section. Bullets = deduped `gift` `items[]` only.
-- **`gift` feature `title` in data:** always **`"Exclusive Perks"`**. Do not use `WhataHotel! Exclusive Perks`, `Exclusive Perks & Inclusions`, or partner wording in `title`.
-- **Rate table** (`ComparisonOverview`): user-facing heading **Rate Comparisons** — do not restore “Booking summary” / “Comparison overview” as visible copy.
-- **Room pricing block** (`ProposalInvestment`): heading **Rate & pricing breakdown** only. No “Investment summary”. No per-room “Preferred Partner” / “What A Hotel! · Preferred Partner” line.
-- **Footer:** org-level lines stay in **`ContactFooter`** / **`contact.ts`**; that is not the same as the removed per-room partner line.
+Agents edit only `src/data/promo-N.ts` and `src/data/promos.ts`. Never edit types, components, or the factory.
 
-Netlify agents: scope is usually data-only (`promo-N.ts`, `promos.ts`); still follow the **`gift` title** rule and avoid prose that duplicates removed UI. **Multi-hotel:** set **`cityImageUrl` / `cityImageAlt` on `hotels[0].hero` only** for a shared destination strip (not on every entry). Paste **`docs/netlify-agent-project-context.txt`** into Netlify Project context.
+## Hardcoded UI (do not set or override)
+
+These labels and sections are hardcoded in the components. The agent must not attempt to provide or change them:
+
+- **"Room Highlights"** — title + door-open icon (RoomCard)
+- **"Exclusive Perks"** — heading (PromoPage)
+- **"Rate & pricing breakdown"** — heading (ProposalInvestment)
+- **"Avg. Daily Rate (ADR)"** + **"Per night"** — labels (ProposalInvestment)
+- **"Grand Total (incl. taxes & fees)"** — label (ProposalInvestment + ComparisonOverview)
+- **"Rate Comparisons"** — table heading (ComparisonOverview)
+- **"Book Now"** + **"Secure booking opens on WhataHotel.com in a new tab."** — button (RoomCard)
+- **"Destination"** — label (CityHeroImage)
+- **5 stars** — star row (HotelIdentity)
+- **"by Lorraine Travel"** — masthead logo
+- **App Download** — all text, URLs, icons
+- **Contact Footer** — "Questions? Contact your advisor", "Lorraine Travel", email
+
+## What the agent provides via createPromo()
+
+- `PromoInput`: `id`, `title`, `dates`, `client?`, `cityImageUrl?`, `cityImageAlt?`
+- `HotelInput[]`: `name`, `location`, `heroImageUrl`, `heroAlt`
+- `RoomInput[]`: `name`, `subtitle`, `badgeText`, `adr`, `grandTotal`, `nights`, `checkIn`, `checkOut`, `bookUrl`, `images?`, `roomHighlights[]`, `perks[]`

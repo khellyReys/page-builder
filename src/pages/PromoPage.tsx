@@ -7,17 +7,13 @@ import { HeroSection } from "../components/HeroSection";
 import { CityHeroImage } from "../components/CityHeroImage";
 import { HotelSectionDivider } from "../components/HotelSectionDivider";
 import { HotelIdentity } from "../components/HotelIdentity";
-import { OfferBanner } from "../components/OfferBanner";
-import { SpecialOfferBox } from "../components/SpecialOfferBox";
 import { RoomCard } from "../components/RoomCard";
 import {
   ComparisonOverview,
   type RoomGroup,
 } from "../components/ComparisonOverview";
-import { PriceSummaryTable } from "../components/PriceSummaryTable";
 import { AppDownload } from "../components/AppDownload";
 import { ContactFooter } from "../components/ContactFooter";
-import { RoomOverviewGrid } from "../components/RoomOverviewGrid";
 import type { Room } from "../types";
 
 function collectGiftPerkItems(rooms: Room[]): string[] {
@@ -33,39 +29,22 @@ function collectGiftPerkItems(rooms: Room[]): string[] {
   );
 }
 
-/** Single-hotel promos: one deduped block after all room cards, before the booking table. */
-function renderSingleHotelPerks(rooms: Room[]) {
-  const items = collectGiftPerkItems(rooms);
-  if (!items.length) return null;
-
-  return (
-    <div className="body body-perks">
-      <div className="perks-section">
-        <h3 className="section-sec-title perks-section-title">
-          Exclusive Perks
-        </h3>
-        <div className="perks-items-wrap">
-          <ul className="perks-ul">
-            {items.map((item) => (
-              <li key={item} className="perk-li">
-                <i className="fas fa-circle" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
+function arraysEqual(a: string[], b: string[]): boolean {
+  if (a.length !== b.length) return false;
+  return a.every((v, i) => v === b[i]);
 }
 
-/** Multi-hotel promos: one deduped block per hotel, directly under that hotel's room cards (not above the combined table). */
-function renderPerHotelPerks(rooms: Room[]) {
-  const items = collectGiftPerkItems(rooms);
-  if (!items.length) return null;
+/** True when every hotel in the promo shares the exact same perks list. */
+function allHotelsSharePerks(hotelRoomSets: Room[][]): boolean {
+  const perksPerHotel = hotelRoomSets.map(collectGiftPerkItems);
+  if (perksPerHotel.length <= 1) return true;
+  return perksPerHotel.every((p) => arraysEqual(p, perksPerHotel[0]));
+}
 
+function renderPerksBlock(items: string[], extraClass?: string) {
+  if (!items.length) return null;
   return (
-    <div className="body body-perks body-perks--after-hotel">
+    <div className={`body body-perks${extraClass ? ` ${extraClass}` : ""}`}>
       <div className="perks-section">
         <h3 className="section-sec-title perks-section-title">
           Exclusive Perks
@@ -88,12 +67,10 @@ function renderPerHotelPerks(rooms: Room[]) {
 function ProposalBookingSection({
   rooms,
   hotelName,
-  footnoteHtml,
   entries,
 }: {
   rooms?: Room[];
   hotelName?: string;
-  footnoteHtml?: string;
   /** When provided, renders a combined multi-hotel table instead. */
   entries?: RoomGroup[];
 }) {
@@ -102,33 +79,10 @@ function ProposalBookingSection({
     : rooms ?? [];
   if (!allRooms.length) return null;
 
-  return (
-    <>
-      {entries ? (
-        <ComparisonOverview entries={entries} />
-      ) : (
-        <ComparisonOverview rooms={rooms!} hotelName={hotelName!} />
-      )}
-      {footnoteHtml ? (
-        <div className="body">
-          <div
-            className="pricing-footnote"
-            dangerouslySetInnerHTML={{ __html: footnoteHtml }}
-          />
-        </div>
-      ) : null}
-      {allRooms.map((room) =>
-        room.keyAttributes?.length ? (
-          <div key={room.badgeText} className="body">
-            <RoomOverviewGrid
-              title={room.overviewTitle}
-              subtitle={room.overviewSubtitle}
-              attributes={room.keyAttributes}
-            />
-          </div>
-        ) : null,
-      )}
-    </>
+  return entries ? (
+    <ComparisonOverview entries={entries} />
+  ) : (
+    <ComparisonOverview rooms={rooms!} hotelName={hotelName!} />
   );
 }
 
@@ -182,9 +136,6 @@ export default function PromoPage() {
     );
   }
 
-  const showOffer = (o: { hidden?: boolean } | undefined) =>
-    Boolean(o && !promo.suppressOfferBanner && !o.hidden);
-
   // ── Multi-hotel promo ────────────────────────────────────────────
   if (promo.hotels && promo.hotels.length > 0) {
     const combinedHotelEntries: RoomGroup[] = promo.hotels
@@ -198,9 +149,7 @@ export default function PromoPage() {
       promo.hotels[0]?.hero?.imageUrl ||
       promo.thumbnailUrl ||
       DEFAULT_HERO_IMAGE;
-    const description =
-      promo.hotels[0]?.offer?.description?.replace(/<[^>]*>/g, "") ||
-      "Exclusive hotel proposal with premium room options and special perks.";
+    const description = `${promo.title} — Exclusive hotel proposal with premium room options and special perks.`;
     const currentUrl =
       typeof window !== "undefined"
         ? `${window.location.origin}/promo/${promo.id}`
@@ -209,6 +158,12 @@ export default function PromoPage() {
     const firstHotelHero = promo.hotels[0]?.hero;
     const sharedCityImageUrl = firstHotelHero?.cityImageUrl;
     const sharedCityImageAlt = firstHotelHero?.cityImageAlt;
+
+    const hotelRoomSets = promo.hotels.map((h) => h.rooms);
+    const perksAreShared = allHotelsSharePerks(hotelRoomSets);
+    const sharedPerks = perksAreShared
+      ? collectGiftPerkItems(hotelRoomSets.flat())
+      : [];
 
     return (
       <div className="wrap">
@@ -230,14 +185,7 @@ export default function PromoPage() {
           client={promo.client}
           dates={promo.dates}
           logoHref="https://www.whatahotel.com/"
-          eyebrow={promo.mastheadEyebrow}
         />
-
-        {promo.specialOffer ? (
-          <div className="body">
-            <SpecialOfferBox offer={promo.specialOffer} />
-          </div>
-        ) : null}
 
         {sharedCityImageUrl ? (
           <CityHeroImage
@@ -261,13 +209,6 @@ export default function PromoPage() {
                 imageUrl={hotel.hero.imageUrl || DEFAULT_HERO_IMAGE}
                 alt={hotel.hero.alt}
               />
-              {showOffer(hotel.offer) ? (
-                <OfferBanner
-                  heading={hotel.offer.heading}
-                  description={hotel.offer.description}
-                  pills={hotel.offer.pills}
-                />
-              ) : null}
               <div className="body">
                 {hotel.rooms.length ? (
                   hotel.rooms.map((room) => (
@@ -280,25 +221,16 @@ export default function PromoPage() {
                   </p>
                 )}
               </div>
-              {renderPerHotelPerks(hotel.rooms)}
+              {!perksAreShared &&
+                renderPerksBlock(
+                  collectGiftPerkItems(hotel.rooms),
+                  "body-perks--after-hotel",
+                )}
             </div>
           );
         })}
-        <ProposalBookingSection
-          entries={combinedHotelEntries}
-          footnoteHtml={promo.pricingFootnote}
-        />
-
-        {promo.priceSummary ? (
-          <div className="body">
-            <PriceSummaryTable
-              items={promo.priceSummary.items}
-              totalSavings={promo.priceSummary.totalSavings}
-              grandTotal={promo.priceSummary.grandTotal}
-              savingsNote={promo.priceSummary.savingsNote}
-            />
-          </div>
-        ) : null}
+        {perksAreShared && renderPerksBlock(sharedPerks)}
+        <ProposalBookingSection entries={combinedHotelEntries} />
 
         <AppDownload />
 
@@ -310,9 +242,7 @@ export default function PromoPage() {
   // ── Single-hotel promo ───────────────────────────────────────────
   const heroImage =
     promo.hero?.imageUrl || promo.thumbnailUrl || DEFAULT_HERO_IMAGE;
-  const description =
-    promo.offer?.description?.replace(/<[^>]*>/g, "") ||
-    "Exclusive hotel proposal with premium room options and special perks.";
+  const description = `${promo.title} — Exclusive hotel proposal with premium room options and special perks.`;
   const currentUrl =
     typeof window !== "undefined"
       ? `${window.location.origin}/promo/${promo.id}`
@@ -341,7 +271,6 @@ export default function PromoPage() {
         client={promo.client}
         dates={promo.dates}
         logoHref="https://www.whatahotel.com/"
-        eyebrow={promo.mastheadEyebrow}
       />
       {promo.hero!.cityImageUrl ? (
         <CityHeroImage
@@ -356,19 +285,6 @@ export default function PromoPage() {
         />
       </div>
       <HeroSection imageUrl={heroImage} alt={promo.hero!.alt} />
-      {showOffer(promo.offer) ? (
-        <OfferBanner
-          heading={promo.offer!.heading}
-          description={promo.offer!.description}
-          pills={promo.offer!.pills}
-        />
-      ) : null}
-
-      {promo.specialOffer ? (
-        <div className="body">
-          <SpecialOfferBox offer={promo.specialOffer} />
-        </div>
-      ) : null}
 
       <div className="body">
         {promo.rooms!.length ? (
@@ -382,22 +298,8 @@ export default function PromoPage() {
           </p>
         )}
       </div>
-      {renderSingleHotelPerks(promo.rooms!)}
-      <ProposalBookingSection
-        entries={singleHotelEntries}
-        footnoteHtml={promo.pricingFootnote}
-      />
-
-      {promo.priceSummary ? (
-        <div className="body">
-          <PriceSummaryTable
-            items={promo.priceSummary.items}
-            totalSavings={promo.priceSummary.totalSavings}
-            grandTotal={promo.priceSummary.grandTotal}
-            savingsNote={promo.priceSummary.savingsNote}
-          />
-        </div>
-      ) : null}
+      {renderPerksBlock(collectGiftPerkItems(promo.rooms!))}
+      <ProposalBookingSection entries={singleHotelEntries} />
 
       <AppDownload />
 

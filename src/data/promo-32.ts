@@ -19,23 +19,12 @@ export const promo32: Promo = {
     location: "Tamarindo, Mexico",
   },
 
-  offer: {
-    heading: "4th Night Free with Breakfast",
-    description:
-      "Enjoy an exclusive WhataHotel! rate at Four Seasons Resort Tamarindo featuring a complimentary 4th night and daily breakfast for two.",
-    pills: ["4th Night Free", "Daily Breakfast", "$100 Credit"],
-    hidden: true,
-  },
-
   rooms: [
     {
       badgeText: "4th Night Free w/ Bkfst",
       name: "Nature Room with guaranteed, double upgrade to Premium Beachfront Room",
       subtitle: "King · 710 sq ft · Golf Course & Resort View",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$938",
-      priceStrike: "",
-      priceTotal: "4-Night Total: $5,190 (incl. taxes & fees)",
       nightsLabel: "4",
       stayCheckInOut: "May 8 → May 12",
       bookingSummary: {
@@ -45,7 +34,6 @@ export const promo32: Promo = {
         total: "$5,190",
       },
       grandTotalInclTaxes: "$5,190",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       images: [
         {
           src: "https://www.fourseasons.com/alt/img-opt/~70.1530.1,3332-42,1941-2997,3326-1685,9996/publish/content/dam/fourseasons/images/web/TMR/TMR_1026_original.jpg",
@@ -77,24 +65,15 @@ export const promo32: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "4 Nights · King",
-        rightLabel: "Total (incl. taxes & fees)",
-        rightValue: "$5,190",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=B1KPP4&rate=PP6&hotel=4746&checkin=2026-05-08&checkout=2026-05-12&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
     {
       badgeText: "4th Night Free w/ Bkfst",
       name: "Premium Beachfront Room Rate with guaranteed, double upgrade to Cliffside Ocean View 1 Bedroom Suite with Infinity Pool",
       subtitle: "King · 1,052 sq ft · Beach & Ocean View",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$1,200",
-      priceStrike: "",
-      priceTotal: "4-Night Total: $6,643 (incl. taxes & fees)",
       nightsLabel: "4",
       stayCheckInOut: "May 8 → May 12",
       bookingSummary: {
@@ -104,7 +83,6 @@ export const promo32: Promo = {
         total: "$6,643",
       },
       grandTotalInclTaxes: "$6,643",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       images: [
         {
           src: "https://www.fourseasons.com/alt/img-opt/~70.1530.0,0000-219,3280-3000,0000-1687,5000/publish/content/dam/fourseasons/images/web/TMR/TMR_1990_original.jpg",
@@ -141,15 +119,9 @@ export const promo32: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "4 Nights · King",
-        rightLabel: "Total (incl. taxes & fees)",
-        rightValue: "$6,643",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=P1KPP4&rate=PP6&hotel=4746&checkin=2026-05-08&checkout=2026-05-12&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
   ],
 };

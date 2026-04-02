@@ -1,24 +1,35 @@
 # Agent instructions (WhataHotel proposal site)
 
-## Canonical docs
+## How to create a new promo
 
-1. **`docs/whatahotel-agent-new-promo.md`** — start here for new promos (images, workflow, Netlify limits).
-2. **`docs/whatahotel-design-ssot.md`** — full single source of truth; read in sections if the environment cannot load the whole file.
-3. **`docs/netlify-agent-project-context.txt`** — paste into **Netlify → Site configuration → Agent runs → Project context** (~3k char cap). Keep in sync with the “Netlify Project Context” section of the SSOT.
+1. Read `docs/whatahotel-agent-new-promo.md` (short guide with image extraction rules).
+2. Fetch the WhataHotel booking URL once. Parse the full HTML.
+3. Create `src/data/promo-N.ts` using `createPromo()` from `src/lib/promoFactory.ts`.
+4. Register in `src/data/promos.ts` (import + add to array).
+5. Run `npm run build` to verify.
 
-## Copy and labels (do not regress)
+## What the agent provides
 
-The SSOT section **“Client-approved copy & labels (do not regress)”** is mandatory. It defines:
+```
+PromoInput: id, title, dates, client?, cityImageUrl?, cityImageAlt?
+  HotelInput[]: name, location, heroImageUrl, heroAlt
+    RoomInput[]: name, subtitle, badgeText, adr, grandTotal,
+                 nights, checkIn, checkOut, bookUrl,
+                 images?, roomHighlights[], perks[]
+```
 
-- Page section **Exclusive Perks** and `gift` **`title: "Exclusive Perks"`** in data
-- **Rate Comparisons** (not “Booking summary / Comparison overview”) for the combined table
-- **Rate & pricing breakdown** in the room card (not “Investment summary”; no per-room Preferred Partner line)
+Everything else (labels, formatting, layout, pricing alignment) is hardcoded in the components and handled by the factory. The agent never sets UI labels, section headings, or structural fields.
 
-**Multi-hotel data:** Optional destination photo uses **`hotels[0].hero.cityImageUrl` / `cityImageAlt` only** (one shared strip in the UI). See SSOT **Proposal page layout** for `HotelSectionDivider` and full order.
+## Rules
 
-Cursor loads **`.cursor/rules/whatahotel-proposal-copy.mdc`** for the same rules.
+- **Only edit** `src/data/promo-N.ts` and `src/data/promos.ts`.
+- **Never edit** `src/types.ts`, `src/components/`, or `src/lib/promoFactory.ts`.
+- **Never copy** from existing `promo-*.ts` files. Always use `createPromo()`.
+- **Images:** hero from `<ul id="subSlides">` background-image (prepend `https://whatahotel.com`). Room images from `<a href>` in `ul.booking-img-list` (NOT `<img src>`), max 2 per room.
+- **Rates:** `adr` = price only with currency symbol, no "/night". `grandTotal` = tax-inclusive total from the booking page.
+- **badgeText:** extract from marketing line between "WhataHotel!" and "More Info". Fallback: `"Exclusive Rate"`. Never `"Hotel Option X"`.
+- **Multi-hotel:** each booking URL = one `HotelInput`. Data from each URL stays in its own entry.
 
-## Scope
+## Netlify agent
 
-- **Data-only agents (e.g. Netlify):** edit only `src/data/promo-N.ts` and `src/data/promos.ts` unless the task explicitly includes UI work.
-- Do not use existing `promo-*.ts` files as templates; build from `src/types.ts` + docs.
+Paste `docs/netlify-agent-project-context.txt` into Netlify > Site configuration > Agent runs > Project context.

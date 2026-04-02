@@ -8,7 +8,6 @@ import type { Promo } from "../types";
 export const promo3: Promo = {
   id: "promo-3",
   createdAt: "2026-03-23T18:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Kyoto, Japan — Park Hyatt Kyoto",
   client: "",
   dates: "June 2 – 4, 2026 | 2 Nights | 11 Room Options",
@@ -26,19 +25,6 @@ export const promo3: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Kyoto, Japan &nbsp;|&nbsp; Luxury Hotel in Higashiyama",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Park Hyatt Kyoto</strong> — including a room upgrade, daily full breakfast, $100 hotel credit, and more.",
-    pills: [
-      "✔ Room Category Upgrade (subject to availability)",
-      "✔ Daily Full Breakfast",
-      "✔ $100 Hotel Credit",
-      "✔ Complimentary WiFi",
-      "✔ Late Check-Out (subject to availability)",
-    ],
-  },
-
   rooms: [
     // ─── Option 1: 1 King Bed, Garden View (45 sqm) ───
     {
@@ -46,14 +32,8 @@ export const promo3: Promo = {
       name: "Garden View Room<br/>1 King Bed",
       subtitle:
         "45 sqm · King Bed · Garden View<br/><strong style='color: var(--burgundy)'>From ¥205,000/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥205,000",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥410,000",
-      stayTotalExclAmount: "¥410,000",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥518,650",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -96,17 +76,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥205,000/night &times; 2 = <strong>¥410,000</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥518,650</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥518,650",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=A1QU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Garden View King",
     },
 
     // ─── Option 2: 2 Twin Beds, Garden View (45 sqm) ───
@@ -115,14 +87,8 @@ export const promo3: Promo = {
       name: "Garden View Room<br/>2 Twin Beds",
       subtitle:
         "45 sqm · Twin Beds · Garden View<br/><strong style='color: var(--burgundy)'>From ¥206,700/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥206,700",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥413,400",
-      stayTotalExclAmount: "¥413,400",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥522,951",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -165,17 +131,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥206,700/night &times; 2 = <strong>¥413,400</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥522,951</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥522,951",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=B2TU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Garden View Twin",
     },
 
     // ─── Option 3: 1 King Bed, Garden Terrace (45 sqm) ───
@@ -184,14 +142,8 @@ export const promo3: Promo = {
       name: "Garden Terrace Room<br/>1 King Bed",
       subtitle:
         "45 sqm · King Bed · Private Japanese Garden<br/><strong style='color: var(--burgundy)'>From ¥227,000/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥227,000",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥454,000",
-      stayTotalExclAmount: "¥454,000",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥574,310",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -234,17 +186,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥227,000/night &times; 2 = <strong>¥454,000</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥574,310</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥574,310",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Garden Terrace King",
     },
 
     // ─── Option 4: 2 Twin Beds, Garden Terrace (45 sqm) ───
@@ -253,14 +197,8 @@ export const promo3: Promo = {
       name: "Garden Terrace Room<br/>2 Twin Beds",
       subtitle:
         "45 sqm · Twin Beds · Private Japanese Garden<br/><strong style='color: var(--burgundy)'>From ¥228,700/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥228,700",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥457,400",
-      stayTotalExclAmount: "¥457,400",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥578,611",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -303,17 +241,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥228,700/night &times; 2 = <strong>¥457,400</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥578,611</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥578,611",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=A2TU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Garden Terrace Twin",
     },
 
     // ─── Option 5: 1 King Bed, Pagoda View (45 sqm) ───
@@ -322,14 +252,8 @@ export const promo3: Promo = {
       name: "Pagoda View Room<br/>1 King Bed",
       subtitle:
         "45 sqm · King Bed · Yasaka Pagoda View<br/><strong style='color: var(--burgundy)'>From ¥250,000/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥250,000",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥500,000",
-      stayTotalExclAmount: "¥500,000",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥632,500",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -372,17 +296,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥250,000/night &times; 2 = <strong>¥500,000</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥632,500</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥632,500",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=P1KU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Pagoda View King",
     },
 
     // ─── Option 6: 2 Twin Beds, Pagoda View (45 sqm) ───
@@ -391,14 +307,8 @@ export const promo3: Promo = {
       name: "Pagoda View Room<br/>2 Twin Beds",
       subtitle:
         "45 sqm · Twin Beds · Yasaka Pagoda View<br/><strong style='color: var(--burgundy)'>From ¥251,700/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥251,700",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥503,400",
-      stayTotalExclAmount: "¥503,400",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥636,801",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -441,17 +351,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥251,700/night &times; 2 = <strong>¥503,400</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥636,801</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥636,801",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=S2TU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Pagoda View Twin",
     },
 
     // ─── Option 7: 1 King Deluxe (68 sqm) ───
@@ -460,14 +362,8 @@ export const promo3: Promo = {
       name: "Deluxe Room<br/>1 King Bed",
       subtitle:
         "68 sqm · King Bed · Garden View<br/><strong style='color: var(--burgundy)'>From ¥280,000/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥280,000",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥560,000",
-      stayTotalExclAmount: "¥560,000",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥708,400",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -501,17 +397,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥280,000/night &times; 2 = <strong>¥560,000</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥708,400</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥708,400",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=T1KU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Deluxe King",
     },
 
     // ─── Option 8: 2 Twin Beds, Pagoda View Deluxe (68 sqm) ───
@@ -520,14 +408,8 @@ export const promo3: Promo = {
       name: "Pagoda View Deluxe Room<br/>2 Twin Beds",
       subtitle:
         "68 sqm · Twin Beds · Yasaka Pagoda View<br/><strong style='color: var(--burgundy)'>From ¥321,700/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥321,700",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥643,400",
-      stayTotalExclAmount: "¥643,400",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥813,901",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -570,17 +452,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥321,700/night &times; 2 = <strong>¥643,400</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥813,901</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥813,901",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=N2TU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Pagoda View Deluxe Twin",
     },
 
     // ─── Option 9: Ninenzaka House Suite (68 sqm) ───
@@ -589,14 +463,8 @@ export const promo3: Promo = {
       name: "Ninenzaka House Suite<br/>1 King Bed",
       subtitle:
         "68 sqm · King Bed · Ninenzaka Slope &amp; Sunset View<br/><strong style='color: var(--burgundy)'>From ¥380,000/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥380,000",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥760,000",
-      stayTotalExclAmount: "¥760,000",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥961,400",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -639,17 +507,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥380,000/night &times; 2 = <strong>¥760,000</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥961,400</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥961,400",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=F1KU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Ninenzaka House Suite",
     },
 
     // ─── Option 10: Higashiyama House Suite (90 sqm) ───
@@ -658,14 +518,8 @@ export const promo3: Promo = {
       name: "Higashiyama House Suite<br/>1 King Bed",
       subtitle:
         "90 sqm · King Bed · City View · Large Round Bathtub<br/><strong style='color: var(--burgundy)'>From ¥480,000/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥480,000",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥960,000",
-      stayTotalExclAmount: "¥960,000",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥1,214,400",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -708,17 +562,9 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥480,000/night &times; 2 = <strong>¥960,000</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥1,214,400</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥1,214,400",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=E1KU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Higashiyama House Suite",
     },
 
     // ─── Option 11: Pagoda House Suite (135 sqm) ───
@@ -727,14 +573,8 @@ export const promo3: Promo = {
       name: "Pagoda House Suite<br/>1 King Bed",
       subtitle:
         "135 sqm · King Bed · Yasaka Pagoda &amp; Sunset View · Kitchen<br/><strong style='color: var(--burgundy)'>From ¥1,271,200/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "¥1,271,200",
-      priceStrike: "",
-      priceTotal: "2-Night Total: ¥2,542,400",
-      stayTotalExclAmount: "¥2,542,400",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "¥3,216,136",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 4",
       nightsLabel: "2",
       bookingSummary: {
@@ -777,21 +617,10 @@ export const promo3: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: ¥1,271,200/night &times; 2 = <strong>¥2,542,400</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>¥3,216,136</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "¥3,216,136",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=G1KU5V&rate=1HZ&hotel=3975&checkin=2026-06-02&checkout=2026-06-04&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Pagoda House Suite",
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes &amp; service charges. Grand totals include taxes &amp; fees. Rates are in Japanese Yen (JPY). Free cancellation before May 30, 2026. Rates subject to availability.",
 
 };

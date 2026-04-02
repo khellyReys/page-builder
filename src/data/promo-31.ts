@@ -22,14 +22,6 @@ export const promo31: Promo = {
     cityImageAlt: "Jackson Hole, Wyoming",
   },
 
-  offer: {
-    heading: "Exclusive WhataHotel! Offer",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at Four Seasons Resort Jackson Hole.",
-    pills: ["6 Nights", "Complimentary Perks", "Best Rate"],
-    hidden: true,
-  },
-
   rooms: [
     // ── 1. 2-Bedroom Resort Residence – Valley View ──
     {
@@ -37,10 +29,7 @@ export const promo31: Promo = {
       name: "2-Bedroom Resort Residence – Valley View",
       subtitle:
         "1,720 sq ft · 1 King & 2 Double Beds · Floor 5 · Fireplace · Full Kitchen",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$2,800.00",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $21,067.20",
       nightsLabel: "6",
       stayCheckInOut: "Jul 12 → Jul 18",
       bookingSummary: {
@@ -88,15 +77,9 @@ export const promo31: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "6 Nights",
-        rightLabel: "Grand Total (incl. taxes & fees)",
-        rightValue: "$21,067.20",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=S2DPR9&rate=PP6&hotel=1325&checkin=2026-07-12&checkout=2026-07-18&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── 2. 2-Bedroom Resort Residence – Mountain View ──
@@ -105,10 +88,7 @@ export const promo31: Promo = {
       name: "2-Bedroom Resort Residence – Mountain View",
       subtitle:
         "1,720 sq ft · 2 King Beds · 9th Floor · Fireplace · Full Kitchen",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$3,390.83",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $25,512.63",
       nightsLabel: "6",
       stayCheckInOut: "Jul 12 → Jul 18",
       bookingSummary: {
@@ -156,15 +136,9 @@ export const promo31: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "6 Nights",
-        rightLabel: "Grand Total (incl. taxes & fees)",
-        rightValue: "$25,512.63",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=T2KPR9&rate=PP6&hotel=1325&checkin=2026-07-12&checkout=2026-07-18&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── 3. 3-Bedroom Resort Residence – Valley View ──
@@ -173,10 +147,7 @@ export const promo31: Promo = {
       name: "3-Bedroom Resort Residence – Valley View",
       subtitle:
         "2,240 sq ft · 2 King & 2 Double Beds · Floors 6–9 · Full Kitchen",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$3,551.67",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $26,722.74",
       nightsLabel: "6",
       stayCheckInOut: "Jul 12 → Jul 18",
       bookingSummary: {
@@ -222,15 +193,9 @@ export const promo31: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "6 Nights",
-        rightLabel: "Grand Total (incl. taxes & fees)",
-        rightValue: "$26,722.74",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=TSDPR9&rate=PP6&hotel=1325&checkin=2026-07-12&checkout=2026-07-18&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── 4. 3-Bedroom Resort Residence – Mountain View ──
@@ -239,10 +204,7 @@ export const promo31: Promo = {
       name: "3-Bedroom Resort Residence – Mountain View",
       subtitle:
         "2,240 sq ft · 2 King & 2 Double Beds · Floors 6–9 · Full Kitchen",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$3,922.50",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $29,512.89",
       nightsLabel: "6",
       stayCheckInOut: "Jul 12 → Jul 18",
       bookingSummary: {
@@ -284,15 +246,9 @@ export const promo31: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "6 Nights",
-        rightLabel: "Grand Total (incl. taxes & fees)",
-        rightValue: "$29,512.89",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=SSDPR9&rate=PP6&hotel=1325&checkin=2026-07-12&checkout=2026-07-18&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── 5. The Wildflower Residence ──
@@ -301,10 +257,7 @@ export const promo31: Promo = {
       name: "The Wildflower Residence",
       subtitle:
         "3-Bedroom + Den · 3,692 sq ft · Mountain View · 3 King Beds",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$6,404.17",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $48,184.95",
       nightsLabel: "6",
       stayCheckInOut: "Jul 12 → Jul 18",
       bookingSummary: {
@@ -351,15 +304,9 @@ export const promo31: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "6 Nights",
-        rightLabel: "Grand Total (incl. taxes & fees)",
-        rightValue: "$48,184.95",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=SSKPR9&rate=PP6&hotel=1325&checkin=2026-07-12&checkout=2026-07-18&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── 6. The Lupine Residence – Three-Bedroom Penthouse (not on WhataHotel) ──
@@ -368,10 +315,7 @@ export const promo31: Promo = {
       name: "The Lupine Residence | Three-Bedroom Penthouse",
       subtitle:
         "2,680 sq ft · Mountain View · 3 King Beds · 1 Rollaway",
-      priceLabel: "Avg. Nightly Rate",
       priceRate: "$6,305.75",
-      priceStrike: "",
-      priceTotal: "6-Night Total: $43,131.33",
       nightsLabel: "6",
       stayCheckInOut: "Jul 12 → Jul 18",
       bookingSummary: {
@@ -417,15 +361,9 @@ export const promo31: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "Avg. Nightly Rate",
-        leftSub: "6 Nights",
-        rightLabel: "Grand Total (incl. taxes & fees)",
-        rightValue: "$43,131.33",
-      },
+
       bookUrl:
         "https://www.fourseasons.com/jacksonhole/accommodations/private_residences/the-lupine-residence-three-bedroom-penthouse/",
-      bookLabel: "Book Now",
     },
   ],
 };

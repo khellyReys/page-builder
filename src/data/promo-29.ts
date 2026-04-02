@@ -25,18 +25,7 @@ export const promo29: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Paris, France &nbsp;|&nbsp; 1st Arrondissement",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive Rate",
-        description: "Exclusive perks included with your stay",
-        pills: [
-          "\u2713 Upgrade subject to availability at check-in",
-          "\u2713 Complimentary continental breakfast for two daily",
-          "\u2713 $100 F&B credit",
-          "\u2713 Free WiFi",
-          "\u2713 Late check-out subject to availability",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Superior Room ── */
         {
@@ -45,8 +34,6 @@ export const promo29: Promo = {
           subtitle:
             "19 sqm \u00B7 Queen or King bed \u00B7 Shower<br/><strong style='color: var(--burgundy)'>From \u20AC602.86/night</strong>",
           priceRate: "\u20AC602.86",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC4,220.00",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -86,17 +73,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC602.86 avg/night &times; 7 nights &mdash; <strong>\u20AC4,220.00</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC4,220.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1Q2SH&rate=2SH&hotel=2719&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* ── Superior Room with Balcony ── */
         {
@@ -105,8 +84,6 @@ export const promo29: Promo = {
           subtitle:
             "19 sqm \u00B7 Queen or King \u00B7 Shower or Tub<br/><strong style='color: var(--burgundy)'>From \u20AC652.86/night</strong>",
           priceRate: "\u20AC652.86",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC4,570.00",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -147,17 +124,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC652.86 avg/night &times; 7 nights &mdash; <strong>\u20AC4,570.00</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC4,570.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B1K2SH&rate=2SH&hotel=2719&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* ── Deluxe Room ── */
         {
@@ -166,8 +135,6 @@ export const promo29: Promo = {
           subtitle:
             "23 sqm \u00B7 Queen or Twin \u00B7 Shower or Tub<br/><strong style='color: var(--burgundy)'>From \u20AC702.86/night</strong>",
           priceRate: "\u20AC702.86",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC4,920.00",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -212,17 +179,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC702.86 avg/night &times; 7 nights &mdash; <strong>\u20AC4,920.00</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC4,920.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1K2SH&rate=2SH&hotel=2719&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -238,18 +197,7 @@ export const promo29: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Paris, France &nbsp;|&nbsp; The Unbound Collection by Hyatt",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive Rate",
-        description: "Exclusive perks included with your stay",
-        pills: [
-          "\u2713 Room upgrade within 48 hours of booking",
-          "\u2713 Complimentary breakfast for two daily",
-          "\u2713 $100 hotel credit",
-          "\u2713 Free WiFi",
-          "\u2713 Late check-out subject to availability",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         /* ── 1 King View Rate (guaranteed upgrade to Deluxe Room) ── */
         {
@@ -258,8 +206,6 @@ export const promo29: Promo = {
           subtitle:
             "<span style='display:inline-block;background:var(--burgundy);color:#fff;font-weight:700;padding:3px 10px;border-radius:4px;font-size:11px;letter-spacing:0.3px;margin-bottom:4px;'>\u2191 Guaranteed Upgrade to a Deluxe Room</span><br/><strong style='color: var(--burgundy)'>From \u20AC780/night</strong>",
           priceRate: "\u20AC780",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC5,623.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -301,17 +247,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC780 avg/night &times; 7 nights &mdash; <strong>\u20AC5,623.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC5,623.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=N1KU5V&rate=1HZ&hotel=3641&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* ── 1 King Deluxe Rate (guaranteed upgrade to Deluxe Room with View) ── */
         {
@@ -320,8 +258,6 @@ export const promo29: Promo = {
           subtitle:
             "<span style='display:inline-block;background:var(--burgundy);color:#fff;font-weight:700;padding:3px 10px;border-radius:4px;font-size:11px;letter-spacing:0.3px;margin-bottom:4px;'>\u2191 Guaranteed Upgrade to a Deluxe Room with View</span><br/><strong style='color: var(--burgundy)'>From \u20AC804.71/night</strong>",
           priceRate: "\u20AC804.71",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC5,796.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -363,17 +299,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC804.71 avg/night &times; 7 nights &mdash; <strong>\u20AC5,796.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC5,796.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=T1KU5V&rate=1HZ&hotel=3641&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -390,18 +318,7 @@ export const promo29: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Paris, France &nbsp;|&nbsp; Saint-Germain-des-Pr\u00E9s",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive Rate",
-        description: "Exclusive perks included with your stay",
-        pills: [
-          "\u2713 Room category upgrade if available at check-in",
-          "\u2713 Complimentary daily breakfast for two",
-          "\u2713 $100 hotel credit",
-          "\u2713 Free Wi-Fi",
-          "\u2713 Late check-out based on availability",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Superior Room ── */
         {
@@ -410,8 +327,6 @@ export const promo29: Promo = {
           subtitle:
             "1 Queen bed \u00B7 Ensuite<br/><strong style='color: var(--burgundy)'>From \u20AC568.57/night</strong>",
           priceRate: "\u20AC568.57",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC3,980.00",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -453,17 +368,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC568.57 avg/night &times; 7 nights &mdash; <strong>\u20AC3,980.00</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC3,980.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B1Q12S&rate=2SH&hotel=6301&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* ── Deluxe Room ── */
         {
@@ -472,8 +379,6 @@ export const promo29: Promo = {
           subtitle:
             "1 King or 1 Queen \u00B7 Ensuite \u00B7 Lounge<br/><strong style='color: var(--burgundy)'>From \u20AC678.57/night</strong>",
           priceRate: "\u20AC678.57",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC4,750.00",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -515,17 +420,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC678.57 avg/night &times; 7 nights &mdash; <strong>\u20AC4,750.00</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC4,750.00",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1K12S&rate=2SH&hotel=6301&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -541,18 +438,7 @@ export const promo29: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Paris, France &nbsp;|&nbsp; IHG Hotel",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive Rate",
-        description: "Exclusive perks included with your stay",
-        pills: [
-          "\u2713 Room category upgrade if available at check-in",
-          "\u2713 Complimentary daily breakfast for two",
-          "\u2713 \u20AC85 hotel credit",
-          "\u2713 Free Wi-Fi",
-          "\u2713 Late check-out based on availability",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Essential Room Rate (guaranteed upgrade to King Essential Room) ── */
         {
@@ -561,8 +447,6 @@ export const promo29: Promo = {
           subtitle:
             "<span style='display:inline-block;background:var(--burgundy);color:#fff;font-weight:700;padding:3px 10px;border-radius:4px;font-size:11px;letter-spacing:0.3px;margin-bottom:4px;'>\u2191 Guaranteed Upgrade to a King Essential Room</span><br/><strong style='color: var(--burgundy)'>From \u20AC633.57/night</strong>",
           priceRate: "\u20AC633.57",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC4,598.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -604,17 +488,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC633.57 avg/night &times; 7 nights &mdash; <strong>\u20AC4,598.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC4,598.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=CSP2SH&rate=2SH&hotel=6300&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* ── Premium Room Rate (guaranteed upgrade to King Premium Room) ── */
         {
@@ -623,8 +499,6 @@ export const promo29: Promo = {
           subtitle:
             "<span style='display:inline-block;background:var(--burgundy);color:#fff;font-weight:700;padding:3px 10px;border-radius:4px;font-size:11px;letter-spacing:0.3px;margin-bottom:4px;'>\u2191 Guaranteed Upgrade to a King Premium Room</span><br/><strong style='color: var(--burgundy)'>From \u20AC753.57/night</strong>",
           priceRate: "\u20AC753.57",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC5,438.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -666,17 +540,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "\u20AC753.57 avg/night &times; 7 nights &mdash; <strong>\u20AC5,438.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC5,438.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=CPG2SH&rate=2SH&hotel=6300&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -692,18 +558,7 @@ export const promo29: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Paris, France &nbsp;|&nbsp; Faubourg Saint-Honor\u00E9",
       },
-      offer: {
-        heading: "WhataHotel! 4th Night Free",
-        description: "Exclusive perks included with your stay",
-        pills: [
-          "\u2713 Room category upgrade subject to availability",
-          "\u2713 Complimentary breakfast for two daily",
-          "\u2713 $100 hotel credit",
-          "\u2713 Free WiFi",
-          "\u2713 Late check-out subject to availability",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Luxury Room (4th Night Free) ── */
         {
@@ -712,8 +567,6 @@ export const promo29: Promo = {
           subtitle:
             "Queen or King bed \u00B7 4th Night Free<br/><strong style='color: var(--burgundy)'>From \u20AC615.43/night avg</strong>",
           priceRate: "\u20AC615.43",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC4,471.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -759,17 +612,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! 4th Night Free</span>",
-            leftSub:
-              "\u20AC615.43 avg/night &times; 7 nights &mdash; <strong>\u20AC4,471.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC4,471.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1D3LN&rate=3LN&hotel=1131&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -786,18 +631,7 @@ export const promo29: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Paris, France &nbsp;|&nbsp; Place de la Bastille",
       },
-      offer: {
-        heading: "WhataHotel! 3rd Night Free",
-        description: "Exclusive perks included with your stay",
-        pills: [
-          "\u2713 Room category upgrade subject to availability",
-          "\u2713 Complimentary breakfast for two daily",
-          "\u2713 $100 hotel credit",
-          "\u2713 Free WiFi",
-          "\u2713 Late check-out subject to availability",
-        ],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Collection Rooftop View King (3rd Night Free) ── */
         {
@@ -806,8 +640,6 @@ export const promo29: Promo = {
           subtitle:
             "Rooftop views \u00B7 1 King or 2 Single beds<br/><strong style='color: var(--burgundy)'>From \u20AC407.86/night avg</strong>",
           priceRate: "\u20AC407.86",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC3,018.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -849,17 +681,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! 3rd Night Free</span>",
-            leftSub:
-              "\u20AC407.86 avg/night &times; 7 nights &mdash; <strong>\u20AC3,018.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC3,018.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1DSGP&rate=SGP&hotel=6343&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
         /* ── Iconic Paris Skyline King (3rd Night Free) ── */
         {
@@ -868,8 +692,6 @@ export const promo29: Promo = {
           subtitle:
             "Seine &amp; Eiffel Tower views \u00B7 1 King or 2 Single beds<br/><strong style='color: var(--burgundy)'>From \u20AC472.86/night avg</strong>",
           priceRate: "\u20AC472.86",
-          priceStrike: "",
-          priceTotal: "7-Night Total: \u20AC3,473.80",
           nightsLabel: "7",
           stayCheckInOut: "Aug 1 \u2192 Aug 8",
           bookingSummary: {
@@ -911,17 +733,9 @@ export const promo29: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "7 Nights &nbsp;|&nbsp; <span>WhataHotel! 3rd Night Free</span>",
-            leftSub:
-              "\u20AC472.86 avg/night &times; 7 nights &mdash; <strong>\u20AC3,473.80</strong> total incl. taxes &amp; fees",
-            rightLabel: "(incl. taxes & fees)",
-            rightValue: "\u20AC3,473.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KSGP&rate=SGP&hotel=6343&checkin=2026-08-01&checkout=2026-08-08&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },

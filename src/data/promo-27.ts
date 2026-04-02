@@ -26,23 +26,14 @@ export const promo27: Promo = {
           "https://railtour.ch/itineraries/destination-tours/London%20-%20Mit%20gutem%20Gewissen-95474/1098/image-thumb__1098__gallery-slider/London%20-%20das%20gr%C3%BCne%20London%20entdecken-199835.5d876693.jpg",
         cityImageAlt: "London, England",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive Offer",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at Four Seasons London at Park Lane.",
-        pills: ["King Bed", "2 Nights", "Exclusive Perks"],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Room 1: Superior Room King ── */
         {
           badgeText: "Superior",
           name: "Superior Room King",
           subtitle: "Floor 3-9 · City or Park View · 269 sqft",
-          priceLabel: "Avg. Nightly Rate",
           priceRate: "£1,250.00",
-          priceStrike: "",
-          priceTotal: "2-Night Total: £2,500.00",
           nightsLabel: "2",
           bookingSummary: {
             checkInOut: "Aug 25 → Aug 27",
@@ -50,12 +41,9 @@ export const promo27: Promo = {
             adr: "£1,250.00",
             total: "£2,500.00",
           },
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "Per Night",
-            rightLabel: "2-Night Total",
-            rightValue: "£2,500.00",
-          },
+          grandTotalInclTaxes: "£2,500.00",
+          stayCheckInOut: "Aug 25 → Aug 27",
+
           images: [],
           features: [
             {
@@ -82,7 +70,6 @@ export const promo27: Promo = {
           ],
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B1KPP9&rate=PP6&hotel=1423&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
 
         /* ── Room 2: Deluxe Room King ── */
@@ -90,10 +77,7 @@ export const promo27: Promo = {
           badgeText: "Deluxe",
           name: "Deluxe Room King",
           subtitle: "Floor 3-9 · City View · 376 sqft",
-          priceLabel: "Avg. Nightly Rate",
           priceRate: "£1,300.00",
-          priceStrike: "",
-          priceTotal: "2-Night Total: £2,600.00",
           nightsLabel: "2",
           bookingSummary: {
             checkInOut: "Aug 25 → Aug 27",
@@ -101,12 +85,9 @@ export const promo27: Promo = {
             adr: "£1,300.00",
             total: "£2,600.00",
           },
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "Per Night",
-            rightLabel: "2-Night Total",
-            rightValue: "£2,600.00",
-          },
+          grandTotalInclTaxes: "£2,600.00",
+          stayCheckInOut: "Aug 25 → Aug 27",
+
           images: [],
           features: [
             {
@@ -133,7 +114,6 @@ export const promo27: Promo = {
           ],
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KPP9&rate=PP6&hotel=1423&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
 
         /* ── Room 3: Premier Park View Room King ── */
@@ -141,10 +121,7 @@ export const promo27: Promo = {
           badgeText: "Premier",
           name: "Premier Park View Room King",
           subtitle: "Floor 4-9 · Park View · 376 sqft",
-          priceLabel: "Avg. Nightly Rate",
           priceRate: "£1,450.00",
-          priceStrike: "",
-          priceTotal: "2-Night Total: £2,900.00",
           nightsLabel: "2",
           bookingSummary: {
             checkInOut: "Aug 25 → Aug 27",
@@ -152,12 +129,9 @@ export const promo27: Promo = {
             adr: "£1,450.00",
             total: "£2,900.00",
           },
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "Per Night",
-            rightLabel: "2-Night Total",
-            rightValue: "£2,900.00",
-          },
+          grandTotalInclTaxes: "£2,900.00",
+          stayCheckInOut: "Aug 25 → Aug 27",
+
           images: [],
           features: [
             {
@@ -184,7 +158,6 @@ export const promo27: Promo = {
           ],
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=P1KPP9&rate=PP6&hotel=1423&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },
@@ -200,23 +173,14 @@ export const promo27: Promo = {
         hotel: "Four Seasons London at Tower Bridge",
         location: "London, England",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive Offer",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at Four Seasons London at Tower Bridge.",
-        pills: ["King Bed", "2 Nights", "Exclusive Perks"],
-        hidden: true,
-      },
+
       rooms: [
         /* ── Room 1: Superior Room King ── */
         {
           badgeText: "Superior",
           name: "Superior Room King",
           subtitle: "City View · 301–366 sqft",
-          priceLabel: "Avg. Nightly Rate",
           priceRate: "£670.00",
-          priceStrike: "",
-          priceTotal: "2-Night Total: £1,340.00",
           nightsLabel: "2",
           bookingSummary: {
             checkInOut: "Aug 25 → Aug 27",
@@ -224,12 +188,9 @@ export const promo27: Promo = {
             adr: "£670.00",
             total: "£1,340.00",
           },
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "Per Night",
-            rightLabel: "2-Night Total",
-            rightValue: "£1,340.00",
-          },
+          grandTotalInclTaxes: "£1,340.00",
+          stayCheckInOut: "Aug 25 → Aug 27",
+
           images: [
             {
               src: "https://d2573qu6qrjt8c.cloudfront.net/783E7752DA9D4915B7BC336F46DBB0B2/783E7752DA9D4915B7BC336F46DBB0B2.JPEG",
@@ -265,7 +226,6 @@ export const promo27: Promo = {
           ],
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=B1KPR2&rate=PP6&hotel=3118&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
 
         /* ── Room 2: Deluxe Room King ── */
@@ -273,10 +233,7 @@ export const promo27: Promo = {
           badgeText: "Deluxe",
           name: "Deluxe Room King",
           subtitle: "City View · 323–484 sqft",
-          priceLabel: "Avg. Nightly Rate",
           priceRate: "£685.00",
-          priceStrike: "",
-          priceTotal: "2-Night Total: £1,370.00",
           nightsLabel: "2",
           bookingSummary: {
             checkInOut: "Aug 25 → Aug 27",
@@ -284,12 +241,9 @@ export const promo27: Promo = {
             adr: "£685.00",
             total: "£1,370.00",
           },
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "Per Night",
-            rightLabel: "2-Night Total",
-            rightValue: "£1,370.00",
-          },
+          grandTotalInclTaxes: "£1,370.00",
+          stayCheckInOut: "Aug 25 → Aug 27",
+
           images: [
             {
               src: "https://d2573qu6qrjt8c.cloudfront.net/79D44BA71525479895CF999D6C3F6CAD/79D44BA71525479895CF999D6C3F6CAD.JPEG",
@@ -325,7 +279,6 @@ export const promo27: Promo = {
           ],
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=A1KPR2&rate=PP6&hotel=3118&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
 
         /* ── Room 3: Premier Room King ── */
@@ -333,10 +286,7 @@ export const promo27: Promo = {
           badgeText: "Premier",
           name: "Premier Room King",
           subtitle: "City View · 355–527 sqft",
-          priceLabel: "Avg. Nightly Rate",
           priceRate: "£700.00",
-          priceStrike: "",
-          priceTotal: "2-Night Total: £1,435.00",
           nightsLabel: "2",
           bookingSummary: {
             checkInOut: "Aug 25 → Aug 27",
@@ -344,12 +294,9 @@ export const promo27: Promo = {
             adr: "£700.00",
             total: "£1,435.00",
           },
-          savings: {
-            leftLabel: "WhataHotel! Rate",
-            leftSub: "Per Night",
-            rightLabel: "2-Night Total",
-            rightValue: "£1,435.00",
-          },
+          grandTotalInclTaxes: "£1,435.00",
+          stayCheckInOut: "Aug 25 → Aug 27",
+
           images: [],
           features: [
             {
@@ -376,7 +323,6 @@ export const promo27: Promo = {
           ],
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=R1KPR2&rate=PP6&hotel=3118&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now",
         },
       ],
     },

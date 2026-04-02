@@ -1,181 +1,140 @@
-# New promo — agent quick guide
+# New promo — agent guide
 
-**Read this file first.** The full design SSOT (`whatahotel-design-ssot.md`) is **longer than most tools’ single-file read limits** (~15k+ tokens). Agents that load the entire SSOT often fail mid-read and **miss image rules** entirely.
-
-**Which doc is “the” SSOT?** There is **one** canonical spec: **`docs/whatahotel-design-ssot.md`**. This file is a **short agent companion** (workflow, images, Netlify limits). **`docs/netlify-agent-project-context.txt`** is a **compressed** copy of the same rules for Netlify’s character cap — if anything disagrees, **trust the full SSOT + `src/types.ts` + `PromoPage.tsx`**.
-
-**Copy that must not regress:** Read the SSOT section **“Client-approved copy & labels (do not regress)”** near the top of `whatahotel-design-ssot.md`. It defines **`gift` `title: "Exclusive Perks"`**, no redundant Lorraine sublines in the app, **Rate Comparisons** table naming, and no **Investment summary** / per-room **Preferred Partner** in components.
-
----
-
-## Read order (do this every time)
-
-1. **Read this file** end-to-end (you are here).
-2. **`src/types.ts`** — confirm `Promo`, `Room`, `HeroBlock` required fields; this is the **canonical shape** for new data.
-3. **Full SSOT only in chunks** if needed — use the [SSOT section index](#ssot-section-index-line-ranges) below and `offset`/`limit` (or search), never assume you saw “Room Images” without opening that section.
-4. **Do not** open any **existing** `src/data/promo-*.ts` as a reference (even after a glob to pick the next id — use **`promos.ts` imports only** to infer the next `promo-N`). Older files can predate current layout (`cityImageUrl`, `CityHeroImage`, framed `HeroSection`, etc.). Construct each promo from **types + this guide + SSOT**, not from another promo file. The only promo TS files you read are **`promos.ts`** and the **new** `promo-N.ts` you create.
-
-### `types.ts` vs docs — do not patch types in data-only runs
-
-After you read **`src/types.ts`**, treat it as **authoritative**. On **main**, `HeroBlock` includes optional **`cityImageUrl`** and **`cityImageAlt`** (see `CityHeroImage` on the proposal page).
-
-If your checkout’s `HeroBlock` **still** lacks those fields while docs mention them:
-
-- **Do not** edit `src/types.ts` or `src/components/` when your job is **only** new promo data (e.g. Netlify agent scope).
-- **Stop** and report: branch is behind `main` — merge or rebase first.
-
-Never add types or components ad hoc in a data-only run; that bypasses review.
-
----
-
-## Minimal user prompt (agents: full rules still apply)
-
-The user may send **only**:
-
-1. A **WhataHotel booking URL** (`showRates.cfm`, `booking_info.cfm`, etc.), and  
-2. Optionally a **second URL** with a short line like *“create a promo”*, *“use this as the city image”*, or *“destination photo”*.
-
-**You must still:** fetch that booking URL **once**, parse **full HTML**, extract **subSlides** + **booking-img-list**, build a complete `Promo`, register in `promos.ts`, and run `npm run build`. Do **not** skip image extraction because the user was brief.
-
-| User intent | What you do |
-|-------------|-------------|
-| Single booking link only | Full promo; **no** `cityImageUrl` unless they also pass a city URL. |
-| Booking link + separate image URL labeled city/destination | Second URL → **`hero.cityImageUrl`** + **`hero.cityImageAlt`** only. **Never** put it in `hero.imageUrl`, `thumbnailUrl`, or `rooms[].images[]` when the page has hotel assets. |
-| `cityImageAlt` not given | Derive from hotel location / title (e.g. `"Amsterdam, Netherlands"`). |
-
-**Defaults when the user does not specify:**
-
-- **Rooms:** feature the **3 lowest-priced** room types on the page (SSOT default).  
-- **Promo id:** if they did not give `promo-N`, open `src/data/promos.ts` and use the **next free** `promo-N` (or ask once if unclear).  
-- **Client:** `""` if not provided.
-- **Contact footer:** Omit entirely — `Promo` has no `contact` field. The page footer (Questions? Contact your advisor / Lorraine Travel / Reservations@WhataHotel.com) is hardcoded in `ContactFooter`; agents must not invent footer HTML or emails in promo data.
-
-**Example (minimal — valid user message):**
-
-```text
-Create a promo.
-
-https://www.whatahotel.com/booking/showRates.cfm?hotelID=2772&checkIn=2026-08-24&checkOut=2026-08-27&guests=2&children=0&rooms=1
-
-City image: https://example.com/amsterdam.jpg
-```
-
----
-
-## Images — mandatory (most common failure)
-
-**Never ship `images: []` for every room and a wrong/missing hero** if the live booking page has carousels. Extract from **raw HTML** of the fetched URL. If your fetch returns no `subSlides` / no `booking-img-list`, the HTML may be truncated or JS-rendered — fix the fetch or ask the user to paste HTML; do not guess URLs.
-
-### A) Property hero — `hero.imageUrl` + `thumbnailUrl`
-
-| Step | Action |
-|------|--------|
-| 1 | In HTML, find `<ul id="subSlides">`. |
-| 2 | On the first `<li>` (often `headerSlide`), read `style="background-image: url(...)"`. |
-| 3 | URL is usually **relative** (e.g. `/content/hotels/{id}/file.jpg`) → prepend **`https://whatahotel.com`**. |
-| 4 | Set **`hero.imageUrl`** and **`thumbnailUrl`** to that **full** URL. |
-| 5 | `hero.alt` = short hotel/property description (this image is the **hotel** hero, not the city). |
-
-If `subSlides` is missing after a real browser-equivalent fetch, note with `// AGENT NOTE:` and leave `hero.imageUrl: ""` (app falls back to `DEFAULT_HERO_IMAGE`).
-
-### B) Room galleries — `rooms[].images[]`
-
-| Step | Action |
-|------|--------|
-| 1 | For each room block, find `.bookingItem` → `.bookingItem-img` → `ul.booking-img-list`. |
-| 2 | For each `<li>`, take the **`<a href="...">`** URL — **not** `<img src>`. |
-| 3 | On CDN `d2573qu6qrjt8c.cloudfront.net`, `<img src>` is often **`/E.JPEG`** (thumbnail). **`<a href>` has the full JPEG.** |
-| 4 | Collect up to **2** valid `href`s per room; skip `/img/paceholder.jpg` or empty `href`. |
-| 5 | Valid hosts: **`d2573qu6qrjt8c.cloudfront.net`** or **`d321ocj5nbe62c.cloudfront.net`**. |
+## Step 1: Create the data file
 
 ```ts
-// Correct pattern (URLs from <a href>)
-images: [
-  { src: "https://d2573qu6qrjt8c.cloudfront.net/…/….JPEG", alt: "Duplex Room" },
-  { src: "https://d2573qu6qrjt8c.cloudfront.net/…/….JPEG", alt: "Duplex Room" },
-],
+import { createPromo } from "../lib/promoFactory";
+
+export const promoN = createPromo({
+  id: "promo-N",
+  title: "Easter Vacation",
+  dates: "Apr 5–9, 2026",
+  client: "The Smith Family",           // optional, "" if not provided
+  cityImageUrl: "https://example.com/city.jpg",  // optional
+  cityImageAlt: "Fort Lauderdale",               // optional
+  hotels: [
+    {
+      name: "Conrad Fort Lauderdale Beach",
+      location: "Fort Lauderdale, Florida, United States",
+      heroImageUrl: "https://whatahotel.com/content/hotels/3333/hero.jpg",
+      heroAlt: "Conrad Fort Lauderdale Beach aerial view",
+      rooms: [
+        {
+          name: "Junior Suite Partial Ocean View",
+          subtitle: "Partial Ocean View",
+          badgeText: "Exclusive Rate",
+          adr: "$458.63",
+          grandTotal: "$2,253.79",
+          nights: 4,
+          checkIn: "2026-04-05",
+          checkOut: "2026-04-09",
+          bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=A11CBPC&rate=I70&hotel=3333&checkin=2026-04-05&checkout=2026-04-09&guests=2&children=0&rooms=1",
+          images: [
+            { src: "https://d2573qu6qrjt8c.cloudfront.net/HASH/HASH.JPEG", alt: "Junior Suite" },
+          ],
+          roomHighlights: [
+            "Junior Suite with partial ocean view",
+            "Accommodates 2 guests",
+          ],
+          perks: [
+            "A Room Category Upgrade if available at Check-in",
+            "Continental Breakfast x 2 Daily",
+            "A $100 Food & Beverage Credit",
+            "Free WiFi",
+            "Late Check-out, subject to availability",
+          ],
+        },
+        // ... more rooms (max 3)
+      ],
+    },
+    // ... more hotels for multi-hotel promos
+  ],
+});
 ```
 
-**Wrong:** copying one user-supplied city/landscape URL into every `images[]` or into `hero.imageUrl` when the page has real hotel/room assets.
+## Step 2: Register in promos.ts
 
-### C) City / destination image (user-supplied only)
+```ts
+import { promoN } from "./promo-N";
+// add to the rawPromos array
+```
 
-If the user gives a **city** image URL:
+## Step 3: Build
 
-| Field | Use |
-|-------|-----|
-| `hero.cityImageUrl` | That URL (**single-hotel:** flat `hero`; **multi-hotel:** put on **`hotels[0].hero` only** ? one shared destination strip, not repeated per hotel) |
-| `hero.cityImageAlt` | e.g. `"Amsterdam, Netherlands"` |
-
-**Do not** put the city URL in `hero.imageUrl` or `rooms[].images[]`. Property hero stays from **`subSlides`**; room images stay from **`booking-img-list`**.
-
----
-
-## Layout (current app behavior)
-
-1. `Masthead`
-2. Optional **`CityHeroImage`** — full-bleed when `hero.cityImageUrl` is set (**single-hotel**); **multi-hotel:** when **`hotels[0].hero.cityImageUrl`** is set, **once** above the first hotel (set city fields on the first `hotels[]` entry only). Then “Destination” label row.
-3. **Multi-hotel (2+ hotels):** **`HotelSectionDivider`** before each hotel ? cream band + burgundy gradient line (**no** “Destination” text).
-4. `HotelIdentity` (stars, name, location)
-5. **`HeroSection`** — **inset** framed property photo (`hero.imageUrl`), not edge-to-edge
-6. `OfferBanner` … room cards (**non-gift** room features / e.g. **Room Highlights** use the same list/title treatment as **Exclusive Perks** in the UI) … **Exclusive Perks**: **single-hotel** — one deduped section (all rooms’ `gift` features) **after** all room cards, **before** the **Rate Comparisons** table. **Multi-hotel** (`hotels[]`) — **per hotel**, one deduped perks section **immediately under that hotel’s room cards** (never one merged perks block above the combined table); perks can differ by hotel. Then one combined **Rate Comparisons** table (`ComparisonOverview`). Book CTAs stay inside each **`RoomCard`**. The app does **not** show an “inclusions” subtitle or Lorraine boilerplate under Exclusive Perks — only bullets from `gift.items[]`.
-
-**Data:** Keep `features` with `icon: "gift"` on each room; use **`title: "Exclusive Perks"`** (not `WhataHotel! Exclusive Perks` or `& Inclusions`). `RoomCard` still omits `gift` from the card body — `PromoPage` renders perks in the sections described above.
+```bash
+npm run build
+```
 
 ---
 
-## Workflow checklist
+## What the agent provides
 
-1. User booking URL (e.g. `showRates.cfm` or `booking_info.cfm`) — **fetch once**, full HTML.
-2. Parse in one pass: hotel name, **hero (`subSlides`)**, **per-room `booking-img-list`**, rates, lowest `bookUrl`, perks, totals.
-3. Set `badgeText` from the room marketing line:
-   - Source line pattern is usually: `WhataHotel! [PROMO PHRASE] [ROOM NAME] - More Info`.
-   - Extract phrase between `WhataHotel!` and room-name / `More Info` when present (examples: `3RD NIGHT FREE W BKFST`, `LAST NIGHT FREE`, `FREE PARKING`).
-   - If no promo phrase exists, use fallback: `badgeText: "Exclusive Rate"`.
-   - Never keep generic placeholders like `Hotel Option 1 — Room 1`.
-4. Apply **city image** to `cityImageUrl` / `cityImageAlt` only if the user provided it (**multi-hotel:** on **`hotels[0].hero` only**).
-5. Build `src/data/promo-N.ts`; register in `src/data/promos.ts`; set `createdAt` (ISO 8601).
-6. Run **`npm run build`** before merge.
-7. Self-verify: **every featured room** has `images.length >= 1` when the source page had carousel links; **hero.imageUrl** is from `subSlides`, not the city URL.
+| Field | Where from | Example |
+|---|---|---|
+| `id` | Next free number from `promos.ts` | `"promo-35"` |
+| `title` | User or destination name | `"Easter Vacation"` |
+| `dates` | Booking page dates | `"Apr 5–9, 2026"` |
+| `client` | User (optional) | `""` if not given |
+| `cityImageUrl` | User-supplied city photo (optional) | URL |
+| `hotel.name` | Booking page `<h1>` | `"Conrad Fort Lauderdale Beach"` |
+| `hotel.location` | Booking page, plain text | `"Fort Lauderdale, Florida, United States"` |
+| `hotel.heroImageUrl` | `<ul id="subSlides">` background-image + prepend `https://whatahotel.com` | URL |
+| `hotel.heroAlt` | Short hotel description | `"Conrad aerial view"` |
+| `room.name` | Room name from booking page | `"Junior Suite Partial Ocean View"` |
+| `room.subtitle` | Short descriptor | `"Partial Ocean View"` |
+| `room.badgeText` | Marketing line between "WhataHotel!" and "More Info"; else `"Exclusive Rate"` | `"3rd Night Free W Bkfst"` |
+| `room.adr` | Nightly rate with currency, no "/night" | `"$458.63"` |
+| `room.grandTotal` | Tax-inclusive grand total from booking page | `"$2,253.79"` |
+| `room.nights` | Number of nights | `4` |
+| `room.checkIn` | ISO date | `"2026-04-05"` |
+| `room.checkOut` | ISO date | `"2026-04-09"` |
+| `room.bookUrl` | Full booking URL (prepend `https://www.whatahotel.com` to relative href) | URL |
+| `room.images` | From `<a href>` in `ul.booking-img-list` (NOT `<img src>`), max 2 per room | `[{ src, alt }]` |
+| `room.roomHighlights` | 2-3 bullets about the room | `["Ocean view", "King bed"]` |
+| `room.perks` | Exclusive Perks items from perks section | `["Room Upgrade...", "Breakfast..."]` |
 
----
+## What the factory handles (agent must NOT set)
 
-## SSOT section index (line ranges)
-
-Use these with **partial reads** of `docs/whatahotel-design-ssot.md` (approximate; re-grep if doc shifts):
-
-| Lines (approx.) | Topic |
-|-------------------|--------|
-| ~15–35 | **Client-approved copy & labels (do not regress)** |
-| 90–140 | Proposal page layout |
-| 321–410 | Field rules |
-| 469–545 | Pricing consistency |
-| **811–956** | **Room + hero image extraction (critical)** |
-| 958–997 | Booking URL / rate variants |
-| 1050–1205 | Multi-hotel workflow |
-| 1298–1323 | Registering in `promos.ts` |
-| 1405–1421 | New promo checklist |
+Everything else: all section headings, button labels, formatting, pricing alignment, feature block structure, booking summary, check-in/out formatting, gallery visibility, portal values.
 
 ---
 
-## Troubleshooting: “page has images but HTML doesn’t”
+## Image extraction
 
-- Confirm the response is **HTML**, not a text summary or markdown table from another tool.
-- Search the raw string for `subSlides` and `booking-img-list`.
-- `showRates.cfm` should still contain the same hotel markup as other booking flows for that hotel; if not, try the hotel’s main booking/rates page the user can open in a browser.
+### Hero image (`heroImageUrl`)
 
-### Browse / “Fetch web” refuses or returns only a summary
+1. Find `<ul id="subSlides">` in HTML.
+2. Read `background-image: url(...)` from the first `<li>`.
+3. Prepend `https://whatahotel.com` (URL is relative).
 
-Some tools **refuse** to return full page HTML (copyright policy) or return **structured summaries** instead of markup. For this **authorized** WhataHotel proposal workflow, **do not stop**:
+### Room images (`images[]`)
 
-1. **Fetch raw HTML** with a shell HTTP client, e.g. `curl -sL "<booking URL>"` (follow redirects), save to a temp file **once** (same single-fetch rule).
-2. **Verify** the file contains `subSlides` and/or `bookingItem` / `booking-img-list` before parsing.
-3. **Parse by stable markers** — search for `id="subSlides"`, `booking-img-list`, `booking_info.cfm`, room codes, etc. **Do not** rely on **fixed line ranges** (e.g. `sed -n '381,700p'`): any site update shifts line numbers and breaks extraction.
-
-If `curl` returns a bot challenge or empty shell, say so and ask the user to paste HTML or try from an environment that receives the normal booking page.
+1. For each room, find `.bookingItem` > `ul.booking-img-list`.
+2. Extract `<a href>` URLs — **never** `<img src>` (those are thumbnails).
+3. Max 2 per room. Valid CDNs: `d2573qu6qrjt8c.cloudfront.net` or `d321ocj5nbe62c.cloudfront.net`.
+4. Skip `/img/paceholder.jpg` — pass empty array instead.
 
 ---
 
-**Netlify Project context (~3k char limit):** paste text from `docs/netlify-agent-project-context.txt` (also embedded in SSOT under *Netlify Project Context*).
+## Multi-hotel promos
 
-_Keep in sync with `src/types.ts` and `docs/whatahotel-design-ssot.md`._
+When the user provides 2+ booking URLs with different hotel IDs:
+- Each URL = one `HotelInput` in `hotels[]`.
+- Data from each URL stays in its own entry. Never cross hotel data.
+- Single vs multi-hotel is auto-detected by the factory.
+
+---
+
+## Defaults
+
+- **Rooms:** 3 lowest-priced standard room types.
+- **Promo id:** next free `promo-N` from `promos.ts`.
+- **Client:** `""` if not provided.
+
+---
+
+## Scope restrictions
+
+- Edit only `src/data/promo-N.ts` and `src/data/promos.ts`.
+- Never edit `src/types.ts`, `src/components/`, or `src/lib/promoFactory.ts`.
+- Never copy from existing `promo-*.ts` files.

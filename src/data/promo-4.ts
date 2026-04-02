@@ -9,7 +9,6 @@ import type { Promo } from "../types";
 export const promo4: Promo = {
   id: "promo-4",
   createdAt: "2026-03-23T20:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Greg's Getaway",
   client: "Greg",
   dates: "June 2 – 5, 2026 | 3 Nights | 3 Resort Options",
@@ -31,32 +30,15 @@ export const promo4: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Anguilla, BWI &nbsp;|&nbsp; Caribbean Luxury Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Malliouhana, Auberge Collection</strong> — including a room upgrade, daily full breakfast, $100 resort credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Full Breakfast for 2 Daily (max $35/person/day)",
-          "✔ $100 Resort Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         {
           badgeText: "🏨 Hotel Option 1",
           name: "Ocean View Premium King",
           subtitle:
             "72 sqm · King Bed · Private Terrace · Ocean View<br/><strong style='color: var(--burgundy)'>From $1,185.67/night</strong>",
-          priceLabel: "Per night (excl. taxes & fees)",
           priceRate: "$1,185.67",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $3,557.01",
-          stayTotalExclAmount: "$3,557.01",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$4,446.25",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           stayCheckInOut: "Jun 2 → Jun 5",
           nightsLabel: "3",
           bookingSummary: {
@@ -99,17 +81,9 @@ export const promo4: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,185.67/night &times; 3 = <strong>$3,557.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$4,446.25</strong>",
-            rightLabel: "(excl. taxes)",
-            rightValue: "$3,557.01",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=P1K2SH&rate=2SH&hotel=3706&checkin=2026-06-02&checkout=2026-06-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Ocean View Premium King",
         },
       ],
     },
@@ -126,32 +100,15 @@ export const promo4: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Naples, Florida &nbsp;|&nbsp; Beachfront Luxury Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>The Ritz-Carlton, Naples</strong> — including a room upgrade, daily breakfast for 2, $100 hotel credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Complimentary Breakfast for 2 Daily",
-          "✔ $100 Hotel Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         {
           badgeText: "🏨 Hotel Option 2",
           name: "Non Balcony Guest Room King",
           subtitle:
             "434 sq ft · King Bed · Standard Room<br/><strong style='color: var(--burgundy)'>From $899/night</strong>",
-          priceLabel: "Per night (excl. taxes & fees)",
           priceRate: "$899",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $2,697",
-          stayTotalExclAmount: "$2,697",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$3,193.47",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           stayCheckInOut: "Jun 2 → Jun 5",
           nightsLabel: "3",
           bookingSummary: {
@@ -194,17 +151,9 @@ export const promo4: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $899/night &times; 3 = <strong>$2,697</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$3,193.47</strong>",
-            rightLabel: "(excl. taxes)",
-            rightValue: "$2,697",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=Z43B00&rate=0S8&hotel=1434&checkin=2026-06-02&checkout=2026-06-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Non Balcony Guest Room King",
         },
       ],
     },
@@ -221,32 +170,15 @@ export const promo4: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Miami Beach, Florida &nbsp;|&nbsp; Oceanfront Luxury Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Acqualina Resort</strong> — including a room upgrade, daily breakfast for 2, $100 spa credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Complimentary Breakfast for 2 Daily (Il Mulino NY)",
-          "✔ $100 Spa Services Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         {
           badgeText: "🏨 Hotel Option 3",
           name: "Intracoastal Room<br/>City-View King",
           subtitle:
             "600 sq ft · King Bed · City View<br/><strong style='color: var(--burgundy)'>From $973.67/night</strong>",
-          priceLabel: "Per night (excl. taxes & fees)",
           priceRate: "$973.67",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $2,921.01",
-          stayTotalExclAmount: "$2,921.01",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$3,521.08",
-          grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
           stayCheckInOut: "Jun 2 → Jun 5",
           nightsLabel: "3",
           bookingSummary: {
@@ -289,23 +221,12 @@ export const promo4: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $973.67/night &times; 3 = <strong>$2,921.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$3,521.08</strong>",
-            rightLabel: "(excl. taxes)",
-            rightValue: "$2,921.01",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=C1K2SH&rate=2SH&hotel=1395&checkin=2026-06-02&checkout=2026-06-05&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Intracoastal Room City-View King",
         },
       ],
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability.",
 
 };

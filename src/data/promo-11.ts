@@ -9,7 +9,6 @@ import type { Promo } from "../types";
 export const promo11: Promo = {
   id: "promo-11",
   createdAt: "2026-03-25T18:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Tuffin Family | Maui Return 🌺",
   client: "Tuffin Family",
   dates: "February 11–19, 2027 | 8 Nights | 3 Hotels",
@@ -29,18 +28,7 @@ export const promo11: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Wailea, Maui, Hawaii &nbsp;|&nbsp; All-Suite Oceanfront Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Fairmont Kea Lani</strong> — including a guaranteed room upgrade, daily breakfast for 2, $100 hotel credit, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Complimentary Breakfast for Two Daily",
-          "✔ $100 Hotel Credit (F&B or Spa)",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ─── Room 1: Fairmont Suite 2 Dbls → Guaranteed Upgrade to Garden View Suite ───
         {
@@ -48,14 +36,8 @@ export const promo11: Promo = {
           name: "Fairmont Suite 2 Double Beds<br/>Guaranteed Upgrade to Garden View Suite",
           subtitle:
             "860 SF · 2 Double Beds · Sofa Bed · Large Private Lanai<br/><strong style='color: var(--burgundy)'>4th Night Free · From $893/night</strong>",
-          priceLabel: "Per night (ADR incl. free nights)",
           priceRate: "$893",
-          priceStrike: "",
-          priceTotal: "8-Night Total: $7,144",
-          stayTotalExclAmount: "$7,144",
-          stayTotalExclSub: "8 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$8,955.44",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Feb 11 → Feb 19",
           nightsLabel: "8",
           bookingSummary: {
@@ -94,17 +76,9 @@ export const promo11: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "8 Nights &nbsp;|&nbsp; <span>4th Night Free Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $893/night (ADR) &times; 8 = <strong>$7,144</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$8,955.44</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$8,955.44",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=C2D3LN&rate=3LN&hotel=1223&checkin=2027-02-11&checkout=2027-02-19&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Fairmont Suite (4th Night Free)",
         },
 
         // ─── Room 2: Garden View Suite 2 Dbls → Guaranteed Upgrade to Partial Ocean View Suite ───
@@ -113,14 +87,8 @@ export const promo11: Promo = {
           name: "Garden View Suite 2 Double Beds<br/>Guaranteed Upgrade to Partial Ocean View Suite",
           subtitle:
             "860 SF · 2 Double Beds · Sofa Bed · Lush Garden View<br/><strong style='color: var(--burgundy)'>4th Night Free · From $1,016.75/night</strong>",
-          priceLabel: "Per night (ADR incl. free nights)",
           priceRate: "$1,016.75",
-          priceStrike: "",
-          priceTotal: "8-Night Total: $8,134",
-          stayTotalExclAmount: "$8,134",
-          stayTotalExclSub: "8 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$10,130.67",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Feb 11 → Feb 19",
           nightsLabel: "8",
           bookingSummary: {
@@ -159,17 +127,9 @@ export const promo11: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "8 Nights &nbsp;|&nbsp; <span>4th Night Free Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,016.75/night (ADR) &times; 8 = <strong>$8,134</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$10,130.67</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$10,130.67",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=C2T3LN&rate=3LN&hotel=1223&checkin=2027-02-11&checkout=2027-02-19&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Garden View Suite (4th Night Free)",
         },
 
         // ─── Room 3: Partial Ocean View Suite 2 Dbls → Guaranteed Upgrade to Ocean View Suite ───
@@ -178,14 +138,8 @@ export const promo11: Promo = {
           name: "Partial Ocean View Suite 2 Double Beds<br/>Guaranteed Upgrade to Ocean View Suite",
           subtitle:
             "860 SF · 2 Double Beds · Sofa Bed · Angled Ocean View<br/><strong style='color: var(--burgundy)'>4th Night Free · From $1,084.25/night</strong>",
-          priceLabel: "Per night (ADR incl. free nights)",
           priceRate: "$1,084.25",
-          priceStrike: "",
-          priceTotal: "8-Night Total: $8,674",
-          stayTotalExclAmount: "$8,674",
-          stayTotalExclSub: "8 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$10,771.71",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Feb 11 → Feb 19",
           nightsLabel: "8",
           bookingSummary: {
@@ -224,17 +178,9 @@ export const promo11: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "8 Nights &nbsp;|&nbsp; <span>4th Night Free Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,084.25/night (ADR) &times; 8 = <strong>$8,674</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$10,771.71</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$10,771.71",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=U2T3LN&rate=3LN&hotel=1223&checkin=2027-02-11&checkout=2027-02-19&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Partial Ocean View Suite (4th Night Free)",
         },
       ],
     },
@@ -251,19 +197,7 @@ export const promo11: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Wailea, Maui, Hawaii &nbsp;|&nbsp; Ultra-Luxury Beachfront Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Four Seasons Maui at Wailea</strong> — including a room upgrade, daily breakfast for 2, $100 credit, <strong>plus an additional $125 nightly resort credit ($1,000 total for 8 nights)</strong>.",
-        pills: [
-          "✔ Room Upgrade (subject to availability)",
-          "✔ Full Breakfast for 2 Daily",
-          "✔ $100 Credit (F&B, Spa, or Activities)",
-          "✔ Additional $125 Nightly Resort Credit ($1,000 for 8 Nights)",
-          "✔ Complimentary Basic Internet",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ─── Room 1: Mountainside Room King Bed → Guaranteed Upgrade to Garden View 2 Queens ───
         {
@@ -271,14 +205,8 @@ export const promo11: Promo = {
           name: "Mountainside Room King Bed<br/>Guaranteed Upgrade to Garden View Room 2 Queen Beds",
           subtitle:
             "600 SF · King Bed · Marble Bathroom · Mountain & Lanai View<br/><strong style='color: var(--burgundy)'>Experience More · From $1,280.63/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$1,280.63",
-          priceStrike: "",
-          priceTotal: "8-Night Total: $10,245.04",
-          stayTotalExclAmount: "$10,245.04",
-          stayTotalExclSub: "8 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$12,684.37",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Feb 11 → Feb 19",
           nightsLabel: "8",
           bookingSummary: {
@@ -321,17 +249,9 @@ export const promo11: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "8 Nights &nbsp;|&nbsp; <span>Experience More Spend Credit Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,280.63/night &times; 8 = <strong>$10,245.04</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$12,684.37</strong> &mdash; Plus $1,000 resort credit",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$12,684.37",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=I1KPG2&rate=PG2&hotel=1421&checkin=2027-02-11&checkout=2027-02-19&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Mountainside Room (Experience More)",
         },
       ],
     },
@@ -348,19 +268,7 @@ export const promo11: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Wailea, Maui, Hawaii &nbsp;|&nbsp; Contemporary Luxury Beach Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Andaz Maui at Wailea</strong> — including a room upgrade, daily breakfast for 2, $100 resort credit, and <strong>20% off best available rates</strong>.",
-        pills: [
-          "✔ 20% Off Best Available Rate",
-          "✔ Room Upgrade Within 48 Hours of Booking",
-          "✔ Full Breakfast for 2 Daily",
-          "✔ $100 Resort Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ─── Room 1: 2 QN Resort View → Guaranteed Upgrade to Two Queen Partial Ocean View ───
         {
@@ -368,14 +276,8 @@ export const promo11: Promo = {
           name: "Two Queen Resort View Room<br/>Guaranteed Upgrade to Partial Ocean View",
           subtitle:
             "380–420 SF · 2 Queen Beds · Resort View<br/><strong style='color: var(--burgundy)'>20% Off · From $772.50/night</strong>",
-          priceLabel: "Per night (20% off)",
           priceRate: "$772.50",
-          priceStrike: "Standard: $965.63/night",
-          priceTotal: "8-Night Total: $6,180",
-          stayTotalExclAmount: "$6,180",
-          stayTotalExclSub: "8 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$7,811.31",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Feb 11 → Feb 19",
           nightsLabel: "8",
           bookingSummary: {
@@ -414,17 +316,9 @@ export const promo11: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "8 Nights &nbsp;|&nbsp; <span>WhataHotel! 20% Off Rate</span>",
-            leftSub:
-              "Standard rate: $965.63/night &times; 8 = $7,725.04 &mdash; WhataHotel! rate: $772.50/night &times; 8 = $6,180 &mdash; you save <strong>$1,834.09</strong> (incl. taxes)",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$7,811.31",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=E2QO94&rate=1HZ&hotel=2706&checkin=2027-02-11&checkout=2027-02-19&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Resort View (20% Off)",
         },
 
         // ─── Room 2: 2 QN Prt Ocn Vw → Guaranteed Upgrade to Two Queen Ocean View ───
@@ -433,14 +327,8 @@ export const promo11: Promo = {
           name: "Two Queen Partial Ocean View Room<br/>Guaranteed Upgrade to Ocean View",
           subtitle:
             "380–420 SF · 2 Queen Beds · Partial Ocean View<br/><strong style='color: var(--burgundy)'>20% Off · From $807.20/night</strong>",
-          priceLabel: "Per night (20% off)",
           priceRate: "$807.20",
-          priceStrike: "Standard: $1,009/night",
-          priceTotal: "8-Night Total: $6,457.60",
-          stayTotalExclAmount: "$6,457.60",
-          stayTotalExclSub: "8 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$8,140.88",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Feb 11 → Feb 19",
           nightsLabel: "8",
           bookingSummary: {
@@ -479,23 +367,12 @@ export const promo11: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "8 Nights &nbsp;|&nbsp; <span>WhataHotel! 20% Off Rate</span>",
-            leftSub:
-              "Standard rate: $1,009/night &times; 8 = $8,072 &mdash; WhataHotel! rate: $807.20/night &times; 8 = $6,457.60 &mdash; you save <strong>$1,916.40</strong> (incl. taxes)",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$8,140.88",
-          },
+
           bookUrl:
             "https://whatahotel.com/booking/booking_info.cfm?room=T2QO94&rate=1HZ&hotel=2706&checkin=2027-02-11&checkout=2027-02-19&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Partial Ocean View (20% Off)",
         },
       ],
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night. When the total rate exceeds the sum of nightly rates, hotel taxes are included. Grand totals include applicable taxes, resort fees, and service charges. Rates subject to availability. Free cancellation available — see individual booking pages for deadlines.",
 
 };

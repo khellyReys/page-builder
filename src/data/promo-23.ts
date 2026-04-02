@@ -9,7 +9,6 @@ export const promo23: Promo = {
   thumbnailUrl: "https://whatahotel.com/content/hotels/2551/baltimore.jpg",
   portalTotalLabel: "From",
   portalTotalValue: "$969.38",
-  pricingFootnote: "¹ Total includes estimated taxes &amp; fees. Deposit required for booking. FREE cancellation before August 24, 2026.",
   hero: {
     imageUrl: "https://whatahotel.com/content/hotels/2551/baltimore.jpg",
     alt: "Four Seasons Hotel Baltimore",
@@ -18,29 +17,13 @@ export const promo23: Promo = {
     cityImageUrl: "https://images.squarespace-cdn.com/content/v1/66b2599c295fbf25503d63d7/1773414186429-AULNR7EB87AQ0IKWHLNX/unsplash-image-3LW-MzohI2o.jpg",
     cityImageAlt: "Baltimore cityscape",
   },
-  offer: {
-    heading: "WhataHotel! Exclusive Rate",
-    description: "Book through WhataHotel! and enjoy exclusive complimentary perks at the Four Seasons Hotel Baltimore.",
-    pills: [
-      "Room Upgrade (subject to availability)",
-      "Full Breakfast for Two Daily",
-      "$100 Credit",
-      "Complimentary Basic Internet",
-      "Late Check-out (subject to availability)",
-    ],
-  },
+
   rooms: [
     {
       badgeText: "King Bed",
       name: "City-View Room King",
       subtitle: "502 SQFT · 1 King Bed · City Views · Floors 5–17",
-      priceLabel: "WhataHotel! Exclusive Rate",
       priceRate: "$412.50",
-      priceStrike: "$550.00",
-      priceTotal: "2-Night Total: $825.00 (excl. taxes)",
-      stayTotalExclAmount: "$825.00",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees¹",
-      investmentContextLine: "City-View Room King · Aug 25 – 27, 2026 · 2 Guests · WhataHotel! Exclusive Rate",
       stayCheckInOut: "Aug 25 → Aug 27",
       nightsLabel: "2",
       bookingSummary: {
@@ -50,7 +33,6 @@ export const promo23: Promo = {
         total: "$969.38",
       },
       grandTotalInclTaxes: "$969.38",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       images: [
         { src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/361964735.jpg?k=d661cd7e6f57665229dabeacd6d4a1f87277291894d879b9fd705db2cf69ebd8&o=&hp=1", alt: "City-View Room with a King Bed" },
       ],
@@ -83,26 +65,14 @@ export const promo23: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "WhataHotel! Rate",
-        leftSub: "$412.50 per night",
-        rightLabel: "Total",
-        rightValue: "$969.38",
-      },
+
       bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=C1KPR9&rate=PP6&hotel=2551&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
     {
       badgeText: "King Bed · Balcony",
       name: "Balcony Room King",
       subtitle: "502 SQFT · 1 King Bed · City Views · Furnished Balcony",
-      priceLabel: "WhataHotel! Exclusive Rate",
       priceRate: "$474.38",
-      priceStrike: "$632.50",
-      priceTotal: "2-Night Total: $948.76 (excl. taxes)",
-      stayTotalExclAmount: "$948.76",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees¹",
-      investmentContextLine: "Balcony Room King · Aug 25 – 27, 2026 · 2 Guests · WhataHotel! Exclusive Rate",
       stayCheckInOut: "Aug 25 → Aug 27",
       nightsLabel: "2",
       bookingSummary: {
@@ -112,7 +82,6 @@ export const promo23: Promo = {
         total: "$1,114.79",
       },
       grandTotalInclTaxes: "$1,114.79",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       images: [
         { src: "https://d2573qu6qrjt8c.cloudfront.net/4F2BD3DA020141D3A7AF3294DCD2FC99/4F2BD3DA020141D3A7AF3294DCD2FC99.jpg", alt: "Balcony Room" },
         { src: "https://d2573qu6qrjt8c.cloudfront.net/C46B39F25FFE41DEBF6FC6BAB41D4DA7/C46B39F25FFE41DEBF6FC6BAB41D4DA7.jpg", alt: "Harbour-View Balcony Room" },
@@ -145,13 +114,7 @@ export const promo23: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel: "WhataHotel! Rate",
-        leftSub: "$474.38 per night",
-        rightLabel: "Total",
-        rightValue: "$1,114.79",
-      },
+
       bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=E1KPR9&rate=PP6&hotel=2551&checkin=2026-08-25&checkout=2026-08-27&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
   ],};

@@ -7,7 +7,6 @@ import type { Promo } from "../types";
 export const promo18: Promo = {
   id: "promo-18",
   createdAt: "2026-03-27T18:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Jack & Diane | Camelback Birthday 🏜️",
   client: "Jack & Diane",
   dates: "May 30 – June 1, 2026 | 2 Nights | 5 Room Options",
@@ -23,19 +22,6 @@ export const promo18: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Scottsdale, Arizona &nbsp;|&nbsp; Desert Luxury Resort & Spa",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Sanctuary on Camelback Mountain</strong> — including a room upgrade, daily breakfast for two, a $100 spa credit, and more.",
-    pills: [
-      "✔ Room Upgrade (subject to availability)",
-      "✔ Complimentary Breakfast for Two Daily (up to $30/person)",
-      "✔ $100 Spa Service Credit (one-time per stay)",
-      "✔ Complimentary WiFi",
-      "✔ Late Check-Out (subject to availability)",
-    ],
-  },
-
   rooms: [
     // ─── Room 1: Camelback Casita King ───
     {
@@ -44,12 +30,7 @@ export const promo18: Promo = {
       subtitle:
         "500 SF · King Bed · Premium Views<br/><strong style='color: var(--burgundy)'>From $787.50/night</strong>",
       priceRate: "$787.50",
-      priceStrike: "",
-      priceTotal: "2-Night Total: $1,575",
-      stayTotalExclAmount: "$1,575",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$1,913.71",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "May 30 → Jun 1",
       nightsLabel: "2",
       bookingSummary: {
@@ -92,17 +73,9 @@ export const promo18: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $787.50/night &times; 2 = <strong>$1,575</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$1,913.71</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$1,913.71",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=A112SH&rate=2SH&hotel=1210&checkin=2026-05-30&checkout=2026-06-01&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Camelback Casita King",
     },
 
     // ─── Room 2: Spa Patio Casita King ───
@@ -112,12 +85,7 @@ export const promo18: Promo = {
       subtitle:
         "650 SF · King Bed · Private Patio<br/><strong style='color: var(--burgundy)'>From $812.50/night</strong>",
       priceRate: "$812.50",
-      priceStrike: "",
-      priceTotal: "2-Night Total: $1,625",
-      stayTotalExclAmount: "$1,625",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$1,970.29",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "May 30 → Jun 1",
       nightsLabel: "2",
       bookingSummary: {
@@ -168,17 +136,9 @@ export const promo18: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $812.50/night &times; 2 = <strong>$1,625</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$1,970.29</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$1,970.29",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=A*K2SH&rate=2SH&hotel=1210&checkin=2026-05-30&checkout=2026-06-01&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Spa Patio Casita King",
     },
 
     // ─── Room 3: Mountain Suite ───
@@ -188,12 +148,7 @@ export const promo18: Promo = {
       subtitle:
         "1,000 SF · King Bed · Living Room & Fireplace<br/><strong style='color: var(--burgundy)'>From $959.50/night</strong>",
       priceRate: "$959.50",
-      priceStrike: "",
-      priceTotal: "2-Night Total: $1,919",
-      stayTotalExclAmount: "$1,919",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$2,303.01",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "May 30 → Jun 1",
       nightsLabel: "2",
       bookingSummary: {
@@ -244,17 +199,9 @@ export const promo18: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $959.50/night &times; 2 = <strong>$1,919</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,303.01</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$2,303.01",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=T*K2SH&rate=2SH&hotel=1210&checkin=2026-05-30&checkout=2026-06-01&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Mountain Suite",
     },
 
     // ─── Room 4: Spa Suite ───
@@ -264,12 +211,7 @@ export const promo18: Promo = {
       subtitle:
         "1,200 SF · King Bed · Outdoor Soaking Tub<br/><strong style='color: var(--burgundy)'>From $1,109.50/night</strong>",
       priceRate: "$1,109.50",
-      priceStrike: "",
-      priceTotal: "2-Night Total: $2,219",
-      stayTotalExclAmount: "$2,219",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$2,642.52",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "May 30 → Jun 1",
       nightsLabel: "2",
       bookingSummary: {
@@ -316,17 +258,9 @@ export const promo18: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $1,109.50/night &times; 2 = <strong>$2,219</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,642.52</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$2,642.52",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=S1U2SH&rate=2SH&hotel=1210&checkin=2026-05-30&checkout=2026-06-01&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Spa Suite",
     },
 
     // ─── Room 5: Camelback Suite ───
@@ -336,12 +270,7 @@ export const promo18: Promo = {
       subtitle:
         "1,000 SF · King Bed · Premium Views & Fireplace<br/><strong style='color: var(--burgundy)'>From $1,159.50/night</strong>",
       priceRate: "$1,159.50",
-      priceStrike: "",
-      priceTotal: "2-Night Total: $2,319",
-      stayTotalExclAmount: "$2,319",
-      stayTotalExclSub: "2 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$2,755.69",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "May 30 → Jun 1",
       nightsLabel: "2",
       bookingSummary: {
@@ -384,17 +313,9 @@ export const promo18: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "2 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $1,159.50/night &times; 2 = <strong>$2,319</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$2,755.69</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "$2,755.69",
-      },
+
       bookUrl:
         "https://whatahotel.com/booking/booking_info.cfm?room=S1K2SH&rate=2SH&hotel=1210&checkin=2026-05-30&checkout=2026-06-01&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Camelback Suite",
     },
   ],
 

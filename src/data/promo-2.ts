@@ -9,7 +9,6 @@ import type { Promo } from "../types";
 export const promo2: Promo = {
   id: "promo-2",
   createdAt: "2026-03-23T12:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Miami Beach, Florida — Acqualina Resort",
   client: "",
   dates: "June 2 – 5, 2026 | 3 Nights | 3 Room Options",
@@ -27,19 +26,6 @@ export const promo2: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Miami Beach, Florida &nbsp;|&nbsp; Oceanfront Luxury Resort",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Acqualina Resort</strong> — including a room upgrade, daily breakfast for 2, $100 spa credit, and more.",
-    pills: [
-      "✔ Room Category Upgrade (subject to availability)",
-      "✔ Complimentary Breakfast for 2 Daily (Il Mulino NY)",
-      "✔ $100 Spa Services Credit",
-      "✔ Complimentary WiFi",
-      "✔ Late Check-Out (subject to availability)",
-    ],
-  },
-
   rooms: [
     // ─── Room Option 1: Intracoastal Room with City-View King ───
     {
@@ -47,14 +33,8 @@ export const promo2: Promo = {
       name: "Intracoastal Room<br/>City-View King",
       subtitle:
         "600 sq ft · King Bed · City View<br/><strong style='color: var(--burgundy)'>From $973.67/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "$973.67",
-      priceStrike: "",
-      priceTotal: "3-Night Total: $2,921.01",
-      stayTotalExclAmount: "$2,921.01",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$3,521.08",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 5",
       nightsLabel: "3",
       bookingSummary: {
@@ -97,17 +77,9 @@ export const promo2: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $973.67/night &times; 3 = <strong>$2,921.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$3,521.08</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$2,921.01",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=C1K2SH&rate=2SH&hotel=1395&checkin=2026-06-02&checkout=2026-06-05&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Intracoastal Room City-View King",
     },
 
     // ─── Room Option 2: Deluxe Intracoastal Room King ───
@@ -116,14 +88,8 @@ export const promo2: Promo = {
       name: "Deluxe Intracoastal Room King",
       subtitle:
         "600 sq ft · King Bed · High Floor · Intracoastal View<br/><strong style='color: var(--burgundy)'>From $1,093.67/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "$1,093.67",
-      priceStrike: "",
-      priceTotal: "3-Night Total: $3,281.01",
-      stayTotalExclAmount: "$3,281.01",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$3,927.88",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 5",
       nightsLabel: "3",
       bookingSummary: {
@@ -166,17 +132,9 @@ export const promo2: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $1,093.67/night &times; 3 = <strong>$3,281.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$3,927.88</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$3,281.01",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=B1K2SH&rate=2SH&hotel=1395&checkin=2026-06-02&checkout=2026-06-05&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Deluxe Intracoastal Room King",
     },
 
     // ─── Room Option 3: Intracoastal Room with City-View 2 Double ───
@@ -185,14 +143,8 @@ export const promo2: Promo = {
       name: "Intracoastal Room<br/>City-View 2 Double",
       subtitle:
         "600 sq ft · Two Full XL Beds · City View<br/><strong style='color: var(--burgundy)'>From $1,123.67/night</strong>",
-      priceLabel: "Per night (excl. taxes & fees)",
       priceRate: "$1,123.67",
-      priceStrike: "",
-      priceTotal: "3-Night Total: $3,371.01",
-      stayTotalExclAmount: "$3,371.01",
-      stayTotalExclSub: "3 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "$4,029.58",
-      grandTotalInclTaxesLabel: "Grand total (incl. taxes & fees)",
       stayCheckInOut: "Jun 2 → Jun 5",
       nightsLabel: "3",
       bookingSummary: {
@@ -235,21 +187,10 @@ export const promo2: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: $1,123.67/night &times; 3 = <strong>$3,371.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$4,029.58</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$3,371.01",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=A2D2SH&rate=2SH&hotel=1395&checkin=2026-06-02&checkout=2026-06-05&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Intracoastal Room 2 Double",
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation before May 26, 2026.",
 
 };

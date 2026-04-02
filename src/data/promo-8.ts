@@ -12,7 +12,6 @@ import type { Promo } from "../types";
 export const promo8: Promo = {
   id: "promo-8",
   createdAt: "2026-03-24T12:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Maui, Hawaii — Two Hotel Options",
   client: "",
   dates: "September 27–30, 2026 | 3 Nights | 2 Hotels",
@@ -34,17 +33,7 @@ export const promo8: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Wailea, Maui, Hawaii &nbsp;|&nbsp; Luxury Beachfront Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Andaz Maui at Wailea Resort</strong> — including daily breakfast for 2, $100 resort credit, and more.",
-        pills: [
-          "✔ Complimentary Full Breakfast for Two Daily",
-          "✔ $100 Resort Credit",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ── Villa 1: 2 Bedroom Makai Ocean Front Villa ──
         {
@@ -52,14 +41,8 @@ export const promo8: Promo = {
           name: "2 Bedroom Makai Ocean Front Villa",
           subtitle:
             "King Bed + Doubles · Kitchen · Jacuzzi · BBQ · 3 Bathrooms<br/><strong style='color: var(--burgundy)'>From $4,561.33/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$4,561.33",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $13,683.99",
-          stayTotalExclAmount: "$13,683.99",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$16,422.62",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 27 → Sep 30",
           nightsLabel: "3",
           bookingSummary: {
@@ -101,17 +84,9 @@ export const promo8: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $4,561.33/night &times; 3 = <strong>$13,683.99</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$16,422.62</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$16,422.62",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=G1KCFV&rate=1HZ&hotel=2706&checkin=2026-09-27&checkout=2026-09-30&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — 2 Bedroom Ocean Front Villa",
         },
 
         // ── Villa 2: 3 Bedroom Makai Ocean Front Villa ──
@@ -120,14 +95,8 @@ export const promo8: Promo = {
           name: "3 Bedroom Makai Ocean Front Villa",
           subtitle:
             "King Beds + Doubles · Ocean View · Kitchen · Plunge Pool<br/><strong style='color: var(--burgundy)'>From $4,665/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$4,665",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $13,995",
-          stayTotalExclAmount: "$13,995",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$16,791.82",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 27 → Sep 30",
           nightsLabel: "3",
           bookingSummary: {
@@ -169,17 +138,9 @@ export const promo8: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $4,665/night &times; 3 = <strong>$13,995</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$16,791.82</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$16,791.82",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=I2KCFV&rate=1HZ&hotel=2706&checkin=2026-09-27&checkout=2026-09-30&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — 3 Bedroom Ocean Front Villa",
         },
 
         // ── Villa 3: 4 Bedroom Makai Ocean Front Villa ──
@@ -188,14 +149,8 @@ export const promo8: Promo = {
           name: "4 Bedroom Makai Ocean Front Villa",
           subtitle:
             "3 Kings + Doubles · Kitchen · Jacuzzi · BBQ Grill<br/><strong style='color: var(--burgundy)'>From $6,048.33/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$6,048.33",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $18,144.99",
-          stayTotalExclAmount: "$18,144.99",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$21,718.37",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 27 → Sep 30",
           nightsLabel: "3",
           bookingSummary: {
@@ -237,17 +192,9 @@ export const promo8: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $6,048.33/night &times; 3 = <strong>$18,144.99</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$21,718.37</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$21,718.37",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=N4KCFV&rate=1HZ&hotel=2706&checkin=2026-09-27&checkout=2026-09-30&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — 4 Bedroom Ocean Front Villa",
         },
       ],
     },
@@ -264,18 +211,7 @@ export const promo8: Promo = {
         location:
           "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Wailea, Maui, Hawaii &nbsp;|&nbsp; Luxury Oceanfront Resort",
       },
-      offer: {
-        heading: "WhataHotel! Exclusive",
-        description:
-          "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Four Seasons Resort Maui at Wailea</strong> — including a room upgrade, daily breakfast for 2, $200 hotel credit for suites, and more.",
-        pills: [
-          "✔ Room Category Upgrade (subject to availability)",
-          "✔ Full Breakfast for 2 Daily",
-          "✔ $200 Hotel Credit (suites)",
-          "✔ Complimentary WiFi",
-          "✔ Late Check-Out (subject to availability)",
-        ],
-      },
+
       rooms: [
         // ── Suite 1: Garden View Executive Suite, King ──
         {
@@ -283,14 +219,8 @@ export const promo8: Promo = {
           name: "Garden View Executive Suite, King",
           subtitle:
             "840 sq ft · Separate Living Room · King Bed · Deep Soaking Tub<br/><strong style='color: var(--burgundy)'>From $1,776.67/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$1,776.67",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $5,330.01",
-          stayTotalExclAmount: "$5,330.01",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$6,523.22",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 27 → Sep 30",
           nightsLabel: "3",
           bookingSummary: {
@@ -329,17 +259,9 @@ export const promo8: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,776.67/night &times; 3 = <strong>$5,330.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$6,523.22</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$6,523.22",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=S1KPP6&rate=PP6&hotel=1421&checkin=2026-09-27&checkout=2026-09-30&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Garden View Executive Suite",
         },
 
         // ── Suite 2: Deluxe Garden View Executive Suite, King ──
@@ -348,14 +270,8 @@ export const promo8: Promo = {
           name: "Deluxe Garden View Executive Suite, King",
           subtitle:
             "840 sq ft · Separate Living Room · Lanai · Outdoor Dining<br/><strong style='color: var(--burgundy)'>From $1,926.67/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$1,926.67",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $5,780.01",
-          stayTotalExclAmount: "$5,780.01",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$7,057.42",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 27 → Sep 30",
           nightsLabel: "3",
           bookingSummary: {
@@ -398,17 +314,9 @@ export const promo8: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $1,926.67/night &times; 3 = <strong>$5,780.01</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$7,057.42</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$7,057.42",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=U1KPP6&rate=PP6&hotel=1421&checkin=2026-09-27&checkout=2026-09-30&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — Deluxe Garden View Executive Suite",
         },
 
         // ── Suite 3: One Bedroom Garden View Suite, King ──
@@ -417,14 +325,8 @@ export const promo8: Promo = {
           name: "One Bedroom Garden View Suite, King",
           subtitle:
             "1,100 sq ft · King Bed · Separate Living Area · Outdoor Teak Dining<br/><strong style='color: var(--burgundy)'>From $4,945/night</strong>",
-          priceLabel: "Per night",
           priceRate: "$4,945",
-          priceStrike: "",
-          priceTotal: "3-Night Total: $14,835",
-          stayTotalExclAmount: "$14,835",
-          stayTotalExclSub: "3 Nights · excl. taxes & fees",
           grandTotalInclTaxes: "$17,806.80",
-          grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
           stayCheckInOut: "Sep 27 → Sep 30",
           nightsLabel: "3",
           bookingSummary: {
@@ -463,23 +365,12 @@ export const promo8: Promo = {
               ],
             },
           ],
-          savings: {
-            leftLabel:
-              "3 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-            leftSub:
-              "WhataHotel! rate: $4,945/night &times; 3 = <strong>$14,835</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>$17,806.80</strong>",
-            rightLabel: "(incl. taxes)",
-            rightValue: "$17,806.80",
-          },
+
           bookUrl:
             "https://www.whatahotel.com/booking/booking_info.cfm?room=F1KPP6&rate=PP6&hotel=1421&checkin=2026-09-27&checkout=2026-09-30&guests=2&children=0&rooms=1",
-          bookLabel: "Book Now — One Bedroom Garden View Suite",
         },
       ],
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Andaz Maui villa rates are estimates based on nearest available dates; final rates may vary. Free cancellation for Four Seasons Maui available until September 13, 2026.",
 
 };

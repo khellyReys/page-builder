@@ -1,7 +1,5 @@
 import type { Room } from "../types";
-import { RoomMetaStrip } from "./RoomMetaStrip";
 import { ProposalInvestment } from "./ProposalInvestment";
-import { ExperienceMore } from "./ExperienceMore";
 
 export type { Room as RoomData } from "../types";
 
@@ -11,20 +9,12 @@ type Props = {
 
 export function RoomCard({ room }: Props) {
   const validRoomImages = room.images.filter((img) => isValidRoomImage(img.src));
-  const showGalleryHead =
-    Boolean(
-      room.galleryTitle ||
-        room.gallerySubtitle ||
-        validRoomImages.some((img) => img.caption),
-    );
+  const showGalleryBlock = validRoomImages.length > 0;
 
-  const galleryHeading =
-    room.galleryTitle ?? (showGalleryHead ? "Suite gallery" : undefined);
+  const highlightItems = room.features
+    .filter((f) => f.icon === "door-open")
+    .flatMap((f) => f.items);
 
-  const galleryImages = validRoomImages;
-  const showGalleryBlock = galleryImages.length > 0;
-
-  const roomFeatures = room.features.filter((f) => f.icon !== "gift");
   return (
     <>
       <div className="room-label">
@@ -46,61 +36,42 @@ export function RoomCard({ room }: Props) {
         />
       </div>
 
-      <RoomMetaStrip facts={room.quickFacts ?? []} />
-
       {!room.hideGallery && showGalleryBlock ? (
         <div className="room-gallery-block">
-          {showGalleryHead ? (
-            <div className="gallery-head">
-              {galleryHeading ? (
-                <h3 className="section-sec-title gallery-title">
-                  {galleryHeading}
-                </h3>
-              ) : null}
-              {room.gallerySubtitle ? (
-                <p className="section-sec-sub gallery-sub">{room.gallerySubtitle}</p>
-              ) : null}
-            </div>
-          ) : null}
           <div className="room-imgs">
-            {galleryImages.map((img) => (
+            {validRoomImages.map((img) => (
               <figure key={img.src} className="room-img">
                 <img src={img.src} alt={img.alt} />
-                {img.caption ? (
-                  <figcaption className="room-img-caption">{img.caption}</figcaption>
-                ) : null}
               </figure>
             ))}
           </div>
         </div>
       ) : null}
 
-      {roomFeatures.length > 0 && (
+      {highlightItems.length > 0 && (
         <div className="room-features-section">
           <div className="feat-grid">
-            {roomFeatures.map((feature) => (
-              <div key={feature.title} className="feat-box">
-                <div className="perks-section room-feature-perks">
-                  <h3 className="section-sec-title perks-section-title room-feature-perks-title">
-                    <i
-                      className={`fas fa-${feature.icon} room-feature-perks-icon`}
-                      aria-hidden="true"
-                    />
-                    <span>{feature.title}</span>
-                  </h3>
-                  <div className="perks-items-wrap">
-                    <ul className="perks-ul">
-                      {feature.items.map((item) => (
-                        <li key={item} className="perk-li">
-                          <i className="fas fa-circle" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            <div className="feat-box">
+              <div className="perks-section room-feature-perks">
+                <h3 className="section-sec-title perks-section-title room-feature-perks-title">
+                  <i
+                    className="fas fa-door-open room-feature-perks-icon"
+                    aria-hidden="true"
+                  />
+                  <span>Room Highlights</span>
+                </h3>
+                <div className="perks-items-wrap">
+                  <ul className="perks-ul">
+                    {highlightItems.map((item) => (
+                      <li key={item} className="perk-li">
+                        <i className="fas fa-circle" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       )}
@@ -114,16 +85,12 @@ export function RoomCard({ room }: Props) {
           rel="noreferrer"
           className="btn-book room-book-link"
         >
-          {room.bookLabel}
+          Book Now
         </a>
         <p className="btn-sub room-book-hint">
           Secure booking opens on WhataHotel.com in a new tab.
         </p>
       </div>
-
-      {room.experienceMore ? (
-        <ExperienceMore block={room.experienceMore} />
-      ) : null}
     </>
   );
 }

@@ -23,19 +23,6 @@ export const promo22: Promo = {
     cityImageAlt: "Coral Gables, Florida",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive Offer",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at The Biltmore Hotel, Coral Gables — a National Historic Landmark resort.",
-    pills: [
-      "✓ Upgrade subject to availability at Check-In",
-      "✓ Complimentary Breakfast for Two Daily",
-      "✓ $100 Spa Treatment Credit",
-      "✓ Free WiFi",
-      "✓ Late Check-out subject to availability",
-    ],
-  },
-
   rooms: [
     // ── Room 1: Superior Room ──
     {
@@ -44,22 +31,16 @@ export const promo22: Promo = {
       subtitle:
         "300 sqft · Golf or City Views · Mini Fridge<br/><strong style='color: var(--burgundy)'>Best Value – From $577.10/night</strong>",
       priceRate: "$577.10",
-      priceStrike: "Standard: $675.13/night",
-      priceTotal: "1-Night Total: $577.10 (incl. taxes)",
       bookingSummary: {
         checkInOut: "May 5 → May 6",
         nights: "1",
         adr: "$577.10",
         total: "$675.13",
       },
-      savings: {
-        leftLabel:
-          "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "Standard rate: $675.13/night &times; 1 = $675.13 &mdash; WhataHotel! rate: $577.10/night &times; 1 = $577.10 &mdash; you save <strong>$98.03</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$675.13 USD",
-      },
+      grandTotalInclTaxes: "$675.13",
+      nightsLabel: "1",
+      stayCheckInOut: "May 5 → May 6",
+
       images: [
         {
           src: "https://d2573qu6qrjt8c.cloudfront.net/846D866974144FC6B96EED2B53F643E3/846D866974144FC6B96EED2B53F643E3.JPEG",
@@ -92,7 +73,6 @@ export const promo22: Promo = {
       ],
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=C2Q2SH&rate=2SH&hotel=2554&checkin=2026-05-05&checkout=2026-05-06&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── Room 2: Superior Two Queen Room ──
@@ -102,22 +82,16 @@ export const promo22: Promo = {
       subtitle:
         "300 sqft · Two Queen Beds · Mini Fridge<br/><strong style='color: var(--burgundy)'>From $604.10/night</strong>",
       priceRate: "$604.10",
-      priceStrike: "Standard: $705.64/night",
-      priceTotal: "1-Night Total: $705.64 (incl. taxes)",
       bookingSummary: {
         checkInOut: "May 5 → May 6",
         nights: "1",
         adr: "$604.10",
         total: "$604.10",
       },
-      savings: {
-        leftLabel:
-          "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "Standard rate: $705.64/night &times; 1 = $705.64 &mdash; WhataHotel! rate: $604.10/night &times; 1 = $604.10 &mdash; you save <strong>$101.54</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$604.10",
-      },
+      grandTotalInclTaxes: "$604.10",
+      nightsLabel: "1",
+      stayCheckInOut: "May 5 → May 6",
+
       images: [
         {
           src: "https://d2573qu6qrjt8c.cloudfront.net/8B9DB031AB2945A69DE6E93E93553B00/8B9DB031AB2945A69DE6E93E93553B00.JPEG",
@@ -150,7 +124,6 @@ export const promo22: Promo = {
       ],
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=CSK2SH&rate=2SH&hotel=2554&checkin=2026-05-05&checkout=2026-05-06&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
 
     // ── Room 3: Junior Suite ──
@@ -160,22 +133,16 @@ export const promo22: Promo = {
       subtitle:
         "355 sqft · Various Views<br/><strong style='color: var(--burgundy)'>From $613.10/night</strong>",
       priceRate: "$613.10",
-      priceStrike: "Standard: $715.81/night",
-      priceTotal: "1-Night Total: $715.81 (incl. taxes)",
       bookingSummary: {
         checkInOut: "May 5 → May 6",
         nights: "1",
         adr: "$613.10",
         total: "$613.10",
       },
-      savings: {
-        leftLabel:
-          "1 Night &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "Standard rate: $715.81/night &times; 1 = $715.81 &mdash; WhataHotel! rate: $613.10/night &times; 1 = $613.10 &mdash; you save <strong>$102.71</strong>",
-        rightLabel: "(excl. taxes)",
-        rightValue: "$613.10",
-      },
+      grandTotalInclTaxes: "$613.10",
+      nightsLabel: "1",
+      stayCheckInOut: "May 5 → May 6",
+
       images: [
         {
           src: "https://be.synxis.com/shs-ngbe-image-resizer/images/hotel/31115/images/room/junior_suite.jpg",
@@ -207,10 +174,7 @@ export const promo22: Promo = {
       ],
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=U1K2SH&rate=2SH&hotel=2554&checkin=2026-05-05&checkout=2026-05-06&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now",
     },
   ],
 
-  pricingFootnote:
-    "Rates shown exclude applicable taxes and fees. Final pricing will be confirmed at time of booking.",
 };

@@ -10,7 +10,6 @@ import type { Promo } from "../types";
 export const promo10: Promo = {
   id: "promo-10",
   createdAt: "2026-03-25T12:00:00Z",
-  mastheadEyebrow: "Travel Proposal",
   title: "Derman Family | Barcelona 🇪🇸",
   client: "Derman Family",
   dates: "June 10–14, 2026 | 4 Nights | 1 Room Option",
@@ -28,19 +27,6 @@ export const promo10: Promo = {
       "<i class='fas fa-map-marker-alt' style='margin-right:5px'></i>Barcelona, Spain &nbsp;|&nbsp; Boutique Luxury in the Gothic Quarter",
   },
 
-  offer: {
-    heading: "WhataHotel! Exclusive",
-    description:
-      "Book through WhataHotel! and enjoy exclusive complimentary perks at <strong>Kimpton Vividora Barcelona</strong> — including a room upgrade, daily breakfast for 2, $100 dining credit, and more.",
-    pills: [
-      "✔ Room Category Upgrade (subject to availability)",
-      "✔ Complimentary Breakfast for 2 Daily",
-      "✔ $100 Dining Credit",
-      "✔ Complimentary WiFi",
-      "✔ Late Check-Out (subject to availability)",
-    ],
-  },
-
   rooms: [
     // ─── Room Option 1: Family Room ───
     {
@@ -48,14 +34,8 @@ export const promo10: Promo = {
       name: "Family Room",
       subtitle:
         "2 Interconnected Rooms · Walk-In Shower<br/><strong style='color: var(--burgundy)'>From €1,446.75/night</strong>",
-      priceLabel: "Per night",
       priceRate: "€1,446.75",
-      priceStrike: "",
-      priceTotal: "4-Night Total: €5,787",
-      stayTotalExclAmount: "€5,787",
-      stayTotalExclSub: "4 Nights · excl. taxes & fees",
       grandTotalInclTaxes: "€5,853",
-      grandTotalInclTaxesLabel: "Grand Total (incl. taxes & fees)",
       stayCheckInOut: "Jun 10 → Jun 14",
       nightsLabel: "4",
       bookingSummary: {
@@ -93,21 +73,10 @@ export const promo10: Promo = {
           ],
         },
       ],
-      savings: {
-        leftLabel:
-          "4 Nights &nbsp;|&nbsp; <span>WhataHotel! Exclusive Rate</span>",
-        leftSub:
-          "WhataHotel! rate: €1,446.75/night &times; 4 = <strong>€5,787</strong> (excl. taxes) &mdash; Grand total incl. taxes &amp; fees: <strong>€5,853</strong>",
-        rightLabel: "(incl. taxes)",
-        rightValue: "€5,853",
-      },
+
       bookUrl:
         "https://www.whatahotel.com/booking/booking_info.cfm?room=QOZ2SH&rate=2SH&hotel=6258&checkin=2026-06-10&checkout=2026-06-14&guests=2&children=0&rooms=1",
-      bookLabel: "Book Now — Family Room",
     },
   ],
-
-  pricingFootnote:
-    "All nightly rates shown are per room, per night and exclude applicable taxes, resort fees, and service charges. Grand totals include taxes &amp; fees. Rates subject to availability. Free cancellation available until June 9, 2026.",
 
 };

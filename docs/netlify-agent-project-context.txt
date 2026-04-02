@@ -1,17 +1,53 @@
 WhataHotel Netlify Agent Rules
 
-Scope: ONLY `src/data/promo-N.ts` + `src/data/promos.ts`. Never `src/types.ts` or `src/components/`. Read `docs/whatahotel-agent-new-promo.md` first. Do not use old `promo-*.ts` as template.
+REQUIRED: Use `createPromo()` from `src/lib/promoFactory.ts` for ALL promos. Read `docs/whatahotel-agent-new-promo.md` first.
 
-Fetch: Each booking URL ONCE; full HTML (not summaries). If tool refuses: `curl -sL` once; parse `subSlides`, `booking-img-list`, `booking_info.cfm`.
+Scope: ONLY edit `src/data/promo-N.ts` + `src/data/promos.ts`. Never edit types, components, or factory. Never copy from existing promo files.
 
-Images: Hero = `ul#subSlides` first `li` bg-url → prepend `https://whatahotel.com` → `hero.imageUrl` AND `thumbnailUrl`. Rooms = `.bookingItem` `ul.booking-img-list` `<a href>` only (not `<img src>`), 2/room. CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`. Skip paceholder/logo → `images: []`. City URL → ONLY `cityImageUrl` + `cityImageAlt` (single-hotel: flat `hero`; multi-hotel: `hotels[0].hero` only — one shared strip, not repeated per hotel).
+```ts
+import { createPromo } from "../lib/promoFactory";
+export const promoN = createPromo({
+  id: "promo-N",
+  title: "...",
+  dates: "...",
+  client: "",
+  cityImageUrl: "...",    // optional
+  cityImageAlt: "...",    // optional
+  hotels: [{
+    name: "Hotel Name",
+    location: "City, State, Country",
+    heroImageUrl: "https://whatahotel.com/content/hotels/ID/file.jpg",
+    heroAlt: "Hotel description",
+    rooms: [{
+      name: "Room Name",
+      subtitle: "View · Bed Type",
+      badgeText: "Exclusive Rate",
+      adr: "$458.63",
+      grandTotal: "$2,253.79",
+      nights: 4,
+      checkIn: "2026-04-05",
+      checkOut: "2026-04-09",
+      bookUrl: "https://www.whatahotel.com/booking/booking_info.cfm?room=CODE&rate=RATE&hotel=ID&checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&guests=2&children=0&rooms=1",
+      images: [{ src: "https://d2573qu6qrjt8c.cloudfront.net/HASH/HASH.JPEG", alt: "Room" }],
+      roomHighlights: ["Ocean view with king bed", "Accommodates 2 guests"],
+      perks: ["Room Upgrade...", "Breakfast x 2 Daily", "$100 Credit", "Free WiFi", "Late Check-Out"]
+    }]
+  }]
+});
+```
 
-Rates: ADR =/night no tax note. Grand total INCL taxes/fees when page shows it. `grandTotalInclTaxes=bookingSummary.total=savings.rightValue`. `portalTotalValue` = lowest featured room grand total. Lowest offer → `bookUrl`; prepend `https://www.whatahotel.com`. `priceStrike: ""`. No excl.-tax-as-total copy.
+Fetch: Each booking URL ONCE, full HTML.
 
-COPY (SSOT “Client-approved copy & labels”): `gift` → always `title: "Exclusive Perks"`. NEVER `WhataHotel! Exclusive Perks`, `& Inclusions`, partner text in title. Perks only in `gift.items[]` — no Lorraine “included when you book…” in data. UI headings are fixed in code (Exclusive Perks, Rate Comparisons, Rate & pricing breakdown).
+Images: Hero = `ul#subSlides` bg-url, prepend `https://whatahotel.com`. Rooms = `.bookingItem` `ul.booking-img-list` `<a href>` only (NOT `<img src>`), max 2/room. CDNs: `d2573qu6qrjt8c` or `d321ocj5nbe62c`. Skip paceholder -> empty array.
 
-Layout: 1 hotelID → `hero/offer/rooms`. 2+ → `hotels[]`, isolate per URL. Per room: bookingSummary, `door-open`+`gift`, ISO `createdAt`. badgeText: line with `WhataHotel! … More Info` → phrase between WhataHotel! and More Info (title case); else `"Exclusive Rate"`. Never `Hotel Option X — Room X`. Single-hotel: Exclusive Perks after all rooms → Rate Comparisons table. Multi: optional city strip once (`hotels[0].hero` only); divider band before each hotel (UI); perks deduped per hotel under that hotel’s cards → one combined Rate Comparisons table. Concise copy; perks not duplicated in subtitle/offer/footnote.
+Rates: `adr` = price with currency, no "/night". `grandTotal` = tax-inclusive total from booking page. Use lowest offer rate for `bookUrl`.
 
-Defaults: 3 lowest rooms; next id from `promos.ts`; `client: ""` if missing. No `contact` on Promo. Footer hardcoded in `ContactFooter`.
+badgeText: Extract from marketing line between "WhataHotel!" and "More Info". Fallback: `"Exclusive Rate"`. Never `"Hotel Option X"`.
 
-Gate: `npm run build` + Validation Report PASS for: rooms, nights, ADR, grand total, equality, logic, portalTotal, images, build. `PROMO COMPLETE` only if all PASS.
+Multi-hotel: 2+ URLs with different hotelIDs -> separate HotelInput entries. Data isolation per URL.
+
+Defaults: 3 lowest rooms; next id from `promos.ts`; `client: ""` if missing.
+
+The factory handles ALL formatting, labels, pricing alignment, and layout. Agent provides only raw data.
+
+Gate: `npm run build` must pass.
