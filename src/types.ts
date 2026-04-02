@@ -28,7 +28,7 @@ export type Room = {
     icon: string;
     items: string[];
   }>;
-  bookUrl: string;
+  bookUrl?: string;
 };
 
 export type HotelBlock = {

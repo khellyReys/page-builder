@@ -78,19 +78,21 @@ export function RoomCard({ room }: Props) {
 
       <ProposalInvestment room={room} />
 
-      <div className="room-book-cta">
-        <a
-          href={room.bookUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-book room-book-link"
-        >
-          Book Now
-        </a>
-        <p className="btn-sub room-book-hint">
-          Secure booking opens on WhataHotel.com in a new tab.
-        </p>
-      </div>
+      {room.bookUrl ? (
+        <div className="room-book-cta">
+          <a
+            href={room.bookUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-book room-book-link"
+          >
+            Book Now
+          </a>
+          <p className="btn-sub room-book-hint">
+            Secure booking opens on WhataHotel.com in a new tab.
+          </p>
+        </div>
+      ) : null}
     </>
   );
 }
