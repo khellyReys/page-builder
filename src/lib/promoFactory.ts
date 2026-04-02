@@ -15,7 +15,7 @@ export interface RoomInput {
   checkIn: string;
   /** ISO date, e.g. "2026-04-09" */
   checkOut: string;
-  bookUrl: string;
+  bookUrl?: string;
   images?: Array<{ src: string; alt: string }>;
   /** 2-3 bullets describing the room (view, bed type, size, etc.) */
   roomHighlights: string[];
@@ -94,7 +94,7 @@ function buildRoom(input: RoomInput): Room {
       { title: "Room Highlights", icon: "door-open", items: input.roomHighlights },
       { title: "Exclusive Perks", icon: "gift", items: input.perks },
     ],
-    bookUrl: input.bookUrl,
+    bookUrl: input.bookUrl ?? "",
   };
 }
 
