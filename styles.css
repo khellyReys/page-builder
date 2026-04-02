@@ -1831,6 +1831,41 @@ body {
   color: var(--slate);
 }
 
+/* Book Now button */
+.room-book-now {
+  text-align: center;
+  margin: 20px 0 32px;
+}
+.room-book-now-btn {
+  display: inline-block;
+  padding: 14px 48px;
+  background: var(--burgundy);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.room-book-now-btn:hover {
+  background: var(--dkburg);
+}
+
+/* Cancellation policy per hotel */
+.hotel-cancellation {
+  text-align: center;
+  margin: 16px 0 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--gray);
+}
+.hotel-cancellation i {
+  margin-right: 6px;
+  color: var(--burgundy);
+}
+
 .proposal-co-header {
   display: flex;
   flex-wrap: wrap;

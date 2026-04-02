@@ -221,6 +221,14 @@ export default function PromoPage() {
                   </p>
                 )}
               </div>
+              {hotel.cancellationPolicy ? (
+                <div className="body">
+                  <div className="hotel-cancellation">
+                    <i className="fas fa-calendar-check" aria-hidden="true" />
+                    {hotel.cancellationPolicy}
+                  </div>
+                </div>
+              ) : null}
               {!perksAreShared &&
                 renderPerksBlock(
                   collectGiftPerkItems(hotel.rooms),
