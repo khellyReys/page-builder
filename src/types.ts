@@ -34,6 +34,7 @@ export type Room = {
 export type HotelBlock = {
   hero: HeroBlock;
   rooms: Room[];
+  cancellationPolicy?: string;
 };
 
 export type Promo = {

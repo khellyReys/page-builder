@@ -78,6 +78,19 @@ export function RoomCard({ room }: Props) {
 
       <ProposalInvestment room={room} />
 
+      {room.bookUrl ? (
+        <div className="room-book-now">
+          <a
+            href={room.bookUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="room-book-now-btn"
+          >
+            Book Now
+          </a>
+        </div>
+      ) : null}
+
     </>
   );
 }

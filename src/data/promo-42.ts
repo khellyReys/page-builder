@@ -1,0 +1,413 @@
+import { createPromo } from "../lib/promoFactory";
+
+export const promo42 = createPromo({
+  id: "promo-42",
+  title: "Sheikh | 25th Birthday Celebration",
+  dates: "May 18–23, 2026",
+  client: "",
+  cityImageUrl: "https://whatahotel.com/content/cities/paris.jpg",
+  cityImageAlt: "Paris",
+  hotels: [
+    {
+      name: "Grand Hôtel du Palais Royal",
+      location: "Paris, France",
+      heroImageUrl: "https://whatahotel.com/content/hotels/2719/327265.jpg",
+      heroAlt: "Grand Hôtel du Palais Royal exterior",
+      cancellationPolicy: "FREE cancellation before May 16, 2026",
+      rooms: [
+        {
+          name: "Superior Room",
+          subtitle: "19 sqm · Queen or King Bed",
+          badgeText: "Exclusive Rate",
+          adr: "€910.00",
+          grandTotal: "€4,550.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=A1Q2SH&rate=2SH&hotel=2719&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [
+            {
+              src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/167/931/993/Superior_Room_S.jpg",
+              alt: "Superior Room",
+            },
+          ],
+          roomHighlights: [
+            "19 sqm with queen or king bed",
+            "Street views of Palais Royal or Place Valois",
+            "Accommodates 2 guests",
+          ],
+          perks: [
+            "An Upgrade subject to availability at Check-In",
+            "Complimentary Continental Breakfast x 2 Daily",
+            "A $100 F&B Credit",
+            "Free WiFi",
+            "Late Check-out, subject to availability upon Request",
+          ],
+        },
+        {
+          name: "Junior Suite Prestige",
+          subtitle: "41 sqm · King Bed · Lounge Area",
+          badgeText: "Exclusive Rate",
+          adr: "€1,810.00",
+          grandTotal: "€9,050.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=S1U2SH&rate=2SH&hotel=2719&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [
+            {
+              src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/156/690/677/Junior_Suite_Emily_1_S.jpg",
+              alt: "Junior Suite Prestige living room",
+            },
+            {
+              src: "https://d321ocj5nbe62c.cloudfront.net/imageRepo/7/0/156/690/756/Junior_suite_Emily_3_S.jpg",
+              alt: "Junior Suite Prestige bedroom",
+            },
+          ],
+          roomHighlights: [
+            "41 sqm suite with king bed and lounge area",
+            "Views of Place de Valois or Palais Royal",
+            "Separate bath and shower with sofa bed",
+          ],
+          perks: [
+            "An Upgrade subject to availability at Check-In",
+            "Complimentary Continental Breakfast x 2 Daily",
+            "A $100 F&B Credit",
+            "Free WiFi",
+            "Late Check-out, subject to availability upon Request",
+          ],
+        },
+      ],
+    },
+    {
+      name: "Shangri-La Hotel Paris",
+      location: "Paris, France",
+      heroImageUrl:
+        "https://whatahotel.com/content/hotels/2490/SLPR-Heroshot-02.jpg",
+      heroAlt: "Shangri-La Hotel Paris exterior",
+      cancellationPolicy: "FREE cancellation before May 17, 2026",
+      rooms: [
+        {
+          name: "Deluxe Room",
+          subtitle: "40 sqm · King Bed · Garden or City View",
+          badgeText: "Plan Ahead and Save 20%",
+          adr: "€1,616.00",
+          grandTotal: "€8,080.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=A1K290&rate=29L&hotel=2490&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [
+            {
+              src: "https://d2573qu6qrjt8c.cloudfront.net/1E50BC63079345848B53EB1B087AB072/1E50BC63079345848B53EB1B087AB072.JPEG",
+              alt: "Deluxe Room",
+            },
+            {
+              src: "https://d2573qu6qrjt8c.cloudfront.net/A3347D6656FE44FF841A426816A4E6F0/A3347D6656FE44FF841A426816A4E6F0.JPEG",
+              alt: "Deluxe Room bathroom",
+            },
+          ],
+          roomHighlights: [
+            "40 sqm with garden or city view",
+            "King bed with French style decor",
+            "Separate bathtub and rain shower",
+          ],
+          perks: [
+            "A Room Category Upgrade at Time of Booking, subject to availability",
+            "Full Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Complimentary WiFi",
+            "Late Check-Out, subject to availability, upon Request",
+          ],
+        },
+        {
+          name: "Terrace Room",
+          subtitle: "45 sqm · King Bed · Guaranteed Terrace",
+          badgeText: "Stay 4 Pay 3 Offer",
+          adr: "€1,920.00",
+          grandTotal: "€9,600.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=E1K329&rate=29L&hotel=2490&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "45 sqm with guaranteed terrace",
+            "City or garden view with king bed",
+            "Large windows opening on outdoor terrace",
+          ],
+          perks: [
+            "A Room Category Upgrade at Time of Booking, subject to availability",
+            "Full Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Complimentary WiFi",
+            "Late Check-Out, subject to availability, upon Request",
+          ],
+        },
+        {
+          name: "Deluxe Suite",
+          subtitle: "60 sqm · King Bed · Separate Living Area",
+          badgeText: "Stay 4 Pay 3 Offer",
+          adr: "€2,400.00",
+          grandTotal: "€12,000.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=P1K329&rate=29L&hotel=2490&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [
+            {
+              src: "https://d2573qu6qrjt8c.cloudfront.net/A8450D022C174A16AFC611AD51F6E122/A8450D022C174A16AFC611AD51F6E122.JPEG",
+              alt: "Deluxe Suite",
+            },
+          ],
+          roomHighlights: [
+            "60 sqm suite with separate living area",
+            "Courtyard or city view with king bed",
+            "French style decoration with sofa bed",
+          ],
+          perks: [
+            "A Room Category Upgrade at Time of Booking, subject to availability",
+            "Full Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Complimentary WiFi",
+            "Late Check-Out, subject to availability, upon Request",
+          ],
+        },
+        {
+          name: "Junior Suite Paris View – 1 King",
+          subtitle: "55 sqm · King Bed · Partial Eiffel Tower View",
+          badgeText: "Stay 4 Pay 3 Offer",
+          adr: "€2,480.00",
+          grandTotal: "€12,400.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=S11329&rate=29L&hotel=2490&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "55 sqm with partial Eiffel Tower view",
+            "Large seating area overlooking hotel garden",
+            "French style decoration",
+          ],
+          perks: [
+            "A Room Category Upgrade at Time of Booking, subject to availability",
+            "Full Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Complimentary WiFi",
+            "Late Check-Out, subject to availability, upon Request",
+          ],
+        },
+        {
+          name: "Eiffel View Room",
+          subtitle: "45 sqm · King Bed · Guaranteed Eiffel Tower Views",
+          badgeText: "Plan Ahead and Save 20%",
+          adr: "€2,816.00",
+          grandTotal: "€14,080.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=B1K290&rate=29L&hotel=2490&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "45 sqm with guaranteed Eiffel Tower views",
+            "King bed with French style decoration",
+            "Separate bathtub and rain shower",
+          ],
+          perks: [
+            "A Room Category Upgrade at Time of Booking, subject to availability",
+            "Full Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Complimentary WiFi",
+            "Late Check-Out, subject to availability, upon Request",
+          ],
+        },
+        {
+          name: "Terrace Suite",
+          subtitle: "70 sqm · King Bed · Guaranteed Terrace",
+          badgeText: "Plan Ahead and Save 20%",
+          adr: "€4,144.00",
+          grandTotal: "€20,720.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=G1Q290&rate=29L&hotel=2490&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [
+            {
+              src: "https://d2573qu6qrjt8c.cloudfront.net/18ED9BBD61A941F2976C031F0707EF20/18ED9BBD61A941F2976C031F0707EF20.JPEG",
+              alt: "Terrace Suite living area",
+            },
+            {
+              src: "https://d2573qu6qrjt8c.cloudfront.net/BC286425D41C4765897C3F9F72236855/BC286425D41C4765897C3F9F72236855.JPEG",
+              alt: "Terrace Suite terrace",
+            },
+          ],
+          roomHighlights: [
+            "70 sqm suite with guaranteed terrace",
+            "Partial Eiffel Tower view with king bed",
+            "Living area with sofabed",
+          ],
+          perks: [
+            "A Room Category Upgrade at Time of Booking, subject to availability",
+            "Full Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Complimentary WiFi",
+            "Late Check-Out, subject to availability, upon Request",
+          ],
+        },
+      ],
+    },
+    {
+      name: "Hotel du Louvre",
+      location: "Paris, France",
+      heroImageUrl:
+        "https://whatahotel.com/content/hotels/3641/135005484.jpg",
+      heroAlt: "Hotel du Louvre exterior",
+      cancellationPolicy: "FREE cancellation before May 17, 2026",
+      rooms: [
+        {
+          name: "Junior Suite Paris View",
+          subtitle: "35 sqm · King Bed · Paris View",
+          badgeText: "Breakfast for 2, Hotel Credit, Welcome Amenity",
+          adr: "€1,350.00",
+          grandTotal: "€6,867.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=F1KU5V&rate=1HZ&hotel=3641&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "35 sqm junior suite with Paris view",
+            "King bed with large seating area",
+            "Marble bathroom",
+          ],
+          perks: [
+            "A Room Upgrade within 48 Hours of Booking",
+            "Complimentary Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Free WiFi",
+            "Late Check-Out, subject to availability, upon request",
+          ],
+        },
+        {
+          name: "Executive Suite View",
+          subtitle: "40 sqm · Separate Living Room · Paris Views",
+          badgeText: "Breakfast for 2, Hotel Credit, Welcome Amenity",
+          adr: "€1,440.00",
+          grandTotal: "€7,317.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=C1DU5V&rate=1HZ&hotel=3641&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "Elegant 40 sqm suite with separate living room",
+            "Paris views with sofa bed",
+            "Accommodates 2 guests",
+          ],
+          perks: [
+            "A Room Upgrade within 48 Hours of Booking",
+            "Complimentary Breakfast x 2 Daily",
+            "A $100 Hotel Credit",
+            "Free WiFi",
+            "Late Check-Out, subject to availability, upon request",
+          ],
+        },
+      ],
+    },
+    {
+      name: "Kimpton St Honoré Paris",
+      location: "Paris, France",
+      heroImageUrl:
+        "https://whatahotel.com/content/hotels/6300/Kimpton_1.jpg",
+      heroAlt: "Kimpton St Honoré Paris exterior",
+      cancellationPolicy: "FREE cancellation before May 17, 2026",
+      rooms: [
+        {
+          name: "Essential Room King",
+          subtitle: "25 sqm · King Bed",
+          badgeText: "Exclusive Rate",
+          adr: "€793.00",
+          grandTotal: "€4,082.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=CSP2SH&rate=2SH&hotel=6300&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "Essential room with king bed",
+            "25 sqm",
+            "Accommodates 2 guests",
+          ],
+          perks: [
+            "A Room Category Upgrade if Available at Check-In",
+            "Complimentary Daily Breakfast for Two",
+            "An 85 EUR Credit",
+            "Free Wi-Fi",
+            "Late check-out, based on availability",
+          ],
+        },
+        {
+          name: "Premium Room",
+          subtitle: "31 sqm · King Bed",
+          badgeText: "Exclusive Rate",
+          adr: "€953.00",
+          grandTotal: "€4,882.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=CPG2SH&rate=2SH&hotel=6300&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "Premium room with king bed",
+            "31 sqm",
+            "Accommodates 2 guests",
+          ],
+          perks: [
+            "A Room Category Upgrade if Available at Check-In",
+            "Complimentary Daily Breakfast for Two",
+            "An 85 EUR Credit",
+            "Free Wi-Fi",
+            "Late check-out, based on availability",
+          ],
+        },
+        {
+          name: "1 King Bed Essential Opera View",
+          subtitle: "25 sqm · King Bed · Opera View",
+          badgeText: "Exclusive Rate",
+          adr: "€973.00",
+          grandTotal: "€4,982.00",
+          nights: 5,
+          checkIn: "2026-05-18",
+          checkOut: "2026-05-23",
+          bookUrl:
+            "https://www.whatahotel.com/booking/booking_info.cfm?room=KON2SH&rate=2SH&hotel=6300&checkin=2026-05-18&checkout=2026-05-23&guests=2&children=0&rooms=1",
+          images: [],
+          roomHighlights: [
+            "Opera view room with king bed",
+            "25 sqm",
+            "Accommodates 2 guests",
+          ],
+          perks: [
+            "A Room Category Upgrade if Available at Check-In",
+            "Complimentary Daily Breakfast for Two",
+            "An 85 EUR Credit",
+            "Free Wi-Fi",
+            "Late check-out, based on availability",
+          ],
+        },
+      ],
+    },
+  ],
+});

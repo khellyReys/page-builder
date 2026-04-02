@@ -30,6 +30,7 @@ export interface HotelInput {
   heroImageUrl: string;
   heroAlt: string;
   rooms: RoomInput[];
+  cancellationPolicy?: string;
 }
 
 export interface PromoInput {
@@ -117,6 +118,9 @@ function buildHotelBlock(
   return {
     hero,
     rooms: input.rooms.map(buildRoom),
+    ...(input.cancellationPolicy
+      ? { cancellationPolicy: input.cancellationPolicy }
+      : {}),
   };
 }
 
