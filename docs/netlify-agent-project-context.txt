@@ -8,6 +8,7 @@ Scope: ONLY edit `src/data/promo-N.ts` + `src/data/promos.ts`. Never edit types,
 import { createPromo } from "../lib/promoFactory";
 export const promoN = createPromo({
   id: "promo-N",
+  createdAt: "2026-05-07T12:00:00Z",
   title: "...",
   dates: "...",
   client: "",

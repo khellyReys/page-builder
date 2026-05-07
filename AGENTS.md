@@ -11,7 +11,7 @@
 ## What the agent provides
 
 ```
-PromoInput: id, title, dates, client?, cityImageUrl?, cityImageAlt?
+PromoInput: id, createdAt, title, dates, client?, cityImageUrl?, cityImageAlt?
   HotelInput[]: name, location, heroImageUrl, heroAlt
     RoomInput[]: name, subtitle, badgeText, adr, grandTotal,
                  nights, checkIn, checkOut, bookUrl,
@@ -29,6 +29,7 @@ Everything else (labels, formatting, layout, pricing alignment) is hardcoded in 
 - **Rates:** `adr` = price only with currency symbol, no "/night". `grandTotal` = tax-inclusive total from the booking page.
 - **badgeText:** extract from marketing line between "WhataHotel!" and "More Info". Fallback: `"Exclusive Rate"`. Never `"Hotel Option X"`.
 - **Multi-hotel:** each booking URL = one `HotelInput`. Data from each URL stays in its own entry.
+- **Portal “Added” date:** set `createdAt` to an ISO 8601 UTC string (e.g. `"2026-05-07T12:00:00Z"`) — the real day the proposal is created, not stay dates.
 
 ## Netlify agent
 

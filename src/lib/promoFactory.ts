@@ -35,6 +35,8 @@ export interface HotelInput {
 
 export interface PromoInput {
   id: string;
+  /** ISO 8601 timestamp for Proposal Portal "Added" date. Omit only when prototyping; defaults to build time. */
+  createdAt?: string;
   title: string;
   client?: string;
   dates: string;
@@ -151,12 +153,13 @@ export function createPromo(input: PromoInput): Promo {
 
   const portalTotal = lowestTotal(input.hotels);
   const isSingleHotel = input.hotels.length === 1;
+  const createdAt = input.createdAt ?? new Date().toISOString();
 
   if (isSingleHotel) {
     const block = hotelBlocks[0];
     return {
       id: input.id,
-      createdAt: new Date().toISOString(),
+      createdAt,
       title: input.title,
       client: input.client ?? "",
       dates: input.dates,
@@ -170,7 +173,7 @@ export function createPromo(input: PromoInput): Promo {
 
   return {
     id: input.id,
-    createdAt: new Date().toISOString(),
+    createdAt,
     title: input.title,
     client: input.client ?? "",
     dates: input.dates,

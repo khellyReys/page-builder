@@ -7,6 +7,7 @@ import { createPromo } from "../lib/promoFactory";
 
 export const promoN = createPromo({
   id: "promo-N",
+  createdAt: "2026-05-07T12:00:00Z",
   title: "Easter Vacation",
   dates: "Apr 5–9, 2026",
   client: "The Smith Family",           // optional, "" if not provided
@@ -72,6 +73,7 @@ npm run build
 | Field | Where from | Example |
 |---|---|---|
 | `id` | Next free number from `promos.ts` | `"promo-35"` |
+| `createdAt` | When the proposal is authored (Portal “Added”); ISO 8601 UTC | `"2026-05-07T12:00:00Z"` |
 | `title` | User or destination name | `"Easter Vacation"` |
 | `dates` | Booking page dates | `"Apr 5–9, 2026"` |
 | `client` | User (optional) | `""` if not given |

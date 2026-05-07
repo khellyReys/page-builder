@@ -6,6 +6,12 @@ import { portalContactFootnoteHtml } from "../data/contact";
 
 const PAGE_SIZE = 6;
 
+/** Highest `promo-N` number first so the newest promo stays on top regardless of `createdAt`. */
+function promoNumericId(id: string): number {
+  const m = /^promo-(\d+)$/i.exec(id);
+  return m ? Number.parseInt(m[1], 10) : 0;
+}
+
 function formatCreatedLabel(iso: string) {
   try {
     return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
@@ -38,10 +44,12 @@ export default function Portal() {
         promo.dates.toLowerCase().includes(searchLower)
       );
     });
-    return [...filtered].sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-    );
+    return [...filtered].sort((a, b) => {
+      const nb = promoNumericId(b.id);
+      const na = promoNumericId(a.id);
+      if (nb !== na) return nb - na;
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
   }, [searchTerm]);
 
   useEffect(() => {

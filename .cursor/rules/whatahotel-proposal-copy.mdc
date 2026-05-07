@@ -30,6 +30,6 @@ These labels and sections are hardcoded in the components. The agent must not at
 
 ## What the agent provides via createPromo()
 
-- `PromoInput`: `id`, `title`, `dates`, `client?`, `cityImageUrl?`, `cityImageAlt?`
+- `PromoInput`: `id`, `createdAt` (ISO 8601 UTC, e.g. proposal creation time for the Portal), `title`, `dates`, `client?`, `cityImageUrl?`, `cityImageAlt?`
 - `HotelInput[]`: `name`, `location`, `heroImageUrl`, `heroAlt`
 - `RoomInput[]`: `name`, `subtitle`, `badgeText`, `adr`, `grandTotal`, `nights`, `checkIn`, `checkOut`, `bookUrl`, `images?`, `roomHighlights[]`, `perks[]`

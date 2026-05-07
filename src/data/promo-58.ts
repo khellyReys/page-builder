@@ -2,6 +2,7 @@ import { createPromo } from "../lib/promoFactory";
 
 export const promo58 = createPromo({
   id: "promo-58",
+  createdAt: "2026-04-17T18:15:04Z",
   title: "London | April 20-23",
   dates: "Apr 20–23, 2026",
   client: "",
