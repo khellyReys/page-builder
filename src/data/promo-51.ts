@@ -29,7 +29,6 @@ export const promo51 = createPromo({
           roomHighlights: [
             "Deluxe room with 1 King or 2 Twin beds",
             "42 sqm / 452 sqft with living area and mini fridge",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
@@ -54,7 +53,6 @@ export const promo51 = createPromo({
           roomHighlights: [
             "Deluxe room with Natural Park views",
             "1 King or 2 Twin beds, 42 sqm / 452 sqft with mini fridge",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
@@ -79,7 +77,6 @@ export const promo51 = createPromo({
           roomHighlights: [
             "Junior Suite with views overlooking the resort",
             "1 King or 2 Twin beds, 52 sqm / 560 sqft with mini fridge",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",

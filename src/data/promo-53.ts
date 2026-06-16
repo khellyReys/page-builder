@@ -36,7 +36,6 @@ export const promo53 = createPromo({
           ],
           roomHighlights: [
             "512 sq ft with city view",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if available at Check-in",
@@ -65,7 +64,6 @@ export const promo53 = createPromo({
           ],
           roomHighlights: [
             "512 sq ft with city view on floors 17-21",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if available at Check-in",

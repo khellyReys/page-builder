@@ -28,7 +28,6 @@ export const promo69 = createPromo({
           images: [],
           roomHighlights: [
             "Studio with 1 king bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if Available at Check-In",

@@ -30,7 +30,6 @@ export const promo57 = createPromo({
           roomHighlights: [
             "King bed with 33 sqm / 355 sqft of space",
             "Air-conditioned with free WiFi and minibar",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade at Time of Booking, subject to availability",
@@ -56,7 +55,6 @@ export const promo57 = createPromo({
           roomHighlights: [
             "King bed with 37 sqm / 398 sqft of space",
             "Separate bath and shower with marble finishes",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade at Time of Booking, subject to availability",
@@ -83,7 +81,6 @@ export const promo57 = createPromo({
           roomHighlights: [
             "King bed with 44 sqm / 473 sqft of space",
             "Open plan sitting area with free WiFi",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade at Time of Booking, subject to availability",

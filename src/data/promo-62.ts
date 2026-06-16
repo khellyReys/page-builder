@@ -33,7 +33,6 @@ export const promo62 = createPromo({
           ],
           roomHighlights: [
             "310–550 sq ft · garden view with 1 king bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Upgrade subject to availability at Check-In",
@@ -62,7 +61,6 @@ export const promo62 = createPromo({
           ],
           roomHighlights: [
             "450–690 sq ft · garden view with 1 king bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Upgrade subject to availability at Check-In",
@@ -91,7 +89,6 @@ export const promo62 = createPromo({
           ],
           roomHighlights: [
             "410–540 sq ft · garden view with 1 king bed and private terrace",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Upgrade subject to availability at Check-In",
@@ -124,7 +121,6 @@ export const promo62 = createPromo({
           ],
           roomHighlights: [
             "540–655 sq ft · garden view with 1 king bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Upgrade subject to availability at Check-In",

@@ -31,7 +31,6 @@ export const promo41 = createPromo({
           images: [],
           roomHighlights: [
             "Resort view with king bed and sofa bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade, subject to availability at Check-in",
@@ -55,7 +54,6 @@ export const promo41 = createPromo({
           images: [],
           roomHighlights: [
             "Resort view with two queen beds and mini fridge",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade, subject to availability at Check-in",
@@ -79,7 +77,6 @@ export const promo41 = createPromo({
           images: [],
           roomHighlights: [
             "Ocean view with king bed and sofa bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade, subject to availability at Check-in",

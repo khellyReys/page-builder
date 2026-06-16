@@ -47,7 +47,6 @@ export const promo34: Promo = {
               icon: "door-open",
               items: [
                 "Junior Suite with partial ocean view",
-                "Accommodates 2 guests",
               ],
             },
             {
@@ -89,7 +88,6 @@ export const promo34: Promo = {
               icon: "door-open",
               items: [
                 "1 Bedroom Suite with Intracoastal view",
-                "Accommodates 2 guests",
               ],
             },
             {
@@ -131,7 +129,6 @@ export const promo34: Promo = {
               icon: "door-open",
               items: [
                 "1 Bedroom Suite with partial ocean view",
-                "Accommodates 2 guests",
               ],
             },
             {

@@ -32,7 +32,6 @@ export const promo39 = createPromo({
           roomHighlights: [
             "Mountain view with private balcony",
             "King bed with fireplace and bar",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if available at Check-in",
@@ -60,7 +59,6 @@ export const promo39 = createPromo({
           roomHighlights: [
             "Spacious suite with dual-sided fireplace",
             "Balcony with mountain views",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if available at Check-in",
@@ -88,7 +86,6 @@ export const promo39 = createPromo({
           roomHighlights: [
             "957 sq ft luxury cabin",
             "Walk-in shower and deep bath",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if available at Check-in",
@@ -116,7 +113,6 @@ export const promo39 = createPromo({
           roomHighlights: [
             "King bed with fireplace amid evergreens",
             "Forest views from private cabin",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if available at Check-in",

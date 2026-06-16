@@ -37,7 +37,6 @@ export const promo52 = createPromo({
           ],
           roomHighlights: [
             "Las Vegas Strip or valley views with king bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade Subject to Availability at Check-In",
@@ -66,7 +65,6 @@ export const promo52 = createPromo({
           ],
           roomHighlights: [
             "640-square-foot room with two queen beds",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade Subject to Availability at Check-In",

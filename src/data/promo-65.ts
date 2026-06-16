@@ -30,7 +30,6 @@ export const promo65 = createPromo({
           roomHighlights: [
             "Lower floor classic room with fireplace",
             "38sqm with city view",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
