@@ -36,7 +36,6 @@ export const promo42 = createPromo({
           roomHighlights: [
             "19 sqm with queen or king bed",
             "Street views of Palais Royal or Place Valois",
-            "Accommodates 2 guests",
           ],
           perks: [
             "An Upgrade subject to availability at Check-In",
@@ -313,7 +312,6 @@ export const promo42 = createPromo({
           roomHighlights: [
             "Elegant 40 sqm suite with separate living room",
             "Paris views with sofa bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Upgrade within 48 Hours of Booking",
@@ -348,7 +346,6 @@ export const promo42 = createPromo({
           roomHighlights: [
             "Essential room with king bed",
             "25 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if Available at Check-In",
@@ -373,7 +370,6 @@ export const promo42 = createPromo({
           roomHighlights: [
             "Premium room with king bed",
             "31 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if Available at Check-In",
@@ -398,7 +394,6 @@ export const promo42 = createPromo({
           roomHighlights: [
             "Opera view room with king bed",
             "25 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade if Available at Check-In",

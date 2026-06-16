@@ -37,7 +37,6 @@ export const promo54 = createPromo({
           ],
           roomHighlights: [
             "Canton Tower River View with 2 twin beds",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade if available at Check-in",

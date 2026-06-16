@@ -38,7 +38,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Standard room with 1 queen bed",
             "220 sqft / 20 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -72,7 +71,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Standard room with 1 king bed",
             "250 sqft / 23 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -106,7 +104,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Deluxe room with City Hall view",
             "250 sqft / 23 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -131,7 +128,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Superior room with 1 king bed",
             "365–490 sqft / 33–44 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -156,7 +152,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Club Floor access with 1 king bed",
             "250 sqft / 23 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -190,7 +185,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Junior Suite with 1 king bed",
             "500–510 sqft / 45–46 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -224,7 +218,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "City Hall view with Ritz-Carlton Club Floor access",
             "1 king bed",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",
@@ -258,7 +251,6 @@ export const promo47 = createPromo({
           roomHighlights: [
             "Superior room with Club Floor access",
             "350–500 sqft / 32–45 sqm",
-            "Accommodates 2 guests",
           ],
           perks: [
             "Room Category Upgrade at Check-in, subject to availability",

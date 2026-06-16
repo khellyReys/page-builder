@@ -33,7 +33,6 @@ export const promo60 = createPromo({
           roomHighlights: [
             "Guest House room a short walk from the main building",
             "1 King or 2 Queen bed configuration with golf view",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
@@ -67,7 +66,6 @@ export const promo60 = createPromo({
           roomHighlights: [
             "Deluxe room in the main building",
             "1 King or 2 Queen bed configuration with mini fridge",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
@@ -101,7 +99,6 @@ export const promo60 = createPromo({
           roomHighlights: [
             "Coastal view with 1 King or 2 Queen bed configuration",
             "Mini fridge and wireless internet",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
@@ -169,7 +166,6 @@ export const promo60 = createPromo({
           roomHighlights: [
             "Direct ocean views from the main building",
             "1 King or 2 Queen bed configuration",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",
@@ -203,7 +199,6 @@ export const promo60 = createPromo({
           roomHighlights: [
             "Guest House room with ocean view, short walk from the main building",
             "1 King or 2 Queen bed configuration with mini fridge",
-            "Accommodates 2 guests",
           ],
           perks: [
             "A Room Category Upgrade subject to availability at Check-In",

@@ -34,7 +34,6 @@ export const promo71 = createPromo({
           roomHighlights: [
             "280 sq ft with two queen-size beds",
             "Basement level retreat with rainfall shower",
-            "Accommodates 2 guests",
           ],
           perks: [
             "An Upgrade subject to availability at Check-In",
@@ -64,7 +63,6 @@ export const promo71 = createPromo({
           roomHighlights: [
             "Up to 305 sq ft with two queen-size beds",
             "Varied views with rainfall shower and desk",
-            "Accommodates 2 guests",
           ],
           perks: [
             "An Upgrade subject to availability at Check-In",
